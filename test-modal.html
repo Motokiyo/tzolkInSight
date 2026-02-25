@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Modal Tzolk'in</title>
+    <link rel="stylesheet" href="./tzolkin-standalone-fixes.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        button {
+            padding: 15px 30px;
+            background: #5e832a;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test de la modale Tzolk'in</h1>
+    <p>Cliquez sur le bouton pour ouvrir la modale de test.</p>
+    <button onclick="openTestModal()">Ouvrir la modale</button>
+
+    <!-- Vue détail complète (copie de index.html) -->
+    <div id="tzolkin-detail-view">
+        <div id="tzolkin-detail-content">
+            <button id="tzolkin-back-btn" onclick="closeTestModal()">← Retour</button>
+            <img src="./assets/glyphs/MAYA-g-log-cal-D01-Imix.svg" alt="Test" style="max-width: 200px; height: 200px; object-fit: contain; display: block; margin: 0 auto 20px;">
+            <h3 style="text-align: center;">Test du titre</h3>
+            <h4>Section de test</h4>
+            <p>Ceci est un paragraphe de test pour vérifier que le texte est bien visible au-dessus du fond sable.</p>
+            <p>L'image Xbalanque.jpg devrait être visible en arrière-plan, inversée (effet négatif).</p>
+            <p>Le fond sable (#ded2b3) devrait être derrière ce texte, pas au-dessus.</p>
+            <h4>Liste de test</h4>
+            <ul>
+                <li>Item 1 de la liste</li>
+                <li>Item 2 de la liste</li>
+                <li>Item 3 de la liste</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function openTestModal() {
+            const detailView = document.getElementById('tzolkin-detail-view');
+            detailView.style.display = 'block';
+            console.log('Modal ouverte');
+        }
+
+        function closeTestModal() {
+            const detailView = document.getElementById('tzolkin-detail-view');
+            detailView.style.display = 'none';
+            console.log('Modal fermée');
+        }
+    </script>
+</body>
+</html>

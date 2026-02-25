@@ -1,0 +1,369 @@
+/*
+Theme Name: Tzolkin App Autonome
+Version: 1.49
+*/
+
+/* ========================================================================== */
+/* TZOLKIN APP - POLICES : DEBUT */
+/* ========================================================================== */
+/* Définition des polices personnalisées */
+@font-face {
+    font-family: "MayaDayNames";
+    src: url("fonts/MDN/mayadn.woff2") format("woff2"),
+        url("fonts/MDN/mayadn.woff") format("woff");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "MayaMonthGlyphs";
+    src: url("fonts/MMG/mayamg.woff2") format("woff2"),
+        url("fonts/MMG/mayamg.woff") format("woff");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Summer";
+    src: url("fonts/Summer/Summer.woff2") format("woff2"),
+        url("fonts/Summer/Summer.woff") format("woff");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Simplifica";
+    src: url("fonts/Simplifica/Simplifica.woff2") format("woff2"),
+        url("fonts/Simplifica/Simplifica.woff") format("woff");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Amatic";
+    src: url("fonts/AmaticSC/AmaticSC-Regular.woff2") format("woff2"),
+        url("fonts/AmaticSC/AmaticSC-Regular.woff") format("woff");
+    font-display: swap;
+}
+
+/* ========================================================================== */
+/* TZOLKIN APP - BASE & TYPO : DEBUT */
+/* ========================================================================== */
+
+/* Héritage des polices personnalisées sur tous les éléments interactifs */
+button,
+input,
+select,
+textarea {
+    font-family: 'Simplifica', sans-serif;
+}
+
+/* Réinitialisation et style de base */
+html {
+    font-size: 20px;
+}
+
+body {
+    background: #ded2b3 url("./assets/Xbalanque.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: #000000;
+    font-family: 'Simplifica', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    font-size: clamp(1.2rem, 1.5vw, 2rem);
+    min-height: 100vh;
+}
+
+.tzolkin-app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: rgba(222, 210, 179, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Summer', cursive;
+    text-transform: uppercase;
+    color: #c19434;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+    line-height: 1.2;
+}
+
+.mayaD {
+    font-family: 'MayaDayNames', sans-serif;
+    font-size: clamp(18px, 2vw, 30px);
+    font-weight: lighter;
+}
+
+.mayaM {
+    font-family: 'MayaMonthGlyphs', sans-serif;
+    font-size: clamp(18px, 2vw, 30px);
+    font-weight: lighter;
+}
+
+/* ========================================================================== */
+/* TZOLKIN APP - LIENS : DEBUT */
+/* ========================================================================== */
+/* --- Styles des liens --- */
+a,
+.entry-content a,
+.widget a {
+    color: #008000;
+    /* Vert */
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover,
+.entry-content a:hover,
+.widget a:hover {
+    color: #ffa500;
+    /* Orange */
+    text-decoration: none;
+}
+
+/* ========================================================================== */
+/* TZOLKIN APP - TOOLTIP : DÉBUT */
+/* ========================================================================== */
+/* Tooltips spécifiques */
+span.itg-tooltip-wrapper {
+    position: relative;
+    display: inline;
+    vertical-align: baseline;
+}
+
+span.itg-tooltip-target {
+    cursor: pointer;
+    font-style: italic;
+    font-weight: bold;
+    color: #8b0000;
+}
+
+span.itg-tooltip-box {
+    display: none;
+    position: absolute;
+    top: -2.5em;
+    /* Juste au-dessus du texte */
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffd700;
+    border: 2px solid #8dc291;
+    color: #000000;
+    padding: 8px 12px;
+    border-radius: 5px;
+    z-index: 1000;
+    min-width: 220px;
+    /* Pour 4-5 mots */
+    max-width: 350px;
+    white-space: normal;
+    line-height: 1.4;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+span.itg-tooltip-wrapper:hover .itg-tooltip-box {
+    display: block;
+}
+
+.entry-content span.itg-tooltip-box {
+    max-width: calc(100% - 20px);
+    left: 10px;
+    right: 10px;
+    transform: none;
+}
+
+@media screen and (max-width: 768px) {
+    span.itg-tooltip-box {
+        max-width: 90%;
+        min-width: 180px;
+        /* Légèrement réduit pour mobile */
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        transform: none;
+        top: -3em;
+    }
+}
+
+/* ========================================================================== */
+/* TZOLKIN APP - TOOLTIP : FIN */
+/* ========================================================================== */
+
+/* ========================================================================== */
+/* TZOLKIN APP - WIDGETS : DEBUT */
+/* ========================================================================== */
+/* Widgets génériques */
+.widget {
+    margin: 0 0 10px 0;
+    padding: 0;
+    background: none;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.widget-title {
+    font-size: 1.5rem;
+    color: #c19434;
+    margin: 0 0 5px 0;
+    padding: 0;
+}
+
+.widget ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* ========================================================================== */
+/* TZOLKIN APP - WIDGETS : FIN */
+/* ========================================================================== */
+
+/* ========================================================================== */
+/* TZOLKIN APP - LIGHTBOX : DÉBUT */
+/* ========================================================================== */
+#custom-lightbox {
+    display: none;
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+#custom-lightbox.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#custom-lightbox .lightbox-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+#custom-lightbox .lightbox-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 40px #0008;
+    padding: 0;
+    overflow: visible;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+/* Toolbar Lightbox */
+#custom-lightbox .lightbox-toolbar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    z-index: 10;
+    background: none;
+    padding: 0;
+    gap: 8px;
+}
+
+/* Boutons close et zoom */
+#custom-lightbox .lightbox-close,
+#custom-lightbox .lightbox-zoom {
+    width: 36px;
+    height: 36px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    border: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    cursor: pointer;
+}
+
+#custom-lightbox .lightbox-close svg,
+#custom-lightbox .lightbox-zoom svg {
+    width: 28px;
+    height: 28px;
+    display: block;
+}
+
+/* Flèches navigation */
+#custom-lightbox .lightbox-arrow-left,
+#custom-lightbox .lightbox-arrow-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1;
+    z-index: 12;
+    cursor: pointer;
+    box-shadow: none;
+    padding: 0 16px;
+    user-select: none;
+}
+
+#custom-lightbox .lightbox-arrow-left {
+    left: 8px;
+}
+
+#custom-lightbox .lightbox-arrow-right {
+    right: 8px;
+}
+
+#custom-lightbox .lightbox-arrow:hover {
+    opacity: 1;
+}
+
+/* Image et wrapper */
+.lightbox-img-wrapper {
+    display: inline-block;
+    position: relative;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+}
+
+.lightbox-img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 16px;
+    display: block;
+}
+
+/* ========================================================================== */
+/* TZOLKIN APP - LIGHTBOX : FIN */
+/* ========================================================================== */
+
+/* ========================================================================== */
+/* TZOLKIN APP - RESPONSIVE : FIN */
+/* ========================================================================== */

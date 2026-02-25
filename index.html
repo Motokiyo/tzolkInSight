@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tzolk'in du Parédé</title>
+
+    <!-- PWA Meta tags -->
+    <meta name="theme-color" content="#ded2b3">
+    <meta name="background-color" content="#ded2b3">
+    <meta name="description" content="Calendrier Tzolk'in Maya - Découvrez votre jour sacré">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Tzolk'in">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="./manifest.json">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="512x512" href="./icons/icon-app-512.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-app-192.png">
+    <link rel="apple-touch-icon" href="./icons/icon-ios.png">
+
+    <!-- Styles CSS -->
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./tzolkin-splash.css">
+    <link rel="stylesheet" href="./tzolkin-menu.css">
+    <link rel="stylesheet" href="./tzolkin-details.css">
+    <link rel="stylesheet" href="./tzolkin-page.css">
+    <link rel="stylesheet" href="./tzolkin-widget-styles.css">
+    <link rel="stylesheet" href="./tzolkin-standalone-fixes.css">
+
+    <!-- Core JavaScript Modules (charger en premier) -->
+    <script src="./tzolkin-core.js" defer></script>
+    <script src="./tzolkin-storage.js" defer></script>
+    <script src="./tzolkin-widget.js" defer></script>
+    <script src="./tzolkin-admin.js" defer></script>
+    <script src="./tzolkin-pin.js" defer></script>
+
+    <!-- Bibliothèques externes -->
+    <script src="./imask.js"></script>
+
+    <!-- Scripts de l'app (charger après les modules) -->
+    <script src="./tzolkin-app-interactive.js" defer></script>
+    <script src="./tzolkin-details-summary-data.js" defer></script>
+    <script src="./tzolkin-details-data.js" defer></script>
+    <script src="./tzolkin-details.js" defer></script>
+    <script src="./tzolkin-details-display.js" defer></script>
+</head>
+
+<body>
+    <div class="tzolkin-app">
+        <!-- Écran de démarrage (splash screen) -->
+        <div id="splash-screen">
+            <!-- Contenu du splash screen (inclus depuis tzolkin-splash.php) -->
+            <div class="tzolkin-splash-container">
+                <div class="tzolkin-splash-icon">
+                    <img src="./assets/tzolkin-splash.png" alt="Tzolk'in du Parédé" />
+                </div>
+                <div class="tzolkin-splash-text">
+                    <h1>Tzolk'in du Parédé</h1>
+                    <p>Calendrier Maya Sacré</p>
+                    <p class="version">Version 2.0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Widget principal (calendrier Tzolk'in) -->
+        <main class="tzolkin-main" id="tzolkin-widget-container">
+            <!-- Le widget sera généré dynamiquement par tzolkin-widget.js -->
+        </main>
+
+        <!-- Section détails du jour actuel (sous le widget) -->
+        <section id="tzolkin-details" style="width: 100%; margin: 20px 0; overflow-x: hidden;">
+            <div id="tzolkin-details-content"
+                style="max-width: 600px; width: 100%; margin: 0 auto; box-sizing: border-box; background: rgba(222, 210, 179, 0.9); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 2px solid #222; border-radius: 16px; padding: 30px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);">
+                <p style="text-align: center; color: #888;">Chargement des détails...</p>
+            </div>
+        </section>
+
+        <!-- Vue détail complète (cachée par défaut) -->
+        <div id="tzolkin-detail-view">
+            <div id="tzolkin-detail-content"></div>
+        </div>
+
+    </div>
+
+    <!-- Menu et modales (notes, enregistrés, fonctionnement, crédits) -->
+    <!-- Le contenu sera chargé depuis tzolkin-menu-standalone.html -->
+    <div id="modales-container"></div>
+
+    <!-- Script d'initialisation de l'app -->
+    <script>
+        // Initialisation de l'application une fois le DOM chargé
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('🚀 Initialisation de l\'app Tzolk\'in...');
+
+            // 1. Charger le menu et les modales
+            try {
+                const response = await fetch('./tzolkin-menu-standalone.html');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const html = await response.text();
+                document.getElementById('modales-container').innerHTML = html;
+                console.log('✅ Menu et modales chargés');
+
+                // Exécuter les scripts du fichier chargé
+                const scripts = document.getElementById('modales-container').querySelectorAll('script');
+                scripts.forEach(script => {
+                    const newScript = document.createElement('script');
+                    newScript.textContent = script.textContent;
+                    document.body.appendChild(newScript);
+                });
+
+                // Ajouter le bouton Admin au menu (maintenant que le menu est chargé)
+                setTimeout(() => {
+                    if (window.tzolkinAdmin) {
+                        window.tzolkinAdmin.addAdminButton();
+                    }
+                }, 200);
+            } catch (error) {
+                console.error('❌ Erreur lors du chargement du menu:', error);
+                alert('Erreur: Le menu ne peut pas être chargé. Vérifiez que vous utilisez un serveur local (pas file://)');
+            }
+
+            // 2. Initialiser le widget Tzolk'in
+            setTimeout(() => {
+                window.tzolkinWidget = new TzolkinWidget('#tzolkin-widget-container');
+                console.log('✅ Widget Tzolk\'in initialisé');
+            }, 100);
+
+            // 3. Gérer le splash screen
+            setTimeout(() => {
+                hideSplashScreen();
+            }, 10000); // 10 secondes (comme demandé)
+
+            // Clic sur le splash screen pour le fermer immédiatement
+            document.getElementById('splash-screen').addEventListener('click', hideSplashScreen);
+
+            // Mobile : tap pour fermer
+            document.getElementById('splash-screen').addEventListener('touchstart', hideSplashScreen);
+
+            function hideSplashScreen() {
+                const splashScreen = document.getElementById('splash-screen');
+                if (splashScreen) {
+                    splashScreen.style.display = 'none';
+                    document.body.classList.remove('splash-active');
+                    window.history.pushState({}, '', '#calendar');
+                }
+            }
+
+            // 4. Gérer l'affichage/masquage du menu au mouvement, clic ou scroll
+            let menuTimeout = null;
+            const MENU_HIDE_DELAY = 3000; // 3 secondes d'inactivité
+
+            function showMenu() {
+                const menu = document.querySelector('.main-menu');
+                if (menu) {
+                    menu.classList.remove('hidden');
+                }
+            }
+
+            function hideMenu() {
+                const menu = document.querySelector('.main-menu');
+                // On cache si on n'est pas sur une modale qui requiert le menu (en fait on cache partout si inactif)
+                if (menu) {
+                    menu.classList.add('hidden');
+                }
+            }
+
+            function resetMenuTimeout() {
+                clearTimeout(menuTimeout);
+                showMenu();
+                menuTimeout = setTimeout(hideMenu, MENU_HIDE_DELAY);
+            }
+
+            // Événements pour afficher le menu et réinitialiser le timer
+            document.addEventListener('mousemove', resetMenuTimeout);
+            document.addEventListener('touchmove', resetMenuTimeout);
+            document.addEventListener('click', resetMenuTimeout);
+            document.addEventListener('scroll', resetMenuTimeout, true); // true pour capturer les scrolls internes
+
+            // Spécifique au detail view qui a son propre scroll interne
+            setTimeout(() => {
+                const detailView = document.getElementById('tzolkin-detail-view');
+                if (detailView) {
+                    detailView.addEventListener('scroll', resetMenuTimeout);
+                }
+            }, 1000);
+
+            // Initialiser le menu au démarrage
+            resetMenuTimeout();
+
+            // 4. Initialiser les scripts des modales (une fois chargées)
+            setTimeout(() => {
+                initModales();
+            }, 500);
+
+            console.log('✅ App Tzolk\'in initialisée');
+        });
+
+        // Fonction d'initialisation des modales
+        function initModales() {
+            // Cette fonction est appelée après le chargement de tzolkin-menu-standalone.html
+            // Elle initialise les événements des modales
+            console.log('✅ Initialisation des modales...');
+
+            // Les événements sont gérés dans le fichier tzolkin-menu-standalone.html
+        }
+
+        // Enregistrement du Service Worker pour le mode hors-ligne
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js', { scope: './' })
+                .then((registration) => {
+                    console.log('✅ Service Worker enregistré:', registration);
+                })
+                .catch((error) => {
+                    console.error('❌ Erreur Service Worker:', error);
+                });
+        }
+    </script>
+</body>
+
+</html>

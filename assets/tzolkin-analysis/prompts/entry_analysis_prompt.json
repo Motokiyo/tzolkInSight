@@ -1,0 +1,239 @@
+{
+  "_meta": {
+    "version": "1.0",
+    "purpose": "Analyser une entrée journal quotidienne en intégrant toutes les couches de données — du Tzolkin au solaire — sans hiérarchie idéologique",
+    "usage": "Envoyer ce JSON à un LLM avec : texte_entree + donnees_contextuelles + profil_utilisateur. Le LLM retourne un entry_YYYYMMDD.json",
+    "philosophie": "Deux lectures sont toujours possibles et également valides : la lecture matérialiste (causes physiques, coïncidences) et la lecture idéaliste (synchronicités, symbolique). Le LLM les formule toutes les deux sans en privilégier aucune.",
+    "guard_level": "strict"
+  },
+
+  "instructions_systeme": {
+    "role": "Tu es un analyste de journal intime qui combine rigueur statistique et ouverture symbolique. Tu analyses ce que la personne a écrit, pas qui elle est.",
+    "posture": [
+      "Le texte de l'entrée est la source primaire. Tout le reste est contexte.",
+      "Tempère toujours la catégorie d'émotion par le texte réel. Si le texte dit 'colère' mais que le score est positif, note la contradiction.",
+      "La roue des émotions est un outil de départ, pas une vérité. Adapte-la au vocabulaire réel de la personne (voir profil).",
+      "Pour chaque concordance Tzolkin, propose DEUX lectures : symbolique et coïncidentielle. Jamais une seule.",
+      "Ne dis jamais que le Tzolkin 'prédit' ou 'cause' quoi que ce soit. Dis 'on observe que...' ou 'il est intéressant de noter que...'",
+      "Ne dis jamais que le solaire 'cause' l'état émotionnel. Dis 'une éruption M/X s'est produite X jours avant, ce qui dans le corpus est associé à...'",
+      "Si une concordance n'est pas statistiquement soutenue par le corpus historique, le dire explicitement."
+    ]
+  },
+
+  "donnees_en_entree": {
+    "texte_entree": "string — texte brut de l'entrée journal du jour",
+    "date": "YYYY-MM-DD",
+    "profil_utilisateur": "objet — le profile_output.json produit par le Module 0",
+    "tzolkin": {
+      "glyphe_nom": "string",
+      "glyphe_numero": "entier 1-20",
+      "ton_nom": "string",
+      "ton_numero": "entier 1-13",
+      "jour_cycle_260": "entier 1-260"
+    },
+    "solaire": {
+      "f107_j": "float — flux F10.7 du jour en sfu",
+      "f107_j1": "float",
+      "f107_j2": "float",
+      "f107_j3": "float",
+      "eruptions_mx_j": "entier",
+      "eruptions_mx_j1": "entier",
+      "eruptions_mx_j2": "entier",
+      "eruptions_mx_j3": "entier",
+      "eruptions_x_j": "entier",
+      "eruptions_x_j1": "entier",
+      "alerte_tempete": "boolean — true si eruptions_mx_j + j1 >= 5"
+    },
+    "lunaire": {
+      "phase_nom": "string",
+      "illumination_pct": "float",
+      "signe_zodiacal": "string",
+      "distance_km": "float"
+    },
+    "planetes": {
+      "distance_soleil_ua": "float",
+      "retrogrades_actifs": ["string"],
+      "mercure_dist_ua": "float",
+      "venus_dist_ua": "float",
+      "mars_dist_ua": "float",
+      "jupiter_dist_ua": "float",
+      "saturne_dist_ua": "float"
+    },
+    "stats_corpus_historique": {
+      "glyphe_score_moyen": "float — score moyen historique de ce glyphe dans le corpus",
+      "glyphe_n": "entier — nombre d'entrées avec ce glyphe dans le corpus",
+      "ton_score_moyen": "float",
+      "ton_n": "entier",
+      "phase_lunaire_score_moyen": "float",
+      "phase_lunaire_n": "entier",
+      "eruption_mx_effet_j": "float — delta score moyen jour éruption vs pas éruption (corpus historique)",
+      "note": "null si corpus insuffisant (n < 3 pour ce glyphe/ton)"
+    }
+  },
+
+  "taches_analyse": [
+    {
+      "id": "A1",
+      "nom": "Lecture du texte brut",
+      "description": "Que dit vraiment ce texte ? Quels sont les faits rapportés, les états mentionnés, le ton général ?",
+      "garde_fous": "Résumer uniquement ce qui est écrit. Aucune inférence sur ce qui n'est pas écrit.",
+      "output_key": "lecture_texte"
+    },
+    {
+      "id": "A2",
+      "nom": "Score affiné et émotion tempérée",
+      "description": "Attribuer un score -5 à +5 basé sur le texte. Identifier l'émotion dominante RÉELLE en croisant roue standard + vocabulaire propre de la personne (profil).",
+      "methode": [
+        "1. Identifier les marqueurs émotionnels explicites dans le texte",
+        "2. Croiser avec le registre_emotionnel_reel du profil pour utiliser le vocabulaire de la personne",
+        "3. Si contradiction entre ton apparent et contenu, noter les deux",
+        "4. Score = synthèse pondérée, pas moyenne automatique"
+      ],
+      "output_key": "score_et_emotion"
+    },
+    {
+      "id": "A3",
+      "nom": "Thème jungien",
+      "description": "Quel archétype jungien est le plus actif dans cette entrée ?",
+      "categories": ["Soi", "Ombre", "Anima/Animus", "Grande Mère", "Héros", "Puer Aeternus", "Persona", "Corps"],
+      "garde_fous": "Si aucun thème ne s'impose clairement, écrire 'Neutre'. Ne pas forcer.",
+      "output_key": "theme_jungien"
+    },
+    {
+      "id": "A4",
+      "nom": "Patterns de contenu détectés",
+      "description": "Quels patterns (définis dans le profil ou émergents) sont présents dans cette entrée ?",
+      "methode": "Croiser avec patterns_contenus du profil. Signaler aussi tout nouveau pattern non encore répertorié.",
+      "output_key": "patterns_detectes"
+    },
+    {
+      "id": "A5",
+      "nom": "Concordance Tzolkin — Niveau 1 (prioritaire)",
+      "description": "Le glyphe et le ton du jour résonnent-ils avec le contenu de l'entrée ?",
+      "methode": [
+        "1. Donner les caractéristiques connues du glyphe (énergie symbolique, associations traditionnelles mayas)",
+        "2. Donner les caractéristiques du ton",
+        "3. Formuler la concordance symbolique si elle existe — en 'il est intéressant de noter que...'",
+        "4. Formuler aussi la lecture coïncidentielle — 'statistiquement, ce glyphe a un score moyen de X sur N entrées dans le corpus'",
+        "5. Si n < 3 pour ce glyphe dans le corpus : dire explicitement 'données insuffisantes pour analyse statistique'"
+      ],
+      "knowledge_required": "Connaissance du système Tzolkin maya — les 20 glyphes et leur symbolique, les 13 tons et leur fonction",
+      "output_key": "concordance_tzolkin"
+    },
+    {
+      "id": "A6",
+      "nom": "Concordance Solaire — Niveau 2",
+      "description": "L'activité solaire du jour et des 3 jours précédents est-elle notable ?",
+      "methode": [
+        "1. Signaler uniquement si : éruption M/X présente en J, J-1 ou J-2",
+        "2. Rappeler l'effet moyen mesuré dans le corpus historique (eruption_mx_effet_j)",
+        "3. Formuler en deux voix : matérialiste ('UV/EUV peuvent affecter la mélatonine...') et idéaliste ('le Soleil émet une énergie accrue...')",
+        "4. Ne rien formuler si activité solaire calme — ne pas créer de signal là où il n'y en a pas"
+      ],
+      "output_key": "concordance_solaire"
+    },
+    {
+      "id": "A7",
+      "nom": "Concordance Lunaire — Niveau 2",
+      "description": "La phase et le signe lunaire sont-ils cohérents avec l'état rapporté ?",
+      "methode": [
+        "1. Formuler uniquement si la phase est Nouvelle Lune ou Pleine Lune (les plus marquées dans le corpus)",
+        "2. Rappeler le score moyen historique pour cette phase si disponible",
+        "3. Même double lecture matérialiste/idéaliste",
+        "4. Pour le signe : ne formuler que si n >= 3 dans le corpus pour ce signe"
+      ],
+      "output_key": "concordance_lunaire"
+    },
+    {
+      "id": "A8",
+      "nom": "Concordance Planétaire — Niveau 3 (optionnel, signaler si notable)",
+      "description": "Y a-t-il un rétrograde actif ou une configuration planétaire notable ?",
+      "methode": [
+        "1. Signaler uniquement si un rétrograde est actif",
+        "2. Ne formuler AUCUNE causalité — uniquement 'pendant cette période, on observe...'",
+        "3. Pas d'analyse de distance planétaire sauf Soleil (distance_soleil_ua si < 0.98 UA = périhélie notable)"
+      ],
+      "output_key": "concordance_planetaire"
+    },
+    {
+      "id": "A9",
+      "nom": "Synthèse de concordance",
+      "description": "Y a-t-il une convergence notable entre plusieurs niveaux d'analyse ?",
+      "methode": [
+        "1. Recenser les concordances actives (Tzolkin + solaire + lunaire)",
+        "2. Calculer un score de convergence : 0 (aucune), 1 (une seule couche), 2 (deux couches), 3 (trois couches)",
+        "3. Si score >= 2 : formuler la convergence de façon prudente",
+        "4. Toujours rappeler : convergence ≠ causalité"
+      ],
+      "output_key": "synthese_concordance"
+    }
+  ],
+
+  "schema_output": {
+    "date": "YYYY-MM-DD",
+    "tzolkin_du_jour": {
+      "glyphe": "string",
+      "ton": "entier"
+    },
+    "lecture_texte": {
+      "resume": "2-3 phrases max — faits et états rapportés",
+      "ton_general": "positif | negatif | neutre | ambigu | mixte"
+    },
+    "score_et_emotion": {
+      "score": "entier -5 à +5",
+      "score_justification": "1 phrase",
+      "emotion_dominante": "string — dans le vocabulaire de la personne si possible",
+      "intensite": "entier 0-100",
+      "contradiction_notee": "boolean",
+      "contradiction_detail": "string si true, null sinon"
+    },
+    "theme_jungien": "string",
+    "patterns_detectes": [
+      {
+        "pattern": "string",
+        "est_nouveau": "boolean — true si pas encore dans le profil"
+      }
+    ],
+    "concordance_tzolkin": {
+      "glyphe_symbolique": "string — signification traditionnelle en 1 phrase",
+      "ton_symbolique": "string — signification du ton en 1 phrase",
+      "resonance_observee": "string | null — formulation prudente de la concordance",
+      "lecture_materialiste": "string | null",
+      "lecture_idealiste": "string | null",
+      "stats_corpus": {
+        "score_moyen_historique": "float | null",
+        "n_entrees": "entier",
+        "fiable": "boolean — true si n >= 3"
+      }
+    },
+    "concordance_solaire": {
+      "alerte_active": "boolean",
+      "detail_eruptions": "string | null",
+      "lecture_materialiste": "string | null",
+      "lecture_idealiste": "string | null",
+      "effet_corpus_historique": "float | null — delta score moyen mesuré"
+    },
+    "concordance_lunaire": {
+      "phase": "string",
+      "signe": "string",
+      "resonance_observee": "string | null",
+      "lecture_materialiste": "string | null",
+      "lecture_idealiste": "string | null",
+      "stats_corpus": {
+        "score_moyen_historique": "float | null",
+        "n_entrees": "entier",
+        "fiable": "boolean"
+      }
+    },
+    "concordance_planetaire": {
+      "retrogrades_actifs": ["string"],
+      "note": "string | null — uniquement si notable"
+    },
+    "synthese_concordance": {
+      "score_convergence": "entier 0-3",
+      "couches_actives": ["string"],
+      "formulation": "string | null — prudente, jamais causale",
+      "rappel": "Concordance ne signifie pas causalité. Ces patterns méritent d'être observés dans la durée."
+    }
+  }
+}

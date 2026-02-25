@@ -1,0 +1,183 @@
+{
+  "f107_stats": {
+    "mean": 138.5,
+    "std": 18.5,
+    "min": 113,
+    "max": 178
+  },
+  "ssn_stats": {
+    "mean": 108.6,
+    "std": 37.5,
+    "min": 16,
+    "max": 178
+  },
+  "correlations": {
+    "F10.7": {
+      "r": 0.0427,
+      "p": 0.7067
+    },
+    "SSN": {
+      "r": -0.0461,
+      "p": 0.6849
+    },
+    "Éruptions_total": {
+      "r": -0.0802,
+      "p": 0.4795
+    },
+    "Éruptions_MX": {
+      "r": -0.1027,
+      "p": 0.3645
+    },
+    "Éruptions_X": {
+      "r": -0.0823,
+      "p": 0.4681
+    },
+    "Distance_Soleil": {
+      "r": -0.1573,
+      "p": 0.1636
+    }
+  },
+  "f107_cats": {
+    "Faible (<120)": {
+      "mean": 1.57,
+      "n": 21
+    },
+    "Modéré (120-150)": {
+      "mean": 3.11,
+      "n": 36
+    },
+    "Élevé (150-200)": {
+      "mean": 1.96,
+      "n": 23
+    },
+    "Très élevé (>200)": {
+      "mean": null,
+      "n": 0
+    }
+  },
+  "ssn_cats": {
+    "Faible (<50)": {
+      "mean": 3.0,
+      "n": 5
+    },
+    "Modéré (50-100)": {
+      "mean": 2.32,
+      "n": 28
+    },
+    "Élevé (100-150)": {
+      "mean": 2.57,
+      "n": 35
+    },
+    "Très élevé (>150)": {
+      "mean": 1.67,
+      "n": 12
+    }
+  },
+  "flare_mx": {
+    "no_flare": {
+      "mean": 2.71,
+      "n": 48
+    },
+    "has_flare": {
+      "mean": 1.88,
+      "n": 32
+    }
+  },
+  "flare_x": {
+    "no_x": {
+      "mean": 2.43,
+      "n": 74
+    },
+    "has_x": {
+      "mean": 1.67,
+      "n": 6
+    }
+  },
+  "x_flare_days": [
+    {
+      "Date": "13/05/2025",
+      "Glyphe+Chiffre": "Cimi Wak",
+      "score": 2,
+      "theme_jungien": "Ombre",
+      "f107": 117,
+      "ssn": 54,
+      "flares_m": 0,
+      "flares_x": 1
+    },
+    {
+      "Date": "14/05/2025",
+      "Glyphe+Chiffre": "Manik Uuc",
+      "score": -1,
+      "theme_jungien": "Héros",
+      "f107": 122,
+      "ssn": 53,
+      "flares_m": 4,
+      "flares_x": 1
+    },
+    {
+      "Date": "17/06/2025",
+      "Glyphe+Chiffre": "Imix Ca",
+      "score": 2,
+      "theme_jungien": "Anima",
+      "f107": 139,
+      "ssn": 97,
+      "flares_m": 1,
+      "flares_x": 1
+    },
+    {
+      "Date": "19/06/2025",
+      "Glyphe+Chiffre": "Akbal Can",
+      "score": 5,
+      "theme_jungien": "Grande Mère",
+      "f107": 136,
+      "ssn": 113,
+      "flares_m": 0,
+      "flares_x": 1
+    },
+    {
+      "Date": "02/02/2026",
+      "Glyphe+Chiffre": "Chuen Buluc",
+      "score": 2,
+      "theme_jungien": "Persona",
+      "f107": 174,
+      "ssn": 131,
+      "flares_m": 15,
+      "flares_x": 2
+    },
+    {
+      "Date": "03/02/2026",
+      "Glyphe+Chiffre": "Eb Lahca",
+      "score": 0,
+      "theme_jungien": "Ombre",
+      "f107": 178,
+      "ssn": 171,
+      "flares_m": 11,
+      "flares_x": 1
+    }
+  ],
+  "x_flare_themes": {
+    "Ombre": 2,
+    "Héros": 1,
+    "Anima": 1,
+    "Grande Mère": 1,
+    "Persona": 1
+  },
+  "peak_activity": {
+    "n": 2,
+    "mean": 2.0,
+    "themes": {
+      "Ombre": 1,
+      "Puer": 1
+    }
+  },
+  "quiet_activity": {
+    "n": 15,
+    "mean": 1.67
+  },
+  "dist_corr": {
+    "r_dist_f107": -0.333,
+    "r_dist_ssn": 0.0796,
+    "r_dist_score": -0.1573
+  },
+  "kp_vs_solar_note": "Kp (r=-0.027 ns) nettement moins prédictif que catégories solaires directes"
+}

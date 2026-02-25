@@ -1,0 +1,241 @@
+/* Neutraliser marges/padding du body et conteneurs parents */
+body.page-id-3936,
+body.page-id-3936 .ast-container,
+body.page-id-3936 .site-content {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+#tzolkin-detail-view {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: url("./assets/Xbalanque.jpg") no-repeat center center fixed;
+    background-size: cover;
+    z-index: 1000;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    filter: invert(100%);
+}
+
+#tzolkin-detail-content {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media (orientation: landscape) {
+    body.page-id-3936 #tzolkin-detail-view {
+        background-size: cover;
+    }
+}
+
+body.page-id-3936 #tzolkin-detail-view.hidden {
+    display: none;
+}
+
+/* Masquer le bouton de retour en haut du thème parent lorsque la fenêtre de détail est visible */
+body.page-id-3936 #tzolkin-detail-view:not(.hidden) #ast-scroll-top,
+body.page-id-3936 #tzolkin-detail-view:not(.hidden) .ast-scroll-top {
+    display: none !important;
+    visibility: hidden !important;
+    z-index: -1 !important;
+    opacity: 0 !important;
+}
+
+/* Restaurer le bouton de retour en haut du thème parent lorsque la fenêtre de détail est fermée */
+body.page-id-3936 #tzolkin-detail-view.hidden~#ast-scroll-top,
+body.page-id-3936 #tzolkin-detail-view.hidden~.ast-scroll-top {
+    display: block !important;
+    visibility: visible !important;
+    z-index: 999 !important;
+    opacity: 1 !important;
+}
+
+body.page-id-3936 #tzolkin-detail-content {
+    max-width: 95%;
+    /* 2.5% marge de chaque côté */
+    width: 500px;
+    /* Limite pour grands écrans */
+    margin: 20px auto;
+    padding: 20px;
+    background: #ded2b3;
+    border: 2px solid #222;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.09);
+    z-index: 1001;
+    position: relative;
+    /* Activer z-index */
+}
+
+body.page-id-3936 #tzolkin-detail-content #tzolkin-back-btn {
+    margin: 0 0 20px 0;
+    /* Haut à gauche, espace en bas */
+    padding: 8px 16px;
+    background: #222;
+    color: #a8624b;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-block;
+    z-index: 1002;
+}
+
+body.page-id-3936 #tzolkin-detail-content #tzolkin-back-btn:hover {
+    color: #5f9487;
+    /* Bleu électrique au survol */
+}
+
+body.page-id-3936 #tzolkin-detail-content .tzolkin-detail-img {
+    max-width: 100px;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+body.page-id-3936 #tzolkin-detail-content h3 {
+    font-size: 1.5em;
+    margin: 10px 0 20px;
+    color: #333;
+    text-align: center;
+}
+
+body.page-id-3936 #tzolkin-detail-content h4 {
+    font-size: 1.2em;
+    margin: 15px 0 5px;
+    color: #333;
+}
+
+body.page-id-3936 #tzolkin-detail-content p,
+body.page-id-3936 #tzolkin-detail-content ul {
+    font-size: 1em;
+    color: #555;
+    line-height: 1.5;
+    margin: 10px 0;
+}
+
+body.page-id-3936 #tzolkin-detail-content ul li {
+    display: flex;
+    align-items: center;
+    /* Aligner image et texte verticalement */
+    gap: 8px;
+    /* Espace entre image et texte */
+}
+
+body.page-id-3936 #tzolkin-detail-content .tzolkin-glyph-icon {
+    width: 20px;
+    /* Taille petite pour les icônes */
+    height: 20px;
+    vertical-align: middle;
+}
+
+body.page-id-3936 #tzolkin-detail-content #tzolkin-scroll-top {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 20px 0 0 auto;
+    /* Bas à droite */
+    padding: 4px;
+    background: #222;
+    border-radius: 8px;
+    z-index: 1002;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+body.page-id-3936 #tzolkin-detail-content #tzolkin-scroll-top:hover {
+    background: #00C4FF;
+    /* Bleu électrique au survol */
+    color: #e4cbb1;
+    /* Texte contrastant */
+}
+
+body.page-id-3936 #tzolkin-detail-content #tzolkin-scroll-top .ast-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 22px;
+}
+
+body.page-id-3936 #tzolkin-detail-content #tzolkin-scroll-top .ast-icon.icon-arrow {
+    display: flex !important;
+    visibility: visible !important;
+}
+
+body.page-id-3936 #tzolkin-detail-content #tzolkin-scroll-top .ast-arrow-svg {
+    fill: #5e832a !important;
+    width: 36px;
+    height: 22px;
+    display: block !important;
+    transform: rotate(180deg);
+    /* Inverser la flèche pour pointer vers le haut */
+}
+
+body.page-id-3936 #tzolkin-detail-content #tzolkin-scroll-top:hover .ast-arrow-svg {
+    fill: #d49b42 !important;
+    /* Icône en jaune pour contraste */
+}
+
+body.page-id-3936 .ast-scroll-top-icon {
+    display: block !important;
+}
+
+body.page-id-3936 .hidden {
+    display: none;
+}
+
+body.page-id-3936 .clickable {
+    cursor: pointer;
+}
+
+body.page-id-3936 .clickable:hover {
+    color: #4d9194;
+}
+
+body.page-id-3936 a:hover {
+    color: #4d9194;
+}
+
+body.page-id-3936 .clickable {
+    cursor: pointer;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+body.page-id-3936 .clickable:hover {
+    color: #4d9194;
+}
+
+body.page-id-3936 .clickable::after {
+    content: '\203A';
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    background: #4d9194;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 26px;
+    color: #000;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 5px;
+    position: relative;
+    top: 2px;
+    transition: background 0.2s ease;
+}
+
+body.page-id-3936 .clickable:hover::after {
+    background: #3a6f71;
+}

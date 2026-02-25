@@ -1,0 +1,60 @@
+{
+  "_note": "Données solaires et lunaires approximatives pour test — en production, générées par enrich_csv.py via API NASA/USNO",
+
+  "date": "2026-01-05",
+  "texte_brut": "Je remets la main avec Galiléo sur ma nouvelle date de naissance en tzolkin, à la sortie de ma retraite. Il s'agit du 9 octobre. Donc 9 octobre 1974 soit 13 Manik. Le même glyphe que Galiléo, mais le 13, le dernier. Ainsi Galaad est né le 09 octobre 1974 à 07h07 et ce qui est dingue, c'est que nous réalisons cela cette semaine où nous sommes dans la trécéna de Men, l'aigle, la trécéna de ma naissance !!! On aura donc le 13 Manik dans quelques jours.",
+
+  "tzolkin": {
+    "glyphe_nom": "Akbal",
+    "glyphe_numero": 3,
+    "ton_nom": "Bolon",
+    "ton_numero": 9,
+    "jour_cycle_260": 43,
+    "trecena_actuelle": "Men (Eagle) — trécéna 4, jours 40-52"
+  },
+
+  "solaire": {
+    "f107_j": 148.3,
+    "f107_j1": 152.1,
+    "f107_j2": 155.0,
+    "f107_j3": 149.8,
+    "eruptions_mx_j": 0,
+    "eruptions_mx_j1": 0,
+    "eruptions_mx_j2": 1,
+    "eruptions_mx_j3": 0,
+    "eruptions_x_j": 0,
+    "eruptions_x_j1": 0,
+    "alerte_tempete": false
+  },
+
+  "lunaire": {
+    "phase_nom": "Lune croissante gibbeuse",
+    "illumination_pct": 71,
+    "signe_zodiacal": "Taureau",
+    "distance_km": 384200
+  },
+
+  "planetes": {
+    "distance_soleil_ua": 0.983,
+    "retrogrades_actifs": [],
+    "mercure_dist_ua": 0.72,
+    "venus_dist_ua": 1.21,
+    "mars_dist_ua": 1.02,
+    "jupiter_dist_ua": 5.38,
+    "saturne_dist_ua": 9.87
+  },
+
+  "stats_corpus_historique": {
+    "glyphe_nom": "Akbal",
+    "glyphe_score_moyen": 1.75,
+    "glyphe_n": 8,
+    "glyphe_scores_detail": [2.0, 2.0, 5.0, -3.0, 0.0, 4.0, 5.0, -1.0],
+    "ton_nom": "Bolon",
+    "ton_score_moyen": 3.67,
+    "ton_n": 6,
+    "phase_lunaire_score_moyen": null,
+    "phase_lunaire_n": 0,
+    "eruption_mx_effet_j": -0.83,
+    "note": "Akbal : variance forte (-3 à +5), données suffisantes (n=8). Bolon : tendance nettement positive (3.67/6). Phase lunaire gibbeuse croissante : données insuffisantes dans ce corpus (n<3)."
+  }
+}

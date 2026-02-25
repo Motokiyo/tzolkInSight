@@ -1,0 +1,5 @@
+.DS_Store
+assets/.DS_Store
+assets/boutons/.DS_Store
+*.docx
+node_modules/

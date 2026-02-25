@@ -1,0 +1,985 @@
+<!-- 
+  Tzolk'in Menu Standalone - Menu et Modales
+  Version: 2.0 (conversion autonome sans PHP)
+  Auteur: Alexandre Ferran + Claude AI
+-->
+
+<!-- Modale Fonctionnement -->
+<div id="fonctionnement-modal" class="modal">
+    <div class="modal-content"
+        style="background: rgba(222, 210, 179, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 2px solid #222; border-radius: 16px;">
+        <button class="close-modal" onclick="closeAllModals()"
+            style="position:absolute; top:15px; right:15px; background:none; border:none; font-size:24px; cursor:pointer;">&times;</button>
+        <div class="modal-body" style="max-height: 80vh; overflow-y: auto; padding: 20px;">
+            <section>
+                <div class="section-header" style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                    <img src="./assets/boutons/SVG/ahau-bt.svg" alt="Ahau" class="section-icon"
+                        style="width: 40px; height: 40px;">
+                    <h2 style="font-family: 'Summer', cursive; color: #c19434; margin: 0;">Le tzolk’in : Le Calendrier
+                        spirituel des Mayas</h2>
+                </div>
+                <p>Le tzolk’in, également appelé “compte des jours” ou “calendrier sacré”, est l’un des calendriers de
+                    la civilisation maya. Originaire de la Mésoamérique, ce système calendaire a été développé il y a
+                    plus de 2 500 ans. Son utilisation s’est poursuivie sans interruption jusqu’à nos jours dans
+                    certaines communautés mayas du Guatemala et du Mexique.</p>
+                <p>Contrairement à notre calendrier grégorien, qui suit les cycles solaires, le tzolk’in repose sur un
+                    cycle de 260 jours, résultant de la combinaison de deux cycles simultanés : un cycle de 13 nombres
+                    et un cycle de 20 glyphes (appelés “nawals”). Chaque jour est ainsi identifié par un nombre de 1 à
+                    13 associé à l’un des 20 glyphes, créant 260 combinaisons uniques. Ce cycle correspond
+                    approximativement à la période de gestation humaine et est également lié aux cycles agricoles et
+                    astronomiques, centraux pour la civilisation maya.</p>
+
+                <h3 style="font-family: 'Summer', cursive; color: #c19434;">Les cycles astronomiques et leur relation
+                    avec le tzolk’in</h3>
+                <p>Les Mayas possédaient une connaissance astronomique remarquablement précise, qui se reflète dans la
+                    structure du tzolk’in. Le cycle de 260 jours présente plusieurs corrélations astronomiques
+                    significatives : il correspond approximativement à neuf cycles lunaires synodiques (environ 29,5
+                    jours chacun) ainsi qu’à la période de visibilité de Vénus. De plus, les observateurs mayas avaient
+                    noté que les passages du Soleil au zénith à la latitude de Copán (environ 14,8° Nord) se
+                    produisaient à 260 jours d’intervalle. Le cycle de 20 jours, lié au système vigésimal (base 20) des
+                    Mayas, reflète également le cycle des Pléiades, visible pendant environ 260 jours par an sous ces
+                    latitudes. Le cycle de 13, quant à lui, pourrait correspondre au nombre de “cieux” ou niveaux
+                    cosmiques dans la cosmologie maya. Les Mayas avaient calculé avec une précision stupéfiante les
+                    cycles synodiques des planètes visibles, les éclipses solaires et lunaires, et même la précession
+                    des équinoxes, un cycle d’environ 26 000 ans. Le tzolk’in s’intégrait dans un système calendaire
+                    plus vaste, incluant le Haab (calendrier solaire de 365 jours), pour former le “Compte Long”,
+                    permettant de suivre des périodes de plusieurs millénaires.</p>
+
+                <h3 style="font-family: 'Summer', cursive; color: #c19434;">Résonances numériques avec d’autres
+                    traditions anciennes</h3>
+                <p>Fait remarquable, les nombres 13 et 20, au cœur du tzolk’in maya, se retrouvent avec une
+                    signification similaire dans d’autres traditions culturelles éloignées géographiquement. Dans la
+                    tradition celtique, le calendrier lunaire comportait 13 mois de 28 jours, correspondant aux 13
+                    cycles lunaires d’une année solaire. Le nombre 20 apparaît dans leur système de comptage vigésimal,
+                    et certains cercles de pierres celtiques présentent des arrangements basés sur ces nombres. Le
+                    calendrier oghamique celtique, par exemple, possède 20 signes principaux, rappelant les 20 glyphes
+                    du tzolk’in. Chez les Égyptiens anciens, le cycle de Sirius (l’étoile la plus brillante du ciel)
+                    était particulièrement important, et sa période de visibilité était d’environ 260 jours par an. Leur
+                    calendrier présentait 13 phases correspondant aux inondations du Nil, et leur système numérique
+                    attribuait une signification particulière au nombre 20 comme marqueur d’une période complète. Dans
+                    la tradition hopi d’Amérique du Nord, on retrouve un système prophétique basé sur 13 cycles majeurs,
+                    et leur cosmologie divise le monde en 20 aspects fondamentaux. Cette convergence numérique entre
+                    cultures, apparemment sans contacts directs, soulève des questions fascinantes sur l’universalité
+                    potentielle de certaines observations astronomiques ou sur des intuitions mathématiques
+                    fondamentales communes à l’humanité.</p>
+
+                <h3 style="font-family: 'Summer', cursive; color: #c19434;">Les glyphes du tzolk’in</h3>
+                <p>Les 20 glyphes du tzolk’in représentent des forces ou énergies spirituelles fondamentales qui
+                    influencent chaque jour selon la cosmogonie maya. Chaque glyphe possède ses propres
+                    caractéristiques, son symbolisme et sa signification spirituelle. Ils sont représentés par des
+                    symboles visuels complexes qui évoquent des éléments naturels, des animaux ou des concepts abstraits
+                    : Imix (Crocodile), Ik (Vent), Akbal (Nuit), Kan (Maïs), Chicchan (Serpent), Cimi (Mort), Manik
+                    (Cerf), Lamat (Étoile), Muluc (Eau), Oc (Chien), Chuen (Singe), Eb (Herbe), Ben (Roseau), Ix
+                    (Jaguar), Men (Aigle), Cib (Vautour), Caban (Terre), Etznab (Silex), Cauac (Orage) et Ahau
+                    (Seigneur/Soleil). Ces glyphes déterminent la nature fondamentale de chaque jour et sont considérés
+                    comme des portails permettant de communiquer avec différentes dimensions de l’existence et des
+                    divinités spécifiques.</p>
+
+                <h3 style="font-family: 'Summer', cursive; color: #c19434;">Les nombres du tzolk’in</h3>
+                <p>Dans le tzolk’in, les 13 nombres ne sont pas de simples indicateurs quantitatifs, mais possèdent une
+                    signification qualitative et spirituelle profonde. Chaque nombre de 1 à 13 représente une intention,
+                    un être ou une direction d’énergie particulière : le 1 symbolise l’unité et l’initiation, le 2 la
+                    dualité et la polarité, le 3 l’activation et le mouvement, le 4 la stabilité et la mesure, le 5
+                    l’harmonie et le centre, le 6 l’équilibre et le rythme, le 7 la réflexion et la méditation, le 8
+                    l’harmonie et la justice, le 9 la patience et la persévérance, le 10 la manifestation et
+                    l’accomplissement, le 11 la dissolution et la libération, le 12 la compréhension et la stabilité, et
+                    le 13 l’ascension et la transcendance. Selon la tradition maya, chaque nombre module l’énergie du
+                    glyphe auquel il est associé, créant une dynamique unique pour chaque jour du calendrier. Ces
+                    nombres sont également liés aux treize articulations majeures du corps humain, établissant une
+                    connexion entre le macrocosme et le microcosme.</p>
+            </section>
+
+            <section style="margin-top: 30px;">
+                <div class="section-header" style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                    <img src="./assets/boutons/SVG/ik-bt.svg" alt="Ik" class="section-icon"
+                        style="width: 40px; height: 40px;">
+                    <h2 style="font-family: 'Summer', cursive; color: #c19434; margin: 0;">Fonctionnement de
+                        l’application</h2>
+                </div>
+
+                <div class="subsection" style="margin-left: 20px; margin-bottom: 20px;">
+                    <div class="section-header"
+                        style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                        <img src="./assets/boutons/SVG/manik-bt.svg" alt="Manik" class="section-icon"
+                            style="width: 30px; height: 30px;">
+                        <h3 style="font-family: 'Summer', cursive; color: #c19434; margin: 0;">Page « Calendrier »</h3>
+                    </div>
+                    <p>Sur cette page, vous avez accès au couple glyphe/chiffre du jour et à la trécéna (cycle de 13
+                        jours correspondant à la “semaine” spirituelle maya, avec une énergie particulière). Sous
+                        l’élément visuel du calendrier, une explication textuelle détaille le glyphe, le chiffre et la
+                        trécéna du jour.</p>
+
+                    <h4 style="font-family: 'Summer', cursive; color: #c19434;">Le module calendrier</h4>
+                    <p>Vous pouvez naviguer entre les jours avec les flèches « < » et «> » qui encadrent la date,
+                            situées sous les modules visuels du tzolk’in. En cliquant sur la date, vous pouvez entrer
+                            une date de votre choix et la valider avec la touche “Entrée”. Cela permet de consulter les
+                            signes associés à votre date de naissance ou à une date d’intérêt, tout en affichant les
+                            informations des chiffres et glyphes correspondants. En haut à droite, un bouton de
+                            réinitialisation ramène à la date du jour. Derrière le cadre affichant le chiffre et le
+                            glyphe du jour, se trouve le glyphe de la trécéna en cours.</p>
+
+                    <h4 style="font-family: 'Summer', cursive; color: #c19434;">La partie textuelle</h4>
+                    <p>Les éléments textuels sont accompagnés de flèches qui, au clic, ouvrent une nouvelle fenêtre
+                        appelée “Détails”, contenant des informations encore plus approfondies. Vous pouvez quitter
+                        cette fenêtre en cliquant sur le bouton “Retour” en haut à gauche, qui ramène à la fenêtre
+                        principale de l’application avec le calendrier.</p>
+                </div>
+
+                <div class="subsection" style="margin-left: 20px; margin-bottom: 20px;">
+                    <div class="section-header"
+                        style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                        <img src="./assets/boutons/SVG/lamat-bt.svg" alt="Lamat" class="section-icon"
+                            style="width: 30px; height: 30px;">
+                        <h3 style="font-family: 'Summer', cursive; color: #c19434; margin: 0;">Page « Fonctionnement »
+                        </h3>
+                    </div>
+                    <p>C’est cette page.</p>
+                </div>
+
+                <div class="subsection" style="margin-left: 20px; margin-bottom: 20px;">
+                    <div class="section-header"
+                        style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                        <img src="./assets/boutons/SVG/akbal-bt.svg" alt="Akbal" class="section-icon"
+                            style="width: 30px; height: 30px;">
+                        <h3 style="font-family: 'Summer', cursive; color: #c19434; margin: 0;">Page « Notes »</h3>
+                    </div>
+
+                    <h4 style="font-family: 'Summer', cursive; color: #c19434;">Code à 4 chiffres, identification</h4>
+                    <p>À la première ouverture, il vous est demandé un code de quatre chiffres ou plus. Ce code n’est
+                        pas requis pour accéder aux modules “Notes” et “Enregistrés”, mais il permet de récupérer vos
+                        notes enregistrées en cas de mise à jour, de changement de téléphone, de désinstallation
+                        accidentelle de l’application, etc. Choisissez un code que vous retiendrez facilement pour ne
+                        jamais perdre vos écrits. C’est votre identifiant personnel, garantissant l’accès à votre
+                        dossier attaché à l’application.</p>
+
+                    <h4 style="font-family: 'Summer', cursive; color: #c19434;">La page « Notes »</h4>
+                    <p>La page “Notes” permet de consigner les événements marquants du jour. Un menu déroulant en haut
+                        propose les huit couleurs de la roue des émotions de Robert Plutchik pour associer une
+                        couleur/émotion à votre note. L’enregistrement des notes est automatique. À minuit, lors du
+                        changement de date, l’espace de note se vide, et le texte est enregistré dans le module
+                        “Enregistrés”.</p>
+
+                    <h4 style="font-family: 'Summer', cursive; color: #c19434;">La page « Enregistrés »</h4>
+                    <p>Accessible via le bouton en haut à droite de la fenêtre “Notes”, la fenêtre “Enregistrés” affiche
+                        toutes vos notes mémorisées. Le module de recherche permet de filtrer vos notes par “glyphe”,
+                        “chiffre” ou “date grégorienne”. Vous pouvez télécharger vos données au format CSV pour les
+                        ouvrir dans un tableur. Le CSV contient les colonnes suivantes : Date, Glyphe, Chiffre,
+                        Glyphe+Chiffre, Couleur, Note.</p>
+                </div>
+
+                <div class="subsection" style="margin-left: 20px; margin-bottom: 20px;">
+                    <div class="section-header"
+                        style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                        <img src="./assets/boutons/SVG/men-bt.svg" alt="Men" class="section-icon"
+                            style="width: 30px; height: 30px;">
+                        <h3 style="font-family: 'Summer', cursive; color: #c19434; margin: 0;">Page « Crédits »</h3>
+                    </div>
+                    <p>Cette page présente les crédits, la version actuelle de l’application, les journaux de mise à
+                        jour et un lien vers le site du Parédé : <a href="https://leparede.org" target="_blank"
+                            style="color: #c19434; text-decoration: underline;">leparede.org</a>.</p>
+                    <blockquote
+                        style="font-style: italic; border-left: 4px solid #c19434; padding-left: 15px; margin: 20px 0;">
+                        « Connais-toi toi-même et tu connaîtras l’Univers et les Dieux »</blockquote>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<!-- Modale Notes -->
+<div id="notes-modal" class="modal">
+    <div class="modal-content">
+        <div class="header">
+            <h2>Notes</h2>
+            <button class="open-saved-btn" id="open-saved-btn" onclick="openSavedWithPin()">Enregistrés</button>
+            <div id="edit-controls" style="display: none; margin-left: auto;">
+                <button onclick="saveEdit()"
+                    style="padding: 5px 10px; background-color: #4CAF50; color: white; border: none; cursor: pointer; margin-right: 5px;">Enregistrer</button>
+                <button onclick="cancelEdit()"
+                    style="padding: 5px 10px; background-color: #FF5555; color: white; border: none; cursor: pointer;">Annuler</button>
+            </div>
+            <button onclick="closeAllModals()"
+                style="background: none; border: none; font-size: 24px; cursor: pointer; margin-left: auto;">&times;</button>
+        </div>
+        <!-- Contenu défilant -->
+        <div class="modal-body">
+            <!-- Section clé personnelle supprimée - plus nécessaire en app autonome -->
+            <div class="custom-dropdown" id="color-dropdown" style="width: 100%; margin-bottom: 10px; position: relative;">
+                <div class="dropdown-selected"
+                    style="padding: 5px; border: 1px solid #ccc; background-color: #FFFFFF; color: #000000; cursor: pointer; font-size: 14px;">
+                    ROUE DES EMOTIONS de R. Plutchik : Je me sens...
+                </div>
+                <div class="dropdown-options"
+                    style="display: none; position: absolute; width: 100%; border: 1px solid #ccc; background-color: #FFFFFF; z-index: 10; max-height: 200px; overflow-y: auto;">
+                    <span class="dropdown-option" data-value=""
+                        style="display: block; padding: 5px; background-color: #FFFFFF; color: #000000; cursor: pointer; font-size: 14px;">Aucune
+                        émotion (sans couleur)</span>
+                    <span class="dropdown-option" data-value="Joie,Sérénité,Extase"
+                        style="display: block; padding: 5px; background-color: #FFFF99; color: #000000; cursor: pointer; font-size: 14px;">Joie,
+                        Sérénité, Extase</span>
+                    <span class="dropdown-option" data-value="Tristesse,Songerie,Chagrin"
+                        style="display: block; padding: 5px; background-color: #99CCFF; color: #000000; cursor: pointer; font-size: 14px;">Tristesse,
+                        Songerie, Chagrin</span>
+                    <span class="dropdown-option" data-value="Peur,Appréhension,Terreur"
+                        style="display: block; padding: 5px; background-color: #99FF99; color: #000000; cursor: pointer; font-size: 14px;">Peur,
+                        Appréhension, Terreur</span>
+                    <span class="dropdown-option" data-value="Colère,Contrariété,Rage"
+                        style="display: block; padding: 5px; background-color: #FF9999; color: #000000; cursor: pointer; font-size: 14px;">Colère,
+                        Contrariété, Rage</span>
+                    <span class="dropdown-option" data-value="Surprise,Distraction,Stupéfaction"
+                        style="display: block; padding: 5px; background-color: #CC99FF; color: #000000; cursor: pointer; font-size: 14px;">Surprise,
+                        Distraction, Stupéfaction</span>
+                    <span class="dropdown-option" data-value="Confiance,Acceptation,Admiration"
+                        style="display: block; padding: 5px; background-color: #CCFFCC; color: #000000; cursor: pointer; font-size: 14px;">Confiance,
+                        Acceptation, Admiration</span>
+                    <span class="dropdown-option" data-value="Dégoût,Aversion,Ennui"
+                        style="display: block; padding: 5px; background-color: #999966; color: #000000; cursor: pointer; font-size: 14px;">Dégoût,
+                        Aversion, Ennui</span>
+                    <span class="dropdown-option" data-value="Anticipation,Intérêt,Vigilance"
+                        style="display: block; padding: 5px; background-color: #FFCC99; color: #000000; cursor: pointer; font-size: 14px;">Anticipation,
+                        Intérêt, Vigilance</span>
+                </div>
+            </div>
+            <textarea id="notes-input" placeholder="Entrez vos notes du jour..."></textarea>
+        </div>
+    </div>
+</div>
+
+<!-- Modale Enregistrés (Saved) -->
+<div id="saved-modal" class="modal">
+    <div class="modal-content">
+        <div class="header">
+            <button class="back-btn" onclick="openModal('notes')">&lt;</button>
+            <h2 style="white-space: nowrap;">Notes enregistrées</h2>
+            <button onclick="closeAllModals()"
+                style="background: none; border: none; font-size: 24px; cursor: pointer; margin-left: auto;">&times;</button>
+        </div>
+
+        <!-- Filtres fixes (non défilants) -->
+        <div class="saved-filters">
+            <div class="search-bar">
+                <!-- Dropdown Glyphe -->
+                <div class="dropdown" id="filter-glyph-dropdown">
+                    <img src="./assets/glyphs/MAYA-g-log-cal-D01-Imix.svg" alt="Glyphe" id="filter-glyph-img">
+                    <span class="dropdown-icon">▼</span>
+                    <ul id="glyph-dropdown">
+                        <li data-value=""><img src="./assets/glyphs/MAYA-g-log-cal-D01-Imix.svg" alt="Tous"></li>
+                        <li data-value="1"><img src="./assets/glyphs/MAYA-g-log-cal-D01-Imix.svg" alt="Imix"></li>
+                        <li data-value="2"><img src="./assets/glyphs/MAYA-g-log-cal-D02-Ik.svg" alt="Ik"></li>
+                        <li data-value="3"><img src="./assets/glyphs/MAYA-g-log-cal-D03-Akbal.svg" alt="Akbal"></li>
+                        <li data-value="4"><img src="./assets/glyphs/MAYA-g-log-cal-D04-Kan.svg" alt="Kan"></li>
+                        <li data-value="5"><img src="./assets/glyphs/MAYA-g-log-cal-D05-Chikchan.svg" alt="Chicchan"></li>
+                        <li data-value="6"><img src="./assets/glyphs/MAYA-g-log-cal-D06-Kimi.svg" alt="Cimi"></li>
+                        <li data-value="7"><img src="./assets/glyphs/MAYA-g-log-cal-D07-Manik.svg" alt="Manik"></li>
+                        <li data-value="8"><img src="./assets/glyphs/MAYA-g-log-cal-D08-Lamat.svg" alt="Lamat"></li>
+                        <li data-value="9"><img src="./assets/glyphs/MAYA-g-log-cal-D09-Muluk.svg" alt="Muluc"></li>
+                        <li data-value="10"><img src="./assets/glyphs/MAYA-g-log-cal-D10-Ok_b.svg" alt="Oc"></li>
+                        <li data-value="11"><img src="./assets/glyphs/MAYA-g-log-cal-D11-Chuwen.svg" alt="Chuen"></li>
+                        <li data-value="12"><img src="./assets/glyphs/MAYA-g-log-cal-D12-Eb.svg" alt="Eb"></li>
+                        <li data-value="13"><img src="./assets/glyphs/MAYA-g-log-cal-D13-Ben.svg" alt="Ben"></li>
+                        <li data-value="14"><img src="./assets/glyphs/MAYA-g-log-cal-D14-Ix.svg" alt="Ix"></li>
+                        <li data-value="15"><img src="./assets/glyphs/MAYA-g-log-cal-D15-Men.svg" alt="Men"></li>
+                        <li data-value="16"><img src="./assets/glyphs/MAYA-g-log-cal-D16-Kib.svg" alt="Cib"></li>
+                        <li data-value="17"><img src="./assets/glyphs/MAYA-g-log-cal-D17-Kaban.svg" alt="Caban"></li>
+                        <li data-value="18"><img src="./assets/glyphs/MAYA-g-log-cal-D18-Etznab.svg" alt="Etznab"></li>
+                        <li data-value="19"><img src="./assets/glyphs/MAYA-g-log-cal-D19-Kawak.svg" alt="Cauac"></li>
+                        <li data-value="20"><img src="./assets/glyphs/MAYA-g-log-cal-D20-Ajaw.svg" alt="Ahau"></li>
+                    </ul>
+                </div>
+
+                <!-- Dropdown Nombre -->
+                <div class="dropdown" id="filter-number-dropdown">
+                    <img src="./assets/numbers/Maya_1.svg" alt="Nombre" id="filter-number-img">
+                    <span class="dropdown-icon">▼</span>
+                    <ul id="number-dropdown">
+                        <li data-value=""><img src="./assets/numbers/Maya_1.svg" alt="Tous"></li>
+                        <li data-value="1"><img src="./assets/numbers/Maya_1.svg" alt="1"></li>
+                        <li data-value="2"><img src="./assets/numbers/Maya_2.svg" alt="2"></li>
+                        <li data-value="3"><img src="./assets/numbers/Maya_3.svg" alt="3"></li>
+                        <li data-value="4"><img src="./assets/numbers/Maya_4.svg" alt="4"></li>
+                        <li data-value="5"><img src="./assets/numbers/Maya_5.svg" alt="5"></li>
+                        <li data-value="6"><img src="./assets/numbers/Maya_6.svg" alt="6"></li>
+                        <li data-value="7"><img src="./assets/numbers/Maya_7.svg" alt="7"></li>
+                        <li data-value="8"><img src="./assets/numbers/Maya_8.svg" alt="8"></li>
+                        <li data-value="9"><img src="./assets/numbers/Maya_9.svg" alt="9"></li>
+                        <li data-value="10"><img src="./assets/numbers/Maya_10.svg" alt="10"></li>
+                        <li data-value="11"><img src="./assets/numbers/Maya_11.svg" alt="11"></li>
+                        <li data-value="12"><img src="./assets/numbers/Maya_12.svg" alt="12"></li>
+                        <li data-value="13"><img src="./assets/numbers/Maya_13.svg" alt="13"></li>
+                    </ul>
+                </div>
+
+                <!-- Champ de recherche par date -->
+                <input type="text" id="filter-date" placeholder="jj/mm/aaaa" onkeyup="filterNotes()"
+                    style="padding: 5px; border: 1px solid #ccc; border-radius: 8px; width: 100px; height: 38px; flex: 1;" />
+
+                <!-- Bouton Tri -->
+                <button class="sort-btn" id="sort-btn" onclick="toggleSortOrder()">⇅</button>
+
+                <!-- Bouton Réinitialiser -->
+                <button onclick="resetFilters()"
+                    style="padding: 8px 12px; background: #888; color: white; border: none; border-radius: 8px; cursor: pointer; height: 38px;">↻</button>
+            </div>
+        </div>
+
+        <!-- Table des notes + bouton CSV défilants ensemble -->
+        <div class="modal-body">
+            <div class="notes-table" id="notes-table">
+                <div class="no-results" style="text-align: center; padding: 20px; color: #888;">Chargement...</div>
+            </div>
+            <div style="text-align: center; padding: 20px 0 30px;">
+                <button onclick="downloadCSV()"
+                    style="padding: 10px 20px; background: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 14px;">&#128229;
+                    Télécharger CSV</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modale Crédits -->
+<div id="credits-modal" class="modal">
+    <div class="modal-content">
+        <div class="tzolkin-splash-container">
+            <div class="tzolkin-splash-icon">
+                <img src="./assets/tzolkin-splash.png" alt="Tzolk'in du Parédé" />
+            </div>
+            <div class="tzolkin-splash-text">
+                <h1>Tzolk'in du Parédé</h1>
+                <p>Calendrier Maya Sacré</p>
+                <p class="version">Version 2.0</p>
+                <p><strong>Auteur :</strong> Alexandre Ferran</p>
+                <p><strong>Assistance IA :</strong> Grok, DeepSeek, Claude</p>
+                <p><a href="https://leparede.org" target="_blank">leparede.org</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Menu principal (fixe en bas) -->
+<div class="main-menu">
+    <div class="menu-button" onclick="closeAllModals()">
+        <img src="./assets/boutons/SVG/men-bt.svg" alt="Calendrier">
+        <span>Calendrier</span>
+    </div>
+    <div class="menu-button" onclick="openModal('fonctionnement')">
+        <img src="./assets/boutons/SVG/lamat-bt.svg" alt="Fonctionnement">
+        <span>Fonctionnement</span>
+    </div>
+    <div class="menu-button" onclick="openModal('notes')">
+        <img src="./assets/boutons/SVG/akbal-bt.svg" alt="Notes">
+        <span>Notes</span>
+    </div>
+    <div class="menu-button" onclick="openModal('credits')">
+        <img src="./assets/boutons/SVG/manik-bt.svg" alt="Crédits">
+        <span>Crédits</span>
+    </div>
+    <!-- Le bouton Admin sera ajouté automatiquement par tzolkin-admin.js -->
+</div>
+
+<!-- JavaScript des modales -->
+<script>
+    // Variables globales
+    let autosaveTimer = null;
+    const AUTOSAVE_DELAY_MS = 800;
+    let notes = [];
+    let lastSavedDate = null;
+    let notesLoaded = false;
+    let currentLocation = ''; // Lieu GPS mis en cache (reverse geocoding)
+
+    // Couleurs des émotions
+    const emotionColors = {
+        'Joie,Sérénité,Extase': '#FFFF99',
+        'Tristesse,Songerie,Chagrin': '#99CCFF',
+        'Peur,Appréhension,Terreur': '#99FF99',
+        'Colère,Contrariété,Rage': '#FF9999',
+        'Surprise,Distraction,Stupéfaction': '#CC99FF',
+        'Confiance,Acceptation,Admiration': '#CCFFCC',
+        'Dégoût,Aversion,Ennui': '#999966',
+        'Anticipation,Intérêt,Vigilance': '#FFCC99'
+    };
+
+    // Clé utilisateur effective : clé perso si définie, sinon clé par défaut de l'appareil
+    function getEffectiveUserKey() {
+        return window.TzolkinStorage.loadUserKey() || 'tzolkin_app_default';
+    }
+
+    //=== FONCTION: Ville depuis le fuseau horaire (synchrone, toujours disponible) ===
+    function getCityFromTimezone() {
+        try {
+            const tz = Intl.DateTimeFormat().resolvedOptions().timeZone; // ex: "Europe/Paris"
+            const parts = tz.split('/');
+            return parts[parts.length - 1].replace(/_/g, ' ').toUpperCase();
+        } catch (e) {
+            return '';
+        }
+    }
+
+    //=== FONCTION: Demander la position GPS et reverse-geocoder ===
+    function requestGPSLocation() {
+        // Valeur immédiate via fuseau horaire (synchrone)
+        // Garantit que même le 1er autosave (800ms) a une valeur
+        currentLocation = getCityFromTimezone();
+
+        if (!navigator.geolocation) return;
+
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                const { latitude, longitude } = position.coords;
+                try {
+                    const response = await fetch(
+                        `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&accept-language=fr`
+                    );
+                    if (response.ok) {
+                        const data = await response.json();
+                        const addr = data.address || {};
+                        const city = addr.city || addr.municipality || addr.town || addr.village || addr.hamlet || addr.county || '';
+                        if (city) currentLocation = city.toUpperCase();
+                    }
+                } catch (e) {
+                    // Nominatim indisponible → on garde le fuseau horaire déjà défini
+                }
+                console.log('📍 Lieu :', currentLocation);
+                // Re-sauvegarder avec le lieu GPS précis (meilleur que le fuseau)
+                await saveCurrentNote();
+                // Rafraîchir l'affichage si Enregistrés est ouvert
+                const savedModal = document.getElementById('saved-modal');
+                if (savedModal && savedModal.classList.contains('active')) {
+                    notesLoaded = false;
+                    await ensureNotesLoaded();
+                    filterNotes();
+                }
+            },
+            () => {
+                // GPS refusé → on garde la valeur du fuseau horaire déjà définie
+                console.log('📍 GPS refusé, fuseau horaire :', currentLocation);
+            },
+            { timeout: 10000, maximumAge: 300000 }
+        );
+    }
+
+    //=== FONCTION: Ouvrir modale ===
+    function openModal(modalId, skipSave = false) {
+        if (modalId !== 'notes' && !skipSave) {
+            saveCurrentNote();
+            localStorage.setItem('isNoteModalOpen', 'false');
+        }
+
+        document.querySelectorAll('.modal').forEach(modal => modal.classList.remove('active'));
+        const modal = document.getElementById(`${modalId}-modal`);
+
+        if (modal) {
+            modal.classList.add('active');
+            document.body.classList.add('modal-open');
+
+            if (modalId === 'notes') {
+                localStorage.setItem('isNoteModalOpen', 'true');
+                requestGPSLocation(); // Demander position GPS (non-bloquant)
+                ensureNotesLoaded().then(() => {
+                    applyCurrentNoteToUI();
+                });
+                checkUserKey();
+            }
+
+            window.history.pushState({}, '', `#${modalId}`);
+        }
+    }
+
+    //=== FONCTION: Ouvrir Enregistrés avec PIN ===
+    async function openSavedWithPin() {
+        // PIN déjà vérifié cette session → accès direct sans redemander
+        if (sessionStorage.getItem('tzolkin_pin_verified') === '1') {
+            await saveCurrentNote();
+            notesLoaded = false; // Forcer rechargement pour avoir les dernières notes
+            await ensureNotesLoaded();
+            openModal('saved', true);
+            filterNotes();
+            return;
+        }
+
+        // Demander le code PIN avant d'accéder
+        window.tzolkinPIN.requestPin(
+            // Succès: marquer la session et ouvrir la modale
+            async () => {
+                sessionStorage.setItem('tzolkin_pin_verified', '1');
+                await saveCurrentNote();
+                notesLoaded = false;
+                await ensureNotesLoaded();
+                openModal('saved', true);
+                filterNotes();
+            },
+            // Annulation: rester sur la modale Notes
+            () => {
+                console.log('Accès aux notes enregistrées annulé');
+            }
+        );
+    }
+
+    //=== FONCTION: Fermer toutes les modales ===
+    function closeAllModals() {
+        saveCurrentNote();
+        localStorage.setItem('isNoteModalOpen', 'false');
+        document.querySelectorAll('.modal').forEach(modal => modal.classList.remove('active'));
+        document.body.classList.remove('modal-open');
+        window.history.pushState({}, '', '#calendar');
+    }
+
+    //=== DÉSACTIVÉ: Clé utilisateur (plus nécessaire en app autonome) ===
+    /*
+    function saveUserKey() {
+        // DÉSACTIVÉ: La clé personnelle n'est plus nécessaire en mode app autonome
+        // Les notes sont stockées directement sur l'appareil
+    }
+    */
+
+    //=== FONCTION: Vérifier si clé utilisateur existe (simplifiée) ===
+    function checkUserKey() {
+        // En mode autonome, les champs sont toujours accessibles
+        const notesInput = document.getElementById('notes-input');
+        const colorDropdown = document.getElementById('color-dropdown');
+        if (notesInput) notesInput.disabled = false;
+        if (colorDropdown) colorDropdown.style.pointerEvents = 'auto';
+    }
+
+    //=== FONCTION: Sauvegarder note actuelle ===
+    async function saveCurrentNote() {
+        const textarea = document.getElementById('notes-input');
+        if (!textarea) return;
+
+        const text = textarea.value.trim();
+        const offset = window.TzolkinStorage.loadOffset();
+
+        const now = new Date();
+        const currentDate = new Date(now);
+        currentDate.setDate(currentDate.getDate() + offset);
+        const dateStr = currentDate.toISOString().split('T')[0];
+
+        // Heure de la dernière sauvegarde (HH:MM)
+        const timeStr = now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+
+        const tzolkin = window.TzolkinCore.calculateTzolkin(currentDate);
+
+        const colorDropdown = document.getElementById('color-dropdown');
+        const selected = colorDropdown ? colorDropdown.querySelector('.dropdown-selected') : null;
+        let emotion = selected ? (selected.dataset.value || '') : '';
+        let color = emotion && emotion !== '' ? emotionColors[emotion] : '';
+
+        const note = {
+            date: dateStr,
+            glyphId: tzolkin.glyphId,
+            numberId: tzolkin.numberId,
+            text,
+            emotion,
+            color,
+            time: timeStr,
+            location: currentLocation
+        };
+
+        if (text || color) {
+            const userKey = getEffectiveUserKey();
+            await window.TzolkinStorage.saveNote(userKey, note);
+            notesLoaded = false; // Forcer rechargement au prochain accès
+            console.log('Note sauvegardée:', note.date, timeStr, currentLocation);
+        }
+    }
+
+    //=== FONCTION: Charger les notes ===
+    async function ensureNotesLoaded() {
+        if (notesLoaded) return true;
+        const userKey = getEffectiveUserKey();
+        notes = await window.TzolkinStorage.loadNotes(userKey);
+        notesLoaded = true;
+        return true;
+    }
+
+    //=== FONCTION: Appliquer note actuelle à l'UI ===
+    function applyCurrentNoteToUI() {
+        const offset = window.TzolkinStorage.loadOffset();
+        const currentDate = new Date();
+        currentDate.setDate(currentDate.getDate() + offset);
+        const dateStr = currentDate.toISOString().split('T')[0];
+
+        const textarea = document.getElementById('notes-input');
+        const selected = document.getElementById('color-dropdown').querySelector('.dropdown-selected');
+        const options = document.getElementById('color-dropdown').querySelectorAll('.dropdown-option');
+
+        const currentNote = notes.find(note => note.date === dateStr);
+
+        if (currentNote) {
+            textarea.value = currentNote.text;
+
+            let selectedText = 'ROUE DES EMOTIONS de R. Plutchik : Je me sens...';
+            let selectedColor = '#FFFFFF';
+
+            options.forEach(option => {
+                if (option.dataset.value === currentNote.emotion) {
+                    selectedText = option.textContent;
+                    selectedColor = option.style.backgroundColor;
+                }
+            });
+
+            selected.textContent = selectedText;
+            selected.dataset.value = currentNote.emotion || '';
+            selected.style.backgroundColor = currentNote.color || selectedColor;
+            textarea.style.backgroundColor = currentNote.color || selectedColor;
+        } else {
+            textarea.value = '';
+            selected.textContent = 'ROUE DES EMOTIONS de R. Plutchik : Je me sens...';
+            selected.dataset.value = '';
+            selected.style.backgroundColor = '#FFFFFF';
+            textarea.style.backgroundColor = '#FFFFFF';
+        }
+    }
+
+    //=== FONCTION: Filtrer et afficher les notes ===
+    let filteredNotes = [];
+    let currentSortOrder = 'desc'; // Par défaut: plus récent en premier
+
+    function filterNotes() {
+        if (!notes || notes.length === 0) {
+            displayNotes([]);
+            return;
+        }
+
+        // Récupérer les valeurs des dropdowns
+        const glyphDropdown = document.querySelector('#glyph-dropdown li.selected');
+        const numberDropdown = document.querySelector('#number-dropdown li.selected');
+
+        const glyphFilter = glyphDropdown ? glyphDropdown.dataset.value : '';
+        const numberFilter = numberDropdown ? numberDropdown.dataset.value : '';
+
+        // Récupérer la valeur de la recherche par date
+        const dateFilter = document.getElementById('filter-date').value.trim();
+
+        // Filtrer
+        filteredNotes = notes.filter(note => {
+            // Filtre glyphe
+            if (glyphFilter && note.glyphId != glyphFilter) {
+                return false;
+            }
+
+            // Filtre nombre
+            if (numberFilter && note.numberId != numberFilter) {
+                return false;
+            }
+
+            // Filtre date (format jj/mm/aaaa)
+            if (dateFilter) {
+                const noteDate = new Date(note.date);
+                const formattedDate = noteDate.toLocaleDateString('fr-FR');
+                if (!formattedDate.includes(dateFilter)) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
+
+        // Trier
+        filteredNotes.sort((a, b) => {
+            const dateA = new Date(a.date);
+            const dateB = new Date(b.date);
+            return currentSortOrder === 'asc' ? (dateA - dateB) : (dateB - dateA);
+        });
+
+        displayNotes(filteredNotes);
+    }
+
+    //=== FONCTION: Toggle l'ordre de tri ===
+    function toggleSortOrder() {
+        currentSortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
+        filterNotes();
+    }
+
+    //=== FONCTION: Échapper le HTML ===
+    function escapeHTML(str) {
+        return (str || '').replace(/[&<>"']/g, tag => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+        }[tag] || tag));
+    }
+
+    //=== FONCTION: Afficher les notes filtrées ===
+    function displayNotes(notesToDisplay) {
+        const table = document.getElementById('notes-table');
+
+        if (!notesToDisplay || notesToDisplay.length === 0) {
+            table.innerHTML = '<div class="no-results" style="text-align: center; padding: 20px; color: #888;">Aucune note trouvée</div>';
+            return;
+        }
+
+        table.innerHTML = notesToDisplay.map(note => {
+            const safeText = escapeHTML(note.text);
+            const isLongNote = safeText.split(/\s+/).length > 200;
+            const displayText = isLongNote ? safeText.split(/\s+/).slice(0, 200).join(' ') + ' (...)' : safeText;
+            const glyphURL = window.TzolkinCore.getGlyphURL(note.glyphId);
+            const glyphName = window.TzolkinCore.GLYPHS[note.glyphId].name;
+            const numberURL = window.TzolkinCore.getNumberURL(note.numberId);
+            const numberName = window.TzolkinCore.NUMBERS[note.numberId].name;
+            const dateFormatted = new Date(note.date).toLocaleDateString('fr-FR');
+
+            const locationTime = [note.location, note.time].filter(Boolean).join(' ');
+
+            return `
+                <div class="note-entry" style="background-color: ${note.color || '#FFFFFF'}; position: relative;" ${isLongNote ? 'onclick="toggleNoteText(this)"' : ''}>
+                    <p style="padding-right: 185px;">${dateFormatted} -
+                       <img src="${glyphURL}" alt="${glyphName}" style="width:24px;height:24px;vertical-align:middle;"> ${glyphName}
+                       <img src="${numberURL}" alt="${numberName}" style="width:24px;height:24px;vertical-align:middle;"> ${numberName}</p>
+                    <p class="note-text" style="padding-right: 185px;" data-full-text="${safeText}">${displayText}</p>
+                    <div style="position: absolute; top: 10px; right: 10px;">
+                        <button onclick="editNoteFromSaved('${note.date}'); event.stopPropagation();" style="padding: 5px 10px; background-color: #4CAF50; color: white; border: none; cursor: pointer; margin-right: 5px;">Modifier</button>
+                        <button onclick="deleteNote('${note.date}'); event.stopPropagation();" style="padding: 5px 10px; background-color: #FF5555; color: white; border: none; cursor: pointer;">Supprimer</button>
+                    </div>
+                    ${locationTime ? `<div style="text-align: right; font-size: 11px; font-weight: bold; letter-spacing: 0.06em; color: #555; margin-top: 6px;">${locationTime}</div>` : ''}
+                </div>
+            `;
+        }).join('');
+    }
+
+    //=== FONCTION: Déplier/replier une longue note ===
+    function toggleNoteText(element) {
+        const textElement = element.querySelector('.note-text');
+        const fullText = textElement.dataset.fullText;
+        const isTruncated = textElement.textContent.endsWith(' (...)');
+        if (isTruncated) {
+            textElement.textContent = fullText;
+        } else {
+            textElement.textContent = fullText.split(/\s+/).slice(0, 200).join(' ') + ' (...)';
+        }
+    }
+
+    //=== FONCTION: Réinitialiser les filtres ===
+    function resetFilters() {
+        // Réinitialiser les sélections des dropdowns
+        document.querySelectorAll('#glyph-dropdown li, #number-dropdown li').forEach(li => {
+            li.classList.remove('selected');
+        });
+
+        // Sélectionner le premier élément (Tous) dans chaque dropdown
+        const firstGlyph = document.querySelector('#glyph-dropdown li[data-value=""]');
+        const firstNumber = document.querySelector('#number-dropdown li[data-value=""]');
+
+        if (firstGlyph) {
+            firstGlyph.classList.add('selected');
+            document.getElementById('filter-glyph-img').src = firstGlyph.querySelector('img').src;
+        }
+
+        if (firstNumber) {
+            firstNumber.classList.add('selected');
+            document.getElementById('filter-number-img').src = firstNumber.querySelector('img').src;
+        }
+
+        // Réinitialiser le champ de date
+        document.getElementById('filter-date').value = '';
+
+        currentSortOrder = 'desc';
+        filterNotes();
+    }
+
+    //=== FONCTION: Éditer une note depuis Enregistrés ===
+    function editNoteFromSaved(dateStr) {
+        const note = notes.find(n => n.date === dateStr);
+        if (!note) return;
+
+        // Calculer l'offset pour naviguer vers cette date
+        const noteDate = new Date(dateStr);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        noteDate.setHours(0, 0, 0, 0);
+
+        const diffTime = noteDate - today;
+        const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+
+        window.TzolkinStorage.saveOffset(diffDays);
+
+        // Recharger le widget
+        if (window.tzolkinWidget) {
+            window.tzolkinWidget.offset = diffDays;
+            window.tzolkinWidget.render();
+            window.tzolkinWidget.attachEventListeners();
+        }
+
+        // Ouvrir la modale Notes
+        openModal('notes');
+    }
+
+    //=== FONCTION: Supprimer une note ===
+    async function deleteNote(dateStr) {
+        if (!confirm('Voulez-vous vraiment supprimer cette note ?')) return;
+
+        const userKey = getEffectiveUserKey();
+        await window.TzolkinStorage.deleteNote(userKey, dateStr);
+
+        // Recharger les notes depuis le stockage
+        notes = await window.TzolkinStorage.loadNotes(userKey);
+        filterNotes();
+    }
+
+    //=== FONCTION: Télécharger CSV ===
+    function downloadCSV() {
+        // Mapping des noms de nombres (comme dans WordPress)
+        const numberNames = {
+            1: 'Hun',
+            2: 'Ca\'',
+            3: 'Ox',
+            4: 'Can',
+            5: 'Ho',
+            6: 'Wak',
+            7: 'Wuk',
+            8: 'Waxak',
+            9: 'Bolon',
+            10: 'Lajun',
+            11: 'Junlajun',
+            12: 'Kablajun',
+            13: 'Oxlajun'
+        };
+
+        const csv = [
+            'Date,Glyphe,Chiffre,Glyphe+Chiffre,Couleur,Note,Heure,Lieu',
+            ...notes.map(note => {
+                const glyphName = window.TzolkinCore.GLYPHS[note.glyphId].name;
+                const numberName = numberNames[note.numberId];
+                const glyphNumber = `${glyphName} ${numberName}`;
+                const dateFormatted = new Date(note.date).toLocaleDateString('fr-FR');
+                const timeVal = note.time || '';
+                const locationVal = note.location || '';
+                return `"${dateFormatted}","${glyphName}","${numberName}","${glyphNumber}","${note.color && note.emotion !== '' ? note.color : ''}","${note.text.replace(/"/g, '""')}","${timeVal}","${locationVal}"`;
+            })
+        ].join('\n');
+
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'tzolkin-notes.csv';
+        a.click();
+        URL.revokeObjectURL(url);
+        alert('Téléchargement réussi ! Le fichier "tzolkin-notes.csv" a été enregistré dans votre dossier de téléchargements.');
+    }
+
+    //=== INITIALISATION AU CHARGEMENT ===
+    // Ce script est injecté dynamiquement via fetch (DOMContentLoaded déjà passé)
+    // → on s'exécute immédiatement
+    (function initMenu() {
+        // Setup dropdown émotions
+        const dropdown = document.getElementById('color-dropdown');
+        const selected = dropdown.querySelector('.dropdown-selected');
+        const optionsContainer = dropdown.querySelector('.dropdown-options');
+        const options = dropdown.querySelectorAll('.dropdown-option');
+        const textarea = document.getElementById('notes-input');
+
+        selected.addEventListener('click', () => {
+            optionsContainer.style.display = optionsContainer.style.display === 'block' ? 'none' : 'block';
+        });
+
+        options.forEach(option => {
+            option.addEventListener('click', () => {
+                selected.textContent = option.textContent;
+                selected.dataset.value = option.dataset.value;
+                selected.style.backgroundColor = option.style.backgroundColor;
+                textarea.style.backgroundColor = option.style.backgroundColor;
+                optionsContainer.style.display = 'none';
+                saveCurrentNote();
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!dropdown.contains(e.target)) {
+                optionsContainer.style.display = 'none';
+            }
+        });
+
+        // Autosave sur modification
+        textarea.addEventListener('input', () => {
+            clearTimeout(autosaveTimer);
+            autosaveTimer = setTimeout(() => {
+                saveCurrentNote();
+            }, AUTOSAVE_DELAY_MS);
+        });
+
+        // Charger notes au démarrage
+        ensureNotesLoaded().then(() => {
+            applyCurrentNoteToUI();
+        });
+
+        // Gestion navigation historique
+        window.addEventListener('popstate', () => {
+            const hash = window.location.hash.replace('#', '');
+            const validModals = ['fonctionnement', 'notes', 'saved', 'credits', 'admin'];
+            if (validModals.includes(hash)) {
+                if (hash === 'saved') {
+                    openSavedWithPin();
+                } else {
+                    openModal(hash);
+                }
+            } else {
+                closeAllModals();
+            }
+        });
+
+        // Sauvegarder avant fermeture
+        window.addEventListener('beforeunload', () => {
+            saveCurrentNote();
+        });
+
+        // Initialiser les dropdowns de filtrage
+        function setupDropdown(dropdownId, imgId) {
+            const dropdown = document.getElementById(dropdownId);
+            if (!dropdown) return;
+
+            const items = dropdown.querySelectorAll('li');
+            const img = document.getElementById(imgId);
+
+            items.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.stopPropagation();
+
+                    // Retirer la sélection précédente
+                    items.forEach(i => i.classList.remove('selected'));
+
+                    // Ajouter la sélection actuelle
+                    item.classList.add('selected');
+
+                    // Mettre à jour l'image affichée
+                    if (img && item.querySelector('img')) {
+                        img.src = item.querySelector('img').src;
+                    }
+
+                    // Cacher le dropdown
+                    dropdown.style.display = 'none';
+
+                    // Filtrer les notes
+                    filterNotes();
+                });
+            });
+
+            // Sélectionner par défaut le premier élément (Tous)
+            if (items.length > 0) {
+                items[0].classList.add('selected');
+            }
+        }
+
+        setupDropdown('glyph-dropdown', 'filter-glyph-img');
+        setupDropdown('number-dropdown', 'filter-number-img');
+
+        // Fermer les dropdowns quand on clique ailleurs
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown ul').forEach(ul => {
+                    ul.style.display = 'none';
+                });
+            }
+        });
+
+        // Toggle dropdown au clic sur mobile
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            dropdown.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const ul = dropdown.querySelector('ul');
+                if (ul) {
+                    ul.style.display = ul.style.display === 'block' ? 'none' : 'block';
+                }
+            });
+        });
+
+        console.log('✅ Modales initialisées');
+    })();
+</script>
