@@ -1,5 +1,5 @@
 // sw.js : Service Worker pour Tzolkin
-const APP_VERSION = '2.0';
+const APP_VERSION = '3.0';
 const CACHE_NAME = `tzolkin-v${APP_VERSION}`;
 
 // Journalisation
@@ -34,9 +34,21 @@ self.addEventListener('install', event => {
     './tzolkin-details-data.js',
     './tzolkin-details.js',
     './tzolkin-details-display.js',
+    './tzolkin-croix-maya.js',
+    './tzolkin-croix-maya.css',
     './imask.js',
-    './assets/Xbalanque.jpg',
+    './assets/x-balanque.png',
     './assets/tzolkin-splash.png',
+    // Seigneurs de la Nuit
+    './assets/seigneurs_de_la_nuit/G1.svg',
+    './assets/seigneurs_de_la_nuit/G2.svg',
+    './assets/seigneurs_de_la_nuit/G3.svg',
+    './assets/seigneurs_de_la_nuit/G4.svg',
+    './assets/seigneurs_de_la_nuit/G5.svg',
+    './assets/seigneurs_de_la_nuit/G6.svg',
+    './assets/seigneurs_de_la_nuit/G7.svg',
+    './assets/seigneurs_de_la_nuit/G8.svg',
+    './assets/seigneurs_de_la_nuit/G9.svg',
     // Boutons SVG
     './assets/boutons/SVG/ahau-bt.svg',
     './assets/boutons/SVG/akbal-bt.svg',

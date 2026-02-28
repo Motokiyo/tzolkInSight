@@ -304,6 +304,21 @@ window.TZOLKIN_SUMMARY_DATA = {
             "description": "<p><strong>Transcendance</strong> : le chiffre 13, Oxlahun, représente l'achèvement ultime, l'ascension et l'autorité. Il est associé à l'intensité et à la connexion divine. Sa fonction est de représenter le plus haut niveau d'accomplissement.</p>"
         }
     }
+    ,
+    "porteurs": {
+        "7": {
+            "description": "<p>Kej — le Cerf — est le Porteur le plus puissant de la tradition K'iche'. Il porte l'année avec une énergie brute et directe, favorable aux leaders, aux guides spirituels et à toutes les figures d'autorité. C'est le temps des Piliers de l'Univers : force mentale et physique, unité des quatre manifestations humaines. Énergie à canaliser pour éviter l'autoritarisme et les abus de pouvoir.</p>"
+        },
+        "12": {
+            "description": "<p>E — la Route — est le Porteur le plus paisible, éternel voyageur et guide des chemins de vie. Une année Eb est propice aux contrats, aux voyages, aux entreprises et à tout apprentissage. Les <em>ajq'ijab'</em> la nomment l'Échelle en Spirale reliant la Terre aux Cieux. Risque principal : errance sans but et obstination intellectuelle masquée en pédagogie.</p>"
+        },
+        "17": {
+            "description": "<p>No'j — l'Intelligence Tellurique — porte l'année sur une vibration de sagesse profonde et d'introspection. Favorable à l'éducation, à la transmission des savoirs et aux grandes décisions, c'est une année où l'esprit prend le pas sur la matière. Faire confiance à son intelligence et ses intuitions est le conseil central. Risque : vanité intellectuelle et analyse sans fin.</p>"
+        },
+        "2": {
+            "description": "<p>Iq' — le Vent — est le Porteur le plus imprévisible, surnommé l'Ouragan par les <em>ajq'ijab'</em>. Une année Ik' est une période de turbulence et de purification puissante, associée aux révolutions et aux transformations collectives profondes. Elle est particulièrement bénéfique pour guérir les blessures liées à la colère. Risque : impulsivité et ruptures soudaines.</p>"
+        }
+    }
 };
 
 console.log('✅ Tzolk\'in Summary Data chargé - Textes courts de WordPress');

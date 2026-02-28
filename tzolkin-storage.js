@@ -384,15 +384,35 @@ function getMatchingPeople(glyphId, numberId) {
         // Calculer les glyphes et nombres du cycle
         const cycleGlyphs = window.TzolkinCore.getCycleGlyphs(g);
         const cycleNumbers = window.TzolkinCore.getCycleNumbers(n);
+        // cycleNumbers = [n-7, n, n-6(=n+7)]
+        // Index 0 → Entrée de cycle (approche du jour central)
+        // Index 1 → Jour central (le nombre de naissance revient)
+        // Index 2 → Sortie de cycle (après le jour central)
 
         // Vérifier si le jour actuel fait partie du cycle de cette personne
-        for (const cg of cycleGlyphs) {
-            for (const cn of cycleNumbers) {
-                if (cg === glyphId && cn === numberId) {
+        for (let gi = 0; gi < cycleGlyphs.length; gi++) {
+            for (let ni = 0; ni < cycleNumbers.length; ni++) {
+                if (cycleGlyphs[gi] === glyphId && cycleNumbers[ni] === numberId) {
+                    const isExactDay = (g === glyphId && n === numberId);
+                    const LABELS = ['entree', 'central', 'sortie'];
+                    const cycleLabel = LABELS[ni];
+
+                    // Extraire l'année de naissance pour le porteur d'année
+                    let birthYear = null;
+                    if (person.birthDate) {
+                        birthYear = new Date(person.birthDate).getFullYear();
+                    }
+
                     matchingPeople.push({
                         name: person.name,
                         color: person.color,
-                        isExactDay: (g === glyphId && n === numberId)
+                        isExactDay,
+                        cycleLabel,
+                        cycleGlyphIdx: gi,
+                        personGlyphId: g,
+                        personNumberId: n,
+                        birthYear,
+                        birthDate: person.birthDate || null
                     });
                     return; // Stop après avoir trouvé une correspondance
                 }

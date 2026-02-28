@@ -58,74 +58,130 @@ function updateTzolkinDetails() {
             </div>
 
             <!-- Glyphe avec flèche cliquable -->
-            <div style="margin-bottom: 20px; padding: 15px; background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: relative;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <div style="margin-bottom: 24px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                     <div style="display: flex; align-items: center; gap: 10px;">
                         <img src="${glyphURL}" alt="" style="width: 30px; height: 30px; opacity: 0.8;">
-                        <h4 style="margin: 0; font-size: 22px; color: #c19434; font-family: 'Summer', cursive;">
+                        <h4 style="margin: 0; font-size: 24px; font-weight: bold; color: #333; font-family: 'Summer', cursive; text-transform: uppercase;">
                             ${glyph.titre}
                         </h4>
                     </div>
-                    <button class="tzolkin-details-arrow"
-                            onclick="window.tzolkinDetailsDisplay.openDetailModal('glyph', ${day.glyphId})"
-                            style="background: #c19434; color: white; border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 10px rgba(193, 148, 52, 0.3); transition: transform 0.2s;"
-                            onmouseover="this.style.transform='scale(1.1)'"
-                            onmouseout="this.style.transform='scale(1)'"
-                            title="Voir les détails complets">
-                        →
+                    <button onclick="window.tzolkinDetailsDisplay.openDetailModal('glyph', ${day.glyphId})"
+                            style="padding: 8px 12px; background: #5e832a; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-family: 'Simplifica', sans-serif; flex-shrink: 0; line-height: 1;">
+                        &rsaquo;
                     </button>
                 </div>
-                <div style="font-size: 18px; color: #333; line-height: 1.5;">
-                    <div style="margin-bottom: 10px; font-style: italic; color: #555;">${glyph.description}</div>
-                    <p style="margin: 10px 0 8px 0;"><strong>✨ Mots-clés:</strong> ${glyph.mots_cles}</p>
-                    <p style="margin: 0;"><strong>🐾 Animal de pouvoir:</strong> ${glyph.animal_pouvoir}</p>
+                <div style="font-size: 16px; color: #333; line-height: 1.6;">
+                    <div style="margin-bottom: 8px;">${glyph.description}</div>
+                    <p style="margin: 6px 0;"><strong>Mots-clés :</strong> ${glyph.mots_cles}</p>
+                    <p style="margin: 0;"><strong>Animal de pouvoir :</strong> ${glyph.animal_pouvoir}</p>
                 </div>
             </div>
 
             <!-- Nombre avec flèche cliquable -->
-            <div style="margin-bottom: 20px; padding: 15px; background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: relative;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <div style="margin-bottom: 24px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                     <div style="display: flex; align-items: center; gap: 10px;">
                         <img src="${numberURL}" alt="" style="width: 25px; height: 25px; opacity: 0.8;">
-                        <h4 style="margin: 0; font-size: 22px; color: #c19434; font-family: 'Summer', cursive;">
+                        <h4 style="margin: 0; font-size: 24px; font-weight: bold; color: #333; font-family: 'Summer', cursive; text-transform: uppercase;">
                             ${number.titre}
                         </h4>
                     </div>
-                    <button class="tzolkin-details-arrow"
-                            onclick="window.tzolkinDetailsDisplay.openDetailModal('number', ${day.numberId})"
-                            style="background: #c19434; color: white; border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 10px rgba(193, 148, 52, 0.3); transition: transform 0.2s;"
-                            onmouseover="this.style.transform='scale(1.1)'"
-                            onmouseout="this.style.transform='scale(1)'"
-                            title="Voir les détails complets">
-                        →
+                    <button onclick="window.tzolkinDetailsDisplay.openDetailModal('number', ${day.numberId})"
+                            style="padding: 8px 12px; background: #5e832a; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-family: 'Simplifica', sans-serif; flex-shrink: 0; line-height: 1;">
+                        &rsaquo;
                     </button>
                 </div>
-                <div style="font-size: 18px; color: #333; line-height: 1.5;">
+                <div style="font-size: 16px; color: #333; line-height: 1.6;">
                     ${number.description}
                 </div>
             </div>
 
-            <!-- Trécéna (sans lien détail) -->
-            <div style="margin-bottom: 25px; padding: 15px; background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-                    <img src="${trecenaURL}" alt="" style="width: 30px; height: 30px; opacity: 0.6;">
-                    <h4 style="margin: 0; font-size: 22px; color: #c19434; font-family: 'Summer', cursive;">
-                        Trécéna de ${trecena.nawal_maya} (${trecena.traduction})
-                    </h4>
+            <!-- Trécéna avec flèche cliquable -->
+            <div style="margin-bottom: 24px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <img src="${trecenaURL}" alt="" style="width: 30px; height: 30px; opacity: 0.6;">
+                        <h4 style="margin: 0; font-size: 24px; font-weight: bold; color: #333; font-family: 'Summer', cursive; text-transform: uppercase;">
+                            Trécéna de ${trecena.nawal_maya} (${trecena.traduction})
+                        </h4>
+                    </div>
+                    <button onclick="window.tzolkinDetailsDisplay.openDetailModal('trecena', ${day.trecenaGlyphId})"
+                            style="padding: 8px 12px; background: #5e832a; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-family: 'Simplifica', sans-serif; flex-shrink: 0; line-height: 1;">
+                        &rsaquo;
+                    </button>
                 </div>
-                <div style="font-size: 18px; color: #333; line-height: 1.5;">
+                <div style="font-size: 16px; color: #333; line-height: 1.6;">
                     ${trecena.description}
                 </div>
             </div>
 
+            <!-- Porteur d'Année avec flèche cliquable -->
+            ${(() => {
+                const bearerGlyphId = window.TzolkinCore.getYearBearerGlyph(new Date().getFullYear());
+                const bearerGlyph   = window.TzolkinCore.GLYPHS[bearerGlyphId];
+                const bearerURL     = window.TzolkinCore.getGlyphURL(bearerGlyphId);
+                const porteurData    = window.TZOLKIN_DETAILS_DATA && window.TZOLKIN_DETAILS_DATA.porteurs
+                                       ? window.TZOLKIN_DETAILS_DATA.porteurs[bearerGlyphId] : null;
+                const summaryPorteur = window.TZOLKIN_SUMMARY_DATA && window.TZOLKIN_SUMMARY_DATA.porteurs
+                                       ? window.TZOLKIN_SUMMARY_DATA.porteurs[bearerGlyphId] : null;
+                const shortDesc  = summaryPorteur ? summaryPorteur.description : '';
+                // Construire le titre : "Porteur Année N°1 Manik - Kej"
+                let titre;
+                if (porteurData) {
+                    const parts    = porteurData.titre.split(' · ');
+                    const num      = (parts[0] || '').replace('Porteur ', '').trim();
+                    const rest     = (parts[1] || '').split(' — ');
+                    const mainName = rest[0] || bearerGlyph.name;
+                    const otherOrtho = rest[1] || '';
+                    titre = `Porteur Année N°${num} ${mainName}${otherOrtho ? ' - ' + otherOrtho : ''}`;
+                } else {
+                    titre = `Porteur Année ${bearerGlyph.name}`;
+                }
+                return `
+                <div style="margin-bottom: 24px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <img src="${bearerURL}" alt="" style="width: 30px; height: 30px; opacity: 0.8;">
+                            <div>
+                                <h4 style="margin: 0; font-size: 24px; font-weight: bold; color: #333; font-family: 'Summer', cursive; text-transform: uppercase;">${titre}</h4>
+                            </div>
+                        </div>
+                        <button onclick="window.tzolkinDetailsDisplay.openDetailModal('porteur', ${bearerGlyphId})"
+                                style="padding: 8px 12px; background: #5e832a; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-family: 'Simplifica', sans-serif; flex-shrink: 0; line-height: 1;">
+                            &rsaquo;
+                        </button>
+                    </div>
+                    ${shortDesc ? `<div style="font-size: 16px; color: #333; line-height: 1.6;">${shortDesc}</div>` : ''}
+                </div>`;
+            })()}
+
             ${day.matchingPeople.length > 0 ? `
-                <div style="margin-top: 10px; padding: 20px; background: rgba(193, 148, 52, 0.15); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 16px; border-left: 6px solid #c19434; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                    <h4 style="margin: 0 0 10px 0; font-size: 20px; color: #444; font-family: 'Summer', cursive;">
-                        👤 Jours importants pour :
+                <div style="margin-top: 10px;">
+                    <h4 style="margin: 0 0 10px 0; font-size: 18px; color: #444; font-family: 'Summer', cursive;">
+                        👤 Jour important pour :
                     </h4>
-                    <p style="margin: 0; font-size: 20px; color: #333; font-weight: bold;">
-                        ${day.matchingPeople.map(p => p.name).join(', ')}
-                    </p>
+                    ${day.matchingPeople.map((p, idx) => {
+                        const css = window.TzolkinCore.getGlyphColorCSS(p.personGlyphId);
+                        const colorName = window.TzolkinCore.getGlyphColor(p.personGlyphId);
+                        const LABEL_TEXT = { entree: 'Entrée de cycle', central: 'Jour central', sortie: 'Sortie de cycle' };
+                        const labelText = LABEL_TEXT[p.cycleLabel] || '';
+                        const glyphImg = window.TzolkinCore.getGlyphURL(p.personGlyphId);
+                        return `
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; padding: 12px 16px; background:${css.bg}; border-radius:12px; border-left:5px solid ${css.border}; margin-bottom:8px; box-shadow:0 2px 8px rgba(0,0,0,0.07);">
+                            <div style="display:flex; align-items:center; gap:10px; flex:1; min-width:0;">
+                                <img src="${glyphImg}" alt="${window.TzolkinCore.GLYPHS[p.personGlyphId].name}" style="width:28px; height:28px; flex-shrink:0; opacity:0.85;">
+                                <div style="min-width:0;">
+                                    <div style="font-size:17px; font-weight:bold; color:#333; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${p.name}</div>
+                                    <div style="font-size:13px; color:${css.text}; margin-top:2px; font-style:italic;">${labelText}</div>
+                                </div>
+                            </div>
+                            <button onclick="openCroixMayaModalByIndex(${idx})"
+                                style="flex-shrink:0; padding:6px 12px; background:${css.border}; color:white; border:none; border-radius:8px; cursor:pointer; font-size:13px; font-family:'Simplifica',sans-serif; white-space:nowrap;">
+                                Croix Maya →
+                            </button>
+                        </div>`;
+                    }).join('')}
                 </div>
             ` : ''}
             
@@ -133,7 +189,8 @@ function updateTzolkinDetails() {
         </div>
     `;
 
-    detailsContainer.innerHTML = html;
+    // Stocker les matchingPeople pour l'accès par index depuis les boutons Croix Maya
+    window._tzolkinLastMatchingPeople = day.matchingPeople;
 
     detailsContainer.innerHTML = html;
     console.log('✅ Tzolk\'in Details Display: Section détails mise à jour', {

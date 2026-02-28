@@ -17,7 +17,9 @@ class TzolkinWidget {
             return;
         }
 
-        this.offset = window.TzolkinStorage.loadOffset() || 0;
+        // Toujours démarrer à la date du jour à chaque ouverture de l'app
+        this.offset = 0;
+        window.TzolkinStorage.saveOffset(0);
         this.init();
     }
 

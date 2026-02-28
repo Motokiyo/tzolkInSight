@@ -15,7 +15,7 @@ class TzolkinPIN {
         this.pinModalId = 'pin-modal';
         this.pinAttempts = 0;
         this.maxAttempts = 3;
-        this.lockoutTime = 30000; // 30 secondes de verrouillage après 3 échecs
+        this.lockoutTime = 300000; // 5 minutes de verrouillage après 3 échecs
 
         this.init();
     }
@@ -80,7 +80,7 @@ class TzolkinPIN {
                         <div class="pin-error" id="pin-error" style="display:none;"></div>
 
                         <div class="pin-actions">
-                            <button type="button" id="pin-submit-btn" class="button button-primary">Valider</button>
+                            <button type="button" id="pin-submit-btn" class="button button-primary" style="display:none;">Valider</button>
                             <button type="button" id="pin-cancel-btn" class="button button-secondary">Annuler</button>
                         </div>
 
@@ -90,6 +90,32 @@ class TzolkinPIN {
                             <p>Voulez-vous en créer un pour protéger vos notes ?</p>
                             <button type="button" id="pin-create-btn" class="button button-primary">Créer un code PIN</button>
                             <button type="button" id="pin-skip-btn" class="button button-secondary">Accéder sans code</button>
+                        </div>
+
+                        <!-- Section création de PIN (formulaire masqué avec œil) -->
+                        <div class="pin-setup" id="pin-create-section" style="display:none;">
+                            <hr />
+                            <p style="margin:0 0 4px;"><strong>Nouveau code PIN (4 chiffres)</strong></p>
+                            <div class="pin-input-container" style="margin:10px 0;">
+                                <input type="password" id="pin-new-1" class="pin-digit pin-create-digit" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off" />
+                                <input type="password" id="pin-new-2" class="pin-digit pin-create-digit" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off" />
+                                <input type="password" id="pin-new-3" class="pin-digit pin-create-digit" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off" />
+                                <input type="password" id="pin-new-4" class="pin-digit pin-create-digit" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off" />
+                            </div>
+                            <p style="margin:0 0 4px;"><strong>Confirmer le code PIN</strong></p>
+                            <div class="pin-input-container" style="margin:10px 0 8px;">
+                                <input type="password" id="pin-conf-1" class="pin-digit pin-create-digit" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off" />
+                                <input type="password" id="pin-conf-2" class="pin-digit pin-create-digit" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off" />
+                                <input type="password" id="pin-conf-3" class="pin-digit pin-create-digit" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off" />
+                                <input type="password" id="pin-conf-4" class="pin-digit pin-create-digit" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off" />
+                            </div>
+                            <button type="button" id="pin-eye-btn" class="pin-eye-btn" title="Afficher / masquer">
+                                <svg id="pin-eye-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                            </button>
+                            <div class="pin-actions">
+                                <button type="button" id="pin-confirm-create-btn" class="button button-primary">Créer</button>
+                                <button type="button" id="pin-cancel-create-btn" class="button button-secondary">Annuler</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -150,6 +176,25 @@ class TzolkinPIN {
                     padding-top: 20px;
                     text-align: center;
                 }
+
+                .pin-eye-btn {
+                    background: none;
+                    border: 1px solid #ccc;
+                    border-radius: 8px;
+                    padding: 6px 14px;
+                    cursor: pointer;
+                    color: #555;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                    margin-bottom: 4px;
+                    font-size: 0.85em;
+                    transition: background 0.2s;
+                }
+
+                .pin-eye-btn:hover {
+                    background: #f0ece0;
+                }
             </style>
         `;
 
@@ -161,60 +206,80 @@ class TzolkinPIN {
      * Attacher les événements de la modale PIN
      */
     attachPinEventListeners() {
-        // Navigation automatique entre les champs
-        const inputs = document.querySelectorAll('.pin-digit');
-        inputs.forEach((input, index) => {
+        // Navigation automatique — saisie du PIN (entrée seulement, pas les champs création)
+        const entryInputs = [
+            document.getElementById('pin-digit-1'),
+            document.getElementById('pin-digit-2'),
+            document.getElementById('pin-digit-3'),
+            document.getElementById('pin-digit-4')
+        ].filter(Boolean);
+
+        entryInputs.forEach((input, index) => {
             input.addEventListener('input', (e) => {
-                // Ne garder que les chiffres
                 e.target.value = e.target.value.replace(/[^0-9]/g, '');
-
-                // Passer au champ suivant si un chiffre est entré
-                if (e.target.value && index < inputs.length - 1) {
-                    inputs[index + 1].focus();
-                }
-            });
-
-            input.addEventListener('keydown', (e) => {
-                // Retour arrière : revenir au champ précédent
-                if (e.key === 'Backspace' && !e.target.value && index > 0) {
-                    inputs[index - 1].focus();
-                }
-
-                // Entrée : valider le PIN
-                if (e.key === 'Enter') {
+                if (e.target.value && index < entryInputs.length - 1) {
+                    entryInputs[index + 1].focus();
+                } else if (e.target.value && index === entryInputs.length - 1) {
                     this.verifyPin();
                 }
             });
-
-            // Sélectionner tout le contenu au focus
-            input.addEventListener('focus', (e) => {
-                e.target.select();
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                    entryInputs[index - 1].focus();
+                }
+                if (e.key === 'Enter') this.verifyPin();
             });
+            input.addEventListener('focus', (e) => e.target.select());
         });
 
-        // Bouton valider
+        // Navigation dans les champs de création (new-1..4 puis conf-1..4)
+        const newInputs = [1,2,3,4].map(i => document.getElementById(`pin-new-${i}`)).filter(Boolean);
+        const confInputs = [1,2,3,4].map(i => document.getElementById(`pin-conf-${i}`)).filter(Boolean);
+        const createInputs = [...newInputs, ...confInputs];
+
+        createInputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                e.target.value = e.target.value.replace(/[^0-9]/g, '');
+                if (e.target.value && index < createInputs.length - 1) {
+                    createInputs[index + 1].focus();
+                }
+            });
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                    createInputs[index - 1].focus();
+                }
+                if (e.key === 'Enter') this.confirmCreatePin();
+            });
+            input.addEventListener('focus', (e) => e.target.select());
+        });
+
+        // Bouton valider (entrée)
         const submitBtn = document.getElementById('pin-submit-btn');
-        if (submitBtn) {
-            submitBtn.addEventListener('click', () => this.verifyPin());
-        }
+        if (submitBtn) submitBtn.addEventListener('click', () => this.verifyPin());
 
-        // Bouton annuler
+        // Bouton annuler (entrée)
         const cancelBtn = document.getElementById('pin-cancel-btn');
-        if (cancelBtn) {
-            cancelBtn.addEventListener('click', () => this.cancelPin());
-        }
+        if (cancelBtn) cancelBtn.addEventListener('click', () => this.cancelPin());
 
-        // Bouton créer PIN
+        // Bouton créer PIN (setup)
         const createBtn = document.getElementById('pin-create-btn');
-        if (createBtn) {
-            createBtn.addEventListener('click', () => this.showCreatePinDialog());
-        }
+        if (createBtn) createBtn.addEventListener('click', () => this.showCreatePinDialog());
 
-        // Bouton ignorer
+        // Bouton ignorer (setup)
         const skipBtn = document.getElementById('pin-skip-btn');
-        if (skipBtn) {
-            skipBtn.addEventListener('click', () => this.skipPin());
-        }
+        if (skipBtn) skipBtn.addEventListener('click', () => this.skipPin());
+
+        // Bouton œil (afficher/masquer lors de la création)
+        const eyeBtn = document.getElementById('pin-eye-btn');
+        if (eyeBtn) eyeBtn.addEventListener('click', () => this.toggleCreatePinVisibility());
+
+        // Bouton confirmer création
+        const confirmCreateBtn = document.getElementById('pin-confirm-create-btn');
+        if (confirmCreateBtn) confirmCreateBtn.addEventListener('click', () => this.confirmCreatePin());
+
+        // Bouton annuler création
+        const cancelCreateBtn = document.getElementById('pin-cancel-create-btn');
+        if (cancelCreateBtn) cancelCreateBtn.addEventListener('click', () => this.cancelCreatePin());
     }
 
     /**
@@ -236,8 +301,9 @@ class TzolkinPIN {
         // Vérifier le verrouillage
         const lockoutEnd = localStorage.getItem('tzolkin_pin_lockout');
         if (lockoutEnd && Date.now() < parseInt(lockoutEnd)) {
-            const remainingSeconds = Math.ceil((parseInt(lockoutEnd) - Date.now()) / 1000);
-            alert(`Trop de tentatives échouées. Veuillez patienter ${remainingSeconds} secondes.`);
+            const remainingMs = parseInt(lockoutEnd) - Date.now();
+            const remainingMin = Math.ceil(remainingMs / 60000);
+            alert(`Trop de tentatives échouées. Veuillez patienter encore ${remainingMin} minute(s).`);
             if (onCancel) onCancel();
             return;
         }
@@ -325,7 +391,7 @@ class TzolkinPIN {
                 const lockoutEnd = Date.now() + this.lockoutTime;
                 localStorage.setItem('tzolkin_pin_lockout', lockoutEnd.toString());
 
-                this.showError(`Code PIN incorrect. ${this.maxAttempts} tentatives échouées. Verrouillage pendant 30 secondes.`);
+                this.showError(`Code PIN incorrect. ${this.maxAttempts} tentatives échouées. Verrouillage pendant 5 minutes.`);
 
                 setTimeout(() => {
                     this.closePinModal();
@@ -360,35 +426,73 @@ class TzolkinPIN {
     }
 
     /**
-     * Afficher le dialogue de création de PIN
+     * Afficher le formulaire de création de PIN (champs masqués, sans prompt)
      */
-    async showCreatePinDialog() {
-        const pin = prompt('Créez un code PIN à 4 chiffres :\n(Notez-le bien, il ne pourra pas être récupéré)');
+    showCreatePinDialog() {
+        document.getElementById('pin-setup-section').style.display = 'none';
+        document.getElementById('pin-create-section').style.display = 'block';
+        this.hideError();
+        // Réinitialiser tous les champs de création
+        [1,2,3,4].forEach(i => {
+            const n = document.getElementById(`pin-new-${i}`);
+            const c = document.getElementById(`pin-conf-${i}`);
+            if (n) { n.value = ''; n.type = 'password'; }
+            if (c) { c.value = ''; c.type = 'password'; }
+        });
+        // Remettre l'icône œil en mode "masqué"
+        const icon = document.getElementById('pin-eye-icon');
+        if (icon) icon.setAttribute('data-visible', 'false');
+        setTimeout(() => document.getElementById('pin-new-1')?.focus(), 100);
+    }
 
-        if (!pin) {
-            return; // Annulé
-        }
+    /**
+     * Confirmer la création du PIN (valide et enregistre)
+     */
+    async confirmCreatePin() {
+        const pin  = [1,2,3,4].map(i => document.getElementById(`pin-new-${i}`)?.value || '').join('');
+        const conf = [1,2,3,4].map(i => document.getElementById(`pin-conf-${i}`)?.value || '').join('');
 
         if (!/^\d{4}$/.test(pin)) {
-            alert('Le PIN doit être composé de exactement 4 chiffres.');
+            this.showError('Entrez 4 chiffres pour le nouveau code');
             return;
         }
-
-        const confirm = prompt('Confirmez votre code PIN :');
-
-        if (confirm !== pin) {
-            alert('Les codes PIN ne correspondent pas.');
+        if (pin !== conf) {
+            this.showError('Les deux codes ne correspondent pas');
             return;
         }
 
         const success = await window.TzolkinStorage.setPinCode(pin);
-
         if (success) {
-            alert('Code PIN créé avec succès !');
             this.closePinModal();
+            if (this.onPinSuccess) this.onPinSuccess();
+        }
+    }
 
-            if (this.onPinSuccess) {
-                this.onPinSuccess();
+    /**
+     * Annuler la création du PIN → revenir à l'option de setup
+     */
+    cancelCreatePin() {
+        document.getElementById('pin-create-section').style.display = 'none';
+        document.getElementById('pin-setup-section').style.display = 'block';
+        this.hideError();
+    }
+
+    /**
+     * Afficher / masquer les chiffres pendant la création
+     */
+    toggleCreatePinVisibility() {
+        const inputs = document.querySelectorAll('.pin-create-digit');
+        const isHidden = inputs[0]?.type === 'password';
+        inputs.forEach(input => { input.type = isHidden ? 'text' : 'password'; });
+        // Mettre à jour l'icône SVG (barrer l'œil quand visible)
+        const icon = document.getElementById('pin-eye-icon');
+        if (icon) {
+            if (isHidden) {
+                // Œil barré (code visible)
+                icon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/>';
+            } else {
+                // Œil normal (code masqué)
+                icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
             }
         }
     }
@@ -456,9 +560,10 @@ class TzolkinPIN {
 
         // Remettre l'affichage par défaut
         document.querySelector('.pin-input-container').style.display = 'flex';
-        document.getElementById('pin-submit-btn').style.display = 'inline-block';
+        document.getElementById('pin-submit-btn').style.display = 'none';
         document.getElementById('pin-cancel-btn').style.display = 'inline-block';
         document.getElementById('pin-setup-section').style.display = 'none';
+        document.getElementById('pin-create-section').style.display = 'none';
     }
 
     /**

@@ -159,11 +159,13 @@ body.splash-active #splash-screen {
     display: flex;
     justify-content: space-around;
     padding: 10px 0;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .main-menu.hidden {
     transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* Contenu des modales */

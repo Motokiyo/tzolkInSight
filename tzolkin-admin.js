@@ -39,8 +39,8 @@ class TzolkinAdmin {
 
         // Créer la modale
         const modalHTML = `
-            <div id="admin-modal" class="modal" style="z-index:1400;">
-                <div class="modal-content" style="background: rgba(222, 210, 179, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 2px solid #222; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
+            <div id="admin-modal" class="modal" style="z-index:1400; padding: 0; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; overflow-y: auto; -webkit-overflow-scrolling: touch; background: rgba(222, 210, 179, 0.95);">
+                <div class="modal-content" style="background: transparent; border: none; border-radius: 0; box-shadow: none; width: 100%; height: auto; min-height: 100vh; max-height: none; max-width: 100%; margin: 0; overflow-y: visible; padding: 20px; box-sizing: border-box; position: relative;">
                     <button class="close-modal" onclick="window.tzolkinAdmin.closeAdminModal()" style="position:absolute; top:15px; right:15px; background:none; border:none; font-size:24px; cursor:pointer;">&times;</button>
                     <div class="header" style="text-align:center; padding-bottom: 20px; border-bottom: 2px solid rgba(0,0,0,0.1);">
                         <h2 style="font-family: 'Summer', cursive; font-size: 32px; color: #c19434; margin:0;">Admin - Mes Contacts</h2>
@@ -358,10 +358,15 @@ class TzolkinAdmin {
      * Ouvrir la modale admin
      */
     openAdminModal() {
+        // Fermer la modale Croix Maya si elle est ouverte
+        if (typeof closeCroixMayaModal === 'function') closeCroixMayaModal();
+
         const modal = document.getElementById('admin-modal');
         if (!modal) return;
 
+        modal.style.display = 'block'; // Force display:block (court-circuite display:flex du CSS)
         modal.classList.add('active');
+        modal.scrollTop = 0;
         document.body.classList.add('modal-open');
 
         // Rafraîchir la liste des contacts
@@ -378,6 +383,7 @@ class TzolkinAdmin {
         const modal = document.getElementById('admin-modal');
         if (!modal) return;
 
+        modal.style.display = ''; // Supprime le display inline → CSS (.modal { display:none }) reprend le contrôle
         modal.classList.remove('active');
         document.body.classList.remove('modal-open');
 

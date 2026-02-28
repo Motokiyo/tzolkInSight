@@ -73,7 +73,8 @@ function showDetail(type, id) {
 
             <div style="background: #ded2b3; border: 2px solid #222; border-radius: 16px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.09); max-width: 500px; margin: 0 auto;">
                 <img src="${item.image}" alt="${item.titre}" class="tzolkin-detail-img" style="max-width: 100px; height: auto; display: block; margin: 0 auto 10px;">
-                <h3 style="text-align: center; font-size: 1.5em; margin: 10px 0 20px; color: #333; font-family: 'Summer', cursive;">${displayTitle}</h3>
+                <h3 style="text-align: center; font-size: 1.5em; margin: 10px 0 5px; color: #333; font-family: 'Summer', cursive;">${displayTitle}</h3>
+                ${item.sous_titre ? `<p style="text-align:center; font-size:13px; color:#888; margin:0 0 20px; font-style:italic;">${item.sous_titre}</p>` : '<div style="margin-bottom:20px;"></div>'}
                 <div class="detailed-html" style="font-family: 'Simplifica', sans-serif; font-size: 20px; color: #555; line-height: 1.6;">
                     ${item.detailed_description}
                 </div>

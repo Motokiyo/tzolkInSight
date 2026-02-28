@@ -10,7 +10,62 @@ body {
     /* Suppression de l'override qui désactivait le fond */
 }
 
-/* Vue détail complète avec image Xbalanque.jpg et effet négatif */
+/* Fonctionnement modal : pleine hauteur, scroll sur le contenu */
+#fonctionnement-modal .modal-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+}
+
+/* Admin modal : scroll sur le conteneur lui-même (pas sur le .modal-content) */
+#admin-modal.active {
+    display: block !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+#admin-modal .modal-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    max-height: none !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    overflow-y: visible !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+}
+
+#fonctionnement-modal .modal-body {
+    max-height: none !important;
+    overflow-y: visible !important;
+}
+
+/* Contenu principal centré avec marges */
+#tzolkin-widget-container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px 20px 0 20px;
+}
+
+#tzolkin-details {
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Vue détail complète avec image x-balanque.png et effet négatif */
 #tzolkin-detail-view {
     position: fixed;
     top: 0;
@@ -19,10 +74,10 @@ body {
     height: 100%;
     box-sizing: border-box;
     /* Same background as everywhere else */
-    background: #ded2b3 url("./assets/Xbalanque.jpg") no-repeat center center fixed;
+    background: #ded2b3 url("./assets/x-balanque.png") no-repeat center center fixed;
     background-size: cover;
     overflow-y: auto;
-    z-index: 10000;
+    z-index: 1999;
     padding: 20px;
     display: none;
 }

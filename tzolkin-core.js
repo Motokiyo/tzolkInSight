@@ -13,27 +13,32 @@
  * Les 20 glyphes Maya (Nawals)
  * Chaque glyphe a un nom, un fichier SVG et une signification
  */
+// Peuple Maïs K'iche' — 4 familles de nawals :
+// rouge = Est  (Chuen, Chicchan, Manik, Men, Ahau)
+// blanc = Nord (Imix, Kan, Muluc, Eb, Ben)
+// bleu  = Ouest/Nuit (Akbal, Cimi, Cib, Caban, Etznab)  ← 'noir' réservé aux Seigneurs de la Nuit
+// jaune = Sud  (Ik, Lamat, Oc, Ix, Cauac)
 const GLYPHS = {
-    1: { name: 'Imix', file: 'MAYA-g-log-cal-D01-Imix.svg', translation: 'Crocodile' },
-    2: { name: 'Ik', file: 'MAYA-g-log-cal-D02-Ik.svg', translation: 'Vent' },
-    3: { name: 'Akbal', file: 'MAYA-g-log-cal-D03-Akbal.svg', translation: 'Nuit' },
-    4: { name: 'Kan', file: 'MAYA-g-log-cal-D04-Kan.svg', translation: 'Graine' },
-    5: { name: 'Chicchan', file: 'MAYA-g-log-cal-D05-Chikchan.svg', translation: 'Serpent Céleste' },
-    6: { name: 'Cimi', file: 'MAYA-g-log-cal-D06-Kimi.svg', translation: 'Mort' },
-    7: { name: 'Manik', file: 'MAYA-g-log-cal-D07-Manik.svg', translation: 'Cerf' },
-    8: { name: 'Lamat', file: 'MAYA-g-log-cal-D08-Lamat.svg', translation: 'Lapin' },
-    9: { name: 'Muluc', file: 'MAYA-g-log-cal-D09-Muluk.svg', translation: 'Eau' },
-    10: { name: 'Oc', file: 'MAYA-g-log-cal-D10-Ok_b.svg', translation: 'Chien' },
-    11: { name: 'Chuen', file: 'MAYA-g-log-cal-D11-Chuwen.svg', translation: 'Singe' },
-    12: { name: 'Eb', file: 'MAYA-g-log-cal-D12-Eb.svg', translation: 'Route' },
-    13: { name: 'Ben', file: 'MAYA-g-log-cal-D13-Ben.svg', translation: 'Roseau' },
-    14: { name: 'Ix', file: 'MAYA-g-log-cal-D14-Ix.svg', translation: 'Jaguar' },
-    15: { name: 'Men', file: 'MAYA-g-log-cal-D15-Men.svg', translation: 'Aigle' },
-    16: { name: 'Cib', file: 'MAYA-g-log-cal-D16-Kib.svg', translation: 'Vautour' },
-    17: { name: 'Caban', file: 'MAYA-g-log-cal-D17-Kaban.svg', translation: 'Terre' },
-    18: { name: 'Etznab', file: 'MAYA-g-log-cal-D18-Etznab.svg', translation: "Couteau d'Obsidienne" },
-    19: { name: 'Cauac', file: 'MAYA-g-log-cal-D19-Kawak.svg', translation: 'Tempête' },
-    20: { name: 'Ahau', file: 'MAYA-g-log-cal-D20-Ajaw.svg', translation: 'Soleil' }
+    1:  { name: 'Imix',    file: 'MAYA-g-log-cal-D01-Imix.svg',    translation: 'Crocodile',           color: 'blanc' },
+    2:  { name: 'Ik',      file: 'MAYA-g-log-cal-D02-Ik.svg',      translation: 'Vent',                color: 'jaune' },
+    3:  { name: 'Akbal',   file: 'MAYA-g-log-cal-D03-Akbal.svg',   translation: 'Nuit',                color: 'rouge' },
+    4:  { name: 'Kan',     file: 'MAYA-g-log-cal-D04-Kan.svg',     translation: 'Graine',              color: 'bleu'  },
+    5:  { name: 'Chicchan',file: 'MAYA-g-log-cal-D05-Chikchan.svg',translation: 'Serpent Céleste',     color: 'blanc' },
+    6:  { name: 'Cimi',    file: 'MAYA-g-log-cal-D06-Kimi.svg',    translation: 'Mort',                color: 'jaune' },
+    7:  { name: 'Manik',   file: 'MAYA-g-log-cal-D07-Manik.svg',   translation: 'Cerf',                color: 'rouge' },
+    8:  { name: 'Lamat',   file: 'MAYA-g-log-cal-D08-Lamat.svg',   translation: 'Lapin',               color: 'bleu'  },
+    9:  { name: 'Muluc',   file: 'MAYA-g-log-cal-D09-Muluk.svg',   translation: 'Eau',                 color: 'blanc' },
+    10: { name: 'Oc',      file: 'MAYA-g-log-cal-D10-Ok_b.svg',    translation: 'Chien',               color: 'jaune' },
+    11: { name: 'Chuen',   file: 'MAYA-g-log-cal-D11-Chuwen.svg',  translation: 'Singe',               color: 'rouge' },
+    12: { name: 'Eb',      file: 'MAYA-g-log-cal-D12-Eb.svg',      translation: 'Route',               color: 'bleu'  },
+    13: { name: 'Ben',     file: 'MAYA-g-log-cal-D13-Ben.svg',     translation: 'Roseau',              color: 'blanc' },
+    14: { name: 'Ix',      file: 'MAYA-g-log-cal-D14-Ix.svg',      translation: 'Jaguar',              color: 'jaune' },
+    15: { name: 'Men',     file: 'MAYA-g-log-cal-D15-Men.svg',     translation: 'Aigle',               color: 'rouge' },
+    16: { name: 'Cib',     file: 'MAYA-g-log-cal-D16-Kib.svg',     translation: 'Vautour',             color: 'bleu'  },
+    17: { name: 'Caban',   file: 'MAYA-g-log-cal-D17-Kaban.svg',   translation: 'Terre',               color: 'blanc' },
+    18: { name: 'Etznab',  file: 'MAYA-g-log-cal-D18-Etznab.svg',  translation: "Couteau d'Obsidienne",color: 'jaune' },
+    19: { name: 'Cauac',   file: 'MAYA-g-log-cal-D19-Kawak.svg',   translation: 'Tempête',             color: 'rouge' },
+    20: { name: 'Ahau',    file: 'MAYA-g-log-cal-D20-Ajaw.svg',    translation: 'Soleil',              color: 'bleu'  }
 };
 
 /**
@@ -407,6 +412,195 @@ function getGlyphURL(glyphId) {
     return `./assets/glyphs/${GLYPHS[glyphId].file}`;
 }
 
+// ============================================================================
+// SEIGNEURS DE LA NUIT (BOLONTIKU) — G1 à G9
+// ============================================================================
+
+/**
+ * Les 9 Seigneurs de la Nuit mayas
+ * Cycle de 9 jours intégré à la Série Supplémentaire Lunaire (inscriptions classiques)
+ * G9 = Pauahtun est le seul nom académiquement confirmé (consensus épigraphique)
+ * G1, G4, G8 : hypothèses savantes (Kelley 1972, Frumker 1993)
+ * G2-G3, G5-G7 : noms mayas du panthéon classique, domaines attestés par les codex
+ */
+const LORDS_OF_NIGHT = {
+    1: {
+        name: "K'awiil",
+        domain: "Foudre · Lignée royale · Pouvoir sacré",
+        description: "K'awiil est le seigneur de la foudre et de la continuité dynastique. Il gouverne les transformations puissantes, les initiations et l'héritage ancestral. Sa présence à la naissance confère un lien profond avec le pouvoir sacré et les forces des ancêtres.",
+        file: 'G1.svg'
+    },
+    2: {
+        name: "Chac",
+        domain: "Pluie · Abondance · Renouveau",
+        description: "Chac est le seigneur des eaux célestes et de la pluie fertilisante. Il incarne l'abondance, le renouveau et la générosité cosmique. Sa présence à la naissance apporte une sensibilité aux cycles naturels et un don pour nourrir et soutenir les autres.",
+        file: 'G2.svg'
+    },
+    3: {
+        name: "Kinich Ahau",
+        domain: "Soleil · Vision · Chaleur créatrice",
+        description: "Kinich Ahau est la face solaire du divin, seigneur du soleil levant et de la vision claire. Il représente la lumière de la conscience et la chaleur créatrice. Naître sous son règne confère une nature rayonnante, une aptitude au leadership et à l'illumination.",
+        file: 'G3.svg'
+    },
+    4: {
+        name: "Yum Kaax",
+        domain: "Végétation · Maïs sacré · Subsistance",
+        description: "Yum Kaax est le seigneur du maïs — aliment sacré des Mayas — et de toute végétation. Il incarne la fertilité, la patience et le lien profond avec la terre. Sa présence confère un talent pour faire croître les projets et nourrir les communautés.",
+        file: 'G4.svg'
+    },
+    5: {
+        name: "Ah Puch",
+        domain: "Mort · Transition · Mystère du cycle",
+        description: "Ah Puch est le seigneur du passage entre les mondes. Il ne représente pas la mort comme fin, mais comme transformation nécessaire dans le grand cycle. Naître sous son règne donne une profondeur particulière, la capacité à traverser les épreuves et à renaître.",
+        file: 'G5.svg'
+    },
+    6: {
+        name: "Ix Chel",
+        domain: "Lune · Eau · Médecine · Divination",
+        description: "Ix Chel est la grande déesse lunaire, maîtresse des eaux, de la médecine et de la divination. Les inscriptions épigraphiques associent G6 aux naissances nobles. Sa présence confère une intuition profonde, des dons de guérison et une connexion forte aux cycles lunaires.",
+        file: 'G6.svg'
+    },
+    7: {
+        name: "Buluc Chabtan",
+        domain: "Feu sacré · Purification · Courage",
+        description: "Buluc Chabtan est associé au feu purificateur et à l'épreuve transformatrice. Sa nature intense pousse à affronter les défis avec courage. Naître sous son règne confère une nature guerrière au sens noble — la capacité de défendre ce qui est juste et de purifier par l'action.",
+        file: 'G7.svg'
+    },
+    8: {
+        name: "Itzamna",
+        domain: "Sagesse suprême · Écriture · Création",
+        description: "Itzamna est le dieu suprême du panthéon maya, maître de la sagesse, de l'écriture et des calendriers sacrés. Sa présence à la naissance est signe d'une intelligence profonde, d'un don pour la connaissance et d'une connexion naturelle avec le divin et le sacré.",
+        file: 'G8.svg'
+    },
+    9: {
+        name: "Pauahtun",
+        domain: "Vent · Quatre directions · Soutien cosmique",
+        description: "Pauahtun est le seul Seigneur de la Nuit formellement identifié par les épigraphistes mayas. Dieu quadripartite — présent aux quatre coins du monde — il soutient le ciel et la terre. Sa présence confère une nature stable, portante, capable d'être un pilier pour les autres.",
+        file: 'G9.svg'
+    }
+};
+
+/**
+ * Calculer le Seigneur de la Nuit pour une date donnée
+ * Formule validée : 03/08/1974 = G9 (ancre de référence, 18525 jours avant le 22/04/2025)
+ *
+ * @param {number} diffDaysFromRef - Écart en jours depuis la référence app (22/04/2025)
+ * @returns {number} Numéro du seigneur (1-9)
+ */
+function calculateLordOfNight(diffDaysFromRef) {
+    const d = diffDaysFromRef + 18525;
+    return ((d - 1) % 9 + 9) % 9 + 1;
+}
+
+/**
+ * Obtenir l'URL d'une image SVG d'un Seigneur de la Nuit
+ * Retourne null si l'image n'est pas disponible
+ *
+ * @param {number} lordNum - Numéro du seigneur (1-9)
+ * @returns {string|null}
+ */
+function getLordOfNightURL(lordNum) {
+    const file = LORDS_OF_NIGHT[lordNum]?.file;
+    return file ? `./assets/seigneurs_de_la_nuit/${file}` : null;
+}
+
+/**
+ * Obtenir la couleur directionnelle d'un glyphe (tradition K'iche')
+ * Formule : (glyphId - 1) % 4 → 0=rouge(Est), 1=blanc(Nord), 2=bleu(Ouest), 3=jaune(Sud)
+ *
+ * @param {number} glyphId - ID du glyphe (1-20)
+ * @returns {string} 'rouge' | 'blanc' | 'bleu' | 'jaune'
+ */
+function getGlyphColor(glyphId) {
+    return GLYPHS[glyphId].color;
+}
+
+/**
+ * Obtenir la couleur CSS rgba pour le fond d'un encart de glyphe
+ *
+ * @param {number} glyphId
+ * @returns {{ bg: string, border: string, text: string }}
+ */
+function getGlyphColorCSS(glyphId) {
+    const c = GLYPHS[glyphId].color;
+    const map = {
+        rouge: { bg: '#e57373', border: '#c0392b', text: '#4a0f0f' },
+        blanc: { bg: '#f0f0f0', border: '#9e9e9e', text: '#333333' },
+        bleu:  { bg: '#64b5f6', border: '#2471a3', text: '#0d2d4a' },
+        jaune: { bg: '#ffd54f', border: '#c9a010', text: '#3a2400' }
+    };
+    return map[c];
+}
+
+/**
+ * Obtenir le glyphe porteur d'année K'iche' pour une année donnée
+ * Cycle : Ik(2) → Manik(7) → Eb(12) → Caban(17) → ...
+ * Référence : 2025 = Ik (glyphId 2)
+ *
+ * @param {number} year - Année grégorienne
+ * @returns {number} glyphId du porteur d'année
+ */
+function getYearBearerGlyph(year) {
+    const BEARERS = [2, 7, 12, 17]; // Ik, Manik, Eb, Caban
+    const BASE_YEAR = 2025;
+    const diff = year - BASE_YEAR;
+    const idx = ((diff % 4) + 4) % 4;
+    return BEARERS[idx];
+}
+
+/**
+ * Calculer la Croix Maya (tradition K'iche') pour un kin donné
+ * 5 positions : Centre, Est (conception), Ouest (mission), Nord (guide), Sud (soutien)
+ *
+ * Formule (index 0-19, tons 1-13) :
+ *   Est   : nawal -4, ton -4
+ *   Ouest : nawal +4, ton +4
+ *   Nord  : nawal +5, même ton
+ *   Sud   : nawal -5, même ton
+ *
+ * Layout de la croix :
+ *        Nord (haut)
+ *   Ouest  Centre  Est
+ *        Sud (bas)
+ *
+ * @param {number} glyphId  - Glyphe de naissance (1-20)
+ * @param {number} numberId - Nombre de naissance (1-13)
+ * @returns {Object} { centre, est, ouest, nord, sud }
+ *   chaque position = { glyphId, numberId }
+ */
+function calculateCroixMaya(glyphId, numberId) {
+    const centre = { glyphId, numberId };
+
+    // Chaque position = décalage de N jours dans le Tzolk'in
+    // glyph ET number avancent du même offset (cycle 20 / cycle 13)
+
+    // Est (droite) — Conception : −8 jours (Imix=1 dans le code, offset identique à 0-indexé Imix=0 donnant -8)
+    const est = {
+        glyphId:  modAdjust(glyphId  - 8, 20),
+        numberId: modAdjust(numberId - 8, 13)
+    };
+
+    // Ouest (gauche) — Mission / Destinée : +8 jours
+    const ouest = {
+        glyphId:  modAdjust(glyphId  + 8, 20),
+        numberId: modAdjust(numberId + 8, 13)
+    };
+
+    // Nord (haut) — Guide : −6 jours
+    const nord = {
+        glyphId:  modAdjust(glyphId  - 6, 20),
+        numberId: modAdjust(numberId - 6, 13)
+    };
+
+    // Sud (bas) — Soutien : +6 jours
+    const sud = {
+        glyphId:  modAdjust(glyphId  + 6, 20),
+        numberId: modAdjust(numberId + 6, 13)
+    };
+
+    return { centre, est, ouest, nord, sud };
+}
+
 /**
  * Obtenir l'URL d'un nombre SVG
  *
@@ -442,7 +636,14 @@ window.TzolkinCore = {
     getCycleData,
     generatePastelColor,
     getGlyphURL,
-    getNumberURL
+    getNumberURL,
+    getGlyphColor,
+    getGlyphColorCSS,
+    getYearBearerGlyph,
+    calculateCroixMaya,
+    LORDS_OF_NIGHT,
+    calculateLordOfNight,
+    getLordOfNightURL
 };
 
 console.log('✅ Tzolk\'in Core chargé - Moteur de calcul prêt');
