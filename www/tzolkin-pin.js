@@ -426,6 +426,22 @@ class TzolkinPIN {
     }
 
     /**
+     * Ouvrir la modale directement en mode création (depuis Admin)
+     */
+    openForCreation(onSuccess) {
+        const modal = document.getElementById(this.pinModalId);
+        if (!modal) return;
+        modal.classList.add('active');
+        document.body.classList.add('modal-open');
+        document.querySelector('.pin-input-container').style.display = 'none';
+        document.getElementById('pin-submit-btn').style.display = 'none';
+        document.getElementById('pin-cancel-btn').style.display = 'none';
+        document.getElementById('pin-setup-section').style.display = 'none';
+        this.onPinSuccess = onSuccess;
+        this.showCreatePinDialog();
+    }
+
+    /**
      * Afficher le formulaire de création de PIN (champs masqués, sans prompt)
      */
     showCreatePinDialog() {

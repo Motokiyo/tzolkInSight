@@ -79,6 +79,16 @@ class TzolkinAdmin {
                         </div>
                     </div>
 
+                    <!-- Section Code PIN -->
+                    <div style="margin: 24px 0; padding: 18px 0; border-top: 2px solid rgba(0,0,0,0.1); border-bottom: 2px solid rgba(0,0,0,0.1);">
+                        <h3 style="font-family:'Summer',cursive; font-size:20px; color:#c19434; margin:0 0 10px 0;">Code PIN</h3>
+                        <p id="pin-admin-status" style="font-size:16px; color:#222; margin:0 0 14px 0;">Chargement…</p>
+                        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                            <button onclick="window.tzolkinAdmin.handlePinChange()" class="btn-edit" style="flex:1; font-size:16px; padding:10px;">Changer le PIN</button>
+                            <button onclick="window.tzolkinAdmin.handlePinRemove()" class="btn-delete" style="flex:1; font-size:16px; padding:10px;">Désactiver le PIN</button>
+                        </div>
+                    </div>
+
                     <!-- Liste des contacts -->
                     <div class="contacts-list">
                         <h3>Contacts enregistrés</h3>
@@ -402,6 +412,9 @@ class TzolkinAdmin {
         // Rafraîchir la liste des contacts
         this.renderContacts();
 
+        // Afficher le statut du PIN
+        this.refreshPinStatus();
+
         // Mettre à jour l'historique
         window.history.pushState({}, '', '#admin');
     }
@@ -420,6 +433,40 @@ class TzolkinAdmin {
         this.resetForm();
 
         window.history.pushState({}, '', '#calendar');
+    }
+
+    refreshPinStatus() {
+        const el = document.getElementById('pin-admin-status');
+        if (!el) return;
+        const hasPin = window.TzolkinStorage && window.TzolkinStorage.hasPinCode();
+        el.textContent = hasPin ? '✓ Code PIN actif — vos notes sont protégées.' : 'Aucun code PIN défini — vos notes sont accessibles librement.';
+        el.style.color = hasPin ? '#5e832a' : '#888';
+    }
+
+    handlePinChange() {
+        if (!window.tzolkinPIN) return;
+        const hasPin = window.TzolkinStorage && window.TzolkinStorage.hasPinCode();
+        if (hasPin) {
+            // Vérifier le PIN actuel, puis ouvrir la création du nouveau
+            window.tzolkinPIN.requestPin(() => {
+                window.tzolkinPIN.openForCreation(() => { this.refreshPinStatus(); });
+            }, null);
+        } else {
+            // Pas de PIN → créer directement
+            window.tzolkinPIN.openForCreation(() => { this.refreshPinStatus(); });
+        }
+    }
+
+    handlePinRemove() {
+        if (!window.tzolkinPIN) return;
+        const hasPin = window.TzolkinStorage && window.TzolkinStorage.hasPinCode();
+        if (!hasPin) { alert('Aucun code PIN à désactiver.'); return; }
+        if (!confirm('Désactiver le code PIN ?\nVos notes ne seront plus protégées.')) return;
+        window.tzolkinPIN.requestPin(() => {
+            window.TzolkinStorage.removePinCode();
+            this.refreshPinStatus();
+            alert('Code PIN désactivé.');
+        }, null);
     }
 }
 

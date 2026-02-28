@@ -1587,6 +1587,19 @@ ${notesHtml}
         document.getElementById('note-time-location-popup').style.display = 'flex';
     }
 
+    //=== FONCTION: Ouvrir les réglages Android pour activer le GPS ===
+    async function openGPSSettings() {
+        if (window.Capacitor) {
+            try {
+                await window.Capacitor.nativePromise('AppSettings', 'openAppSettings');
+            } catch(e) {
+                alert('Allez dans Réglages → Applications → Tzolkin → Autorisations → Localisation');
+            }
+        } else {
+            alert('Allez dans les réglages de votre navigateur pour autoriser la localisation.');
+        }
+    }
+
     //=== FONCTION: Demander le GPS depuis le popup ville ===
     function requestGPSForPopup() {
         const locEl  = document.getElementById('note-confirm-location');
@@ -1631,7 +1644,7 @@ ${notesHtml}
             (err) => {
                 // GPS refusé ou indisponible
                 if (err.code === 1) { // PERMISSION_DENIED
-                    hintEl.innerHTML = 'GPS refusé. Pour l\'activer&nbsp;: Réglages → [Navigateur/App] → Localisation.';
+                    hintEl.innerHTML = 'GPS refusé. <button onclick="openGPSSettings()" style="background:#c0392b;color:white;border:none;padding:4px 12px;border-radius:6px;cursor:pointer;font-size:14px;font-family:\'Simplifica\',sans-serif;">Ouvrir les réglages →</button>';
                 } else {
                     hintEl.textContent = 'Position indisponible. Saisissez la ville manuellement.';
                 }
