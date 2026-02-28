@@ -335,9 +335,9 @@
                     <button id="download-toggle-btn" onclick="toggleDownloadMenu()"
                         style="padding:10px 20px; background:#4CAF50; color:white; border:none; border-radius:8px; cursor:pointer; font-size:14px; font-family:'Simplifica',sans-serif;">⬇ Télécharger ▾</button>
                     <div id="download-menu" style="display:none; position:absolute; bottom:48px; right:0; background:white; border:1px solid #ccc; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.15); min-width:210px; overflow:hidden; z-index:100;">
-                        <button onclick="downloadCSV()" style="display:block; width:100%; padding:12px 16px; background:none; border:none; border-bottom:1px solid #eee; cursor:pointer; text-align:left; font-family:'Simplifica',sans-serif; font-size:14px;">📊 CSV — données complètes</button>
-                        <button onclick="downloadTXT()" style="display:block; width:100%; padding:12px 16px; background:none; border:none; border-bottom:1px solid #eee; cursor:pointer; text-align:left; font-family:'Simplifica',sans-serif; font-size:14px;">📄 TXT — texte formaté</button>
-                        <button onclick="printPDF()" style="display:block; width:100%; padding:12px 16px; background:none; border:none; cursor:pointer; text-align:left; font-family:'Simplifica',sans-serif; font-size:14px;">🖨 PDF — version imprimable</button>
+                        <button onclick="downloadCSV()" style="display:block; width:100%; padding:12px 16px; background:none; border:none; border-bottom:1px solid #eee; cursor:pointer; text-align:left; font-family:'Simplifica',sans-serif; font-size:16px;">📊 <strong>.csv</strong> — données complètes</button>
+                        <button onclick="downloadTXT()" style="display:block; width:100%; padding:12px 16px; background:none; border:none; border-bottom:1px solid #eee; cursor:pointer; text-align:left; font-family:'Simplifica',sans-serif; font-size:16px;">📄 <strong>.txt</strong> — texte formaté</button>
+                        <button onclick="printPDF()" style="display:block; width:100%; padding:12px 16px; background:none; border:none; cursor:pointer; text-align:left; font-family:'Simplifica',sans-serif; font-size:16px;">🖨 <strong>.pdf</strong> — version imprimable</button>
                     </div>
                 </div>
             </div>
@@ -1080,7 +1080,7 @@
     }
 
     //=== FONCTION: Télécharger CSV (format complet 10 colonnes) ===
-    function downloadCSV() {
+    async function downloadCSV() {
         document.getElementById('download-menu').style.display = 'none';
         if (!notes || !notes.length) { alert('Aucune note à exporter.'); return; }
 
@@ -1106,19 +1106,23 @@
         });
 
         const blob = new Blob(['\uFEFF' + rows.join('\n')], { type: 'text/csv;charset=utf-8;' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `tzolkin-notes-${today}.csv`;
-        a.click();
-        URL.revokeObjectURL(url);
+        const filename = `tzolkin-notes-${today}.csv`;
+        const file = new File([blob], filename, { type: 'text/csv;charset=utf-8;' });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            await navigator.share({ files: [file], title: 'Notes Tzolkin' });
+        } else {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = filename; a.click();
+            URL.revokeObjectURL(url);
+        }
 
         // Proposer de supprimer les notes après téléchargement
         setTimeout(() => showPostCSVConfirm(), 600);
     }
 
     //=== FONCTION: Télécharger TXT (texte formaté) ===
-    function downloadTXT() {
+    async function downloadTXT() {
         document.getElementById('download-menu').style.display = 'none';
         if (!notes || !notes.length) { alert('Aucune note à exporter.'); return; }
 
@@ -1153,12 +1157,16 @@
         });
 
         const blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8;' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `tzolkin-notes-${today}.txt`;
-        a.click();
-        URL.revokeObjectURL(url);
+        const filename = `tzolkin-notes-${today}.txt`;
+        const file = new File([blob], filename, { type: 'text/plain;charset=utf-8;' });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            await navigator.share({ files: [file], title: 'Notes Tzolkin' });
+        } else {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = filename; a.click();
+            URL.revokeObjectURL(url);
+        }
     }
 
     //=== FONCTION: Imprimer / PDF ===
