@@ -1,6 +1,6 @@
 <!-- 
   Tzolk'in Menu Standalone - Menu et Modales
-  Version: 1.0.1
+  Version: 1.0.5
   Auteur: Alexandre Ferran + Claude AI
 -->
 
@@ -328,7 +328,7 @@
                 <div class="no-results" style="text-align: center; padding: 20px; color: #888;">Chargement...</div>
             </div>
             <div style="display:flex; justify-content:center; gap:12px; padding:20px 0 30px;">
-                <input type="file" id="import-csv-input" accept=".csv" style="display:none;" onchange="handleImportFile(this)">
+                <input type="file" id="import-csv-input" accept=".csv,text/csv,text/plain,application/vnd.ms-excel" style="display:none;" onchange="handleImportFile(this)">
                 <button onclick="triggerImport()"
                     style="padding:10px 20px; background:#5e832a; color:white; border:none; border-radius:8px; cursor:pointer; font-size:14px; font-family:'Simplifica',sans-serif;">⬆ Uploader</button>
                 <div style="position:relative;">
@@ -355,7 +355,7 @@
             <div class="tzolkin-splash-text">
                 <h1>Tzolk'in du Parédé</h1>
                 <p>Calendrier Maya Sacré</p>
-                <p class="version">Version 1.0.1</p>
+                <p class="version">Version 1.0.5</p>
                 <p><strong>Auteur :</strong> Alexandre Ferran</p>
                 <p><strong>Assistance IA :</strong> Grok, DeepSeek, Claude</p>
                 <p><a href="https://leparede.org" target="_blank">leparede.org</a></p>
