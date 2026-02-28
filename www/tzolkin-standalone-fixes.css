@@ -1,0 +1,247 @@
+/**
+ * Tzolkin Standalone App - Fixes CSS
+ * Corrige les styles de modale pour l'application autonome
+ * Version propre sans !important
+ */
+
+/* Background enabled globally in style.css */
+html,
+body {
+    /* Suppression de l'override qui désactivait le fond */
+}
+
+/* Fonctionnement modal : pleine hauteur, scroll sur le contenu */
+#fonctionnement-modal .modal-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+}
+
+/* Admin modal : scroll sur le conteneur lui-même (pas sur le .modal-content) */
+#admin-modal.active {
+    display: block !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+#admin-modal .modal-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    max-height: none !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    overflow-y: visible !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+}
+
+#fonctionnement-modal .modal-body {
+    max-height: none !important;
+    overflow-y: visible !important;
+}
+
+/* Contenu principal centré avec marges */
+#tzolkin-widget-container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px 20px 0 20px;
+}
+
+#tzolkin-details {
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Vue détail complète avec image x-balanque.png et effet négatif */
+#tzolkin-detail-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    /* Same background as everywhere else */
+    background: #ded2b3 url("./assets/x-balanque.png") no-repeat center center fixed;
+    background-size: cover;
+    overflow-y: auto;
+    z-index: 1999;
+    padding: 20px;
+    display: none;
+}
+
+/* Quand affiché */
+#tzolkin-detail-view[style*="display: block"] {
+    display: block;
+}
+
+/* Mode paysage */
+@media (orientation: landscape) {
+    #tzolkin-detail-view {
+        background-size: cover;
+    }
+}
+
+/* Conteneur du contenu - fond sable qui sera inversé par le filtre parent */
+#tzolkin-detail-view #tzolkin-detail-content {
+    max-width: 560px;
+    width: 100%;
+    margin: 40px auto;
+    padding: 30px;
+    box-sizing: border-box;
+    background: rgba(222, 210, 179, 0.9);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 2px solid #222;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Bouton retour */
+#tzolkin-detail-view #tzolkin-back-btn {
+    display: inline-block;
+    margin: 0 0 20px 0;
+    padding: 10px 20px;
+    background: #5e832a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#tzolkin-detail-view #tzolkin-back-btn:hover {
+    background: #4a6821;
+}
+
+/* Image du détail */
+#tzolkin-detail-view .tzolkin-detail-img {
+    max-width: 200px;
+    height: 200px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+/* Titres */
+#tzolkin-detail-view #tzolkin-detail-content h3 {
+    text-align: center;
+    font-size: 1.8em;
+    margin: 10px 0 20px;
+    color: #333;
+}
+
+#tzolkin-detail-view #tzolkin-detail-content h4 {
+    font-size: 1.3em;
+    margin: 15px 0 10px;
+    color: #444;
+}
+
+/* Texte */
+#tzolkin-detail-view #tzolkin-detail-content p,
+#tzolkin-detail-view #tzolkin-detail-content ul {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #333;
+    margin: 10px 0;
+}
+
+#tzolkin-detail-view #tzolkin-detail-content ul {
+    padding-left: 20px;
+}
+
+#tzolkin-detail-view #tzolkin-detail-content ul li {
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Icônes dans les listes */
+#tzolkin-detail-view #tzolkin-detail-content .tzolkin-glyph-icon,
+#tzolkin-detail-view #tzolkin-detail-content .tzolkin-number-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* Bouton scroll to top */
+#tzolkin-detail-view #tzolkin-scroll-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: #5e832a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#tzolkin-detail-view #tzolkin-scroll-top:hover {
+    background: #4a6821;
+}
+
+/* Flèche du bouton scroll */
+#tzolkin-detail-view #tzolkin-scroll-top .ast-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#tzolkin-detail-view #tzolkin-scroll-top .ast-arrow-svg {
+    fill: white;
+    width: 26px;
+    height: 16px;
+}
+
+/* Mobile - ajustements */
+@media (max-width: 768px) {
+    /* Section details principale */
+    #tzolkin-details {
+        width: 100%;
+    }
+
+    #tzolkin-details-content {
+        padding: 15px;
+    }
+
+    /* Page detail complète */
+    #tzolkin-detail-view {
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    #tzolkin-detail-view #tzolkin-detail-content {
+        width: 100%;
+        padding: 15px;
+    }
+
+    #tzolkin-detail-view #tzolkin-detail-content h3 {
+        font-size: 1.5em;
+    }
+
+    #tzolkin-detail-view #tzolkin-detail-content h4 {
+        font-size: 1.2em;
+    }
+
+    #tzolkin-detail-view .tzolkin-detail-img {
+        max-width: 150px;
+        height: 150px;
+    }
+}

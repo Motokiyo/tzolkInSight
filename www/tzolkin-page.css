@@ -1,0 +1,317 @@
+/* wp-content/themes/astra-child/tzolkin-page.css */
+
+/* Supprimer les éléments indésirables */
+.masthead,
+.header-bar,
+#wpadminbar {
+    display: none;
+}
+
+/* Style de base avec image de fond */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+/* Background handled in style.css */
+
+
+
+/* Nettoyage des conteneurs */
+/* Nettoyage des conteneurs - Standalone version */
+.tzolkin-app {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    z-index: 1;
+    background: transparent;
+}
+
+/* Ajustement #primary */
+#primary.content-area {
+    margin-top: 0;
+    padding-top: 0;
+    min-height: 100vh;
+    background: transparent;
+}
+
+/* Masquer les titres standards */
+.entry-title,
+.page-header,
+.entry-header,
+h1.site-title {
+    display: none;
+    margin: 0;
+    padding: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+/* Conteneur des widgets et blocs Groupe */
+.entry-content .wp-block-group,
+.entry-content .wp-block-group:has(.widget_tzolkin-app-interactive, .wp-block-astra-child-tzolkin-maya, .wp-block-table),
+.entry-content>div {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    box-sizing: border-box;
+    background: transparent;
+}
+
+/* Préserver les styles Gutenberg pour le bloc Groupe */
+.entry-content .wp-block-group,
+.entry-content .wp-block-group.has-background,
+.entry-content .wp-block-group__inner-container {
+    position: relative;
+    z-index: 2;
+    min-height: auto;
+    width: 100%;
+    padding: 20px;
+    background: transparent;
+}
+
+/* Widgets */
+.entry-content .tzolkin-widget-container,
+.entry-content .widget_tzolkin-app-interactive {
+    width: 100%;
+    max-width: 400px;
+    min-height: 400px;
+    margin: 20px auto;
+    padding: 0;
+    background: #ded2b3;
+    position: relative;
+    z-index: 3;
+    border-radius: 16px;
+    border: 2px solid #222;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.09);
+    display: block;
+    aspect-ratio: 1 / 1;
+    overflow: visible;
+}
+
+/* Cadre carré */
+.tzolkin-square {
+    width: 76%;
+    max-width: 304px;
+    height: 260px;
+    /* 65% de 400px */
+    margin: 48px auto 48px auto;
+    position: relative;
+    z-index: 3;
+    border-radius: 16px;
+    border: 2px solid #222;
+    overflow: hidden;
+}
+
+/* Navigation */
+.tzolkin-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 4;
+    background: #ded2b3;
+}
+
+.tzolkin-nav-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 8px 0;
+}
+
+.tzolkin-nav-prev,
+.tzolkin-nav-next {
+    width: 40px;
+    min-width: 40px;
+    height: 100%;
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: #000;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.tzolkin-gregorian {
+    font-size: 1em;
+    color: #000;
+}
+
+/* Bouton reset */
+.tzolkin-widget-reset {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    background: #111;
+    border-radius: 8px;
+    border: none;
+    z-index: 4;
+    cursor: pointer;
+}
+
+/* Tableau */
+.wp-block-table {
+    width: 100%;
+    max-width: 600px;
+    margin: 40px auto 20px auto;
+    background: transparent;
+    border-collapse: collapse;
+    z-index: 2;
+}
+
+.wp-block-table td {
+    padding: 10px;
+    vertical-align: top;
+    border: 1px solid #ccc;
+    background: transparent;
+    text-align: left;
+    min-height: 150px;
+}
+
+/* Shortcodes */
+.tzolkin-glyphe,
+.tzolkin-chiffre {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0;
+    padding: 0;
+    min-height: 150px;
+}
+
+.tzolkin-glyphe h3,
+.tzolkin-chiffre h3 {
+    font-size: 1.2em;
+    margin: 0.5em 0 0.25em 0;
+    color: #333;
+}
+
+.tzolkin-glyphe p,
+.tzolkin-chiffre p {
+    font-size: 0.9em;
+    margin: 0;
+    color: #555;
+}
+
+.tzolkin-glyphe-svg,
+.tzolkin-chiffre-svg {
+    width: 50px;
+    height: auto;
+    margin-bottom: 0.5em;
+    display: block;
+}
+
+/* Styles existants pour hover (inchangés) */
+.tzolkin-nav-prev:hover,
+.tzolkin-nav-next:hover {
+    background: #ccc;
+    color: #000;
+    cursor: pointer;
+}
+
+.tzolkin-gregorian:hover {
+    color: #222;
+    cursor: pointer;
+}
+
+.tzolkin-square img:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+/* Classes pour simuler hover sur mobile */
+.tzolkin-nav-prev.active,
+.tzolkin-nav-next.active {
+    background: #ccc;
+    color: #000;
+}
+
+.tzolkin-gregorian.active {
+    color: #222;
+}
+
+.tzolkin-square img.active {
+    transform: scale(1.1);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+    .wp-block-group,
+    .wp-block-group:has(.widget_tzolkin-app-interactive, .wp-block-astra-child-tzolkin-maya, .wp-block-table),
+    .entry-content>div {
+        width: 95%;
+        max-width: 400px;
+        padding: 10px;
+        background: transparent;
+    }
+
+    .tzolkin-widget-container,
+    .widget_tzolkin-app-interactive {
+        max-width: 300px;
+        min-height: 300px;
+        margin: 10px auto;
+    }
+
+    .tzolkin-square {
+        width: 80%;
+        max-width: 240px;
+        height: 192px;
+        /* 60% de 300px */
+        margin: 40px auto 40px auto;
+    }
+
+    .tzolkin-nav-prev,
+    .tzolkin-nav-next {
+        width: 32px;
+        min-width: 32px;
+        font-size: 1.2em;
+    }
+
+    .tzolkin-gregorian {
+        font-size: 0.9em;
+    }
+
+    .wp-block-table {
+        width: 100%;
+        max-width: 100%;
+        margin: 20px auto;
+    }
+
+    .wp-block-table td {
+        min-height: 120px;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .tzolkin-glyphe,
+    .tzolkin-chiffre {
+        min-height: 120px;
+    }
+
+    .tzolkin-glyphe-svg,
+    .tzolkin-chiffre-svg {
+        width: 40px;
+    }
+}

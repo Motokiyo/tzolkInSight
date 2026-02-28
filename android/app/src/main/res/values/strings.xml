@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">TzolkinSight</string>
+    <string name="title_activity_main">TzolkinSight</string>
+    <string name="package_name">org.leparede.tzolkinsight</string>
+    <string name="custom_url_scheme">org.leparede.tzolkinsight</string>
+</resources>

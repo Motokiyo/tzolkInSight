@@ -135,9 +135,9 @@ function renderLordOfNight(containerId, lordNum) {
     el.innerHTML = `
         <div style="display:flex; align-items:center; gap:14px; padding:12px 16px; background:#1a1a1a; border-radius:12px; border:2px solid #444; margin-bottom:12px;">
             <div style="flex:1; text-align:right;">
-                <div style="font-size:11px; color:#888; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:2px;">Seigneur de la Nuit · G${lordNum}</div>
+                <div style="font-size:14px; color:#ccc; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:2px;">Seigneur de la Nuit · G${lordNum}</div>
                 <div style="font-size:18px; font-weight:bold; color:#fff; font-family:'Summer',cursive;">${lord.name}</div>
-                <div style="font-size:12px; color:#bbb; margin-top:2px;">${lord.domain}</div>
+                <div style="font-size:15px; color:#eee; margin-top:2px;">${lord.domain}</div>
             </div>
             ${imgURL
                 ? `<img src="${imgURL}" alt="G${lordNum}" style="height:52px; width:auto; flex-shrink:0; filter:invert(1);">`
@@ -168,13 +168,13 @@ function renderCrossPosition(containerId, pos, label) {
     el.style.borderWidth = isCentre ? '3px' : '2px';
 
     el.innerHTML = `
-        <div style="font-size:10px; color:${css.text}; margin-bottom:4px; font-style:italic; text-align:center; line-height:1.2;">${label}</div>
+        <div style="font-size:13px; color:${css.text}; margin-bottom:4px; font-style:italic; text-align:center; line-height:1.2;">${label}</div>
         <div style="display:flex; align-items:center; justify-content:center; gap:3px; margin-bottom:3px;">
             <img src="${numURL}"   alt="${n}"          style="height:22px; width:auto;">
             <img src="${glyphURL}" alt="${glyph.name}" style="height:36px; width:auto;">
         </div>
-        <div style="font-size:12px; font-weight:bold; color:${css.text}; text-align:center; line-height:1.2;">${n} ${glyph.name}</div>
-        <div style="font-size:10px; color:${css.text}; text-align:center; opacity:0.8;">${glyph.translation}</div>
+        <div style="font-size:15px; font-weight:bold; color:${css.text}; text-align:center; line-height:1.2;">${n} ${glyph.name}</div>
+        <div style="font-size:13px; color:${css.text}; text-align:center;">${glyph.translation}</div>
     `;
 }
 
@@ -192,11 +192,11 @@ function renderYearBearerGlyphs(containerId, currentBearer, currentYear, birthBe
         const pal      = COLOR_PALETTES[glyph.color];
         return `
             <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
-                <div style="font-size:11px; color:#888; text-align:center;">${label} ${year}</div>
+                <div style="font-size:15px; color:#222; text-align:center;">${label} ${year}</div>
                 <div style="background:${pal.bg}; border:2px solid ${pal.border}; border-radius:12px; padding:6px 10px;">
                     <img src="${glyphURL}" alt="${glyph.name}" style="height:50px; width:auto; display:block;">
                 </div>
-                <div style="font-size:14px; font-weight:bold; color:#333; text-align:center; font-family:'Summer',cursive;">${glyph.name}</div>
+                <div style="font-size:16px; font-weight:bold; color:#222; text-align:center; font-family:'Summer',cursive;">${glyph.name}</div>
             </div>`;
     };
 
@@ -247,12 +247,12 @@ function renderParagraphs(containerId, cross, lordNum, currentBearer, birthBeare
             <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
                 <img src="${imgURL}" alt="${glyph.name}" style="height:30px; width:auto; opacity:0.85;">
                 <div style="flex:1;">
-                    <div style="font-size:12px; color:${pal.textColor}; opacity:0.75; font-style:italic;">${pt.title}</div>
+                    <div style="font-size:14px; color:${pal.textColor}; font-style:italic;">${pt.title}</div>
                     <div style="font-size:16px; font-weight:bold; color:${pal.textColor}; font-family:'Summer',cursive;">${n} ${glyph.name} · ${glyph.translation}</div>
                 </div>
                 ${btnDetail('glyph', g)}
             </div>
-            <p style="margin:0; font-size:14px; color:${pal.textColor}; line-height:1.6;">${pt.text}</p>
+            <p style="margin:0; font-size:16px; color:${pal.textColor}; line-height:1.6;">${pt.text}</p>
         </div>`;
     });
 
@@ -268,11 +268,11 @@ function renderParagraphs(containerId, cross, lordNum, currentBearer, birthBeare
                     ? `<img src="${imgURL}" alt="G${lordNum}" style="height:30px; width:auto; filter:invert(1); opacity:0.85;">`
                     : `<div style="width:30px; height:30px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:bold; color:#aaa;">G${lordNum}</div>`}
                 <div>
-                    <div style="font-size:12px; color:#aaa; font-style:italic;">${POSITION_TEXTS.seigneur.title} · G${lordNum}</div>
+                    <div style="font-size:14px; color:#ddd; font-style:italic;">${POSITION_TEXTS.seigneur.title} · G${lordNum}</div>
                     <div style="font-size:16px; font-weight:bold; color:#fff; font-family:'Summer',cursive;">${lord.name} · ${lord.domain}</div>
                 </div>
             </div>
-            <p style="margin:0; font-size:14px; color:#e0e0e0; line-height:1.6;">${lord.description}</p>
+            <p style="margin:0; font-size:16px; color:#e0e0e0; line-height:1.6;">${lord.description}</p>
         </div>`;
     }
 
@@ -293,12 +293,12 @@ function renderParagraphs(containerId, cross, lordNum, currentBearer, birthBeare
                 <img src="${tURL}" alt="${tGlyph.name}" style="height:30px; width:auto; opacity:0.85;">
             </div>
             <div style="flex:1;">
-                <div style="font-size:12px; color:${tPal.textColor}; opacity:0.75; font-style:italic;">${POSITION_TEXTS.trecena.title}</div>
+                <div style="font-size:14px; color:${tPal.textColor}; font-style:italic;">${POSITION_TEXTS.trecena.title}</div>
                 <div style="font-size:16px; font-weight:bold; color:${tPal.textColor}; font-family:'Summer',cursive;">1 ${tGlyph.name} · ${tGlyph.translation}</div>
             </div>
             ${btnDetail('trecena', tg)}
         </div>
-        <p style="margin:0; font-size:14px; color:${tPal.textColor}; line-height:1.6;">${POSITION_TEXTS.trecena.text}</p>
+        <p style="margin:0; font-size:16px; color:${tPal.textColor}; line-height:1.6;">${POSITION_TEXTS.trecena.text}</p>
     </div>`;
 
     // Porteur d'année — basé sur l'année de naissance (ou année en cours si pas de date)
@@ -313,12 +313,12 @@ function renderParagraphs(containerId, cross, lordNum, currentBearer, birthBeare
         <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
             <img src="${bearerURL}" alt="${bearerGlyph.name}" style="height:30px; width:auto; opacity:0.85;">
             <div style="flex:1;">
-                <div style="font-size:12px; color:${bearerPal.textColor}; opacity:0.75; font-style:italic;">${pt.title} · Naissance ${displayYear}</div>
+                <div style="font-size:14px; color:${bearerPal.textColor}; font-style:italic;">${pt.title} · Naissance ${displayYear}</div>
                 <div style="font-size:16px; font-weight:bold; color:${bearerPal.textColor}; font-family:'Summer',cursive;">${bearerGlyph.name} · ${bearerGlyph.translation}</div>
             </div>
             ${btnDetail('porteur', displayBearer)}
         </div>
-        <p style="margin:0; font-size:14px; color:${bearerPal.textColor}; line-height:1.6;">${pt.text}</p>
+        <p style="margin:0; font-size:16px; color:${bearerPal.textColor}; line-height:1.6;">${pt.text}</p>
     </div>`;
 
     el.innerHTML = html;

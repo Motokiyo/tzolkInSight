@@ -3,3 +3,8 @@ assets/.DS_Store
 assets/boutons/.DS_Store
 *.docx
 node_modules/
+android/local.properties
+android/.gradle/
+android/build/
+android/app/build/
+android/app/.cxx/

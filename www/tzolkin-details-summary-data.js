@@ -1,0 +1,324 @@
+/**
+ * Tzolk'in Details Summary Data - Textes courts pour affichage dans la section détails
+ * Source: tzolkin-widget.php (WordPress)
+ * Version: 2.0
+ * Auteur: Alexandre Ferran
+ */
+
+window.TZOLKIN_SUMMARY_DATA = {
+    "trecenas": {
+        "1": {
+            "nom_francais": "Imix",
+            "nawal_maya": "Imix",
+            "traduction": "Crocodile",
+            "description": "<p>Imix, qu'on peut traduire par Crocodile, est associé à la création, aux rêves et à l'énergie primordiale de la Mère. C'est une période pour faire confiance à l'univers et se connecter avec la terre et l'eau. Mots clés : création, rêves, inspiration, énergie primordiale.</p>"
+        },
+        "2": {
+            "nom_francais": "Ik'",
+            "nawal_maya": "Ik'",
+            "traduction": "Vent",
+            "description": "<p>Ik', qu'on peut traduire par Vent, est lié à la communication, à l'imagination et à l'inspiration. C'est un moment propice aux nouvelles conversations et à l'ouverture aux changements. Mots clés : communication, imagination, inspiration, changement.</p>"
+        },
+        "3": {
+            "nom_francais": "Ak'bal",
+            "nawal_maya": "Ak'bal",
+            "traduction": "Nuit",
+            "description": "<p>Ak'bal, qu'on peut traduire par Nuit ou Maison, traite de l'ombre et de la lumière, ainsi que de la dualité. C'est une période pour la réflexion et la recherche de la sagesse intérieure. Mots clés : ombre, lumière, dualité, sagesse intérieure.</p>"
+        },
+        "4": {
+            "nom_francais": "Graine",
+            "nawal_maya": "Kan",
+            "traduction": "Graine",
+            "description": "<p>Kan, qu'on peut traduire par Graine ou Maïs, est associé à la sagesse, au pouvoir et à la force vitale. C'est un moment propice à l'apprentissage et à l'évolution spirituelle. Mots clés : sagesse, pouvoir, force vitale, transformation.</p>"
+        },
+        "5": {
+            "nom_francais": "Chicchan",
+            "nawal_maya": "Chicchan",
+            "traduction": "Serpent Céleste",
+            "description": "<p>Chicchan, qu'on peut traduire par Serpent Céleste, met en lumière l'énergie vitale et la passion. C'est un moment puissant et potentiellement transformateur. Mots clés : énergie vitale, passion, force primale.</p>"
+        },
+        "6": {
+            "nom_francais": "Cimi",
+            "nawal_maya": "Cimi",
+            "traduction": "Mort",
+            "description": "<p>Cimi, qu'on peut traduire par Mort ou Transformation, aborde les thèmes de la mort et du lâcher-prise. C'est une période de changement profond et de renouveau spirituel. Mots clés : mort, transformation, lâcher-prise, renouveau spirituel.</p>"
+        },
+        "7": {
+            "nom_francais": "Manik",
+            "nawal_maya": "Manik",
+            "traduction": "Cerf",
+            "description": "<p>Manik, qu'on peut traduire par Cerf, symbolise l'autorité, le respect et l'équilibre cosmique. C'est un moment pour honorer nos dons et servir avec humilité. Mots clés : autorité, respect, équilibre cosmique, guérison.</p>"
+        },
+        "8": {
+            "nom_francais": "Lamat",
+            "nawal_maya": "Lamat",
+            "traduction": "Lapin",
+            "description": "<p>Lamat, qu'on peut traduire par Lapin ou Vénus, est associé à la fertilité et à l'abondance. C'est un moment propice à la plantation de nouvelles idées et à la croissance. Mots clés : fertilité, abondance, croissance, prospérité.</p>"
+        },
+        "9": {
+            "nom_francais": "Muluc",
+            "nawal_maya": "Muluc",
+            "traduction": "Eau",
+            "description": "<p>Muluc, qu'on peut traduire par Eau ou Offrande, est lié à la purification et au flux de la vie. C'est un moment pour lâcher prise et suivre le rythme naturel des cycles. Mots clés : eau, purification, flux, lâcher-prise.</p>"
+        },
+        "10": {
+            "nom_francais": "Oc",
+            "nawal_maya": "Oc",
+            "traduction": "Chien",
+            "description": "<p>Oc, qu'on peut traduire par Chien, souligne l'amour, la vérité et la loyauté. Le chien est un symbole de fidélité et de protection. Mots clés : amour, vérité, justice, loyauté, autorité.</p>"
+        },
+        "11": {
+            "nom_francais": "Chuen",
+            "nawal_maya": "Chuen",
+            "traduction": "Singe",
+            "description": "<p>Chuen, qu'on peut traduire par Singe ou Fil, est lié à la créativité, à la gaieté et aux arts. C'est un moment d'expression artistique et de joie de vivre. Mots clés : créativité, gaieté, arts, temps, ancêtres.</p>"
+        },
+        "12": {
+            "nom_francais": "Eb",
+            "nawal_maya": "Eb",
+            "traduction": "Route",
+            "description": "<p>Eb, qu'on peut traduire par Route ou Herbe, met en évidence le chemin spirituel et le voyage. C'est un moment pour se concentrer sur son propre parcours de vie. Mots clés : chemin spirituel, voyage, destin, gratitude.</p>"
+        },
+        "13": {
+            "nom_francais": "Ben",
+            "nawal_maya": "Ben",
+            "traduction": "Roseau",
+            "description": "<p>Ben, qu'on peut traduire par Roseau ou Maïs, met l'accent sur la maison, la famille et la communauté. C'est un bon moment pour reconnaître les bénédictions de la vie. Mots clés : maison, famille, communauté, fertilité, destin.</p>"
+        },
+        "14": {
+            "nom_francais": "Ix",
+            "nawal_maya": "Ix",
+            "traduction": "Jaguar",
+            "description": "<p>Ix, qu'on peut traduire par Jaguar ou Magicien, est consacré à la magie terrestre et au pouvoir féminin. Le jaguar symbolise la force et l'intuition. Mots clés : magie terrestre, pouvoir féminin, connexion à la nature.</p>"
+        },
+        "15": {
+            "nom_francais": "Men",
+            "nawal_maya": "Men",
+            "traduction": "Aigle",
+            "description": "<p>Men, qu'on peut traduire par Aigle ou Vision, est dédié à la vision et à la prospérité. L'aigle représente une perspective supérieure et la liberté. Mots clés : vision, prospérité, vue d'ensemble, abondance.</p>"
+        },
+        "16": {
+            "nom_francais": "Cib",
+            "nawal_maya": "Cib",
+            "traduction": "Vautour",
+            "description": "<p>Cib, qu'on peut traduire par Vautour ou Hibou, est associé à la sagesse ancestrale et au pardon. C'est un moment pour se connecter avec les ancêtres et guérir le passé. Mots clés : sagesse ancestrale, pardon, force cosmique.</p>"
+        },
+        "17": {
+            "nom_francais": "Caban",
+            "nawal_maya": "Caban",
+            "traduction": "Terre",
+            "description": "<p>Caban, qu'on peut traduire par Terre ou Mouvement, est dédié à l'intelligence et aux idées. C'est un moment propice à l'introspection et à la réflexion. Mots clés : intelligence, idées, sagesse, connaissance, mémoire.</p>"
+        },
+        "18": {
+            "nom_francais": "Etz'nab",
+            "nawal_maya": "Etz'nab",
+            "traduction": "Couteau d'Obsidienne",
+            "description": "<p>Etz'nab, qu'on peut traduire par Couteau d'Obsidienne ou Miroir, est dédié à la guérison et au lâcher-prise. Le couteau d'obsidienne symbolise la clarté et la vérité. Mots clés : guérison, lâcher-prise, vérité, clarté.</p>"
+        },
+        "19": {
+            "nom_francais": "Cauac",
+            "nawal_maya": "Cauac",
+            "traduction": "Tempête",
+            "description": "<p>Cauac, qu'on peut traduire par Pluie ou Tempête, est axé sur la naissance et la renaissance. La pluie symbolise la purification et le potentiel de nouveaux départs. Mots clés : naissance, renaissance, nouveaux commencements, purification.</p>"
+        },
+        "20": {
+            "nom_francais": "Ahau",
+            "nawal_maya": "Ahau",
+            "traduction": "Soleil",
+            "description": "<p>Ahau, qu'on peut traduire par Soleil ou Seigneur, est dédié à l'expérience humaine divine et à la lumière dorée. C'est un moment pour la découverte de soi et la connexion avec le divin. Mots clés : expérience humaine divine, lumière intérieure, héroïsme, illumination.</p>"
+        }
+    },
+    "glyphs": {
+        "1": {
+            "titre": "Imix, le Dragon",
+            "description": "<p>Imix peut se traduire par Crocodile. Il représente la source de vie, l'énergie primordiale et la création. Ce glyphe est lié à la fertilité, à l'eau et à la nature nourricière.</p>",
+            "mots_cles": "création, origine, potentiel, intégrité",
+            "animal_pouvoir": "<strong>Crocodile</strong> ou <strong>Nénuphar</strong>"
+        },
+        "2": {
+            "titre": "Ik, le Vent",
+            "description": "<p>Ik ou Ik' peut se traduire par Vent. Il symbolise le souffle de vie, la communication et l'inspiration. Ce glyphe porte l'énergie du mouvement et de la spiritualité.</p>",
+            "mots_cles": "communication, esprit, inspiration, changement",
+            "animal_pouvoir": "<strong>Colibri</strong> ou <strong>Vent</strong>"
+        },
+        "3": {
+            "titre": "Akbal, la Nuit",
+            "description": "<p>Akbal ou Ak'bal peut se traduire par Nuit. Il représente les rêves, l'introspection et l'obscurité. Ce glyphe invite à explorer l'intériorité et les mystères cachés.</p>",
+            "mots_cles": "obscurité, mystère, intuition, refuge",
+            "animal_pouvoir": "<strong>Chauve-souris</strong> ou <strong>Nuit</strong>"
+        },
+        "4": {
+            "titre": "Kan, la Graine",
+            "description": "<p>Kan peut se traduire par Maïs. Il symbolise la graine, le potentiel de croissance et la créativité. Ce glyphe représente le développement et l'abondance.</p>",
+            "mots_cles": "abondance, croissance, potentiel, sagesse",
+            "animal_pouvoir": "<strong>Graine</strong> ou <strong>Lézard</strong>"
+        },
+        "5": {
+            "titre": "Chicchan, le Serpent",
+            "description": "<p>Chicchan ou Chikchan peut se traduire par Serpent. Il incarne l'énergie vitale, l'instinct et la transformation. Ce glyphe est lié à la passion et à la sagesse corporelle.</p>",
+            "mots_cles": "énergie, passion, transformation, intuition",
+            "animal_pouvoir": "<strong>Serpent</strong>"
+        },
+        "6": {
+            "titre": "Cimi, la Mort",
+            "description": "<p>Cimi ou Kimi peut se traduire par Mort. Il symbolise la transformation, le renouveau et le lâcher-prise. Ce glyphe représente le cycle de la vie et la libération.</p>",
+            "mots_cles": "mort, transformation, libération, pardon",
+            "animal_pouvoir": "<strong>Hibou</strong>, <strong>Mort</strong> ou <strong>Transformation</strong>"
+        },
+        "7": {
+            "titre": "Manik, le Cerf",
+            "description": "<p>Manik ou Manik' peut se traduire par Cerf. Il incarne la liberté, l'équilibre et la connexion avec la nature. Ce glyphe symbolise l'honneur et l'harmonie.</p>",
+            "mots_cles": "autorité, équilibre, intégrité, don",
+            "animal_pouvoir": "<strong>Cerf</strong> ou <strong>Guérisseur</strong>"
+        },
+        "8": {
+            "titre": "Lamat, l'Étoile",
+            "description": "<p>Lamat peut se traduire par Lapin. Il représente l'étoile, la beauté et l'harmonie cosmique. Ce glyphe est associé à la créativité et à la prospérité.</p>",
+            "mots_cles": "abondance, fertilité, chance, harmonie",
+            "animal_pouvoir": "<strong>Lapin</strong> ou <strong>Planète Vénus</strong>"
+        },
+        "9": {
+            "titre": "Muluc, l'Eau",
+            "description": "<p>Muluc ou Muluk peut se traduire par Eau. Il symbolise les émotions, la purification et le flux de la vie. Ce glyphe invite à écouter son intuition.</p>",
+            "mots_cles": "eau, purification, flux, offrande",
+            "animal_pouvoir": "<strong>Poisson</strong>, <strong>Eau</strong> ou <strong>Lune</strong>"
+        },
+        "10": {
+            "titre": "Oc, le Chien",
+            "description": "<p>Oc ou Ok peut se traduire par Chien. Il représente la loyauté, l'amour et la protection. Ce glyphe incarne la fidélité et les connexions émotionnelles.</p>",
+            "mots_cles": "loyauté, protection, guidance, fidélité",
+            "animal_pouvoir": "<strong>Chien</strong>"
+        },
+        "11": {
+            "titre": "Chuen, le Singe",
+            "description": "<p>Chuen ou Chuwen peut se traduire par Singe. Il symbolise la créativité, le jeu et l'humour. Ce glyphe incarne l'esprit artistique et la spontanéité.</p>",
+            "mots_cles": "créativité, jeu, habileté, humour",
+            "animal_pouvoir": "<strong>Singe</strong>"
+        },
+        "12": {
+            "titre": "Eb, l'Humain",
+            "description": "<p>Eb peut se traduire par Herbe. Il représente l'humain, la route de la vie et les relations. Ce glyphe est lié à la gratitude et à la communauté.</p>",
+            "mots_cles": "chemin, gratitude, humilité, connexion",
+            "animal_pouvoir": "<strong>Herbe</strong> ou <strong>Route</strong>"
+        },
+        "13": {
+            "titre": "Ben, le Roseau",
+            "description": "<p>Ben peut se traduire par Roseau. Il symbolise la croissance, l'autorité spirituelle et la connexion entre la terre et le ciel.</p>",
+            "mots_cles": "autorité, croissance, fondation, bénédiction",
+            "animal_pouvoir": "<strong>Roseau</strong> ou <strong>Maïs</strong>"
+        },
+        "14": {
+            "titre": "Ix, le Jaguar",
+            "description": "<p>Ix peut se traduire par Jaguar. Il incarne la magie, la puissance et la connexion avec la terre. Ce glyphe représente la sagesse chamanique.</p>",
+            "mots_cles": "magie, féminin, nature, intuition",
+            "animal_pouvoir": "<strong>Jaguar</strong> ou <strong>Ocelot</strong>"
+        },
+        "15": {
+            "titre": "Men, l'Aigle",
+            "description": "<p>Men peut se traduire par Aigle. Il représente la vision, la liberté et la conscience supérieure. Ce glyphe est lié à l'inspiration et à la perspective élevée.</p>",
+            "mots_cles": "vision, liberté, conscience, prospérité",
+            "animal_pouvoir": "<strong>Aigle</strong>"
+        },
+        "16": {
+            "titre": "Cib, le Vautour",
+            "description": "<p>Cib ou Kib peut se traduire par Hibou ou Vautour. Il symbolise la patience, la purification et la sagesse ancestrale. Ce glyphe invite à accepter les cycles naturels.</p>",
+            "mots_cles": "sagesse, pardon, destin, connexion",
+            "animal_pouvoir": "<strong>Vautour</strong> ou <strong>Chouette</strong>"
+        },
+        "17": {
+            "titre": "Caban, la Terre",
+            "description": "<p>Caban ou Kab'an peut se traduire par Terre. Il représente le mouvement, l'évolution et la synchronicité. Ce glyphe incarne l'énergie planétaire.</p>",
+            "mots_cles": "mouvement, intelligence, synchronicité, évolution",
+            "animal_pouvoir": "<strong>Terre</strong> ou <strong>Pic-vert</strong>"
+        },
+        "18": {
+            "titre": "Etznab, le Couteau d'Obsidienne",
+            "description": "<p>Etznab ou Etz'nab peut se traduire par Couteau d'Obsidienne. Il symbolise la vérité, la réflexion et la clarté. Ce glyphe invite à affronter ses ombres.</p>",
+            "mots_cles": "vérité, clarté, guérison, discernement",
+            "animal_pouvoir": "<strong>Miroir</strong> ou <strong>Obsidienne</strong>"
+        },
+        "19": {
+            "titre": "Cauac, l'Orage",
+            "description": "<p>Cauac ou Kawak peut se traduire par Pluie. Il représente l'orage, la transformation et l'énergie purificatrice. Ce glyphe apporte le renouveau à travers le chaos.</p>",
+            "mots_cles": "pluie, purification, transformation, communauté",
+            "animal_pouvoir": "<strong>Tortue</strong>, <strong>Pluie</strong> ou <strong>Tempête</strong>"
+        },
+        "20": {
+            "titre": "Ahau, le Soleil",
+            "description": "<p>Ahau ou Ajaw peut se traduire par Seigneur. Il incarne le soleil, la lumière et la maîtrise. Ce glyphe symbolise l'illumination et l'accomplissement.</p>",
+            "mots_cles": "lumière, conscience, leadership, unité",
+            "animal_pouvoir": "<strong>Soleil</strong>, <strong>Roi</strong> ou <strong>Fleur</strong>"
+        }
+    },
+    "numbers": {
+        "1": {
+            "titre": "1, Hun",
+            "description": "<p><strong>Unité</strong> : le chiffre 1, Hun, incarne les commencements, l'unité et l'intention primordiale. Il représente la source de l'énergie créatrice et l'initiation des cycles. Sa fonction est d'initier les cycles et de donner le ton à une trécéna.</p>"
+        },
+        "2": {
+            "titre": "2, Ca'",
+            "description": "<p><strong>Dualité</strong> : le chiffre 2, Ca', symbolise la dualité, l'équilibre et le partenariat. Il évoque le mystère, le charisme et la connexion spirituelle. Sa fonction est de représenter l'interaction des forces opposées, favorisant l'équilibre.</p>"
+        },
+        "3": {
+            "titre": "3, Ox",
+            "description": "<p><strong>Mouvement</strong> : le chiffre 3, Ox, est associé à l'action, à la créativité et au mouvement. Il représente le rythme et l'expression de soi. Sa fonction est d'injecter du dynamisme et une expression artistique.</p>"
+        },
+        "4": {
+            "titre": "4, Kan",
+            "description": "<p><strong>Stabilité</strong> : le chiffre 4, Kan, incarne la stabilité, la fondation et la complétude. Il représente les quatre directions et le monde matériel. Sa fonction est de fournir un sentiment d'ancrage et de structure.</p>"
+        },
+        "5": {
+            "titre": "5, Ho'",
+            "description": "<p><strong>Centre</strong> : le chiffre 5, Ho', symbolise l'action humaine à travers les cinq doigts et les cinq sens. Il représente l'intelligence, la communication et la manifestation. Sa fonction est de représenter le pouvoir de la volonté et de l'intellect humains.</p>"
+        },
+        "6": {
+            "titre": "6, Wak",
+            "description": "<p><strong>Flux</strong> : le chiffre 6, Wak, représente l'harmonie, l'équilibre et le flux. Il est associé à la compréhension des commencements et des fins. Sa fonction est de faciliter l'équilibre et l'harmonie.</p>"
+        },
+        "7": {
+            "titre": "7, Uk",
+            "description": "<p><strong>Réflexion</strong> : le chiffre 7, Uk, est lié à l'introspection, à la réflexion et à la spiritualité. Il représente le questionnement et un point tournant. Sa fonction est d'encourager la réflexion intérieure et l'exploration spirituelle.</p>"
+        },
+        "8": {
+            "titre": "8, Waxak",
+            "description": "<p><strong>Harmonie</strong> : le chiffre 8, Waxak, symbolise l'achèvement, la plénitude et le tissage de la vie. Il représente le fil du temps et l'interconnexion. Sa fonction est de signifier la culmination des énergies et le potentiel de transformation.</p>"
+        },
+        "9": {
+            "titre": "9, Bolon",
+            "description": "<p><strong>Accomplissement</strong> : le chiffre 9, Bolon, est connu comme le nombre de la vie et représente les neuf mois de gestation. Il est associé aux femmes et au principe féminin. Sa fonction est de représenter la force vitale et l'énergie féminine nourricière.</p>"
+        },
+        "10": {
+            "titre": "10, Lahun",
+            "description": "<p><strong>Manifestation</strong> : le chiffre 10, Lahun, représente les deux mains et les dix doigts, symbolisant la coopération humaine. Il est associé à l'union et à la loi universelle. Sa fonction est de souligner l'importance de la collaboration et de la communauté.</p>"
+        },
+        "11": {
+            "titre": "11, Buluc",
+            "description": "<p><strong>Libération</strong> : le chiffre 11, Buluc, est considéré comme intense et représente de nouveaux commencements après un défi. Il est associé à une énergie élevée et à l'instabilité potentielle. Sa fonction est de faciliter l'abandon des schémas obsolètes.</p>"
+        },
+        "12": {
+            "titre": "12, Lahca",
+            "description": "<p><strong>Compréhension</strong> : le chiffre 12, Lahca, symbolise l'achèvement d'un cycle plus vaste et l'harmonie. Il représente la culmination et la sagesse. Sa fonction est de signifier la fin de cycles importants et la transition.</p>"
+        },
+        "13": {
+            "titre": "13, Oxlahun",
+            "description": "<p><strong>Transcendance</strong> : le chiffre 13, Oxlahun, représente l'achèvement ultime, l'ascension et l'autorité. Il est associé à l'intensité et à la connexion divine. Sa fonction est de représenter le plus haut niveau d'accomplissement.</p>"
+        }
+    }
+    ,
+    "porteurs": {
+        "7": {
+            "description": "<p>Kej — le Cerf — est le Porteur le plus puissant de la tradition K'iche'. Il porte l'année avec une énergie brute et directe, favorable aux leaders, aux guides spirituels et à toutes les figures d'autorité. C'est le temps des Piliers de l'Univers : force mentale et physique, unité des quatre manifestations humaines. Énergie à canaliser pour éviter l'autoritarisme et les abus de pouvoir.</p>"
+        },
+        "12": {
+            "description": "<p>E — la Route — est le Porteur le plus paisible, éternel voyageur et guide des chemins de vie. Une année Eb est propice aux contrats, aux voyages, aux entreprises et à tout apprentissage. Les <em>ajq'ijab'</em> la nomment l'Échelle en Spirale reliant la Terre aux Cieux. Risque principal : errance sans but et obstination intellectuelle masquée en pédagogie.</p>"
+        },
+        "17": {
+            "description": "<p>No'j — l'Intelligence Tellurique — porte l'année sur une vibration de sagesse profonde et d'introspection. Favorable à l'éducation, à la transmission des savoirs et aux grandes décisions, c'est une année où l'esprit prend le pas sur la matière. Faire confiance à son intelligence et ses intuitions est le conseil central. Risque : vanité intellectuelle et analyse sans fin.</p>"
+        },
+        "2": {
+            "description": "<p>Iq' — le Vent — est le Porteur le plus imprévisible, surnommé l'Ouragan par les <em>ajq'ijab'</em>. Une année Ik' est une période de turbulence et de purification puissante, associée aux révolutions et aux transformations collectives profondes. Elle est particulièrement bénéfique pour guérir les blessures liées à la colère. Risque : impulsivité et ruptures soudaines.</p>"
+        }
+    }
+};
+
+console.log('✅ Tzolk\'in Summary Data chargé - Textes courts de WordPress');

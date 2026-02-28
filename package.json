@@ -1,0 +1,27 @@
+{
+  "name": "tzolkin-app-autonome",
+  "version": "1.0.0",
+  "description": "Version 2.0 - Février 2026 Auteur : Alexandre Ferran + Claude AI",
+  "main": "imask.js",
+  "scripts": {
+    "build": "bash build.sh",
+    "sync": "npm run build && npx cap sync android",
+    "open": "npx cap open android"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Motokiyo/tzolkin_PWA.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Motokiyo/tzolkin_PWA/issues"
+  },
+  "homepage": "https://github.com/Motokiyo/tzolkin_PWA#readme",
+  "dependencies": {
+    "@capacitor/android": "^8.1.0",
+    "@capacitor/cli": "^8.1.0",
+    "@capacitor/core": "^8.1.0"
+  }
+}
