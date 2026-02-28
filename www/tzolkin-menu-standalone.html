@@ -900,16 +900,16 @@
             const locationTime = [note.location, note.time].filter(Boolean).join(' ');
 
             return `
-                <div class="note-entry" style="background-color: ${note.color || '#FFFFFF'}; position: relative;" ${isLongNote ? 'onclick="toggleNoteText(this)"' : ''}>
-                    <p style="padding-right: 185px;">${dateFormatted} -
+                <div class="note-entry" style="background-color: ${note.color || '#FFFFFF'};" ${isLongNote ? 'onclick="toggleNoteText(this)"' : ''}>
+                    <p style="margin:0 0 6px 0; font-size:15px; color:#444;">${dateFormatted} —
                        <img src="${glyphURL}" alt="${glyphName}" style="width:24px;height:24px;vertical-align:middle;"> ${glyphName}
                        <img src="${numberURL}" alt="${numberName}" style="width:24px;height:24px;vertical-align:middle;"> ${numberName}</p>
-                    <p class="note-text" style="padding-right: 185px;" data-full-text="${safeText}">${displayText}</p>
-                    <div style="position: absolute; top: 10px; right: 10px;">
-                        <button onclick="editNoteFromSaved('${note.date}'); event.stopPropagation();" style="padding: 5px 10px; background-color: #4CAF50; color: white; border: none; cursor: pointer; margin-right: 5px;">Modifier</button>
-                        <button onclick="deleteNote('${note.date}'); event.stopPropagation();" style="padding: 5px 10px; background-color: #FF5555; color: white; border: none; cursor: pointer;">Supprimer</button>
+                    <p class="note-text" data-full-text="${safeText}">${displayText}</p>
+                    ${locationTime ? `<div style="font-size:13px; font-weight:bold; color:#555; margin-top:6px;">📍 ${locationTime}</div>` : ''}
+                    <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:10px;">
+                        <button onclick="editNoteFromSaved('${note.date}'); event.stopPropagation();" style="padding:6px 14px; background:#4CAF50; color:white; border:none; border-radius:6px; cursor:pointer; font-size:14px; font-family:'Simplifica',sans-serif;">✏️ Modifier</button>
+                        <button onclick="deleteNote('${note.date}'); event.stopPropagation();" style="padding:6px 14px; background:#FF5555; color:white; border:none; border-radius:6px; cursor:pointer; font-size:14px; font-family:'Simplifica',sans-serif;">🗑 Supprimer</button>
                     </div>
-                    ${locationTime ? `<div style="text-align: right; font-size: 11px; font-weight: bold; letter-spacing: 0.06em; color: #555; margin-top: 6px;">${locationTime}</div>` : ''}
                 </div>
             `;
         }).join('');
