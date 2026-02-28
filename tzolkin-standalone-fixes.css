@@ -10,6 +10,35 @@ body {
     /* Suppression de l'override qui désactivait le fond */
 }
 
+/* ===================================================
+   SAFE AREA — Barres système Android (edge-to-edge)
+   =================================================== */
+
+/* Corps principal : pousser le contenu sous la barre de statut */
+body {
+    padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* Menu principal : pousser au-dessus de la barre de navigation Android */
+.main-menu {
+    padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Modales plein écran : header doit commencer sous la barre de statut */
+#notes-modal .modal-content .header,
+#saved-modal .modal-content .header {
+    padding-top: calc(15px + env(safe-area-inset-top, 0px));
+}
+
+/* Modale fonctionnement et crédits */
+#fonctionnement-modal .modal-content {
+    padding-top: calc(env(safe-area-inset-top, 0px) + 20px) !important;
+}
+
+#credits-modal .modal-content {
+    padding-top: calc(env(safe-area-inset-top, 0px) + 20px);
+}
+
 /* Fonctionnement modal : pleine hauteur, scroll sur le contenu */
 #fonctionnement-modal .modal-content {
     width: 100% !important;

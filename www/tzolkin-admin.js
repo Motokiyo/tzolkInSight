@@ -432,7 +432,7 @@ class TzolkinAdmin {
 
         this.resetForm();
 
-        window.history.pushState({}, '', '#calendar');
+        window.history.replaceState({}, '', '#calendar');
     }
 
     refreshPinStatus() {

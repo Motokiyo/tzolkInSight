@@ -41,7 +41,7 @@ const POSITION_TEXTS = {
     },
     seigneur: {
         title: "Seigneur de la Nuit",
-        text: "Les Bolontiku (Neuf Dieux) gouvernent un cycle de 9 nuits en rotation permanente. Chaque naissance tombe sous le règne de l'un d'eux — énergie souterraine et nocturne qui agit en arrière-plan, révélant la face cachée de votre être."
+        text: "Les Bolontiku — les Neuf Seigneurs de la Nuit — forment un cycle de 9 nuits qui court en permanence en parallèle du Tzolk'in. La nuit de votre naissance était placée sous le règne de l'un d'eux : une énergie souterraine, nocturne et intérieure qui complète votre kin solaire. Là où le nawal du jour révèle qui vous êtes dans la lumière — vos dons, votre mission, votre dynamique sociale —, le Seigneur de la Nuit révèle qui vous êtes dans l'ombre : votre monde intérieur, vos rêves, vos processus invisibles, votre rapport à l'inconscient et aux forces cachées de la vie. Ensemble, ils forment le double fil de votre être."
     }
 };
 
@@ -113,6 +113,7 @@ function openCroixMayaModal(personName, glyphId, numberId, birthDate) {
 function closeCroixMayaModal() {
     const modal = document.getElementById('croix-maya-modal');
     if (modal) modal.style.display = 'none';
+    closeLordDetail();
 }
 
 // ============================================================================
@@ -201,7 +202,7 @@ function renderYearBearerGlyphs(containerId, currentBearer, currentYear, birthBe
     };
 
     el.innerHTML = `
-        <p style="font-family:'Summer',cursive; font-size:16px; color:#c19434; margin:0 0 10px 0; text-align:center;">🏔 Porteurs d'Année K'iche'</p>
+        <p style="font-family:'Summer',cursive; font-size:16px; color:#222; margin:0 0 10px 0; text-align:center;">🏔 Porteurs d'Année K'iche'</p>
         <div style="display:flex; justify-content:center; gap:24px; flex-wrap:wrap;">
             ${renderOne(currentBearer, currentYear, 'Année en cours')}
             ${birthBearer ? renderOne(birthBearer, birthYear, 'Année de naissance') : ''}
@@ -256,7 +257,7 @@ function renderParagraphs(containerId, cross, lordNum, currentBearer, birthBeare
         </div>`;
     });
 
-    // Seigneur de la Nuit (pas de bouton ">" — pas de fiche détail)
+    // Seigneur de la Nuit — texte générique + bouton détail
     if (lordNum) {
         const lord   = window.TzolkinCore.LORDS_OF_NIGHT[lordNum];
         const imgURL = window.TzolkinCore.getLordOfNightURL(lordNum);
@@ -266,13 +267,15 @@ function renderParagraphs(containerId, cross, lordNum, currentBearer, birthBeare
             <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
                 ${imgURL
                     ? `<img src="${imgURL}" alt="G${lordNum}" style="height:30px; width:auto; filter:invert(1); opacity:0.85;">`
-                    : `<div style="width:30px; height:30px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:bold; color:#aaa;">G${lordNum}</div>`}
-                <div>
+                    : `<div style="width:30px; height:30px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:bold; color:#ccc;">G${lordNum}</div>`}
+                <div style="flex:1;">
                     <div style="font-size:14px; color:#ddd; font-style:italic;">${POSITION_TEXTS.seigneur.title} · G${lordNum}</div>
                     <div style="font-size:16px; font-weight:bold; color:#fff; font-family:'Summer',cursive;">${lord.name} · ${lord.domain}</div>
                 </div>
+                <button onclick="openLordDetail(${lordNum})"
+                    style="padding:8px 12px; background:#5e832a; color:white; border:none; border-radius:5px; cursor:pointer; font-size:16px; font-family:'Simplifica',sans-serif; flex-shrink:0; line-height:1;">&rsaquo;</button>
             </div>
-            <p style="margin:0; font-size:16px; color:#e0e0e0; line-height:1.6;">${lord.description}</p>
+            <p style="margin:0; font-size:16px; color:#e0e0e0; line-height:1.6;">${POSITION_TEXTS.seigneur.text}</p>
         </div>`;
     }
 
@@ -339,11 +342,73 @@ function openCroixMayaModalByIndex(idx) {
 }
 
 // ============================================================================
+// DÉTAIL SEIGNEUR DE LA NUIT — overlay plein écran
+// ============================================================================
+
+function openLordDetail(lordNum) {
+    if (!window.TzolkinCore) return;
+    const lord   = window.TzolkinCore.LORDS_OF_NIGHT[lordNum];
+    const imgURL = window.TzolkinCore.getLordOfNightURL(lordNum);
+    if (!lord) return;
+
+    let overlay = document.getElementById('lord-detail-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'lord-detail-overlay';
+        overlay.style.cssText = [
+            'position:fixed', 'top:0', 'left:0', 'width:100%', 'height:100%',
+            'z-index:2300', 'background:#111', 'overflow-y:auto',
+            'padding:20px', 'box-sizing:border-box', 'display:none'
+        ].join(';');
+        overlay.style.paddingTop = 'calc(env(safe-area-inset-top, 0px) + 20px)';
+        document.body.appendChild(overlay);
+    }
+
+    const glyphBlock = imgURL
+        ? `<img src="${imgURL}" alt="G${lordNum}" style="height:90px; width:auto; filter:invert(1); display:block; margin:0 auto 14px;">`
+        : `<div style="width:90px; height:90px; background:#2a2a2a; border:2px solid #444; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:32px; font-weight:bold; color:#888; margin:0 auto 14px; font-family:'Summer',cursive;">G${lordNum}</div>`;
+
+    overlay.innerHTML = `
+        <button onclick="closeLordDetail()"
+            style="display:inline-flex; align-items:center; gap:6px; background:#2a2a2a; color:#ddd; border:1px solid #444; padding:8px 16px; border-radius:8px; cursor:pointer; font-size:16px; margin-bottom:24px; font-family:'Simplifica',sans-serif;">
+            ‹ Retour
+        </button>
+
+        <div style="text-align:center; margin-bottom:24px;">
+            ${glyphBlock}
+            <div style="font-size:13px; color:#888; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;">Seigneur de la Nuit · G${lordNum}</div>
+            <div style="font-size:28px; font-weight:bold; color:#fff; font-family:'Summer',cursive; margin-bottom:4px;">${lord.name}</div>
+            <div style="font-size:16px; color:#bbb;">${lord.domain}</div>
+        </div>
+
+        <div style="background:#1e1e1e; border-radius:14px; border-left:4px solid #555; padding:18px; margin-bottom:14px;">
+            <div style="font-size:13px; color:#888; font-style:italic; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.05em;">Rôle dans la Croix Maya</div>
+            <p style="margin:0; font-size:16px; color:#ddd; line-height:1.7;">${POSITION_TEXTS.seigneur.text}</p>
+        </div>
+
+        <div style="background:#1e1e1e; border-radius:14px; border-left:4px solid #777; padding:18px;">
+            <div style="font-size:13px; color:#888; font-style:italic; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.05em;">Énergie de G${lordNum} — ${lord.name}</div>
+            <p style="margin:0; font-size:16px; color:#ddd; line-height:1.7;">${lord.description}</p>
+        </div>
+    `;
+
+    overlay.style.display = 'block';
+    overlay.scrollTop = 0;
+}
+
+function closeLordDetail() {
+    const overlay = document.getElementById('lord-detail-overlay');
+    if (overlay) overlay.style.display = 'none';
+}
+
+// ============================================================================
 // EXPORT GLOBAL
 // ============================================================================
 
-window.openCroixMayaModal       = openCroixMayaModal;
-window.openCroixMayaModalByIndex = openCroixMayaModalByIndex;
-window.closeCroixMayaModal      = closeCroixMayaModal;
+window.openCroixMayaModal        = openCroixMayaModal;
+window.openCroixMayaModalByIndex  = openCroixMayaModalByIndex;
+window.closeCroixMayaModal       = closeCroixMayaModal;
+window.openLordDetail            = openLordDetail;
+window.closeLordDetail           = closeLordDetail;
 
 console.log("✅ Tzolk'in Croix Maya chargé");

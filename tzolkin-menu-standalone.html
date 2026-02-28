@@ -328,7 +328,7 @@
                 <div class="no-results" style="text-align: center; padding: 20px; color: #888;">Chargement...</div>
             </div>
             <div style="display:flex; justify-content:center; gap:12px; padding:20px 0 30px;">
-                <input type="file" id="import-csv-input" accept=".csv,text/csv,text/plain,application/vnd.ms-excel" style="display:none;" onchange="handleImportFile(this)">
+                <input type="file" id="import-csv-input" accept="text/*,.csv" style="display:none;" onchange="handleImportFile(this)">
                 <button onclick="triggerImport()"
                     style="padding:10px 20px; background:#5e832a; color:white; border:none; border-radius:8px; cursor:pointer; font-size:14px; font-family:'Simplifica',sans-serif;">⬆ Uploader</button>
                 <div style="position:relative;">
@@ -545,7 +545,7 @@
                     if (response.ok) {
                         const data = await response.json();
                         const addr = data.address || {};
-                        const city = addr.city || addr.municipality || addr.town || addr.village || addr.hamlet || addr.county || '';
+                        const city = addr.city || addr.town || addr.village || addr.suburb || addr.hamlet || addr.neighbourhood || addr.county || '';
                         if (city) currentLocation = city.toUpperCase();
                     }
                 } catch (e) {
@@ -593,7 +593,10 @@
             }
         }
 
-        document.querySelectorAll('.modal').forEach(modal => modal.classList.remove('active'));
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.classList.remove('active');
+            modal.style.display = ''; // Réinitialise le display inline (ex: admin-modal)
+        });
         const modal = document.getElementById(`${modalId}-modal`);
 
         if (modal) {
@@ -673,7 +676,7 @@
         // Fermer aussi la modale Croix Maya (gérée par display inline, pas par classe active)
         if (typeof closeCroixMayaModal === 'function') closeCroixMayaModal();
         document.body.classList.remove('modal-open');
-        window.history.pushState({}, '', '#calendar');
+        window.history.replaceState({}, '', '#calendar');
 
         // Fermer aussi la vue détail si elle est ouverte
         const detailView = document.getElementById('tzolkin-detail-view');
@@ -1105,12 +1108,22 @@
             ].join(','));
         });
 
-        const blob = new Blob(['\uFEFF' + rows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+        const csvContent = '\uFEFF' + rows.join('\n');
         const filename = `tzolkin-notes-${today}.csv`;
-        const file = new File([blob], filename, { type: 'text/csv;charset=utf-8;' });
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            await navigator.share({ files: [file], title: 'Notes Tzolkin' });
+
+        if (window.Capacitor) {
+            try {
+                await window.Capacitor.nativePromise('FileDownloader', 'saveFile', {
+                    filename: filename,
+                    content: csvContent,
+                    mimeType: 'text/csv'
+                });
+                alert(`✓ "${filename}" enregistré dans Téléchargements`);
+            } catch(e) {
+                alert('Erreur lors du téléchargement : ' + e.message);
+            }
         } else {
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url; a.download = filename; a.click();
@@ -1156,12 +1169,22 @@
             lines.push(note.text || '');
         });
 
-        const blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8;' });
+        const txtContent = lines.join('\n');
         const filename = `tzolkin-notes-${today}.txt`;
-        const file = new File([blob], filename, { type: 'text/plain;charset=utf-8;' });
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            await navigator.share({ files: [file], title: 'Notes Tzolkin' });
+
+        if (window.Capacitor) {
+            try {
+                await window.Capacitor.nativePromise('FileDownloader', 'saveFile', {
+                    filename: filename,
+                    content: txtContent,
+                    mimeType: 'text/plain'
+                });
+                alert(`✓ "${filename}" enregistré dans Téléchargements`);
+            } catch(e) {
+                alert('Erreur lors du téléchargement : ' + e.message);
+            }
         } else {
+            const blob = new Blob([txtContent], { type: 'text/plain;charset=utf-8;' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url; a.download = filename; a.click();
@@ -1465,6 +1488,10 @@ ${notesHtml}
             saveCurrentNote();
         });
 
+        // Demander la permission GPS dès le démarrage (non-bloquant)
+        // → Android affichera le dialogue de permission au premier lancement
+        setTimeout(() => requestGPSLocation(), 1500);
+
         // Initialiser les dropdowns de filtrage
         function setupDropdown(dropdownId, imgId) {
             const dropdown = document.getElementById(dropdownId);
@@ -1627,7 +1654,7 @@ ${notesHtml}
                     if (response.ok) {
                         const data = await response.json();
                         const addr = data.address || {};
-                        const city = addr.city || addr.municipality || addr.town || addr.village || addr.hamlet || addr.county || '';
+                        const city = addr.city || addr.town || addr.village || addr.suburb || addr.hamlet || addr.neighbourhood || addr.county || '';
                         if (city) {
                             currentLocation = city.toUpperCase();
                             locEl.textContent = currentLocation;
