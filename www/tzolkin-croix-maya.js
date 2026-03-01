@@ -373,11 +373,11 @@ function openLordDetail(lordNum) {
     overlay.style.paddingBottom = 'calc(env(safe-area-inset-bottom, 0px) + 20px)';
 
     overlay.innerHTML = `
-        <div style="padding: 20px; max-width: 800px; margin: 0 auto; position: relative;">
+        <div style="max-width: 560px; width: 100%; margin: 40px auto; padding: 30px; box-sizing: border-box; background: rgba(222, 210, 179, 0.9); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 2px solid #222; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
             <button onclick="closeLordDetail()"
                 style="padding: 8px 16px; background: #222; color: #ded2b3; border: none; border-radius: 8px; cursor: pointer; margin-bottom: 20px; font-family: 'Summer', cursive; font-size: 18px; display: inline-block;">← Retour</button>
 
-            <div style="background: #ded2b3; border: 2px solid #222; border-radius: 16px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.09); max-width: 500px; margin: 0 auto;">
+            <div style="background: #ded2b3; border: 2px solid #222; border-radius: 16px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.09); margin: 0 auto;">
                 ${imgURL ? `<img src="${imgURL}" alt="G${lordNum}" style="max-width: 100px; height: auto; display: block; margin: 0 auto 10px;">` : ''}
                 <h3 style="text-align: center; font-size: 1.5em; margin: 10px 0 5px; color: #333; font-family: 'Summer', cursive;">${lord.name}</h3>
                 <p style="text-align: center; font-size: 13px; color: #888; margin: 0 0 20px; font-style: italic;">${lord.domain}</p>
