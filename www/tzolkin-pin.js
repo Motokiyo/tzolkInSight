@@ -37,7 +37,7 @@ class TzolkinPIN {
         }
 
         const modalHTML = `
-            <div id="${this.pinModalId}" class="modal pin-modal">
+            <dialog id="${this.pinModalId}" class="pin-modal">
                 <div class="modal-content pin-content">
                     <div class="header">
                         <h2>Code PIN requis</h2>
@@ -119,12 +119,24 @@ class TzolkinPIN {
                         </div>
                     </div>
                 </div>
-            </div>
+            </dialog>
 
             <!-- Styles pour la modale PIN -->
             <style>
+                /* <dialog> reset — le top layer gère le positionnement, pas z-index */
                 #pin-modal {
-                    z-index: 9999;
+                    border: none;
+                    padding: 0;
+                    background: transparent;
+                    max-width: 95vw;
+                    overflow: visible;
+                }
+
+                /* Fond sombre flouté via ::backdrop (top layer natif, inatteignable par z-index) */
+                #pin-modal::backdrop {
+                    background: rgba(0, 0, 0, 0.4);
+                    backdrop-filter: blur(8px);
+                    -webkit-backdrop-filter: blur(8px);
                 }
 
                 .pin-modal .pin-content {
@@ -210,6 +222,12 @@ class TzolkinPIN {
      * Attacher les événements de la modale PIN
      */
     attachPinEventListeners() {
+        // Empêcher Escape de fermer le <dialog> sans passer par nos callbacks
+        const modal = document.getElementById(this.pinModalId);
+        if (modal) {
+            modal.addEventListener('cancel', (e) => e.preventDefault());
+        }
+
         // Navigation automatique — saisie du PIN (entrée seulement, pas les champs création)
         const entryInputs = [
             document.getElementById('pin-digit-1'),
@@ -323,9 +341,8 @@ class TzolkinPIN {
         const modal = document.getElementById(this.pinModalId);
         if (!modal) return;
 
-        document.body.appendChild(modal); // Dernier enfant → toujours au-dessus par ordre DOM
-        modal.classList.add('active');
-        modal.style.zIndex = '9999';
+        document.body.appendChild(modal); // S'assurer qu'il est enfant direct du body
+        modal.showModal();               // Top layer — au-dessus de tout stacking context
         document.body.classList.add('modal-open');
 
         // Cacher la section setup
@@ -351,9 +368,8 @@ class TzolkinPIN {
         const modal = document.getElementById(this.pinModalId);
         if (!modal) return;
 
-        document.body.appendChild(modal); // Dernier enfant → toujours au-dessus par ordre DOM
-        modal.classList.add('active');
-        modal.style.zIndex = '9999';
+        document.body.appendChild(modal); // S'assurer qu'il est enfant direct du body
+        modal.showModal();               // Top layer — au-dessus de tout stacking context
         document.body.classList.add('modal-open');
 
         // Afficher la section setup
@@ -439,9 +455,8 @@ class TzolkinPIN {
     openForCreation(onSuccess) {
         const modal = document.getElementById(this.pinModalId);
         if (!modal) return;
-        document.body.appendChild(modal); // Dernier enfant → toujours au-dessus par ordre DOM
-        modal.classList.add('active');
-        modal.style.zIndex = '9999';
+        document.body.appendChild(modal); // S'assurer qu'il est enfant direct du body
+        modal.showModal();               // Top layer — au-dessus de tout stacking context
         document.body.classList.add('modal-open');
         document.querySelector('.pin-input-container').style.display = 'none';
         document.getElementById('pin-submit-btn').style.display = 'none';
@@ -578,7 +593,7 @@ class TzolkinPIN {
         const modal = document.getElementById(this.pinModalId);
         if (!modal) return;
 
-        modal.classList.remove('active');
+        if (modal.open) modal.close(); // Fermeture native du <dialog>
         document.body.classList.remove('modal-open');
 
         this.resetPinInputs();
