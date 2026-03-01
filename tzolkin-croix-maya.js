@@ -355,40 +355,31 @@ function openLordDetail(lordNum) {
     if (!overlay) {
         overlay = document.createElement('div');
         overlay.id = 'lord-detail-overlay';
-        overlay.style.cssText = [
-            'position:fixed', 'top:0', 'left:0', 'width:100%', 'height:100%',
-            'z-index:2300', 'background:#111', 'overflow-y:auto',
-            'padding:20px', 'box-sizing:border-box', 'display:none'
-        ].join(';');
-        overlay.style.paddingTop = 'calc(env(safe-area-inset-top, 0px) + 20px)';
         document.body.appendChild(overlay);
     }
 
-    const glyphBlock = imgURL
-        ? `<img src="${imgURL}" alt="G${lordNum}" style="height:90px; width:auto; filter:invert(1); display:block; margin:0 auto 14px;">`
-        : `<div style="width:90px; height:90px; background:#2a2a2a; border:2px solid #444; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:32px; font-weight:bold; color:#888; margin:0 auto 14px; font-family:'Summer',cursive;">G${lordNum}</div>`;
+    overlay.style.cssText = [
+        'position:fixed', 'top:0', 'left:0', 'width:100%', 'height:100%',
+        'z-index:2300', 'overflow-y:auto', 'display:none',
+        'background:url("./assets/x-balanque.png") no-repeat center center fixed',
+        'background-size:cover', 'filter:invert(100%)'
+    ].join(';');
+    overlay.style.paddingTop = 'calc(env(safe-area-inset-top, 0px) + 20px)';
+    overlay.style.paddingBottom = 'calc(env(safe-area-inset-bottom, 0px) + 20px)';
 
     overlay.innerHTML = `
-        <button onclick="closeLordDetail()"
-            style="display:inline-flex; align-items:center; gap:6px; background:#2a2a2a; color:#ddd; border:1px solid #444; padding:8px 16px; border-radius:8px; cursor:pointer; font-size:16px; margin-bottom:24px; font-family:'Simplifica',sans-serif;">
-            ‹ Retour
-        </button>
+        <div style="padding: 20px; max-width: 800px; margin: 0 auto; position: relative;">
+            <button onclick="closeLordDetail()"
+                style="padding: 8px 16px; background: #222; color: #a8624b; border: none; border-radius: 8px; cursor: pointer; margin-bottom: 20px; font-family: 'Summer', cursive; font-size: 18px; display: inline-block;">← Retour</button>
 
-        <div style="text-align:center; margin-bottom:24px;">
-            ${glyphBlock}
-            <div style="font-size:13px; color:#888; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;">Seigneur de la Nuit · G${lordNum}</div>
-            <div style="font-size:28px; font-weight:bold; color:#fff; font-family:'Summer',cursive; margin-bottom:4px;">${lord.name}</div>
-            <div style="font-size:16px; color:#bbb;">${lord.domain}</div>
-        </div>
-
-        <div style="background:#1e1e1e; border-radius:14px; border-left:4px solid #555; padding:18px; margin-bottom:14px;">
-            <div style="font-size:13px; color:#888; font-style:italic; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.05em;">Rôle dans la Croix Maya</div>
-            <p style="margin:0; font-size:16px; color:#ddd; line-height:1.7;">${POSITION_TEXTS.seigneur.text}</p>
-        </div>
-
-        <div style="background:#1e1e1e; border-radius:14px; border-left:4px solid #777; padding:18px;">
-            <div style="font-size:13px; color:#888; font-style:italic; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.05em;">Énergie de G${lordNum} — ${lord.name}</div>
-            <p style="margin:0; font-size:16px; color:#ddd; line-height:1.7;">${lord.description}</p>
+            <div style="background: #ded2b3; border: 2px solid #222; border-radius: 16px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.09); max-width: 500px; margin: 0 auto;">
+                ${imgURL ? `<img src="${imgURL}" alt="G${lordNum}" style="max-width: 100px; height: auto; display: block; margin: 0 auto 10px;">` : ''}
+                <h3 style="text-align: center; font-size: 1.5em; margin: 10px 0 5px; color: #333; font-family: 'Summer', cursive;">${lord.name}</h3>
+                <p style="text-align: center; font-size: 13px; color: #888; margin: 0 0 20px; font-style: italic;">${lord.domain}</p>
+                <div style="font-family: 'Simplifica', sans-serif; font-size: 20px; color: #555; line-height: 1.6;">
+                    ${lord.description}
+                </div>
+            </div>
         </div>
     `;
 

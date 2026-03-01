@@ -123,6 +123,10 @@ class TzolkinPIN {
 
             <!-- Styles pour la modale PIN -->
             <style>
+                #pin-modal {
+                    z-index: 2500;
+                }
+
                 .pin-modal .pin-content {
                     max-width: 400px;
                     font-family: 'Simplifica', Arial, sans-serif;

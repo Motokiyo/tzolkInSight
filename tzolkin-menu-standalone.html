@@ -1,6 +1,6 @@
 <!-- 
   Tzolk'in Menu Standalone - Menu et Modales
-  Version: 1.0.5
+  Version: 1.0.7
   Auteur: Alexandre Ferran + Claude AI
 -->
 
@@ -355,7 +355,7 @@
             <div class="tzolkin-splash-text">
                 <h1>Tzolk'in du Parédé</h1>
                 <p>Calendrier Maya Sacré</p>
-                <p class="version">Version 1.0.5</p>
+                <p class="version">Version 1.0.7</p>
                 <p><strong>Auteur :</strong> Alexandre Ferran</p>
                 <p><strong>Assistance IA :</strong> Grok, DeepSeek, Claude</p>
                 <p><a href="https://leparede.org" target="_blank">leparede.org</a></p>
@@ -628,6 +628,16 @@
 
     //=== FONCTION: Ouvrir Enregistrés avec PIN ===
     async function openSavedWithPin() {
+        // Si aucun PIN défini → accès direct sans popup
+        if (!window.TzolkinStorage.hasPinCode()) {
+            await saveCurrentNote();
+            notesLoaded = false;
+            await ensureNotesLoaded();
+            openModal('saved', true);
+            filterNotes();
+            return;
+        }
+
         // PIN déjà vérifié cette session → accès direct sans redemander
         if (sessionStorage.getItem('tzolkin_pin_verified') === '1') {
             await saveCurrentNote();

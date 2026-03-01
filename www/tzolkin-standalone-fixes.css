@@ -30,13 +30,53 @@ body {
     padding-top: calc(15px + env(safe-area-inset-top, 0px));
 }
 
-/* Modale fonctionnement et crédits */
+/* Modale fonctionnement et crédits — haut */
 #fonctionnement-modal .modal-content {
     padding-top: calc(env(safe-area-inset-top, 0px) + 20px) !important;
 }
 
 #credits-modal .modal-content {
     padding-top: calc(env(safe-area-inset-top, 0px) + 20px);
+}
+
+/* ===================================================
+   SAFE AREA BOTTOM — bas des fenêtres au-dessus de la nav bar Android
+   =================================================== */
+
+/* Notes / Enregistrés : zone de scroll */
+#notes-modal .modal-body,
+#saved-modal .modal-body {
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Enregistrés : footer boutons téléchargement */
+#saved-modal .saved-footer {
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Fonctionnement */
+#fonctionnement-modal .modal-content {
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+/* Crédits */
+#credits-modal .modal-content {
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Admin */
+#admin-modal .modal-content {
+    padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+/* Vue détail glyphe/chiffre */
+#tzolkin-detail-view {
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Croix Maya */
+#croix-maya-modal {
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
 }
 
 /* Fonctionnement modal : pleine hauteur, scroll sur le contenu */
