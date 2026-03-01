@@ -388,14 +388,19 @@ function openLordDetail(lordNum) {
 
             <div style="height: 80px;"></div>
         </div>
-
-        <div id="lord-scroll-top" onclick="document.getElementById('lord-detail-overlay').scrollTop=0"
-            style="position: fixed; bottom: 40px; right: 30px; width: 44px; height: 44px; background: #222; border-radius: 8px; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.4); z-index: 2301;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="36px" height="22px" viewBox="57 35.171 26 16.043">
-                <path d="M57.5,38.193l12.5,12.5l12.5-12.5l-2.5-2.5l-10,10l-10-10L57.5,38.193z" fill="#ded2b3" style="transform: rotate(180deg); transform-origin: 70px 43px;"/>
-            </svg>
-        </div>
     `;
+
+    // Bouton scroll-to-top EN DEHORS du container filtré
+    // (position:fixed à l'intérieur d'un filter:invert() est cassé dans Android WebView)
+    let scrollBtn = document.getElementById('lord-scroll-top');
+    if (!scrollBtn) {
+        scrollBtn = document.createElement('div');
+        scrollBtn.id = 'lord-scroll-top';
+        document.body.appendChild(scrollBtn);
+    }
+    scrollBtn.onclick = () => { overlay.scrollTop = 0; };
+    scrollBtn.style.cssText = 'position:fixed; bottom:40px; right:30px; width:44px; height:44px; background:#222; border-radius:8px; display:flex; justify-content:center; align-items:center; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.4); z-index:2302;';
+    scrollBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="36px" height="22px" viewBox="57 35.171 26 16.043"><path d="M57.5,38.193l12.5,12.5l12.5-12.5l-2.5-2.5l-10,10l-10-10L57.5,38.193z" fill="#ded2b3" style="transform:rotate(180deg); transform-origin:70px 43px;"/></svg>';
 
     overlay.style.display = 'block';
     overlay.scrollTop = 0;
@@ -404,6 +409,8 @@ function openLordDetail(lordNum) {
 function closeLordDetail() {
     const overlay = document.getElementById('lord-detail-overlay');
     if (overlay) overlay.style.display = 'none';
+    const scrollBtn = document.getElementById('lord-scroll-top');
+    if (scrollBtn) scrollBtn.style.display = 'none';
 }
 
 // ============================================================================

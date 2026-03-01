@@ -124,7 +124,7 @@ class TzolkinPIN {
             <!-- Styles pour la modale PIN -->
             <style>
                 #pin-modal {
-                    z-index: 2500;
+                    z-index: 9999;
                 }
 
                 .pin-modal .pin-content {
@@ -323,7 +323,9 @@ class TzolkinPIN {
         const modal = document.getElementById(this.pinModalId);
         if (!modal) return;
 
+        document.body.appendChild(modal); // Dernier enfant → toujours au-dessus par ordre DOM
         modal.classList.add('active');
+        modal.style.zIndex = '9999';
         document.body.classList.add('modal-open');
 
         // Cacher la section setup
@@ -349,7 +351,9 @@ class TzolkinPIN {
         const modal = document.getElementById(this.pinModalId);
         if (!modal) return;
 
+        document.body.appendChild(modal); // Dernier enfant → toujours au-dessus par ordre DOM
         modal.classList.add('active');
+        modal.style.zIndex = '9999';
         document.body.classList.add('modal-open');
 
         // Afficher la section setup
@@ -435,7 +439,9 @@ class TzolkinPIN {
     openForCreation(onSuccess) {
         const modal = document.getElementById(this.pinModalId);
         if (!modal) return;
+        document.body.appendChild(modal); // Dernier enfant → toujours au-dessus par ordre DOM
         modal.classList.add('active');
+        modal.style.zIndex = '9999';
         document.body.classList.add('modal-open');
         document.querySelector('.pin-input-container').style.display = 'none';
         document.getElementById('pin-submit-btn').style.display = 'none';
