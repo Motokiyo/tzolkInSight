@@ -132,6 +132,8 @@ function renderLordOfNight(containerId, lordNum) {
     const lord   = window.TzolkinCore.LORDS_OF_NIGHT[lordNum];
     const imgURL = window.TzolkinCore.getLordOfNightURL(lordNum);
     el.style.display = '';
+    el.style.cursor = 'pointer';
+    el.onclick = () => openLordDetail(lordNum);
 
     el.innerHTML = `
         <div style="display:flex; align-items:center; gap:14px; padding:12px 16px; background:#1a1a1a; border-radius:12px; border:2px solid #444; margin-bottom:12px;">
@@ -167,6 +169,8 @@ function renderCrossPosition(containerId, pos, label) {
     el.style.background  = css.bg;
     el.style.borderColor = css.border;
     el.style.borderWidth = isCentre ? '3px' : '2px';
+    el.style.cursor = 'pointer';
+    el.onclick = () => { if (typeof showDetail === 'function') showDetail('glyph', g); };
 
     el.innerHTML = `
         <div style="font-size:13px; color:${css.text}; margin-bottom:4px; font-style:italic; text-align:center; line-height:1.2;">${label}</div>
@@ -192,7 +196,8 @@ function renderYearBearerGlyphs(containerId, currentBearer, currentYear, birthBe
         const glyphURL = window.TzolkinCore.getGlyphURL(bearerGlyphId);
         const pal      = COLOR_PALETTES[glyph.color];
         return `
-            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+            <div style="display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer;"
+                 onclick="if(typeof showDetail==='function') showDetail('glyph', ${bearerGlyphId})">
                 <div style="font-size:15px; color:#222; text-align:center;">${label} ${year}</div>
                 <div style="background:${pal.bg}; border:2px solid ${pal.border}; border-radius:12px; padding:6px 10px;">
                     <img src="${glyphURL}" alt="${glyph.name}" style="height:50px; width:auto; display:block;">
@@ -202,7 +207,7 @@ function renderYearBearerGlyphs(containerId, currentBearer, currentYear, birthBe
     };
 
     el.innerHTML = `
-        <p style="font-family:'Summer',cursive; font-size:16px; color:#222; margin:0 0 10px 0; text-align:center;">🏔 Porteurs d'Année K'iche'</p>
+        <p style="font-family:'Summer',cursive; font-size:16px; color:#222; margin:0 0 10px 0; text-align:center; font-weight:bold;">🏔 Porteurs d'Année K'iche'</p>
         <div style="display:flex; justify-content:center; gap:24px; flex-wrap:wrap;">
             ${renderOne(currentBearer, currentYear, 'Année en cours')}
             ${birthBearer ? renderOne(birthBearer, birthYear, 'Année de naissance') : ''}
@@ -370,7 +375,7 @@ function openLordDetail(lordNum) {
     overlay.innerHTML = `
         <div style="padding: 20px; max-width: 800px; margin: 0 auto; position: relative;">
             <button onclick="closeLordDetail()"
-                style="padding: 8px 16px; background: #222; color: #a8624b; border: none; border-radius: 8px; cursor: pointer; margin-bottom: 20px; font-family: 'Summer', cursive; font-size: 18px; display: inline-block;">← Retour</button>
+                style="padding: 8px 16px; background: #222; color: #ded2b3; border: none; border-radius: 8px; cursor: pointer; margin-bottom: 20px; font-family: 'Summer', cursive; font-size: 18px; display: inline-block;">← Retour</button>
 
             <div style="background: #ded2b3; border: 2px solid #222; border-radius: 16px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.09); max-width: 500px; margin: 0 auto;">
                 ${imgURL ? `<img src="${imgURL}" alt="G${lordNum}" style="max-width: 100px; height: auto; display: block; margin: 0 auto 10px;">` : ''}
@@ -380,6 +385,15 @@ function openLordDetail(lordNum) {
                     ${lord.description}
                 </div>
             </div>
+
+            <div style="height: 80px;"></div>
+        </div>
+
+        <div id="lord-scroll-top" onclick="document.getElementById('lord-detail-overlay').scrollTop=0"
+            style="position: fixed; bottom: 40px; right: 30px; width: 44px; height: 44px; background: #222; border-radius: 8px; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.4); z-index: 2301;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36px" height="22px" viewBox="57 35.171 26 16.043">
+                <path d="M57.5,38.193l12.5,12.5l12.5-12.5l-2.5-2.5l-10,10l-10-10L57.5,38.193z" fill="#ded2b3" style="transform: rotate(180deg); transform-origin: 70px 43px;"/>
+            </svg>
         </div>
     `;
 
