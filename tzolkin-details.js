@@ -69,7 +69,7 @@ function showDetail(type, id) {
 
     detailContent.innerHTML = `
         <div style="padding: 20px; max-width: 800px; margin: 0 auto; position: relative;">
-            <button id="tzolkin-back-btn" style="padding: 8px 16px; background: #222; color: #a8624b; border: none; border-radius: 8px; cursor: pointer; margin-bottom: 20px; font-family: 'Summer', cursive; font-size: 18px; display: inline-block;">← Retour</button>
+            <button id="tzolkin-back-btn" style="padding: 8px 16px; background: #222; color: #ded2b3; border: none; border-radius: 8px; cursor: pointer; margin-bottom: 20px; font-family: 'Summer', cursive; font-size: 18px; display: inline-block;">← Retour</button>
 
             <div style="background: #ded2b3; border: 2px solid #222; border-radius: 16px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.09); max-width: 500px; margin: 0 auto;">
                 <img src="${item.image}" alt="${item.titre}" class="tzolkin-detail-img" style="max-width: 100px; height: auto; display: block; margin: 0 auto 10px;">
@@ -85,7 +85,7 @@ function showDetail(type, id) {
 
         <div id="tzolkin-scroll-top" style="position: fixed; bottom: 40px; right: 30px; width: 44px; height: 44px; background: #222; border-radius: 8px; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.4); z-index: 2000;">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="36px" height="22px" viewBox="57 35.171 26 16.043" enable-background="new 57 35.171 26 16.043" xml:space="preserve">
-                <path d="M57.5,38.193l12.5,12.5l12.5-12.5l-2.5-2.5l-10,10l-10-10L57.5,38.193z" fill="#5e832a" style="transform: rotate(180deg); transform-origin: 70px 43px;"/>
+                <path d="M57.5,38.193l12.5,12.5l12.5-12.5l-2.5-2.5l-10,10l-10-10L57.5,38.193z" fill="#ded2b3" style="transform: rotate(180deg); transform-origin: 70px 43px;"/>
             </svg>
         </div>
     `;
