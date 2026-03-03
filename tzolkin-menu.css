@@ -18,7 +18,7 @@ body {
     bottom: 0;
     width: 100%;
     z-index: 1500;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.2;
     transition: transform 0.8s ease, opacity 0.8s ease;
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
@@ -55,7 +55,7 @@ body {
 
 .menu-button span {
     color: #222222;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .modal {
@@ -154,7 +154,7 @@ body {
 }
 
 #fonctionnement-modal h2 {
-    font-size: 24px;
+    font-size: 26px;
     margin-bottom: 20px;
     color: #222222;
 }
@@ -165,7 +165,7 @@ body {
 }
 
 #fonctionnement-modal li {
-    font-size: 16px;
+    font-size: 18px;
     margin-bottom: 10px;
 }
 
@@ -176,7 +176,7 @@ body {
 }
 
 #notes-modal h2 {
-    font-size: 24px;
+    font-size: 26px;
     margin: 0;
     color: #222222;
 }
@@ -188,7 +188,7 @@ body {
     padding: 8px 12px;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 #notes-modal .open-saved-btn:hover {
@@ -199,7 +199,7 @@ body {
     width: 100%;
     flex: 1;
     min-height: 150px;
-    font-size: 16px;
+    font-size: 18px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -224,7 +224,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 #saved-modal .back-btn:hover {
@@ -232,7 +232,7 @@ body {
 }
 
 #saved-modal h2 {
-    font-size: 24px;
+    font-size: 26px;
     margin: 0;
     color: #222222;
     text-align: right;
@@ -309,7 +309,7 @@ body {
 #saved-modal .dropdown .dropdown-icon {
     position: absolute;
     right: 5px;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 #saved-modal .date-inputs {
@@ -321,7 +321,7 @@ body {
 
 #saved-modal .date-inputs input[type="text"] {
     padding: 5px;
-    font-size: 14px;
+    font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 8px;
     width: 100px;
@@ -350,7 +350,7 @@ body {
     padding: 5px 5px;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
     display: flex;
     align-items: center;
     height: 38px;
@@ -373,7 +373,7 @@ body {
     color: white;
     padding: 2px 5px;
     border-radius: 3px;
-    font-size: 12px;
+    font-size: 14px;
     white-space: nowrap;
     display: none;
 }
@@ -431,12 +431,12 @@ body {
 
 .note-entry p {
     margin: 5px 0;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .note-text {
     margin: 6px 0;
-    font-size: 16px;
+    font-size: 18px;
     white-space: pre-wrap;
     word-break: break-word;
     overflow-wrap: break-word;
@@ -507,7 +507,7 @@ body {
 
 .admin-form h3,
 .contacts-list h3 {
-    font-size: 20px;
+    font-size: 22px;
     color: #222;
     margin: 16px 0 12px 0;
 }
@@ -518,7 +518,7 @@ body {
 
 .admin-form label {
     display: block;
-    font-size: 17px;
+    font-size: 19px;
     color: #222;
     margin-bottom: 6px;
     font-weight: bold;
@@ -526,7 +526,7 @@ body {
 
 .admin-form input[type="text"],
 .admin-form input[type="date"] {
-    font-size: 16px;
+    font-size: 18px;
     color: #222;
     padding: 10px 12px;
     border: 2px solid #bbb;
@@ -538,13 +538,13 @@ body {
 
 .admin-form small {
     display: block;
-    font-size: 14px;
+    font-size: 16px;
     color: #555;
     margin-top: 5px;
 }
 
 .admin-form .btn-secondary {
-    font-size: 15px;
+    font-size: 17px;
     padding: 8px 14px;
     border-radius: 8px;
 }
@@ -552,11 +552,11 @@ body {
 .contacts-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 15px;
+    font-size: 17px;
 }
 
 .contacts-table th {
-    font-size: 15px;
+    font-size: 17px;
     color: #222;
     padding: 8px 6px;
     border-bottom: 2px solid #bbb;
@@ -564,7 +564,7 @@ body {
 }
 
 .contacts-table td {
-    font-size: 15px;
+    font-size: 17px;
     color: #222;
     padding: 8px 6px;
     border-bottom: 1px solid #ddd;
@@ -572,7 +572,7 @@ body {
 }
 
 .btn-edit {
-    font-size: 14px;
+    font-size: 16px;
     padding: 6px 10px;
     border-radius: 6px;
     border: none;
@@ -583,7 +583,7 @@ body {
 }
 
 .btn-delete {
-    font-size: 14px;
+    font-size: 16px;
     padding: 6px 10px;
     border-radius: 6px;
     border: none;

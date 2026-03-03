@@ -56,6 +56,12 @@ textarea {
 
 /* Réinitialisation et style de base */
 html {
+    font-size: 22px; /* augmenté de 20px (+10%) — cascade sur tous les em/rem */
+}
+
+/* Crédits + vue détail : maintiennent la taille originale (déjà à la bonne taille) */
+#credits-modal,
+#tzolkin-detail-view {
     font-size: 20px;
 }
 
