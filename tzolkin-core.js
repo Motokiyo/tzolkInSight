@@ -176,7 +176,7 @@ const TRECENAS = {
  * Date de référence du calendrier Tzolk'in
  * Cette date correspond à 11 Chicchan dans le calendrier
  */
-const BASE_DATE = new Date('2025-04-22');
+const BASE_DATE = new Date(2025, 3, 22); // minuit local — évite le décalage UTC/local
 const BASE_GLYPH = 5;  // Chicchan
 const BASE_NUMBER = 11; // 11
 
@@ -205,9 +205,11 @@ function modAdjust(x, m) {
  * @returns {Object} { glyphId, numberId, glyphName, numberName, gregorian }
  */
 function calculateTzolkin(date) {
+    // Normaliser à minuit local pour éviter tout décalage UTC
+    const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     // Calculer le nombre de jours depuis la date de référence
-    const diffTime = date - BASE_DATE;
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    const diffTime = d - BASE_DATE;
+    const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
 
     // Calculer glyphe et nombre
     const glyphId = modAdjust(BASE_GLYPH + diffDays, 20);

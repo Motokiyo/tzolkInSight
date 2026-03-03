@@ -846,7 +846,18 @@
         const now = new Date();
         const currentDate = new Date(now);
         currentDate.setDate(currentDate.getDate() + offset);
-        const dateStr = currentDate.toISOString().split('T')[0];
+
+        // Cutoff 3h : si on écrit "maintenant" (offset=0) avant 3h du matin,
+        // la note appartient au jour d'avant (la journée subjective n'est pas terminée)
+        if (offset === 0 && now.getHours() < 3) {
+            currentDate.setDate(currentDate.getDate() - 1);
+        }
+
+        // Date locale (pas toISOString qui est UTC et décale d'un jour la nuit)
+        const year = currentDate.getFullYear();
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+        const day = String(currentDate.getDate()).padStart(2, '0');
+        const dateStr = `${year}-${month}-${day}`;
 
         const timeStr = pendingNoteTime || now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
 
