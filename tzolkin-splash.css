@@ -65,6 +65,7 @@
     color: #c19434;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 0.5rem;
+    text-transform: none;
 }
 
 .tzolkin-splash-text p {
@@ -79,6 +80,8 @@
     color: #666;
     margin-top: 2rem;
     letter-spacing: 2px;
+    text-align: center;
+    display: block;
 }
 
 /* Responsive pour petits écrans */
@@ -95,4 +98,52 @@
     .tzolkin-splash-text p {
         font-size: 1rem;
     }
+}
+/* ── Footer Galaad dans le splash app ── */
+.splash-galaad-footer {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.splash-galaad-divider {
+    width: 55%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #c19434, transparent);
+    margin-bottom: 14px;
+}
+
+.splash-galaad-logo {
+    width: 34px;
+    height: auto;
+    margin-bottom: 5px;
+    opacity: 0.9;
+}
+
+.splash-galaad-company {
+    font-family: 'Simplifica', sans-serif !important;
+    font-size: 0.82rem !important;
+    font-weight: bold;
+    color: #1a2d4e !important;
+    letter-spacing: 1.5px;
+    margin: 0 !important;
+    text-align: center;
+}
+
+.splash-galaad-tagline {
+    font-family: 'Simplifica', sans-serif !important;
+    font-size: 0.72rem !important;
+    color: #666 !important;
+    margin: 0 !important;
+    text-align: center;
+}
+
+.splash-galaad-email {
+    font-family: 'Simplifica', sans-serif !important;
+    font-size: 0.72rem !important;
+    color: #888 !important;
+    margin: 0 !important;
+    text-align: center;
 }

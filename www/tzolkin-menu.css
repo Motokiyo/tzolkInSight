@@ -448,30 +448,200 @@ body {
 }
 
 #credits-modal .modal-content {
-    background: #ded2b3;
+    background: transparent;
     width: 100%;
     height: 100vh;
+    max-height: 100vh;
+    margin: 0;
     border: none;
-    padding: 20px;
-    overflow-y: auto;
-    transform: none;
-    opacity: 1;
+    border-radius: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
 }
 
-#credits-modal .tzolkin-splash-text {
+/* ── Sidebar gauche Galaad (navy) ── */
+.credits-galaad-section {
+    background: #1a2d4e;
+    width: 28%;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 16px 8px;
+    padding-top: calc(env(safe-area-inset-top, 0px) + 16px);
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+    border-right: 1px solid rgba(201,168,76,0.3);
+}
+
+.credits-galaad-logo {
+    width: 88px;
+    height: auto;
+    flex-shrink: 0;
+    margin-bottom: 10px;
+}
+
+.credits-company {
+    font-family: 'Simplifica', sans-serif;
+    font-size: clamp(0.65rem, 2.5vw, 0.8rem);
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 2px;
+    text-align: center;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.credits-company-sub {
+    font-family: 'Simplifica', sans-serif;
+    font-size: clamp(0.55rem, 2vw, 0.68rem);
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 1px;
+    text-align: center;
+    margin: 0 0 6px;
+    line-height: 1.3;
+}
+
+/* Nom Galaad mis en valeur dans la section tzolkInSight */
+.credits-galaad-name {
+    display: inline-block;
+    font-family: 'Simplifica', sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    color: #1a2d4e;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.credits-tagline {
+    font-family: 'Simplifica', sans-serif;
+    font-size: clamp(0.6rem, 2vw, 0.72rem);
+    color: #4dd9e8;
+    margin: 0;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.credits-person {
+    font-family: 'Simplifica', sans-serif;
+    font-size: clamp(0.55rem, 1.8vw, 0.65rem);
+    color: rgba(255,255,255,0.55);
+    margin: 0;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.credits-email-link {
+    display: inline-block;
+    margin-top: 10px;
+    background: rgba(255,255,255,0.08);
+    color: #c9a84c;
+    font-size: 0.65rem;
+    font-family: 'Simplifica', sans-serif;
+    border: 1px solid rgba(201,168,76,0.5);
+    border-radius: 6px;
+    padding: 3px 10px;
+    text-decoration: none;
+}
+
+/* ── Zone principale tzolkInSight (beige, centrée) ── */
+.credits-tzolkin-section {
+    background: #ded2b3;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 14px 16px;
+    padding-top: calc(env(safe-area-inset-top, 0px) + 14px);
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 14px);
+    overflow-y: auto;
     text-align: center;
 }
 
+.credits-app-icon {
+    width: 104px !important;
+    height: 104px !important;
+    flex-shrink: 0;
+    margin-bottom: 6px !important;
+}
+
+.credits-app-title {
+    font-family: 'Summer', cursive;
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    color: #c19434;
+    margin: 0 0 2px;
+    text-transform: none;
+}
+
+.credits-app-sub {
+    font-family: 'Simplifica', sans-serif;
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    color: #444;
+    margin: 0;
+}
+
+.credits-app-version {
+    font-family: 'Simplifica', sans-serif;
+    font-size: 0.75rem;
+    color: #888;
+    letter-spacing: 1.5px;
+    margin: 2px 0 6px;
+}
+
+.credits-app-meta {
+    font-family: 'Simplifica', sans-serif;
+    font-size: clamp(0.7rem, 2.5vw, 0.8rem);
+    color: #666;
+    margin: 0;
+}
+
+.credits-app-site {
+    color: #5e832a;
+    text-decoration: none;
+    font-family: 'Simplifica', sans-serif;
+    font-size: 0.8rem;
+    margin: 4px 0;
+}
+
+.credits-rapport-text {
+    font-family: 'Simplifica', sans-serif;
+    font-size: clamp(0.72rem, 2.5vw, 0.82rem);
+    color: #555;
+    line-height: 1.5;
+    text-align: center;
+    margin: 8px 0 6px;
+    padding: 8px 10px;
+    background: rgba(193,148,52,0.1);
+    border-left: 3px solid #c19434;
+    border-radius: 0 6px 6px 0;
+    text-align: left;
+}
+
+.credits-app-email {
+    display: inline-block;
+    background: #2d597e;
+    color: #fff;
+    font-size: clamp(0.72rem, 2.5vw, 0.82rem);
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 4px 14px;
+    text-decoration: none;
+    font-family: 'Simplifica', sans-serif;
+    margin-top: 4px;
+}
+
+
 @media (max-width: 600px) {
 
-    #saved .modal-content,
-    #credits-modal .modal-content {
+    #saved .modal-content {
         padding: 15px;
         max-height: 85vh;
-
     }
 
     @media (max-width: 768px) {
@@ -481,10 +651,6 @@ body {
 
         #notes-modal textarea {
             height: 200px;
-        }
-
-        #credits-modal .modal-content {
-            padding: 15px;
         }
 
         #saved-modal .search-bar {

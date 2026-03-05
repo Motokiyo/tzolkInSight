@@ -405,20 +405,31 @@
 <!-- Modale Crédits -->
 <div id="credits-modal" class="modal">
     <div class="modal-content">
-        <div class="tzolkin-splash-container">
-            <div class="tzolkin-splash-icon">
-                <img src="./assets/tzolkin-splash.png" alt="TzolkInSight" />
+        <button onclick="closeAllModals()" style="position:absolute; top:calc(env(safe-area-inset-top,0px)+12px); right:14px; background:none; border:none; font-size:28px; cursor:pointer; z-index:10; color:#333; line-height:1;">&times;</button>
+        <!-- Sidebar gauche Galaad (navy, ~28%) -->
+        <div class="credits-galaad-section">
+            <img src="./assets/graal-logo-galaad.png" alt="Galaad" class="credits-galaad-logo" />
+            <p class="credits-company">GALAAD</p>
+            <p class="credits-company-sub">MOTOKIYO FERRAN</p>
+            <p class="credits-tagline">IA Access</p>
+            <p class="credits-tagline">Conseil &amp; Création</p>
+            <p class="credits-person">Alexandre Ferran</p>
+            <p class="credits-person">Chief Product Officer</p>
+            <a href="mailto:motokiyoferran@gmail.com" class="credits-email-link">contact</a>
+        </div>
+        <!-- Zone principale tzolkInSight (beige, centrée) -->
+        <div class="credits-tzolkin-section">
+            <div class="tzolkin-splash-icon credits-app-icon">
+                <img src="./assets/tzolkin-splash.png" alt="tzolkInSight" />
             </div>
-            <div class="tzolkin-splash-text">
-                <h1>TzolkInSight</h1>
-                <p>Calendrier Maya Sacré</p>
-                <p class="version">Version 1.1.0</p>
-                <p><strong>Auteur :</strong> Motokiyo Galaad Ferran</p>
-                <p><strong>Assistance IA :</strong> Claude, Grok, DeepSeek</p>
-                <p><a href="https://leparede.org" target="_blank">leparede.org</a></p>
-                <p style="margin-top: 12px; font-size: 14px; color: #888;">Contact &amp; analyse personnalisée :</p>
-                <p><a href="mailto:tzolkinsight@leparede.org" style="display:inline-block;background:#2d597e;color:#fff;font-size:16px;font-weight:bold;border-radius:8px;padding:3px 12px;text-decoration:none;font-family:'Simplifica',sans-serif;">tzolkinsight@leparede.org</a></p>
-            </div>
+            <h1 class="credits-app-title">tzolkInSight</h1>
+            <p class="credits-app-sub">Calendrier Maya Sacré</p>
+            <p class="credits-app-version">Version 1.1.1</p>
+            <p class="credits-app-meta">Pensé, imaginé et développé par Alexandre Ferran pour <strong class="credits-galaad-name">Galaad Motokiyo Ferran</strong></p>
+            <p class="credits-app-meta"><strong>IA :</strong> Claude, Grok, DeepSeek</p>
+            <a href="https://leparede.org" target="_blank" class="credits-app-site">leparede.org</a>
+            <p class="credits-rapport-text">Faites réaliser des rapports à partir de vos données brutes&nbsp;pour découvrir comment et si le Tzolk'in impacte votre vie. Offrez-vous une compréhension unique de cet outil millénaire.</p>
+            <a href="mailto:tzolkinsight@leparede.org" class="credits-app-email">tzolkinsight@leparede.org</a>
         </div>
     </div>
 </div>
@@ -481,8 +492,7 @@
             <div style="display:flex; align-items:center; justify-content:center; gap:8px;">
                 <span id="note-confirm-location" contenteditable="true"
                     style="display:inline-block; padding:8px 16px; background:white; border:1px solid #ccc; border-radius:8px; font-size:1.1em; color:#333; min-width:100px; text-align:center; cursor:text;"></span>
-                <button type="button" onclick="searchGeocode()" title="Rechercher la ville"
-                    style="padding:8px 10px; background:#5e832a; color:white; border:none; border-radius:8px; font-size:1.1em; cursor:pointer; flex-shrink:0;">🔍</button>
+                <span id="geocode-spinner" style="display:none; font-size:0.85em; color:#888; flex-shrink:0; line-height:1;">⏳</span>
                 <button type="button" onclick="requestGPSForPopup()" title="Utiliser ma position GPS"
                     style="padding:8px 10px; background:#5e832a; color:white; border:none; border-radius:8px; font-size:1.1em; cursor:pointer; flex-shrink:0;">📍</button>
             </div>
@@ -586,6 +596,7 @@
     // Variables globales
     let autosaveTimer = null;
     const AUTOSAVE_DELAY_MS = 800;
+    let geocodeDebounceTimer = null;
     let notes = [];
     let lastSavedDate = null;
     let notesLoaded = false;
@@ -596,6 +607,7 @@
     let pendingNoteLocation = null; // Override ville pour note sur un autre jour
     let pendingNoteLat = null;      // Override latitude pour note sur un autre jour
     let pendingNoteLon = null;      // Override longitude pour note sur un autre jour
+    let pendingNoteDate = null;     // Date verrouillée (YYYY-MM-DD) quand note hors aujourd'hui — immune au changement de minuit
     let pendingFreshNote = false;   // true = ouvrir une note vierge (nouveau jour sans note)
     let editingFromSaved = false;   // true = édition d'une note via Enregistrés (autosave suspendu)
 
@@ -774,6 +786,7 @@
         const notesWasOpen = document.getElementById('notes-modal')?.classList.contains('active');
         const offsetAtClose = window.TzolkinStorage.loadOffset();
 
+        clearTimeout(autosaveTimer);
         saveCurrentNote();
         // Vider immédiatement le textarea pour éviter tout contenu périmé à la prochaine ouverture
         const _ta = document.getElementById('notes-input');
@@ -801,6 +814,7 @@
         pendingNoteLocation = null;
         pendingNoteLat = null;
         pendingNoteLon = null;
+        pendingNoteDate = null;
         window._geocodedLat = null;
         window._geocodedLon = null;
         pendingFreshNote = false;
@@ -854,10 +868,17 @@
         }
 
         // Date locale (pas toISOString qui est UTC et décale d'un jour la nuit)
-        const year = currentDate.getFullYear();
-        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-        const day = String(currentDate.getDate()).padStart(2, '0');
-        const dateStr = `${year}-${month}-${day}`;
+        // Si pendingNoteDate est défini (note hors aujourd'hui confirmée via popup 2),
+        // on l'utilise directement — immune au passage de minuit et à la confusion d'offset.
+        let dateStr;
+        if (pendingNoteDate) {
+            dateStr = pendingNoteDate;
+        } else {
+            const year = currentDate.getFullYear();
+            const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+            const day = String(currentDate.getDate()).padStart(2, '0');
+            dateStr = `${year}-${month}-${day}`;
+        }
 
         const timeStr = pendingNoteTime || now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
 
@@ -900,10 +921,25 @@
 
     //=== FONCTION: Appliquer note actuelle à l'UI ===
     function applyCurrentNoteToUI() {
-        const offset = window.TzolkinStorage.loadOffset();
-        const currentDate = new Date();
-        currentDate.setDate(currentDate.getDate() + offset);
-        const dateStr = currentDate.toISOString().split('T')[0];
+        // Si une date est verrouillée (note hors aujourd'hui), l'utiliser directement
+        let dateStr;
+        if (pendingNoteDate) {
+            dateStr = pendingNoteDate;
+        } else {
+            const offset = window.TzolkinStorage.loadOffset();
+            const now = new Date();
+            const currentDate = new Date(now);
+            currentDate.setDate(currentDate.getDate() + offset);
+            // Appliquer le cutoff 3h (cohérent avec saveCurrentNote)
+            if (offset === 0 && now.getHours() < 3) {
+                currentDate.setDate(currentDate.getDate() - 1);
+            }
+            // Date locale (pas toISOString — décale d'un jour UTC à minuit)
+            const year = currentDate.getFullYear();
+            const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+            const day = String(currentDate.getDate()).padStart(2, '0');
+            dateStr = `${year}-${month}-${day}`;
+        }
 
         const textarea = document.getElementById('notes-input');
         const selected = document.getElementById('color-dropdown').querySelector('.dropdown-selected');
@@ -1086,31 +1122,22 @@
         const note = notes.find(n => n.date === dateStr);
         if (!note) return;
 
-        // Calculer l'offset pour naviguer vers cette date
         const noteDate = new Date(dateStr);
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         noteDate.setHours(0, 0, 0, 0);
-
-        const diffTime = noteDate - today;
-        const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+        const diffDays = Math.round((noteDate - today) / (1000 * 60 * 60 * 24));
 
         window.TzolkinStorage.saveOffset(diffDays);
-
-        // Recharger le widget
         if (window.tzolkinWidget) {
             window.tzolkinWidget.offset = diffDays;
             window.tzolkinWidget.render();
             window.tzolkinWidget.attachEventListeners();
         }
 
-        // Ouvrir la modale Notes en mode édition manuelle
+        pendingNoteDate = dateStr;
         editingFromSaved = true;
-        openModal('notes', true);
-
-        // Afficher les boutons Enregistrer / Annuler ; cacher le bouton Enregistrés
-        document.getElementById('edit-controls').style.display = 'flex';
-        document.getElementById('open-saved-btn').style.display = 'none';
+        showNoteTimeLocationPopup(note);
     }
 
     //=== FONCTION: Enregistrer l'édition d'une note (bouton Enregistrer) ===
@@ -1160,42 +1187,45 @@
     }
 
     //=== FONCTION: Recherche géocodage (ville → lat/lon) ===
-    async function searchGeocode() {
-        const locEl = document.getElementById('note-confirm-location');
+    // Recherche Nominatim pour l'autocomplétion (debounce) ou directement
+    async function searchGeocodeQuery(query) {
         const sugDiv = document.getElementById('geocode-suggestions');
         const hintEl = document.getElementById('note-location-hint');
-        const query = locEl.textContent.trim();
-        if (!query) { hintEl.textContent = 'Saisissez un nom de ville avant de rechercher.'; return; }
-
-        hintEl.textContent = 'Recherche en cours…';
-        hintEl.style.color = '#888';
+        const spinnerEl = document.getElementById('geocode-spinner');
+        if (!query) {
+            sugDiv.style.display = 'none';
+            if (spinnerEl) spinnerEl.style.display = 'none';
+            return;
+        }
+        hintEl.textContent = '';
         sugDiv.style.display = 'none';
-
         try {
             const resp = await fetch(
                 `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=4&accept-language=fr`
             );
             if (!resp.ok) throw new Error();
             const results = await resp.json();
+            if (spinnerEl) spinnerEl.style.display = 'none';
             if (!results.length) {
-                hintEl.textContent = 'Aucun résultat trouvé. Vérifiez l\'orthographe.';
+                hintEl.textContent = 'Aucun résultat.';
                 hintEl.style.color = '#c0392b';
                 return;
             }
             hintEl.textContent = '';
             sugDiv.innerHTML = results.map((r, i) => {
                 const label = r.display_name.split(',').slice(0, 3).join(', ');
+                const city = r.display_name.split(',')[0].replace(/'/g, "\'");
                 return `<button type="button"
-                    onclick="selectGeocodeSuggestion(${parseFloat(r.lat).toFixed(4)}, ${parseFloat(r.lon).toFixed(4)}, '${r.display_name.split(',')[0].replace(/'/g, "\\'")}', this.closest('div'))"
+                    onclick="selectGeocodeSuggestion(${parseFloat(r.lat).toFixed(4)}, ${parseFloat(r.lon).toFixed(4)}, '${city}', this.closest('div'))"
                     style="display:block; width:100%; padding:10px 14px; background:${i % 2 === 0 ? '#f9f9f9' : '#fff'}; border:none; border-bottom:1px solid #eee; cursor:pointer; text-align:left; font-family:'Simplifica',sans-serif; font-size:13px; color:#333; line-height:1.4;">${label}</button>`;
             }).join('');
             sugDiv.style.display = 'block';
         } catch (e) {
-            hintEl.textContent = 'Erreur réseau. Vérifiez votre connexion.';
+            if (spinnerEl) spinnerEl.style.display = 'none';
+            hintEl.textContent = 'Erreur réseau.';
             hintEl.style.color = '#c0392b';
         }
     }
-
     function selectGeocodeSuggestion(lat, lon, cityName, container) {
         window._geocodedLat = parseFloat(lat);
         window._geocodedLon = parseFloat(lon);
@@ -1670,7 +1700,7 @@ ${notesHtml}
                 if (dm) dm.style.display = 'none';
             }
             // Fermer les suggestions géocodage si clic extérieur
-            if (!e.target.closest('#note-confirm-location') && !e.target.closest('#geocode-suggestions') && !e.target.closest('[onclick="searchGeocode()"]')) {
+            if (!e.target.closest('#note-confirm-location') && !e.target.closest('#geocode-suggestions')) {
                 const gs = document.getElementById('geocode-suggestions');
                 if (gs) gs.style.display = 'none';
             }
@@ -1708,33 +1738,59 @@ ${notesHtml}
     }
 
     //=== FONCTION: Afficher popup 2 (heure et ville) ===
-    async function showNoteTimeLocationPopup() {
-        // Réinitialiser les coordonnées géocodées de la session précédente
-        window._geocodedLat = null;
-        window._geocodedLon = null;
+    // prefilledNote : note existante (mode édition depuis Enregistrés), null en mode normal
+    async function showNoteTimeLocationPopup(prefilledNote = null) {
+        const spinnerEl = document.getElementById('geocode-spinner');
+        if (spinnerEl) spinnerEl.style.display = 'none';
         document.getElementById('geocode-suggestions').style.display = 'none';
-        // Pré-remplir l'heure courante
-        const now = new Date();
-        document.getElementById('note-confirm-time').textContent =
-            now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
-
-        // Ville : GPS si disponible et accordé, sinon vide avec message d'aide
-        const locEl = document.getElementById('note-confirm-location');
         const hintEl = document.getElementById('note-location-hint');
-        let gpsGranted = false;
-        if (navigator.permissions) {
-            try {
-                const perm = await navigator.permissions.query({ name: 'geolocation' });
-                gpsGranted = perm.state === 'granted';
-            } catch (e) { }
-        }
-        if (gpsGranted) {
-            // GPS accordé → déclencher automatiquement la géolocalisation
-            requestGPSForPopup();
+        hintEl.textContent = '';
+
+        window._geocodedLat = prefilledNote ? (prefilledNote.lat || null) : null;
+        window._geocodedLon = prefilledNote ? (prefilledNote.lon || null) : null;
+
+        // Heure
+        const now = new Date();
+        document.getElementById('note-confirm-time').textContent = prefilledNote
+            ? (prefilledNote.time || now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }))
+            : now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+
+        // Lieu
+        const locEl = document.getElementById('note-confirm-location');
+        if (prefilledNote) {
+            locEl.textContent = prefilledNote.location || '';
         } else {
-            locEl.textContent = '';
-            hintEl.textContent = 'Activez le GPS pour la ville automatique, ou saisissez-la, ou laissez vide.';
+            if (currentLocation) {
+                locEl.textContent = currentLocation;
+                hintEl.textContent = 'GPS en cache — 📍 pour actualiser.';
+                hintEl.style.color = '#888';
+            } else {
+                locEl.textContent = '';
+                hintEl.textContent = 'Appuyez sur 📍 pour détecter la ville, ou saisissez-la.';
+                hintEl.style.color = '#888';
+            }
+            let gpsGranted = false;
+            if (navigator.permissions) {
+                try {
+                    const perm = await navigator.permissions.query({ name: 'geolocation' });
+                    gpsGranted = perm.state === 'granted';
+                } catch (e) { }
+            }
+            if (gpsGranted) requestGPSForPopup();
         }
+
+        // Autocomplétion Nominatim en temps réel (debounce 600ms)
+        locEl.oninput = () => {
+            clearTimeout(geocodeDebounceTimer);
+            const q = locEl.textContent.trim();
+            if (q.length < 2) {
+                document.getElementById('geocode-suggestions').style.display = 'none';
+                if (spinnerEl) spinnerEl.style.display = 'none';
+                return;
+            }
+            if (spinnerEl) spinnerEl.style.display = 'inline';
+            geocodeDebounceTimer = setTimeout(() => searchGeocodeQuery(q), 600);
+        };
 
         document.getElementById('note-time-location-popup').style.display = 'flex';
     }
@@ -1810,6 +1866,20 @@ ${notesHtml}
     //=== FONCTION: Popup 2 → Annuler ===
     function noteTimeLocationCancel() {
         document.getElementById('note-time-location-popup').style.display = 'none';
+        if (editingFromSaved) {
+            editingFromSaved = false;
+            pendingNoteDate = null;
+            pendingNoteTime = null;
+            pendingNoteLocation = null;
+            pendingNoteLat = null;
+            pendingNoteLon = null;
+            window.TzolkinStorage.saveOffset(0);
+            if (window.tzolkinWidget) {
+                window.tzolkinWidget.offset = 0;
+                window.tzolkinWidget.render();
+                window.tzolkinWidget.attachEventListeners();
+            }
+        }
     }
 
     //=== FONCTION: Popup 2 → Confirmer (avec logique note existante vs. vierge) ===
@@ -1827,11 +1897,12 @@ ${notesHtml}
 
         const targetDate = new Date();
         targetDate.setDate(targetDate.getDate() + targetOffset);
-        const targetDateStr = targetDate.toISOString().split('T')[0];
+        // Utiliser les composantes de date LOCALE (pas toISOString qui est UTC et peut décaler d'un jour à minuit)
+        const tdY = targetDate.getFullYear();
+        const tdM = String(targetDate.getMonth() + 1).padStart(2, '0');
+        const tdD = String(targetDate.getDate()).padStart(2, '0');
+        const targetDateStr = `${tdY}-${tdM}-${tdD}`;
         const hasExisting = notes.some(n => n.date === targetDateStr);
-
-        // 3. Si aucune note pour ce jour → interface vierge ; sinon → charger la note existante
-        pendingFreshNote = !hasExisting;
 
         // 4. Positionner les overrides heure / ville / coordonnées
         pendingNoteTime = chosenTime;
@@ -1839,7 +1910,16 @@ ${notesHtml}
         pendingNoteLat = window._geocodedLat || null;
         pendingNoteLon = window._geocodedLon || null;
 
-        // 5. Ouvrir Notes (skipSave=true : pas de re-déclenchement du popup 1)
-        openModal('notes', true);
+        if (editingFromSaved) {
+            // Mode édition : date déjà verrouillée dans pendingNoteDate par editNoteFromSaved()
+            openModal('notes', true);
+            document.getElementById('edit-controls').style.display = 'flex';
+            document.getElementById('open-saved-btn').style.display = 'none';
+        } else {
+            // Mode normal : vierge si nouveau jour, sinon charger la note existante
+            pendingFreshNote = !hasExisting;
+            pendingNoteDate = targetDateStr;
+            openModal('notes', true);
+        }
     }
 </script>
