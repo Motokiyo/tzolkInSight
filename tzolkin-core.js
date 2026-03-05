@@ -13,17 +13,17 @@
  * Les 20 glyphes Maya (Nawals)
  * Chaque glyphe a un nom, un fichier SVG et une signification
  */
-// Peuple Maïs K'iche' — 4 familles de nawals :
-// rouge = Est  (Chuen, Chicchan, Manik, Men, Ahau)
-// blanc = Nord (Imix, Kan, Muluc, Eb, Ben)
-// bleu  = Ouest/Nuit (Akbal, Cimi, Cib, Caban, Etznab)  ← 'noir' réservé aux Seigneurs de la Nuit
-// jaune = Sud  (Ik, Lamat, Oc, Ix, Cauac)
+// Peuple Maïs K'iche' — 4 familles de nawals (tradition K'iche' vivante) :
+// rouge = Est  (Akbal/3, Manik/7, Chuen/11, Men/15, Cauac/19)
+// blanc = Nord (Imix/1, Chicchan/5, Muluc/9, Ben/13, Caban/17)
+// bleu  = Ouest/Nuit (Kan/4, Lamat/8, Eb/12, Cib/16, Ahau/20)  ← 'noir' réservé aux Seigneurs de la Nuit
+// jaune = Sud  (Ik/2, Cimi/6, Oc/10, Ix/14, Etznab/18)
 const GLYPHS = {
     1:  { name: 'Imix',    file: 'MAYA-g-log-cal-D01-Imix.svg',    translation: 'Crocodile',           color: 'blanc' },
     2:  { name: 'Ik',      file: 'MAYA-g-log-cal-D02-Ik.svg',      translation: 'Vent',                color: 'jaune' },
     3:  { name: 'Akbal',   file: 'MAYA-g-log-cal-D03-Akbal.svg',   translation: 'Nuit',                color: 'rouge' },
     4:  { name: 'Kan',     file: 'MAYA-g-log-cal-D04-Kan.svg',     translation: 'Graine',              color: 'bleu'  },
-    5:  { name: 'Chicchan',file: 'MAYA-g-log-cal-D05-Chikchan.svg',translation: 'Serpent Céleste',     color: 'blanc' },
+    5:  { name: 'Chicchan',file: 'MAYA-g-log-cal-D05-Chikchan.svg',translation: 'Serpent',     color: 'blanc' },
     6:  { name: 'Cimi',    file: 'MAYA-g-log-cal-D06-Kimi.svg',    translation: 'Mort',                color: 'jaune' },
     7:  { name: 'Manik',   file: 'MAYA-g-log-cal-D07-Manik.svg',   translation: 'Cerf',                color: 'rouge' },
     8:  { name: 'Lamat',   file: 'MAYA-g-log-cal-D08-Lamat.svg',   translation: 'Lapin',               color: 'bleu'  },
@@ -88,7 +88,7 @@ const TRECENAS = {
     },
     5: {
         name: 'Chicchan',
-        translation: 'Serpent Céleste',
+        translation: 'Serpent',
         description: 'Chicchan met en lumière l\'énergie vitale et la passion. C\'est un moment puissant et potentiellement transformateur.'
     },
     6: {
@@ -422,8 +422,11 @@ function getGlyphURL(glyphId) {
  * Les 9 Seigneurs de la Nuit mayas
  * Cycle de 9 jours intégré à la Série Supplémentaire Lunaire (inscriptions classiques)
  * G9 = Pauahtun est le seul nom académiquement confirmé (consensus épigraphique)
- * G1, G4, G8 : hypothèses savantes (Kelley 1972, Frumker 1993)
- * G2-G3, G5-G7 : noms mayas du panthéon classique, domaines attestés par les codex
+ * G4 = Wuk Ah (déité agricole) — identification révisée par Frumker 1993 (coefficient wuk=7 dans le glyphe)
+ *      L'ancienne hypothèse Kelley 1972 proposait Yum Kaax (désormais dépassée)
+ * G1, G8 : hypothèses savantes (Kelley 1972)
+ * G2-G3, G5-G7 : noms du panthéon classique, domaines attestés par les codex — spéculatifs
+ * G6 : lié épigraphiquement aux naissances nobles (academia.edu, Glyph Y study)
  */
 const LORDS_OF_NIGHT = {
     1: {
@@ -445,9 +448,9 @@ const LORDS_OF_NIGHT = {
         file: 'G3.svg'
     },
     4: {
-        name: "Yum Kaax",
-        domain: "Végétation · Maïs sacré · Subsistance",
-        description: "Yum Kaax est le seigneur du maïs — aliment sacré des Mayas — et de toute végétation. Il incarne la fertilité, la patience et le lien profond avec la terre. Sa présence confère un talent pour faire croître les projets et nourrir les communautés.",
+        name: "Wuk Ah",
+        domain: "Maïs sacré · Germination · Subsistance",
+        description: "Wuk Ah ('le Sep-fois', coefficient 7 dans le glyphe) est le seigneur de la germination et du maïs sacré. Il incarne la force souterraine qui permet à la graine de traverser l'obscurité et de renaître en plant. Sa présence confère un lien profond avec les cycles naturels et la patience nourricière. (Identification Frumker 1993 ; ancienne hypothèse Kelley 1972 : Yum Kaax.)",
         file: 'G4.svg'
     },
     5: {
@@ -459,7 +462,7 @@ const LORDS_OF_NIGHT = {
     6: {
         name: "Ix Chel",
         domain: "Lune · Eau · Médecine · Divination",
-        description: "Ix Chel est la grande déesse lunaire, maîtresse des eaux, de la médecine et de la divination. Les inscriptions épigraphiques associent G6 aux naissances nobles. Sa présence confère une intuition profonde, des dons de guérison et une connexion forte aux cycles lunaires.",
+        description: "Ix Chel est la grande déesse lunaire, maîtresse des eaux, de la médecine et de la divination. Les inscriptions épigraphiques associent directement G6 aux naissances nobles et aux événements de haut rang dynastique — c'est l'une des associations les mieux attestées parmi les G1-G8. Sa présence confère une intuition profonde, des dons de guérison et une connexion forte aux cycles lunaires et à la naissance.",
         file: 'G6.svg'
     },
     7: {

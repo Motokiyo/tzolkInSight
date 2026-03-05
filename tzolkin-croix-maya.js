@@ -33,7 +33,7 @@ const POSITION_TEXTS = {
     },
     trecena: {
         title: "Trécéna de Naissance",
-        text: "La trécéna est la période de 13 jours à laquelle appartient votre kin de naissance. Elle commence toujours au ton 1 et colore l'ensemble du cycle. Le nawal qui ouvre votre trécéna est votre maître de période — il oriente l'énergie fondamentale dans laquelle vous avez émergé."
+        text: "La trécéna est la période de 13 jours à laquelle appartient votre kin de naissance. Elle commence toujours au ton 1 et colore l'ensemble du cycle. Le nawal qui ouvre votre trécéna est votre maître de période — il oriente l'énergie fondamentale dans laquelle vous avez émergé. Dans la tradition K'iche', le 8e jour de chaque trécéna (Wajxaqib') est le plus propice aux cérémonies : le 8 est le nombre divin du renouveau et du commencement."
     },
     porteur: {
         title: "Porteur d'Année K'iche'",

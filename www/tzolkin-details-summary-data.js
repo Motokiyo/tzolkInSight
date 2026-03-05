@@ -34,8 +34,8 @@ window.TZOLKIN_SUMMARY_DATA = {
         "5": {
             "nom_francais": "Chicchan",
             "nawal_maya": "Chicchan",
-            "traduction": "Serpent Céleste",
-            "description": "<p>Chicchan, qu'on peut traduire par Serpent Céleste, met en lumière l'énergie vitale et la passion. C'est un moment puissant et potentiellement transformateur. Mots clés : énergie vitale, passion, force primale.</p>"
+            "traduction": "Serpent",
+            "description": "<p>Chicchan, qu'on peut traduire par Serpent (Kan en K'iche'), met en lumière l'énergie vitale et la passion. C'est un moment puissant et potentiellement transformateur. Mots clés : énergie vitale, passion, force primale.</p>"
         },
         "6": {
             "nom_francais": "Cimi",
@@ -172,8 +172,8 @@ window.TZOLKIN_SUMMARY_DATA = {
             "animal_pouvoir": "<strong>Cerf</strong> ou <strong>Guérisseur</strong>"
         },
         "8": {
-            "titre": "Lamat, l'Étoile",
-            "description": "<p>Lamat peut se traduire par Lapin. Il représente l'étoile, la beauté et l'harmonie cosmique. Ce glyphe est associé à la créativité et à la prospérité.</p>",
+            "titre": "Lamat, la Graine",
+            "description": "<p>Lamat (Q'anil en K'iche') signifie la Graine — le mûrissement, la semence de vie. Son animal totem est le Lapin. Son glyphe classique est le symbole de Vénus (l'Étoile du soir et du matin), ce qui lui confère aussi une dimension astrologique : fertilité cosmique, cycles et abondance.</p>",
             "mots_cles": "abondance, fertilité, chance, harmonie",
             "animal_pouvoir": "<strong>Lapin</strong> ou <strong>Planète Vénus</strong>"
         },
@@ -196,8 +196,8 @@ window.TZOLKIN_SUMMARY_DATA = {
             "animal_pouvoir": "<strong>Singe</strong>"
         },
         "12": {
-            "titre": "Eb, l'Humain",
-            "description": "<p>Eb peut se traduire par Herbe. Il représente l'humain, la route de la vie et les relations. Ce glyphe est lié à la gratitude et à la communauté.</p>",
+            "titre": "Eb, la Route",
+            "description": "<p>Eb (E en K'iche') peut se traduire par Route ou Chemin de vie. Il représente le voyage, la communauté et les relations. Ce glyphe est lié à la gratitude et à l'exploration.</p>",
             "mots_cles": "chemin, gratitude, humilité, connexion",
             "animal_pouvoir": "<strong>Herbe</strong> ou <strong>Route</strong>"
         },
@@ -227,7 +227,7 @@ window.TZOLKIN_SUMMARY_DATA = {
         },
         "17": {
             "titre": "Caban, la Terre",
-            "description": "<p>Caban ou Kab'an peut se traduire par Terre. Il représente le mouvement, l'évolution et la synchronicité. Ce glyphe incarne l'énergie planétaire.</p>",
+            "description": "<p>Caban (No'j en K'iche') peut se traduire par Terre — c'est son sens étymologique en Yucatèque (KAB = sol, terre). Il représente aussi le mouvement tellurique et les tremblements de terre, ainsi que l'intelligence et la pensée profonde (No'j en K'iche'). Ce glyphe incarne la sagesse enracinée et la synchronicité.</p>",
             "mots_cles": "mouvement, intelligence, synchronicité, évolution",
             "animal_pouvoir": "<strong>Terre</strong> ou <strong>Pic-vert</strong>"
         },
