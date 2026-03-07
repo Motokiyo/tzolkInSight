@@ -43,7 +43,7 @@ class TzolkinAdmin {
                 <div class="modal-content" style="background: transparent; border: none; border-radius: 0; box-shadow: none; width: 100%; height: auto; min-height: 100%; max-height: none; max-width: 100%; margin: 0; overflow-y: visible; padding: 20px; padding-top: calc(env(safe-area-inset-top, 0px) + 20px); padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 20px); box-sizing: border-box; position: relative;">
                     <button class="close-modal" onclick="window.tzolkinAdmin.closeAdminModal()" style="position:absolute; top: calc(env(safe-area-inset-top, 0px) + 15px); right:15px; background:none; border:none; font-size:24px; cursor:pointer;">&times;</button>
                     <div class="header" style="text-align:center; padding-bottom: 20px; border-bottom: 2px solid rgba(0,0,0,0.1);">
-                        <h2 style="font-family: 'Summer', cursive; font-size: 32px; color: #c19434; margin:0;">Admin - Mes Contacts</h2>
+                        <h2 style="font-family: 'Summer', cursive; font-size: 32px; color: #c19434; margin:0;">Réglages - Mes Contacts</h2>
                     </div>
 
                     <!-- Formulaire d'ajout/modification -->
@@ -93,6 +93,7 @@ class TzolkinAdmin {
                     <div class="contacts-list">
                         <h3>Contacts enregistrés</h3>
                         <div id="contacts-table"></div>
+                        <div style="height: 80px;"></div>
                     </div>
                 </div>
             </div>
@@ -124,13 +125,18 @@ class TzolkinAdmin {
 
             const adminButton = `
                 <div class="menu-button" id="admin-menu-btn" onclick="window.tzolkinAdmin.openAdminModal()" style="cursor:pointer;">
-                    <img src="./assets/boutons/SVG/ahau-bt.svg" alt="Admin">
-                    <span>Admin</span>
+                    <img src="./assets/boutons/SVG/ahau-bt.svg" alt="Réglages">
+                    <span>Réglages</span>
                 </div>
             `;
 
-            menu.insertAdjacentHTML('beforeend', adminButton);
-            console.log('✅ Bouton Admin ajouté au menu');
+            const creditsBtn = document.getElementById('credits-menu-btn');
+            if (creditsBtn) {
+                creditsBtn.insertAdjacentHTML('beforebegin', adminButton);
+            } else {
+                menu.insertAdjacentHTML('beforeend', adminButton);
+            }
+            console.log('✅ Bouton Réglages ajouté au menu');
         };
 
         findMenuAndAdd();
@@ -312,18 +318,25 @@ class TzolkinAdmin {
         let html = '<table class="contacts-table"><thead><tr><th>Nom</th><th>Date de naissance</th><th>Tzolk\'in</th><th>Couleur</th><th>Actions</th></tr></thead><tbody>';
 
         people.forEach((person, index) => {
-            const glyphName = window.TzolkinCore.GLYPHS[person.glyph].name;
-            const numberName = person.number;
+            const glyphId = person.glyph;
+            const numberId = person.number;
+            const glyphURL = window.TzolkinCore.getGlyphURL(glyphId);
+            const numberURL = window.TzolkinCore.getNumberURL(numberId);
+            const glyphName = window.TzolkinCore.GLYPHS[glyphId].name;
 
             html += `
                 <tr>
                     <td>${person.name}</td>
                     <td>${new Date(person.birthDate).toLocaleDateString('fr-FR')}</td>
-                    <td>${numberName} ${glyphName}</td>
+                    <td style="white-space:nowrap;">
+                        <img src="${numberURL}" alt="${numberId}" style="width:22px;height:22px;vertical-align:middle;opacity:0.85;">
+                        <img src="${glyphURL}" alt="${glyphName}" style="width:22px;height:22px;vertical-align:middle;opacity:0.85;margin-left:2px;">
+                    </td>
                     <td><span style="display:inline-block;width:30px;height:30px;background:${person.color};border-radius:4px;border:1px solid #ccc;"></span></td>
-                    <td>
+                    <td style="white-space:nowrap;">
                         <button onclick="window.tzolkinAdmin.editPerson(${index})" class="btn-edit">Modifier</button>
                         <button onclick="window.tzolkinAdmin.deletePerson(${index})" class="btn-delete">Supprimer</button>
+                        <button onclick="window.openCroixMayaModal('${person.name.replace(/'/g,"\\'")}', ${glyphId}, ${numberId}, '${person.birthDate}')" class="btn-edit" title="Croix Maya" style="padding:6px 10px; background:${window.TzolkinCore.getGlyphColorCSS(glyphId).bg}; color:${window.TzolkinCore.getGlyphColorCSS(glyphId).text}; border-color:${window.TzolkinCore.getGlyphColorCSS(glyphId).border};">✛</button>
                     </td>
                 </tr>
             `;
