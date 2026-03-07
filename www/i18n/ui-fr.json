@@ -242,7 +242,8 @@
         "company": "GALAAD MOTOKIYO FERRAN",
         "subtitle": "IA Access Conseil & Création",
         "app_title": "Calendrier Maya Sacré",
-        "reports_cta": "Faites réaliser des rapports à partir de vos données brutes pour découvrir comment et si le Tzolk'in impacte votre vie. Offrez-vous une compréhension unique de cet outil millénaire."
+        "support_text": "Cette app est gratuite et sans publicité. Si elle vous apporte de la valeur, vous pouvez soutenir son développement librement.",
+        "support_button": "☕ Soutenir le projet"
     },
     "analysis": {
         "menu_button": "Commander\nAnalyse",

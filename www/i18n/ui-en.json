@@ -242,7 +242,8 @@
         "company": "GALAAD MOTOKIYO FERRAN",
         "subtitle": "AI Access Consulting & Creation",
         "app_title": "Sacred Mayan Calendar",
-        "reports_cta": "Have reports generated from your raw data to discover how and whether the Tzolk'in impacts your life. Treat yourself to a unique understanding of this thousand-year-old tool."
+        "support_text": "This app is free and ad-free. If it brings you value, you can freely support its development.",
+        "support_button": "☕ Support the project"
     },
     "analysis": {
         "menu_button": "Order\nAnalysis",
