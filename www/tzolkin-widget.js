@@ -113,9 +113,28 @@ class TzolkinWidget {
     /**
      * Rendre le widget HTML
      */
+    // Calcule si le fond des personnes est clair (pour adapter le filtre glyph/ton)
+    isBgLight(matchingPeople) {
+        if (!matchingPeople || matchingPeople.length === 0) return false;
+        let totalLuma = 0, count = 0;
+        for (const p of matchingPeople) {
+            const hex = (p.color || '').replace('#', '');
+            if (hex.length >= 6) {
+                const r = parseInt(hex.substr(0,2), 16);
+                const g = parseInt(hex.substr(2,2), 16);
+                const b = parseInt(hex.substr(4,2), 16);
+                totalLuma += (0.299*r + 0.587*g + 0.114*b) / 255;
+                count++;
+            }
+        }
+        return count > 0 && (totalLuma / count) > 0.8;
+    }
+
     render() {
         const day = this.getCurrentDay();
         const bgStyle = this.getBackgroundStyle(day.matchingPeople);
+        const bgLight = this.isBgLight(day.matchingPeople);
+        const imgFilter = bgLight ? 'brightness(0) contrast(1.5)' : 'invert(1) brightness(2) contrast(1.2)';
         const namesStr = this.getPeopleNames(day.matchingPeople);
 
         // URLs des images
@@ -179,7 +198,7 @@ class TzolkinWidget {
                             <img src="${numberURL}"
                                  alt="Chiffre maya ${day.numberId}"
                                  class="tzolkin-number-img"
-                                 style="width:94%;height:auto;max-width:100%;max-height:100%;display:block;z-index:2;"
+                                 style="width:94%;height:auto;max-width:100%;max-height:100%;display:block;z-index:2;filter:${imgFilter};"
                                  onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span style=\\'font-size:clamp(1.1em,2vw,2em);color:#fff;\\'>${day.numberId}</span>');"
                                  data-lightbox="none" />
                         </div>
@@ -190,7 +209,7 @@ class TzolkinWidget {
                             <img src="${glyphURL}"
                                  alt="Glyphe maya ${day.glyphName}"
                                  class="tzolkin-glyph-img"
-                                 style="width:98%;height:auto;max-width:100%;max-height:100%;display:block;"
+                                 style="width:98%;height:auto;max-width:100%;max-height:100%;display:block;filter:${imgFilter};"
                                  data-lightbox="none" />
                         </div>
                     </div>

@@ -52,7 +52,7 @@
 /* GLYPHES ET NOMBRES - INVERSER LES COULEURS (BLANC) */
 #tzolkin-widget-php .tzolkin-glyph-img,
 #tzolkin-widget-php .tzolkin-number-img {
-    filter: invert(1) brightness(2) contrast(1.2) !important;
+    filter: invert(1) brightness(2) contrast(1.2);
 }
 
 /* Carré central */

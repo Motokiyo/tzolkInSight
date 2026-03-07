@@ -1327,8 +1327,40 @@
         const filename = `tzolkin-notes-${today}.csv`;
 
         const emailTo = 'tzolkinsight@leparede.org';
-        const emailSubject = `Analyse Tzolkin - ${year}`;
-        const emailBody = `Bonjour,
+
+        // Détection langue système
+        const sysLang = (navigator.language || navigator.userLanguage || 'fr').toLowerCase().split('-')[0];
+        const lang = ['fr','en','es'].includes(sysLang) ? sysLang : 'fr';
+        const langLabel = { fr: 'Français', en: 'English', es: 'Español' }[lang];
+
+        const emailSubject = `Analyse Tzolkin - ${year} [${langLabel}]`;
+        const emailBody = lang === 'en' ? `Hello,
+
+I would like to order my annual Tzolkin analysis.
+Please find my travel journal attached.
+
+Please note that the analysis of your data (tzolkin, transits, psyche, astronomy) will cost 50 euros. It will be processed as soon as you have paid via the link received in reply to this email.
+
+We hope you enjoy our application.
+
+Best regards,
+The Galaad Motokiyo Ferran team
+
+P.S. Check your spam. The payment link should arrive instantly after your email.`
+        : lang === 'es' ? `Hola,
+
+Me gustaría encargar mi análisis anual Tzolkin.
+Encontrarás mi diario de viaje adjunto.
+
+Le recordamos que el análisis de sus datos (tzolkin, tránsitos, psique, astronomía) le costará 50 euros. Se procesará en cuanto haya pagado a través del enlace recibido en respuesta a este correo.
+
+Esperamos que disfrute de nuestra aplicación.
+
+Atentamente,
+El equipo de Galaad Motokiyo Ferran
+
+P.D. Revisa tu carpeta de spam. El enlace de pago debería llegar instantáneamente tras tu envío.`
+        : `Bonjour,
 
 Je souhaite commander mon analyse annuelle Tzolkin.
 Vous trouverez mon journal de bord en pièce jointe.
