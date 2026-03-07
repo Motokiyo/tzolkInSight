@@ -445,6 +445,12 @@ body {
 
 #credits-modal {
     background: #ded2b3;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+#credits-modal.active {
+    display: block;
 }
 
 #credits-modal .modal-content {
@@ -456,7 +462,7 @@ body {
     border: none;
     border-radius: 0;
     padding: 0;
-    overflow: hidden;
+    overflow: visible;
     position: relative;
     display: flex;
     flex-direction: row;

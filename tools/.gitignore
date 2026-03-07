@@ -1,0 +1,4 @@
+.env
+rapport_expert_*.md
+tzolkin_knowledge_base.md
+__pycache__/

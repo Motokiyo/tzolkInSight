@@ -41,6 +41,7 @@
 
     <!-- Bibliothèques externes -->
     <script src="./imask.js"></script>
+    <script src="./email-composer.js"></script>
 
     <!-- Scripts de l'app (charger après les modules) -->
     <script src="./tzolkin-app-interactive.js" defer></script>
@@ -62,7 +63,7 @@
                 <div class="tzolkin-splash-text">
                     <h1>tzolkInSight</h1>
                     <p>Calendrier Maya Sacré</p>
-                    <p class="version">Version 1.1.3</p>
+                    <p class="version">Version 1.1.4</p>
                 </div>
                 <div class="splash-galaad-footer">
                     <div class="splash-galaad-divider"></div>
@@ -144,11 +145,18 @@
                 hideSplashScreen();
             }, 10000); // 10 secondes (comme demandé)
 
-            // Clic sur le splash screen pour le fermer immédiatement
-            document.getElementById('splash-screen').addEventListener('click', hideSplashScreen);
+            // Clic sur le splash screen pour le fermer immédiatement (sans propager aux éléments dessous)
+            document.getElementById('splash-screen').addEventListener('click', function(e) {
+                e.stopPropagation();
+                hideSplashScreen();
+            }, true);
 
             // Mobile : tap pour fermer
-            document.getElementById('splash-screen').addEventListener('touchstart', hideSplashScreen);
+            document.getElementById('splash-screen').addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                hideSplashScreen();
+            }, true);
 
             function hideSplashScreen() {
                 const splashScreen = document.getElementById('splash-screen');

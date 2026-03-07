@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  @font-face { font-family: 'Summer'; src: url('fonts/Summer/Summer.ttf'); }
+  @font-face { font-family: 'Simplifica'; src: url('fonts/Simplifica/SIMPLIFICA Typeface.ttf'); }
+  @font-face { font-family: 'AmaticSC'; src: url('fonts/AmaticSC/AmaticSC-Bold.ttf'); }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1024px;
+    height: 500px;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .container {
+    position: relative;
+    width: 1024px;
+    height: 500px;
+    overflow: hidden;
+  }
+
+  /* Fond illustré */
+  .bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('www/assets/x-balanque.png');
+    background-size: cover;
+    background-position: center center;
+  }
+
+  /* Overlay sombre léger */
+  .bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 15, 25, 0.38);
+  }
+
+  /* Icône gauche */
+  .icon-wrap {
+    position: absolute;
+    left: 72px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 224px;
+    height: 224px;
+  }
+  .icon-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    background: rgba(232, 220, 185, 0.85);
+  }
+  .icon-wrap::after {
+    content: '';
+    position: absolute;
+    inset: -14px;
+    border-radius: 50%;
+    border: 3px solid rgba(193, 148, 52, 0.9);
+  }
+  .icon-wrap img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Carte principale droite */
+  .card {
+    position: absolute;
+    left: 360px;
+    top: 40px;
+    width: 630px;
+    height: 420px;
+    background: rgba(22, 32, 50, 0.88);
+    border-radius: 16px;
+    border: 1px solid rgba(193, 148, 52, 0.35);
+    padding: 30px 38px 18px 38px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Titre */
+  .title {
+    font-family: 'Summer', cursive;
+    font-size: 78px;
+    color: #c19434;
+    line-height: 1;
+    text-shadow: 2px 2px 0 rgba(8,12,22,0.9);
+    letter-spacing: 1px;
+  }
+
+  .subtitle {
+    font-family: 'Simplifica', sans-serif;
+    font-size: 27px;
+    color: rgba(232, 220, 185, 0.92);
+    margin-top: 8px;
+    letter-spacing: 2px;
+  }
+
+  .separator {
+    width: 400px;
+    height: 2px;
+    background: linear-gradient(to right, rgba(193,148,52,0.9), rgba(193,148,52,0.2));
+    margin-top: 12px;
+    margin-bottom: 10px;
+  }
+
+  .tagline {
+    font-family: 'AmaticSC', cursive;
+    font-size: 23px;
+    color: rgba(200, 190, 165, 0.9);
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+  }
+
+  /* Bandeau calendrier */
+  .bandeau {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 158px;
+    background: rgb(100, 181, 246);
+    border-radius: 0 0 14px 14px;
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+  }
+
+  .band-side {
+    width: 30px;
+    background: rgb(50, 110, 165);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .band-side span {
+    font-family: 'Simplifica', sans-serif;
+    font-size: 13px;
+    color: white;
+    letter-spacing: 2px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  .band-side.right span { transform: rotate(180deg); }
+
+  .band-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 10px 0;
+  }
+
+  .band-date {
+    font-family: 'Simplifica', sans-serif;
+    font-size: 18px;
+    color: rgb(30, 50, 80);
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+
+  .band-hr {
+    width: 100%;
+    height: 1px;
+    background: rgba(30,50,80,0.25);
+    margin-bottom: 8px;
+  }
+
+  .band-cols {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+
+  .band-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+  }
+
+  .band-label {
+    font-family: 'Simplifica', sans-serif;
+    font-size: 12px;
+    color: rgb(30, 50, 80);
+    letter-spacing: 1.5px;
+    min-height: 16px;
+  }
+
+  .band-col img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    filter: brightness(0) saturate(100%) invert(16%) sepia(30%) saturate(800%) hue-rotate(190deg) brightness(60%);
+  }
+
+  .band-col.main img { width: 68px; height: 68px; }
+
+  .band-ton-bar {
+    width: 6px;
+    height: 46px;
+    background: rgb(30, 50, 80);
+    margin-right: 6px;
+    align-self: center;
+    flex-shrink: 0;
+    margin-top: 16px;
+  }
+
+  .band-col.main {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0;
+    flex: 1.2;
+  }
+
+  .band-col.main .main-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .band-name {
+    font-family: 'AmaticSC', cursive;
+    font-size: 16px;
+    color: rgb(30, 50, 80);
+    text-align: center;
+    line-height: 1.2;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="bg"></div>
+  <div class="bg-overlay"></div>
+
+  <!-- Icône -->
+  <div class="icon-wrap">
+    <img src="www/icons/icon-app-512.png" alt="TzolkInSight">
+  </div>
+
+  <!-- Carte -->
+  <div class="card">
+    <div class="title">tzolkInSight</div>
+    <div class="subtitle">Calendrier Maya Sacré</div>
+    <div class="separator"></div>
+    <div class="tagline">Les savoirs ancestraux mayas<br>à l'épreuve de votre vie</div>
+
+    <!-- Bandeau calendrier -->
+    <div class="bandeau">
+      <div class="band-side left">
+        <span>MAÏS NOIR</span>
+      </div>
+
+      <div class="band-content">
+        <div class="band-date">07/03/2026</div>
+        <div class="band-hr"></div>
+        <div class="band-cols">
+
+          <!-- Trécéna -->
+          <div class="band-col">
+            <div class="band-label">TRÉCÉNA</div>
+            <img src="www/assets/glyphs/MAYA-g-log-cal-D20-Ajaw.svg" alt="Ahau">
+            <div class="band-name">Ahau</div>
+          </div>
+
+          <!-- Glyphe principal + Ton -->
+          <div class="band-col main">
+            <div class="band-ton-bar"></div>
+            <div class="main-inner">
+              <div class="band-label"></div>
+              <img src="www/assets/glyphs/MAYA-g-log-cal-D04-Kan.svg" alt="Kan">
+              <div class="band-name">5 Kan</div>
+            </div>
+          </div>
+
+          <!-- Seigneur de Nuit -->
+          <div class="band-col">
+            <div class="band-label">S. DE NUIT</div>
+            <img src="www/assets/glyphs/MAYA-g-log-cal-D16-Kib.svg" alt="Kib">
+            <div class="band-name">G7 Buluc<br>Chabtan</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="band-side right">
+        <span>OUEST · EAU</span>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

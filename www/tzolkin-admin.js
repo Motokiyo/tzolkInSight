@@ -335,8 +335,8 @@ class TzolkinAdmin {
                     <td><span style="display:inline-block;width:30px;height:30px;background:${person.color};border-radius:4px;border:1px solid #ccc;"></span></td>
                     <td style="white-space:nowrap;">
                         <button onclick="window.tzolkinAdmin.editPerson(${index})" class="btn-edit">Modifier</button>
-                        <button onclick="window.tzolkinAdmin.deletePerson(${index})" class="btn-delete">Supprimer</button>
                         <button onclick="window.openCroixMayaModal('${person.name.replace(/'/g,"\\'")}', ${glyphId}, ${numberId}, '${person.birthDate}')" class="btn-edit" title="Croix Maya" style="padding:6px 10px; background:${window.TzolkinCore.getGlyphColorCSS(glyphId).bg}; color:${window.TzolkinCore.getGlyphColorCSS(glyphId).text}; border-color:${window.TzolkinCore.getGlyphColorCSS(glyphId).border};">✛</button>
+                        <span onclick="window.tzolkinAdmin.deletePerson(${index})" title="Supprimer" style="cursor:pointer; font-size:20px; padding:0 4px;">🗑</span>
                     </td>
                 </tr>
             `;

@@ -1,0 +1,74 @@
+╔══════════════════════════════════════════════════════════════╗
+║       CONVERTISSEUR CSV — Ancien format → Nouvelle app       ║
+╚══════════════════════════════════════════════════════════════╝
+
+Ce script transforme automatiquement un fichier CSV exporté depuis
+l'ancienne app Tzolk'in vers le format de la nouvelle app.
+
+Il gère tout seul :
+  • La détection du séparateur (, ou ;)
+  • La conversion des noms mayas en chiffres  (ex. "Uuc" → 7)
+  • La conversion des couleurs en émotions    (ex. #FFFF99 → Joie)
+  • Le calcul de la trécéna
+  • La mise en forme correcte pour l'import
+
+
+────────────────────────────────────────────────────────────────
+ UTILISATION
+────────────────────────────────────────────────────────────────
+
+1. Ouvre un Terminal
+
+2. Va dans le dossier où se trouve le script :
+   (glisser-déposer le dossier dans le Terminal après avoir tapé "cd ")
+
+3. Tape la commande suivante en remplaçant par ton fichier :
+
+      python3 convertir_csv.py mon_fichier.csv
+
+4. Le fichier converti apparaît automatiquement dans le même
+   dossier sous le nom :  mon_fichier_converti.csv
+
+
+────────────────────────────────────────────────────────────────
+ EXEMPLE CONCRET
+────────────────────────────────────────────────────────────────
+
+   python3 convertir_csv.py tzolkin-notes-claire.csv
+
+   → crée : tzolkin-notes-claire_converti.csv  ✓
+
+
+────────────────────────────────────────────────────────────────
+ OPTIONNEL — choisir le nom du fichier de sortie
+────────────────────────────────────────────────────────────────
+
+   python3 convertir_csv.py ancien.csv nouveau.csv
+
+
+────────────────────────────────────────────────────────────────
+ PRÉREQUIS
+────────────────────────────────────────────────────────────────
+
+   • Python 3 installé  (déjà présent sur Mac et Linux)
+   • Aucune autre installation nécessaire
+
+
+────────────────────────────────────────────────────────────────
+ FORMAT ATTENDU EN ENTRÉE (ancien format)
+────────────────────────────────────────────────────────────────
+
+   Date, Glyphe, Chiffre, Glyphe+Chiffre, Couleur, Note
+
+   Exemple :
+   "14/05/2025","Manik","Uuc","Manik Uuc","#FFFF99","Ma note..."
+
+
+────────────────────────────────────────────────────────────────
+ FORMAT PRODUIT EN SORTIE (nouveau format)
+────────────────────────────────────────────────────────────────
+
+   Date, Heure, Lieu, Lat, Lon, Glyphe, Ton, Trecena, Emotion, Texte
+
+   Exemple :
+   "14/05/2025","","","","","Manik","7","Imix","Joie,Sérénité,Extase","Ma note..."
