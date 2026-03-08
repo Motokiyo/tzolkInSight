@@ -1090,7 +1090,7 @@
         const table = document.getElementById('notes-table');
 
         if (!notesToDisplay || notesToDisplay.length === 0) {
-            table.innerHTML = '<div class="no-results" style="text-align: center; padding: 20px; color: #888;">Aucune note trouvée</div>';
+            table.innerHTML = `<div class="no-results" style="text-align: center; padding: 20px; color: #888;">${_t('saved_modal.no_notes')}</div>`;
             return;
         }
 
@@ -1114,8 +1114,8 @@
                     <p class="note-text" data-full-text="${safeText}">${displayText}</p>
                     ${locationTime ? `<div style="font-size:13px; font-weight:bold; color:#555; margin-top:6px;">📍 ${locationTime}</div>` : ''}
                     <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:10px;">
-                        <button onclick="editNoteFromSaved('${note.date}'); event.stopPropagation();" style="padding:6px 14px; background:#4CAF50; color:white; border:none; border-radius:6px; cursor:pointer; font-size:14px; font-family:'Simplifica',sans-serif;">✏️ Modifier</button>
-                        <button onclick="deleteNote('${note.date}'); event.stopPropagation();" style="padding:6px 14px; background:#FF5555; color:white; border:none; border-radius:6px; cursor:pointer; font-size:14px; font-family:'Simplifica',sans-serif;">🗑 Supprimer</button>
+                        <button onclick="editNoteFromSaved('${note.date}'); event.stopPropagation();" style="padding:6px 14px; background:#4CAF50; color:white; border:none; border-radius:6px; cursor:pointer; font-size:14px; font-family:'Simplifica',sans-serif;">✏️ ${_t('saved_modal.edit')}</button>
+                        <button onclick="deleteNote('${note.date}'); event.stopPropagation();" style="padding:6px 14px; background:#FF5555; color:white; border:none; border-radius:6px; cursor:pointer; font-size:14px; font-family:'Simplifica',sans-serif;">🗑 ${_t('saved_modal.delete')}</button>
                     </div>
                 </div>
             `;
@@ -1221,7 +1221,7 @@
 
     //=== FONCTION: Supprimer une note ===
     async function deleteNote(dateStr) {
-        if (!confirm('Voulez-vous vraiment supprimer cette note ?')) return;
+        if (!confirm(_t('notes_modal.confirm_delete_note'))) return;
 
         const userKey = getEffectiveUserKey();
         await window.TzolkinStorage.deleteNote(userKey, dateStr);
@@ -1701,10 +1701,10 @@ ${notesHtml}
                 .join(', ');
             const suffix = conflictNotes.length > 5 ? ` … (+${conflictNotes.length - 5} autres)` : '';
             const shouldReplace = confirm(
-                `${conflictNotes.length} note(s) en double :\n${conflictDates}${suffix}\n\n` +
-                `Une entrée existe déjà pour ces dates dans l'application.\n` +
-                `Remplacer toutes les entrées en double ?\n\n` +
-                `OK = Remplacer   |   Annuler = Conserver les existantes`
+                `${conflictNotes.length} ${_t('saved_modal.import_duplicates_prefix')} :\n${conflictDates}${suffix}\n\n` +
+                `${_t('saved_modal.import_duplicates_exists')}\n` +
+                `${_t('saved_modal.import_duplicates_replace')}\n\n` +
+                `${_t('saved_modal.import_duplicates_buttons')}`
             );
             if (shouldReplace) {
                 for (const note of conflictNotes) {
@@ -1940,11 +1940,11 @@ ${notesHtml}
         } else {
             if (currentLocation) {
                 locEl.textContent = currentLocation;
-                hintEl.textContent = 'GPS en cache — 📍 pour actualiser.';
+                hintEl.textContent = _t('notes_modal.gps_cached');
                 hintEl.style.color = '#888';
             } else {
                 locEl.textContent = '';
-                hintEl.textContent = 'Appuyez sur 📍 pour détecter la ville, ou saisissez-la.';
+                hintEl.textContent = _t('notes_modal.gps_tap_detect');
                 hintEl.style.color = '#888';
             }
             let gpsGranted = false;
