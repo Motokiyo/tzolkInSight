@@ -7,6 +7,9 @@
  * avec des flèches cliquables pour ouvrir la modale avec les textes longs complets (de tzolkin-details.php)
  */
 
+// i18n convenience helper
+const t = window.i18n ? window.i18n.t.bind(window.i18n) : k => k;
+
 /**
  * Mettre à jour l'affichage des détails avec les textes courts complets (de WordPress)
  * et des flèches cliquables pour ouvrir la modale avec les textes longs
@@ -56,13 +59,13 @@ function updateTzolkinDetails() {
             ${(() => {
                 const css = window.TzolkinCore.getGlyphColorCSS(day.glyphId);
                 const colorName = window.TzolkinCore.getGlyphColor(day.glyphId);
-                const FAMILY = { rouge: 'MAÏS ROUGE', blanc: 'MAÏS BLANC', bleu: 'MAÏS NOIR', jaune: 'MAÏS JAUNE' };
-                const DIR_ELEM = { rouge: 'EST • FEU', blanc: 'NORD • AIR', bleu: 'OUEST • EAU', jaune: 'SUD • TERRE' };
+                const FAMILY = { rouge: t('details.corn_red'), blanc: t('details.corn_white'), bleu: t('details.corn_black'), jaune: t('details.corn_yellow') };
+                const DIR_ELEM = { rouge: t('details.dir_elem_east'), blanc: t('details.dir_elem_north'), bleu: t('details.dir_elem_west'), jaune: t('details.dir_elem_south') };
                 const labelLeft  = FAMILY[colorName]   || colorName.toUpperCase();
                 const labelRight = DIR_ELEM[colorName] || '';
                 const textColor = colorName === 'blanc' ? '#333' : '#fff';
                 return `
-            <div onclick="window.tzolkinDetailsDisplay.showCornFamily('${colorName}')" style="margin-bottom: 25px; padding: 14px 46px 16px 46px; background: ${css.bg}; border-radius: 20px; border: 2px solid ${css.border}; position: relative; overflow: hidden; cursor: pointer;" title="Découvrir la famille ${FAMILY[colorName] || colorName}">
+            <div onclick="window.tzolkinDetailsDisplay.showCornFamily('${colorName}')" style="margin-bottom: 25px; padding: 14px 46px 16px 46px; background: ${css.bg}; border-radius: 20px; border: 2px solid ${css.border}; position: relative; overflow: hidden; cursor: pointer;" title="${t('details.discover_family')} ${FAMILY[colorName] || colorName}">
                 <!-- Bande gauche : famille Maïs (bas → haut) -->
                 <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 34px; background: ${css.border}; display: flex; align-items: center; justify-content: center;">
                     <span style="writing-mode: vertical-rl; transform: rotate(180deg); color: ${textColor}; font-family: 'Summer', cursive; font-size: clamp(1.3rem, 5.5vw, 1.7rem); letter-spacing: 2px; white-space: nowrap;">${labelLeft}</span>
@@ -80,7 +83,7 @@ function updateTzolkinDetails() {
 
                     <!-- Gauche : Trécéna -->
                     <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px;">
-                        <span style="font-size: clamp(0.75rem, 3vw, 0.95rem); font-family: 'Summer', cursive; color: #222; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; line-height: 1;">Trécéna</span>
+                        <span style="font-size: clamp(0.75rem, 3vw, 0.95rem); font-family: 'Summer', cursive; color: #222; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; line-height: 1;">${t('details.trecena')}</span>
                         <img src="${trecenaURL}" alt="${window.TzolkinCore.GLYPHS[day.trecenaGlyphId].name}" style="height: clamp(40px, 11vw, 54px); filter: drop-shadow(0 0 4px rgba(0,0,0,0.2));">
                         <span style="font-size: clamp(0.8rem, 3.2vw, 1rem); font-family: 'Summer', cursive; color: #333; text-align: center; line-height: 1.2;">${window.TzolkinCore.GLYPHS[day.trecenaGlyphId].name}</span>
                     </div>
@@ -88,7 +91,7 @@ function updateTzolkinDetails() {
                     <!-- Centre : Glyphe + Ton du jour -->
                     <div style="flex: 1.4; display: flex; flex-direction: column; align-items: center; gap: 5px;">
                         <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                            <img src="${numberURL}" alt="Nombre ${day.numberId}" style="height: clamp(32px, 9vw, 46px); filter: drop-shadow(0 0 5px rgba(0,0,0,0.2));">
+                            <img src="${numberURL}" alt="${t('details.number')} ${day.numberId}" style="height: clamp(32px, 9vw, 46px); filter: drop-shadow(0 0 5px rgba(0,0,0,0.2));">
                             <img src="${glyphURL}" alt="${window.TzolkinCore.GLYPHS[day.glyphId].name}" style="height: clamp(46px, 13vw, 64px); filter: drop-shadow(0 0 5px rgba(0,0,0,0.2));">
                         </div>
                         <span style="font-size: clamp(1rem, 4vw, 1.25rem); color: #333; font-weight: bold; font-family: 'Summer', cursive; text-align: center;">${day.numberId} ${window.TzolkinCore.GLYPHS[day.glyphId].name}</span>
@@ -96,7 +99,7 @@ function updateTzolkinDetails() {
 
                     <!-- Droite : Seigneur de la Nuit -->
                     <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px;">
-                        <span style="font-size: clamp(0.75rem, 3vw, 0.95rem); font-family: 'Summer', cursive; color: #222; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; line-height: 1;">S. de Nuit</span>
+                        <span style="font-size: clamp(0.75rem, 3vw, 0.95rem); font-family: 'Summer', cursive; color: #222; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; line-height: 1;">${t('details.lord_of_night_short')}</span>
                         ${lordURL
                             ? `<img src="${lordURL}" alt="G${lordNum}" style="height: clamp(40px, 11vw, 54px); filter: drop-shadow(0 0 4px rgba(0,0,0,0.15));">`
                             : `<span style="font-size: clamp(1.5rem, 6vw, 2rem); line-height: 1; color: #333;">G${lordNum}</span>`
@@ -122,8 +125,8 @@ function updateTzolkinDetails() {
                 </div>
                 <div style="font-size: 18px; color: #333; line-height: 1.6;">
                     <div style="margin-bottom: 8px;">${glyph.description}</div>
-                    <p style="margin: 6px 0;"><strong>Mots-clés :</strong> ${glyph.mots_cles}</p>
-                    <p style="margin: 0;"><strong>Animal de pouvoir :</strong> ${glyph.animal_pouvoir}</p>
+                    <p style="margin: 6px 0;"><strong>${t('details.keywords')} :</strong> ${glyph.mots_cles}</p>
+                    <p style="margin: 0;"><strong>${t('details.power_animal')} :</strong> ${glyph.animal_pouvoir}</p>
                 </div>
             </div>
 
@@ -171,7 +174,7 @@ function updateTzolkinDetails() {
                     <div style="display: flex; align-items: center; gap: 10px;">
                         <img src="${trecenaURL}" alt="" style="width: 30px; height: 30px; opacity: 0.6;">
                         <h4 style="margin: 0; font-size: 26px; font-weight: bold; color: #333; font-family: 'Summer', cursive; text-transform: uppercase;">
-                            Trécéna de ${trecena.nawal_maya} (${trecena.traduction})
+                            ${t('details.trecena_of')} ${trecena.nawal_maya} (${trecena.traduction})
                         </h4>
                     </div>
                     <button onclick="window.tzolkinDetailsDisplay.openDetailModal('trecena', ${day.trecenaGlyphId})"
@@ -202,9 +205,9 @@ function updateTzolkinDetails() {
                     const rest     = (parts[1] || '').split(' — ');
                     const mainName = rest[0] || bearerGlyph.name;
                     const otherOrtho = rest[1] || '';
-                    titre = `Porteur Année N°${num} ${mainName}${otherOrtho ? ' - ' + otherOrtho : ''}`;
+                    titre = `${t('details.year_bearer')} N°${num} ${mainName}${otherOrtho ? ' - ' + otherOrtho : ''}`;
                 } else {
-                    titre = `Porteur Année ${bearerGlyph.name}`;
+                    titre = `${t('details.year_bearer')} ${bearerGlyph.name}`;
                 }
                 return `
                 <div style="margin-bottom: 24px;">
@@ -227,12 +230,12 @@ function updateTzolkinDetails() {
             ${day.matchingPeople.length > 0 ? `
                 <div style="margin-top: 10px;">
                     <h4 style="margin: 0 0 10px 0; font-size: 20px; color: #444; font-family: 'Summer', cursive;">
-                        👤 Jour important pour :
+                        👤 ${t('details.important_for')} :
                     </h4>
                     ${day.matchingPeople.map((p, idx) => {
                         const css = window.TzolkinCore.getGlyphColorCSS(p.personGlyphId);
                         const colorName = window.TzolkinCore.getGlyphColor(p.personGlyphId);
-                        const LABEL_TEXT = { entree: 'Entrée de cycle', central: 'Jour central', sortie: 'Sortie de cycle' };
+                        const LABEL_TEXT = { entree: t('details.cycle_entry'), central: t('details.cycle_central'), sortie: t('details.cycle_exit') };
                         const labelText = LABEL_TEXT[p.cycleLabel] || '';
                         const glyphImg = window.TzolkinCore.getGlyphURL(p.personGlyphId);
                         return `
@@ -246,7 +249,7 @@ function updateTzolkinDetails() {
                             </div>
                             <button onclick="openCroixMayaModalByIndex(${idx})"
                                 style="flex-shrink:0; padding:6px 12px; background:${css.border}; color:white; border:none; border-radius:8px; cursor:pointer; font-size:15px; font-family:'Simplifica',sans-serif; white-space:nowrap;">
-                                Croix Maya →
+                                ${t('details.maya_cross_button')}
                             </button>
                         </div>`;
                     }).join('')}
@@ -280,6 +283,10 @@ const PORTEUR_IMAGES = {
 
 /**
  * Données des 4 familles de Maïs K'iche' (Peuple du Maïs / Popol Vuh)
+ * TODO i18n: CORN_FAMILY_DATA contains extensive French text (frenchName, direction, element,
+ * popolvuh, elementDesc, nawals[].title/desc, ceremony, dirDesc). These should be extracted
+ * to i18n overlay files (e.g. corn-families-fr.json / corn-families-en.json) in a future pass.
+ * Same applies to PORTEUR_IMAGES labels above.
  */
 const CORN_FAMILY_DATA = {
     rouge: {
@@ -368,7 +375,7 @@ const CORN_FAMILY_DATA = {
  * Afficher la page détail d'une famille de Maïs K'iche'
  */
 function showCornFamilyDetail(colorName) {
-    const data = CORN_FAMILY_DATA[colorName];
+    const data = (window.CORN_FAMILY_DATA_I18N || CORN_FAMILY_DATA)[colorName];
     if (!data) return;
 
     // Masquer widget + résumé, afficher vue détail (même pattern que showDetail)
@@ -407,7 +414,7 @@ function showCornFamilyDetail(colorName) {
             <!-- Bouton Retour -->
             <button onclick="window.showMain ? window.showMain() : (document.getElementById('tzolkin-detail-view').style.display='none', document.getElementById('tzolkin-widget-container').style.display='', document.getElementById('tzolkin-details').style.display='')"
                 style="padding: 8px 16px; background: #222; color: #ded2b3; border: none; border-radius: 8px; cursor: pointer; font-family: 'Summer', cursive; font-size: 18px; margin-bottom: 20px; display: inline-block;">
-                ← Retour
+                ${t('details.back')}
             </button>
 
             <div style="background: #ded2b3; border: 2px solid #222; border-radius: 16px; padding: 20px; max-width: 500px; margin: 0 auto;">
@@ -417,7 +424,7 @@ function showCornFamilyDetail(colorName) {
                     <img src="${PORTEUR_IMAGES[colorName].img}" style="width: clamp(70px, 18vw, 96px); height: auto; margin-bottom: 10px; filter: brightness(0);">
                     <h3 style="font-family: 'Summer', cursive; font-size: clamp(1.5rem, 6.5vw, 2rem); margin: 0 0 4px 0; color: #222; letter-spacing: 2px;">${data.frenchName}</h3>
                     <div style="font-family: 'Summer', cursive; font-size: clamp(1rem, 4vw, 1.3rem); color: #555; margin-bottom: 10px;">${data.kicheName}</div>
-                    <div style="font-family: 'Simplifica', sans-serif; font-size: 15px; color: #666; margin-bottom: 12px;">Porteur d'année : <strong>${PORTEUR_IMAGES[colorName].kiche}</strong> (${PORTEUR_IMAGES[colorName].yucatec})</div>
+                    <div style="font-family: 'Simplifica', sans-serif; font-size: 15px; color: #666; margin-bottom: 12px;">${t('details.year_bearer_of')} : <strong>${PORTEUR_IMAGES[colorName].kiche}</strong> (${PORTEUR_IMAGES[colorName].yucatec})</div>
                     <div style="display: inline-flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
                         <span style="padding: 3px 12px; border-radius: 20px; background: #444; color: #ded2b3; font-size: 14px; font-family: 'Simplifica', sans-serif;">${data.direction} · ${data.dirKiche}</span>
                         <span style="padding: 3px 12px; border-radius: 20px; background: #444; color: #ded2b3; font-size: 14px; font-family: 'Simplifica', sans-serif;">${data.element} · ${data.elementKiche}</span>
@@ -427,25 +434,25 @@ function showCornFamilyDetail(colorName) {
 
                 <!-- Popol Vuh -->
                 <div style="margin-bottom: 20px;">
-                    <h3 style="font-family: 'Summer', cursive; font-size: 19px; margin: 0 0 8px 0; color: #333; text-transform: uppercase; letter-spacing: 1px;">Popol Vuh</h3>
+                    <h3 style="font-family: 'Summer', cursive; font-size: 19px; margin: 0 0 8px 0; color: #333; text-transform: uppercase; letter-spacing: 1px;">${t('details.popol_vuh')}</h3>
                     <p style="margin: 0; font-size: 17px; line-height: 1.65; color: #555;">${data.popolvuh}</p>
                 </div>
 
                 <!-- Élément -->
                 <div style="margin-bottom: 20px; padding: 14px 16px; background: #c8c4b8; border-radius: 10px;">
-                    <h3 style="font-family: 'Summer', cursive; font-size: 19px; margin: 0 0 8px 0; color: #333; text-transform: uppercase; letter-spacing: 1px;">L'Élément ${data.element} (${data.elementKiche})</h3>
+                    <h3 style="font-family: 'Summer', cursive; font-size: 19px; margin: 0 0 8px 0; color: #333; text-transform: uppercase; letter-spacing: 1px;">${t('details.element_title')} ${data.element} (${data.elementKiche})</h3>
                     <p style="margin: 0; font-size: 17px; line-height: 1.65; color: #555;">${data.elementDesc}</p>
                 </div>
 
                 <!-- Les 5 Nawals -->
                 <div style="margin-bottom: 20px;">
-                    <h3 style="font-family: 'Summer', cursive; font-size: 19px; margin: 0 0 12px 0; color: #333; text-transform: uppercase; letter-spacing: 1px;">Les 5 Nawals K'iche'</h3>
+                    <h3 style="font-family: 'Summer', cursive; font-size: 19px; margin: 0 0 12px 0; color: #333; text-transform: uppercase; letter-spacing: 1px;">${t('details.nawals_title')}</h3>
                     ${nawalRowsHTML}
                 </div>
 
                 <!-- Cérémonies -->
                 <div style="padding: 14px 16px; background: #c8c4b8; border-radius: 10px;">
-                    <h3 style="font-family: 'Summer', cursive; font-size: 19px; margin: 0 0 8px 0; color: #333; text-transform: uppercase; letter-spacing: 1px;">Cérémonies K'iche'</h3>
+                    <h3 style="font-family: 'Summer', cursive; font-size: 19px; margin: 0 0 8px 0; color: #333; text-transform: uppercase; letter-spacing: 1px;">${t('details.ceremonies_title')}</h3>
                     <p style="margin: 0; font-size: 17px; line-height: 1.65; color: #555;">${data.ceremony}</p>
                 </div>
 

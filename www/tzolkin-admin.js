@@ -12,6 +12,7 @@
 class TzolkinAdmin {
     constructor() {
         this.currentEditIndex = -1;
+        this.t = window.i18n ? window.i18n.t.bind(window.i18n) : k => k;
         this.init();
     }
 
@@ -38,60 +39,61 @@ class TzolkinAdmin {
         }
 
         // Créer la modale
+        const t = this.t;
         const modalHTML = `
             <div id="admin-modal" class="modal" style="z-index:1400; padding: 0; position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; background: rgba(222, 210, 179, 0.95);">
                 <div class="modal-content" style="background: transparent; border: none; border-radius: 0; box-shadow: none; width: 100%; height: auto; min-height: 100%; max-height: none; max-width: 100%; margin: 0; overflow-y: visible; padding: 20px; padding-top: calc(env(safe-area-inset-top, 0px) + 20px); padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 20px); box-sizing: border-box; position: relative;">
                     <button class="close-modal" onclick="window.tzolkinAdmin.closeAdminModal()" style="position:absolute; top: calc(env(safe-area-inset-top, 0px) + 15px); right:15px; background:none; border:none; font-size:24px; cursor:pointer;">&times;</button>
                     <div class="header" style="text-align:center; padding-bottom: 20px; border-bottom: 2px solid rgba(0,0,0,0.1);">
-                        <h2 style="font-family: 'Summer', cursive; font-size: 32px; color: #c19434; margin:0;">Réglages - Mes Contacts</h2>
+                        <h2 style="font-family: 'Summer', cursive; font-size: 32px; color: #c19434; margin:0;">${t('settings.contacts_title')}</h2>
                     </div>
 
                     <!-- Formulaire d'ajout/modification -->
                     <div class="admin-form">
-                        <h3 id="form-title">Ajouter un contact</h3>
+                        <h3 id="form-title">${t('settings.add_contact')}</h3>
 
                         <div class="form-group">
-                            <label for="person-name">Nom :</label>
-                            <input type="text" id="person-name" placeholder="Nom de la personne" required>
+                            <label for="person-name">${t('settings.name')}</label>
+                            <input type="text" id="person-name" placeholder="${t('settings.name').replace(' :', '')}" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="person-birthdate">Date de naissance :</label>
-                            <input type="text" id="person-birthdate" placeholder="jj/mm/aaaa" inputmode="numeric" autocomplete="off" required>
-                            <small>Le glyphe et le nombre seront calculés automatiquement</small>
+                            <label for="person-birthdate">${t('settings.birthdate')}</label>
+                            <input type="text" id="person-birthdate" placeholder="${t('widget.date_placeholder')}" inputmode="numeric" autocomplete="off" required>
+                            <small>${t('settings.auto_glyph')}</small>
                         </div>
 
                         <div class="form-group">
-                            <label for="person-color">Couleur :</label>
+                            <label for="person-color">${t('settings.color')}</label>
                             <input type="color" id="person-color" value="#ffeedd">
-                            <button type="button" id="generate-color-btn" class="btn-secondary">Couleur aléatoire</button>
+                            <button type="button" id="generate-color-btn" class="btn-secondary">${t('settings.random_color')}</button>
                         </div>
 
                         <div class="tzolkin-preview" id="tzolkin-preview" style="display:none;">
-                            <p><strong>Jour Tzolk'in :</strong> <span id="preview-tzolkin"></span></p>
+                            <p><strong>${t('settings.tzolkin_day')}</strong> <span id="preview-tzolkin"></span></p>
                             <img id="preview-glyph" src="" alt="Glyphe" style="width:60px;height:60px;">
                             <img id="preview-number" src="" alt="Nombre" style="width:40px;height:40px;">
                         </div>
 
                         <div class="form-actions">
-                            <button type="button" id="save-person-btn" class="button button-primary">Enregistrer</button>
-                            <button type="button" id="cancel-edit-btn" class="button button-secondary" style="display:none;">Annuler</button>
+                            <button type="button" id="save-person-btn" class="button button-primary">${t('settings.save')}</button>
+                            <button type="button" id="cancel-edit-btn" class="button button-secondary" style="display:none;">${t('settings.cancel')}</button>
                         </div>
                     </div>
 
                     <!-- Section Code PIN -->
                     <div style="margin: 24px 0; padding: 18px 0; border-top: 2px solid rgba(0,0,0,0.1); border-bottom: 2px solid rgba(0,0,0,0.1);">
-                        <h3 style="font-family:'Summer',cursive; font-size:20px; color:#c19434; margin:0 0 10px 0;">Code PIN</h3>
-                        <p id="pin-admin-status" style="font-size:16px; color:#222; margin:0 0 14px 0;">Chargement…</p>
+                        <h3 style="font-family:'Summer',cursive; font-size:20px; color:#c19434; margin:0 0 10px 0;">${t('pin.title')}</h3>
+                        <p id="pin-admin-status" style="font-size:16px; color:#222; margin:0 0 14px 0;">${t('settings.loading')}</p>
                         <div style="display:flex; gap:12px; flex-wrap:wrap;">
-                            <button onclick="window.tzolkinAdmin.handlePinChange()" class="btn-edit" style="flex:1; font-size:16px; padding:10px;">Changer le PIN</button>
-                            <button onclick="window.tzolkinAdmin.handlePinRemove()" class="btn-delete" style="flex:1; font-size:16px; padding:10px;">Désactiver le PIN</button>
+                            <button onclick="window.tzolkinAdmin.handlePinChange()" class="btn-edit" style="flex:1; font-size:16px; padding:10px;">${t('pin.change_pin')}</button>
+                            <button onclick="window.tzolkinAdmin.handlePinRemove()" class="btn-delete" style="flex:1; font-size:16px; padding:10px;">${t('pin.disable_pin')}</button>
                         </div>
                     </div>
 
                     <!-- Liste des contacts -->
                     <div class="contacts-list">
-                        <h3>Contacts enregistrés</h3>
+                        <h3>${t('settings.saved_contacts')}</h3>
                         <div id="contacts-table"></div>
                         <div style="height: 80px;"></div>
                     </div>
@@ -125,8 +127,8 @@ class TzolkinAdmin {
 
             const adminButton = `
                 <div class="menu-button" id="admin-menu-btn" onclick="window.tzolkinAdmin.openAdminModal()" style="cursor:pointer;">
-                    <img src="./assets/boutons/SVG/ahau-bt.svg" alt="Réglages">
-                    <span>Réglages</span>
+                    <img src="./assets/boutons/SVG/ahau-bt.svg" alt="${this.t('settings.title')}">
+                    <span>${this.t('settings.title')}</span>
                 </div>
             `;
 
@@ -225,17 +227,17 @@ class TzolkinAdmin {
         const color = document.getElementById('person-color').value;
 
         if (!name || !rawDate || rawDate.length < 10) {
-            alert('Veuillez remplir tous les champs obligatoires');
+            alert(this.t('settings.fill_required'));
             return;
         }
         const dateParts = rawDate.split('/');
         if (dateParts.length !== 3 || dateParts[2].length !== 4) {
-            alert('Format de date invalide. Utilisez jj/mm/aaaa');
+            alert(this.t('settings.invalid_date_format'));
             return;
         }
         const birthDateObj = new Date(parseInt(dateParts[2]), parseInt(dateParts[1]) - 1, parseInt(dateParts[0]));
         if (isNaN(birthDateObj.getTime())) {
-            alert('Date invalide. Vérifiez le jour, le mois et l\'année');
+            alert(this.t('settings.invalid_date'));
             return;
         }
         // Stocker au format YYYY-MM-DD (rétrocompatible)
@@ -256,13 +258,13 @@ class TzolkinAdmin {
             // Mode modification
             const success = window.TzolkinStorage.updatePerson(this.currentEditIndex, person);
             if (success) {
-                alert(`Contact "${name}" modifié avec succès !`);
+                alert(this.t('settings.contact_edited', {name: name}));
             }
         } else {
             // Mode ajout
             const success = window.TzolkinStorage.addPerson(person);
             if (success) {
-                alert(`Contact "${name}" ajouté avec succès !`);
+                alert(this.t('settings.contact_added', {name: name}));
             }
         }
 
@@ -291,13 +293,13 @@ class TzolkinAdmin {
     resetForm() {
         this.currentEditIndex = -1;
 
-        document.getElementById('form-title').textContent = 'Ajouter un contact';
+        document.getElementById('form-title').textContent = this.t('settings.add_contact');
         document.getElementById('person-name').value = '';
         document.getElementById('person-birthdate').value = '';
         document.getElementById('person-color').value = '#ffeedd';
         document.getElementById('tzolkin-preview').style.display = 'none';
 
-        document.getElementById('save-person-btn').textContent = 'Enregistrer';
+        document.getElementById('save-person-btn').textContent = this.t('settings.save');
         document.getElementById('cancel-edit-btn').style.display = 'none';
     }
 
@@ -311,11 +313,12 @@ class TzolkinAdmin {
         const people = window.TzolkinStorage.loadPeople();
 
         if (people.length === 0) {
-            container.innerHTML = '<p>Aucun contact enregistré.</p>';
+            container.innerHTML = `<p>${this.t('settings.no_contacts') || 'Aucun contact enregistré.'}</p>`;
             return;
         }
 
-        let html = '<table class="contacts-table"><thead><tr><th>Nom</th><th>Date de naissance</th><th>Tzolk\'in</th><th>Couleur</th><th>Actions</th></tr></thead><tbody>';
+        const locale = this.t('date_format.locale');
+        let html = `<table class="contacts-table"><thead><tr><th>${this.t('settings.name').replace(' :', '')}</th><th>${this.t('settings.birthdate').replace(' :', '')}</th><th>Tzolk'in</th><th>${this.t('settings.color').replace(' :', '')}</th><th>Actions</th></tr></thead><tbody>`;
 
         people.forEach((person, index) => {
             const glyphId = person.glyph;
@@ -327,16 +330,16 @@ class TzolkinAdmin {
             html += `
                 <tr>
                     <td>${person.name}</td>
-                    <td>${new Date(person.birthDate).toLocaleDateString('fr-FR')}</td>
+                    <td>${new Date(person.birthDate).toLocaleDateString(locale)}</td>
                     <td style="white-space:nowrap;">
                         <img src="${numberURL}" alt="${numberId}" style="width:22px;height:22px;vertical-align:middle;opacity:0.85;">
                         <img src="${glyphURL}" alt="${glyphName}" style="width:22px;height:22px;vertical-align:middle;opacity:0.85;margin-left:2px;">
                     </td>
                     <td><span style="display:inline-block;width:30px;height:30px;background:${person.color};border-radius:4px;border:1px solid #ccc;"></span></td>
                     <td style="white-space:nowrap;">
-                        <button onclick="window.tzolkinAdmin.editPerson(${index})" class="btn-edit">Modifier</button>
-                        <button onclick="window.openCroixMayaModal('${person.name.replace(/'/g,"\\'")}', ${glyphId}, ${numberId}, '${person.birthDate}')" class="btn-edit" title="Croix Maya" style="padding:6px 10px; background:${window.TzolkinCore.getGlyphColorCSS(glyphId).bg}; color:${window.TzolkinCore.getGlyphColorCSS(glyphId).text}; border-color:${window.TzolkinCore.getGlyphColorCSS(glyphId).border};">✛</button>
-                        <span onclick="window.tzolkinAdmin.deletePerson(${index})" title="Supprimer" style="cursor:pointer; font-size:20px; padding:0 4px;">🗑</span>
+                        <button onclick="window.tzolkinAdmin.editPerson(${index})" class="btn-edit">${this.t('saved_modal.edit')}</button>
+                        <button onclick="window.openCroixMayaModal('${person.name.replace(/'/g,"\\'")}', ${glyphId}, ${numberId}, '${person.birthDate}')" class="btn-edit" title="${this.t('details.maya_cross')}" style="padding:6px 10px; background:${window.TzolkinCore.getGlyphColorCSS(glyphId).bg}; color:${window.TzolkinCore.getGlyphColorCSS(glyphId).text}; border-color:${window.TzolkinCore.getGlyphColorCSS(glyphId).border};">✛</button>
+                        <span onclick="window.tzolkinAdmin.deletePerson(${index})" title="${this.t('saved_modal.delete')}" style="cursor:pointer; font-size:20px; padding:0 4px;">🗑</span>
                     </td>
                 </tr>
             `;
@@ -359,7 +362,7 @@ class TzolkinAdmin {
 
         this.currentEditIndex = index;
 
-        document.getElementById('form-title').textContent = 'Modifier le contact';
+        document.getElementById('form-title').textContent = this.t('settings.edit_contact') || 'Modifier le contact';
         document.getElementById('person-name').value = person.name;
         // Convertir YYYY-MM-DD → DD/MM/YYYY pour l'affichage dans le champ texte
         const [y, m, d] = person.birthDate.split('-');
@@ -373,7 +376,7 @@ class TzolkinAdmin {
 
         this.updateTzolkinPreview();
 
-        document.getElementById('save-person-btn').textContent = 'Enregistrer les modifications';
+        document.getElementById('save-person-btn').textContent = this.t('settings.save_changes') || this.t('settings.save');
         document.getElementById('cancel-edit-btn').style.display = 'inline-block';
 
         // Scroller vers le formulaire
@@ -391,13 +394,13 @@ class TzolkinAdmin {
 
         if (!person) return;
 
-        if (!confirm(`Voulez-vous vraiment supprimer "${person.name}" ?`)) {
+        if (!confirm(this.t('settings.confirm_delete_contact', {name: person.name}))) {
             return;
         }
 
         const success = window.TzolkinStorage.deletePerson(index);
         if (success) {
-            alert(`Contact "${person.name}" supprimé`);
+            alert(this.t('settings.contact_deleted', {name: person.name}));
             this.renderContacts();
 
             // Rafraîchir le widget
@@ -452,7 +455,9 @@ class TzolkinAdmin {
         const el = document.getElementById('pin-admin-status');
         if (!el) return;
         const hasPin = window.TzolkinStorage && window.TzolkinStorage.hasPinCode();
-        el.textContent = hasPin ? '✓ Code PIN actif — vos notes sont protégées.' : 'Aucun code PIN défini — vos notes sont accessibles librement.';
+        el.textContent = hasPin
+            ? (this.t('pin.active_status') || '✓ Code PIN actif — vos notes sont protégées.')
+            : (this.t('pin.inactive_status') || 'Aucun code PIN défini — vos notes sont accessibles librement.');
         el.style.color = hasPin ? '#5e832a' : '#888';
     }
 
@@ -473,12 +478,12 @@ class TzolkinAdmin {
     handlePinRemove() {
         if (!window.tzolkinPIN) return;
         const hasPin = window.TzolkinStorage && window.TzolkinStorage.hasPinCode();
-        if (!hasPin) { alert('Aucun code PIN à désactiver.'); return; }
-        if (!confirm('Désactiver le code PIN ?\nVos notes ne seront plus protégées.')) return;
+        if (!hasPin) { alert(this.t('pin.no_pin_to_disable') || 'Aucun code PIN à désactiver.'); return; }
+        if (!confirm(this.t('pin.confirm_delete_pin'))) return;
         window.tzolkinPIN.requestPin(() => {
             window.TzolkinStorage.removePinCode();
             this.refreshPinStatus();
-            alert('Code PIN désactivé.');
+            alert(this.t('pin.pin_deleted'));
         }, null);
     }
 }

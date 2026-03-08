@@ -629,6 +629,19 @@ body {
     text-align: left;
 }
 
+.credits-support-btn {
+    display: inline-block;
+    background: #c19434;
+    color: #fff;
+    font-size: clamp(0.82rem, 2.8vw, 0.95rem);
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 8px 20px;
+    text-decoration: none;
+    font-family: 'Simplifica', sans-serif;
+    margin: 6px 0;
+}
+
 .credits-app-email {
     display: inline-block;
     background: #2d597e;

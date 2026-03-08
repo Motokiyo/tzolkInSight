@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  @font-face { font-family: 'Summer'; src: url('fonts/Summer/Summer.ttf'); }
+  @font-face { font-family: 'Simplifica'; src: url('fonts/Simplifica/SIMPLIFICA Typeface.ttf'); }
+  @font-face { font-family: 'AmaticSC'; src: url('fonts/AmaticSC/AmaticSC-Bold.ttf'); }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1200px;
+    height: 675px;
+    overflow: hidden;
+    background: #0d0d0d;
+  }
+
+  .container {
+    position: relative;
+    width: 1200px;
+    height: 675px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Fond illustré gauche */
+  .bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('www/assets/x-balanque.png');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(8,12,22,0.45) 0%,
+      rgba(8,12,22,0.55) 40%,
+      rgba(8,12,22,0.92) 58%,
+      rgba(8,12,22,0.97) 100%
+    );
+  }
+
+  /* Partie gauche : mockup téléphone */
+  .phone-zone {
+    position: relative;
+    width: 560px;
+    height: 675px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .phone-frame {
+    position: relative;
+    width: 268px;
+    height: 580px;
+    background: #1a1a1a;
+    border-radius: 40px;
+    border: 6px solid #333;
+    box-shadow:
+      0 0 0 1px #444,
+      0 30px 80px rgba(0,0,0,0.7),
+      0 0 40px rgba(193,148,52,0.15);
+    overflow: hidden;
+  }
+
+  /* Notch */
+  .phone-frame::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 20px;
+    background: #1a1a1a;
+    border-radius: 0 0 14px 14px;
+    z-index: 10;
+  }
+
+  .phone-screen {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 34px;
+  }
+
+  /* Badge bêta */
+  .beta-badge {
+    position: absolute;
+    top: 28px;
+    right: -12px;
+    background: #c19434;
+    color: white;
+    font-family: 'Simplifica', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(193,148,52,0.5);
+    white-space: nowrap;
+  }
+
+  /* Partie droite : texte */
+  .text-zone {
+    position: relative;
+    flex: 1;
+    padding: 50px 55px 50px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    height: 100%;
+    justify-content: center;
+  }
+
+  .eyebrow {
+    font-family: 'Simplifica', sans-serif;
+    font-size: 15px;
+    letter-spacing: 4px;
+    color: #c19434;
+    margin-bottom: 14px;
+  }
+
+  .app-name {
+    font-family: 'Summer', cursive;
+    font-size: 64px;
+    color: #c19434;
+    line-height: 1;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+    margin-bottom: 8px;
+  }
+
+  .app-sub {
+    font-family: 'Simplifica', sans-serif;
+    font-size: 22px;
+    color: rgba(232,220,185,0.85);
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, rgba(193,148,52,0.7), transparent);
+    margin-bottom: 24px;
+  }
+
+  .headline {
+    font-family: 'AmaticSC', cursive;
+    font-size: 38px;
+    color: white;
+    line-height: 1.25;
+    margin-bottom: 20px;
+  }
+
+  .headline span { color: #c19434; }
+
+  .desc {
+    font-family: 'AmaticSC', cursive;
+    font-size: 22px;
+    color: rgba(200,190,165,0.9);
+    line-height: 1.55;
+    margin-bottom: 28px;
+  }
+
+  .tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+
+  .tag {
+    font-family: 'Simplifica', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(193,148,52,0.5);
+    color: rgba(232,220,185,0.8);
+  }
+
+  .tag.highlight {
+    background: rgba(193,148,52,0.15);
+    border-color: rgba(193,148,52,0.8);
+    color: #c19434;
+  }
+
+  .cta {
+    display: inline-block;
+    background: #c19434;
+    color: white;
+    font-family: 'Simplifica', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    padding: 12px 28px;
+    border-radius: 30px;
+    box-shadow: 0 4px 20px rgba(193,148,52,0.4);
+    align-self: flex-start;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 22px;
+    right: 55px;
+    font-family: 'Simplifica', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: rgba(180,170,145,0.5);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="bg"></div>
+  <div class="bg-overlay"></div>
+
+  <!-- Téléphone -->
+  <div class="phone-zone">
+    <div class="phone-frame">
+      <img class="phone-screen"
+           src="www/assets/x-balanque.png"
+           alt="App screenshot">
+    </div>
+    <div class="beta-badge">BÊTA ANDROID</div>
+  </div>
+
+  <!-- Texte -->
+  <div class="text-zone">
+    <div class="eyebrow">RECHERCHE BÊTA-TESTEURS</div>
+    <div class="app-name">tzolkInSight</div>
+    <div class="app-sub">Calendrier Maya Sacré</div>
+    <div class="divider"></div>
+    <div class="headline">
+      Les savoirs ancestraux mayas<br>
+      <span>à l'épreuve de votre vie</span>
+    </div>
+    <div class="desc">
+      Tenez un journal de bord lié au Tzolkin.<br>
+      Observez. Comparez. Tirez vos propres conclusions.
+    </div>
+    <div class="tags">
+      <div class="tag highlight">📱 Android uniquement</div>
+      <div class="tag highlight">🆓 Gratuit</div>
+      <div class="tag">⏱ 2 semaines</div>
+      <div class="tag">12 places</div>
+    </div>
+    <div class="cta">Répondez en DM ou commentaire 👇</div>
+  </div>
+
+  <div class="footer">GALAAD MOTOKIYO FERRAN · IA ACCESS & CRÉATION</div>
+</div>
+</body>
+</html>

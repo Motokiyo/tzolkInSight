@@ -65,14 +65,14 @@
                 </div>
                 <div class="tzolkin-splash-text">
                     <h1>tzolkInSight</h1>
-                    <p>Calendrier Maya Sacré</p>
-                    <p class="version">Version 1.1.5</p>
+                    <p data-i18n="credits.app_title">Calendrier Maya Sacré</p>
+                    <p class="version">Version 1.1.6</p>
                 </div>
                 <div class="splash-galaad-footer">
                     <div class="splash-galaad-divider"></div>
                     <img src="./assets/graal-logo-galaad.png" alt="Galaad" class="splash-galaad-logo" />
                     <p class="splash-galaad-company">GALAAD MOTOKIYO FERRAN</p>
-                    <p class="splash-galaad-tagline">IA Access &middot; Conseil &amp; Création</p>
+                    <p class="splash-galaad-tagline" data-i18n="credits.splash_tagline">IA Access &middot; Conseil &amp; Création</p>
                     <p class="splash-galaad-email">motokiyoferran@gmail.com</p>
                 </div>
             </div>
@@ -87,7 +87,7 @@
         <section id="tzolkin-details" style="width: 100%; margin: 5px 0; overflow-x: hidden;">
             <div id="tzolkin-details-content"
                 style="max-width: 600px; width: 100%; margin: 0 auto; box-sizing: border-box; background: #ffffff; border: 2px solid #222; border-radius: 16px; padding: 10px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);">
-                <p style="text-align: center; color: #888;">Chargement des détails...</p>
+                <p data-i18n="app.loading" style="text-align: center; color: #888;">Chargement des détails...</p>
             </div>
         </section>
 
@@ -106,7 +106,11 @@
     <script>
         // Initialisation de l'application une fois le DOM chargé
         document.addEventListener('DOMContentLoaded', async () => {
-            console.log('🚀 Initialisation de l\'app Tzolk\'in...');
+            // Traduire immédiatement le splash screen
+            if (window.i18n && window.i18n.ready) { window.i18n.applyToDOM(document.getElementById('splash-screen')); }
+            else if (window.i18n) { window.i18n.onReady(function() { window.i18n.applyToDOM(document.getElementById('splash-screen')); }); }
+
+            console.log('Initialisation de l\'app Tzolk\'in...');
 
             // 1. Charger le menu et les modales
             try {
@@ -125,6 +129,13 @@
                     newScript.textContent = script.textContent;
                     document.body.appendChild(newScript);
                 });
+
+                // Appliquer les traductions i18n sur le menu chargé + splash
+                if (window.i18n) {
+                    window.i18n.onReady(function() {
+                        window.i18n.applyToDOM();
+                    });
+                }
 
                 // Ajouter le bouton Admin au menu (maintenant que le menu est chargé)
                 setTimeout(() => {

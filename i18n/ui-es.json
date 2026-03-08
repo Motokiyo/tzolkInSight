@@ -14,7 +14,8 @@
     "widget": {
         "date_placeholder": "dd/mm/aaaa",
         "invalid_format": "Formato de fecha incorrecto. Use dd/mm/aaaa.",
-        "invalid_date": "Fecha inválida. Por favor ingrese una fecha válida."
+        "invalid_date": "Fecha inválida. Por favor ingrese una fecha válida.",
+        "today_tooltip": "volver al día de hoy"
     },
     "details": {
         "important_for": "Día importante para",
@@ -71,7 +72,8 @@
         "gps_denied": "GPS denegado.",
         "gps_unavailable": "Posición no disponible. Ingrese la ciudad manualmente.",
         "location_settings_browser": "Vaya a los ajustes de su navegador para permitir el acceso a la ubicación.",
-        "open_settings": "Abrir ajustes →"
+        "open_settings": "Abrir ajustes →",
+        "gps_android": "Vaya a Ajustes → Aplicaciones → Tzolkin → Permisos → Ubicación"
     },
     "saved_modal": {
         "title": "Notas guardadas",
@@ -101,7 +103,13 @@
         "import_duplicates_prefix": "nota(s) duplicada(s)",
         "import_duplicates_exists": "Ya existe una entrada para estas fechas en la aplicación.",
         "import_duplicates_replace": "¿Reemplazar todas las entradas duplicadas?",
-        "import_duplicates_buttons": "OK = Reemplazar   |   Cancelar = Conservar las existentes"
+        "import_duplicates_buttons": "OK = Reemplazar   |   Cancelar = Conservar las existentes",
+        "no_notes_export": "No hay notas para exportar.",
+        "file_saved": "guardado en Descargas",
+        "pdf_title": "Diario Tzolk'in",
+        "csv_note1": "💾 Sus notas están guardadas en el archivo CSV descargado.",
+        "csv_note2": "🔄 Para recuperarlas, reimporte este archivo mediante <strong>Subir</strong>.",
+        "csv_note3": "⚠️ Solo el CSV permite una restauración completa. TXT y PDF no son suficientes."
     },
     "emotions": {
         "joie": "Alegría",
@@ -236,19 +244,41 @@
         "section_cross": "La Cruz Maya",
         "section_notes": "Notas",
         "section_saved": "Guardados",
-        "section_settings": "Ajustes"
+        "section_settings": "Ajustes",
+        "intro_p1": "El tzolk'in, también llamado \"cuenta de los días\" o \"calendario sagrado\", es uno de los calendarios de la civilización maya. Originario de Mesoamérica, este sistema calendárico fue desarrollado hace más de 2 500 años. Su uso ha continuado sin interrupción hasta nuestros días en ciertas comunidades mayas de Guatemala y México.",
+        "intro_p2": "A diferencia de nuestro calendario gregoriano, que sigue los ciclos solares, el tzolk'in se basa en un ciclo de 260 días, resultado de la combinación de dos ciclos simultáneos: un ciclo de 13 números y un ciclo de 20 glifos (llamados \"nawals\"). Cada día se identifica así por un número del 1 al 13 asociado a uno de los 20 glifos, creando 260 combinaciones únicas. Este ciclo corresponde aproximadamente al período de gestación humana y también está vinculado a los ciclos agrícolas y astronómicos, centrales para la civilización maya.",
+        "cycles_text": "Los mayas poseían un conocimiento astronómico notablemente preciso, que se refleja en la estructura del tzolk'in. El ciclo de 260 días presenta varias correlaciones astronómicas significativas: corresponde aproximadamente a nueve ciclos lunares sinódicos (alrededor de 29,5 días cada uno) así como al período de visibilidad de Venus. Además, los observadores mayas habían notado que los pasos del Sol por el cenit a la latitud de Copán (aproximadamente 14,8° Norte) se producían a 260 días de intervalo. El ciclo de 20 días, ligado al sistema vigesimal (base 20) de los mayas, refleja también el ciclo de las Pléyades, visible durante aproximadamente 260 días al año bajo esas latitudes. El ciclo de 13, por su parte, podría corresponder al número de \"cielos\" o niveles cósmicos en la cosmología maya. Los mayas habían calculado con una precisión asombrosa los ciclos sinódicos de los planetas visibles, los eclipses solares y lunares, e incluso la precesión de los equinoccios, un ciclo de aproximadamente 26 000 años. El tzolk'in se integraba en un sistema calendárico más amplio, que incluía el Haab (calendario solar de 365 días), para formar el \"Cuenta Larga\", permitiendo seguir períodos de varios milenios.",
+        "resonances_text": "Hecho notable, los números 13 y 20, en el corazón del tzolk'in maya, se encuentran con un significado similar en otras tradiciones culturales geográficamente distantes. En la tradición celta, el calendario lunar constaba de 13 meses de 28 días, correspondientes a los 13 ciclos lunares de un año solar. El número 20 aparece en su sistema de conteo vigesimal, y ciertos círculos de piedras celtas presentan disposiciones basadas en estos números. El calendario ogámico celta, por ejemplo, posee 20 signos principales, recordando los 20 glifos del tzolk'in. Entre los antiguos egipcios, el ciclo de Sirio (la estrella más brillante del cielo) era particularmente importante, y su período de visibilidad era de aproximadamente 260 días al año. Su calendario presentaba 13 fases correspondientes a las inundaciones del Nilo, y su sistema numérico atribuía un significado particular al número 20 como marcador de un período completo. En la tradición hopi de América del Norte, se encuentra un sistema profético basado en 13 ciclos mayores, y su cosmología divide el mundo en 20 aspectos fundamentales. Esta convergencia numérica entre culturas, aparentemente sin contactos directos, plantea preguntas fascinantes sobre la universalidad potencial de ciertas observaciones astronómicas o sobre intuiciones matemáticas fundamentales comunes a la humanidad.",
+        "glyphs_text": "Los 20 glifos del tzolk'in representan fuerzas o energías espirituales fundamentales que influyen en cada día según la cosmogonía maya. Cada glifo posee sus propias características, su simbolismo y su significado espiritual. Están representados por símbolos visuales complejos que evocan elementos naturales, animales o conceptos abstractos: Imix (Cocodrilo), Ik (Viento), Akbal (Noche), Kan (Semilla), Chicchan (Serpiente), Cimi (Muerte), Manik (Venado), Lamat (Conejo), Muluc (Agua), Oc (Perro), Chuen (Mono), Eb (Camino), Ben (Caña), Ix (Jaguar), Men (Águila), Cib (Buitre), Caban (Tierra), Etznab (Cuchillo de Obsidiana), Cauac (Tormenta) y Ahau (Señor/Sol). Estos glifos determinan la naturaleza fundamental de cada día y son considerados como portales que permiten comunicarse con diferentes dimensiones de la existencia y con divinidades específicas.",
+        "numbers_text": "En el tzolk'in, los 13 números no son simples indicadores cuantitativos, sino que poseen un significado cualitativo y espiritual profundo. Cada número del 1 al 13 representa una intención, un ser o una dirección de energía particular: el 1 simboliza la unidad y la iniciación, el 2 la dualidad y la polaridad, el 3 la activación y el movimiento, el 4 la estabilidad y la medida, el 5 la armonía y el centro, el 6 el equilibrio y el ritmo, el 7 la reflexión y la meditación, el 8 la armonía y la justicia, el 9 la paciencia y la perseverancia, el 10 la manifestación y la realización, el 11 la disolución y la liberación, el 12 la comprensión y la estabilidad, y el 13 la ascensión y la trascendencia. Según la tradición maya, cada número modula la energía del glifo al que está asociado, creando una dinámica única para cada día del calendario. Estos números también están ligados a las trece articulaciones mayores del cuerpo humano, estableciendo una conexión entre el macrocosmos y el microcosmos.",
+        "calendar_btn": "Detalles ›",
+        "calendar_text": "Las flechas ◀ ▶ navegan día por día. Clic en la fecha → entrada libre (nacimiento, evento…). ↺ regresa al día actual. <strong>Cada elemento es clicable</strong> — glifo, número, trecena — y abre una página de descripción.",
+        "corn_text": "Bajo el calendario, el marco de color indica la <strong>familia de maíz K'iche'</strong> del día — Rojo (Este), Blanco (Norte), Negro (Oeste) o Amarillo (Sur). <strong>Haga clic</strong> para acceder a la página de la familia: Popol Vuh, elemento, los 5 nawals K'iche' y las ceremonias asociadas.",
+        "cross_text": "Carta personal desde su fecha de nacimiento — cinco dimensiones: <span style=\"background:#ded2b3;border:1px solid #222;border-radius:4px;padding:1px 7px;font-size:14px;\">Centro</span> nacimiento · <span style=\"background:#e57373;color:#4a0f0f;border-radius:4px;padding:1px 7px;font-size:14px;\">Este</span> concepción · <span style=\"background:#64b5f6;color:#0d2d4a;border-radius:4px;padding:1px 7px;font-size:14px;\">Oeste</span> misión · <span style=\"background:#f0f0f0;color:#333;border-radius:4px;padding:1px 7px;font-size:14px;\">Norte</span> guía · <span style=\"background:#ffd54f;color:#3a2400;border-radius:4px;padding:1px 7px;font-size:14px;\">Sur</span> apoyo. Más el <span style=\"background:#1a1a1a;color:#ccc;border-radius:4px;padding:1px 7px;font-size:14px;\">Señor de la Noche G1–G9</span>. Cada posición es clicable. Accesible desde « Día importante para » o desde el botón <strong>✛</strong> en Ajustes.",
+        "notes_text": "Elija una emoción en la <strong>rueda de Plutchik</strong> y escriba libremente. Guardado automático. También posible para un <strong>día pasado</strong> (fecha, hora y lugar confirmados, ciudad prellenada por GPS).",
+        "notes_emotions": "<span style=\"background:#FFFF99;color:#555;border-radius:3px;padding:1px 7px;\">Alegría</span> · Serenidad · Éxtasis<br><span style=\"background:#99CCFF;color:#333;border-radius:3px;padding:1px 7px;\">Tristeza</span> · Melancolía · Pena<br><span style=\"background:#99FF99;color:#333;border-radius:3px;padding:1px 7px;\">Miedo</span> · Aprensión · Terror<br><span style=\"background:#FF9999;color:#333;border-radius:3px;padding:1px 7px;\">Ira</span> · Contrariedad · Furia<br><span style=\"background:#CC99FF;color:#333;border-radius:3px;padding:1px 7px;\">Sorpresa</span> · Distracción · Asombro<br><span style=\"background:#CCFFCC;color:#333;border-radius:3px;padding:1px 7px;\">Confianza</span> · Aceptación · Admiración<br><span style=\"background:#999966;color:#fff;border-radius:3px;padding:1px 7px;\">Asco</span> · Aversión · Hastío<br><span style=\"background:#FFCC99;color:#555;border-radius:3px;padding:1px 7px;\">Anticipación</span> · Interés · Vigilancia",
+        "saved_text": "Historial completo, filtrable. Descargue en <strong style=\"color:#4CAF50;\">CSV</strong>, <strong style=\"color:#2196F3;\">TXT</strong> o <strong style=\"color:#e53935;\">PDF</strong>. Reimportación CSV posible. <strong>Copia de seguridad automática</strong> anual — consérvela con cuidado.",
+        "saved_other_day": "<strong>Guardar para otro día:</strong> navegue hasta el día deseado en el calendario, abra las Notas — se le pedirá una confirmación de fecha antes de ingresar hora y lugar.",
+        "saved_edit": "<strong>Edición desde Guardados:</strong> cada nota es totalmente modificable — texto, hora, lugar. El botón <strong>📍</strong> activa el GPS para completar automáticamente su ubicación si el permiso es concedido.",
+        "settings_contacts": "Gestione sus <strong>contactos</strong> para la Cruz Maya. Registre tantos nombres y fechas de nacimiento como desee, elija un color. Para cada contacto: <strong>Modificar</strong>, <strong>Eliminar</strong>, y el botón <strong style=\"background:#e57373;color:#fff;border-radius:4px;padding:1px 8px;\">✛</strong> abre directamente su Cruz Maya.",
+        "settings_pin": "También es aquí donde configura un <strong>código PIN opcional</strong> para proteger sus notas.",
+        "quote": "« Conócete a ti mismo y conocerás el Universo y los Dioses »"
     },
     "credits": {
         "company": "GALAAD MOTOKIYO FERRAN",
         "subtitle": "IA Access Consultoría & Creación",
         "app_title": "Calendario Maya Sagrado",
-        "reports_cta": "Solicite informes a partir de sus datos brutos para descubrir cómo y si el Tzolk'in impacta su vida. Regálese una comprensión única de esta herramienta milenaria."
+        "developed_by": "Pensado, imaginado y desarrollado por Alexandre Ferran para",
+        "ai_label": "IA:",
+        "splash_tagline": "IA Access · Consultoría & Creación",
+        "support_text": "Esta app es gratuita y sin publicidad. Si le aporta valor, puede apoyar su desarrollo libremente.",
+        "support_button": "☕ Apoyar el proyecto"
     },
     "analysis": {
         "menu_button": "Solicitar\nAnálisis",
         "no_notes": "No hay notas para exportar. Agregue notas antes de solicitar un análisis.",
         "email_subject": "Análisis Tzolkin - {year}",
-        "email_body": "Hola,\n\nDeseo solicitar mi análisis anual Tzolkin.\nEncontrará mi diario de a bordo adjunto.\n\nLe recordamos que el análisis de sus datos (tzolkin, tránsitos, psique, astronomía) tendrá un costo de 50 euros. Será procesado tan pronto como haya realizado el pago mediante el enlace recibido en respuesta a este correo.\n\nEsperamos que disfrute de nuestra aplicación.\n\nCordialmente,\nEl equipo de Galaad Motokiyo Ferran\n\nP.D. Revise su carpeta de spam. Normalmente el enlace de pago debería llegar instantáneamente después de su envío.",
+        "email_body": "Hola,\n\nDeseo solicitar mi análisis anual Tzolkin.\nEncontrará mi diario de bitácora adjunto.\n\nLe recordamos que el análisis de sus datos (tzolkin, tránsitos, psique, astronomía) tendrá un costo de 50 euros. Será procesado tan pronto como haya realizado el pago mediante el enlace recibido en respuesta a este correo.\n\nEsperamos que disfrute de nuestra aplicación.\n\nCordialmente,\nEl equipo de Galaad Motokiyo Ferran\n\nP.D. Revise su carpeta de spam. Normalmente el enlace de pago debería llegar instantáneamente después de su envío.",
         "web_fallback": "Por favor adjunte el archivo {filename} que acaba de descargarse.",
         "section_title": "Análisis personalizado",
         "section_description": "Análisis de su año TzolkInSight a partir de su .csv (sin interés si no hay suficientes datos — mínimo 100 a 150 entradas en un año): recurrencia de glifos, tonos, trecenas, tránsitos, ciclos, psique junguiana…",

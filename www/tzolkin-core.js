@@ -220,7 +220,7 @@ function calculateTzolkin(date) {
         numberId,
         glyphName: GLYPHS[glyphId].name,
         numberName: NUMBERS[numberId].name,
-        gregorian: date.toLocaleDateString('fr-FR')
+        gregorian: date.toLocaleDateString((window.i18n && window.i18n.strings.date_format && window.i18n.strings.date_format.locale) || 'fr-FR')
     };
 }
 

@@ -157,7 +157,7 @@ class TzolkinWidget {
 
                 <!-- Bouton Reset -->
                 <button class="tzolkin-widget-reset"
-                        title="retour au jour d'aujourd'hui"
+                        title="${window.i18n?.t('widget.today_tooltip') || 'retour au jour d\'aujourd\'hui'}"
                         type="button"
                         style="position:absolute;top:8px;right:8px;width:28px;height:28px;min-width:0;min-height:0;max-width:32px;max-height:32px;padding:0;margin:0;background:#111;border-radius:8px;border:none;outline:none;z-index:20;display:flex;align-items:center;justify-content:center;cursor:pointer;">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -392,7 +392,7 @@ class TzolkinWidget {
     navigateToDate(dateStr) {
         const dateRegex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
         if (!dateRegex.test(dateStr)) {
-            alert('Format de date incorrect. Utilisez jj/mm/aaaa.');
+            alert(window.i18n?.t('widget.invalid_format') || 'Format de date incorrect. Utilisez jj/mm/aaaa.');
             return;
         }
 
@@ -400,7 +400,7 @@ class TzolkinWidget {
         const targetDate = new Date(`${year}-${month}-${day}`);
 
         if (isNaN(targetDate.getTime())) {
-            alert('Date invalide. Veuillez entrer une date valide.');
+            alert(window.i18n?.t('widget.invalid_date') || 'Date invalide. Veuillez entrer une date valide.');
             return;
         }
 

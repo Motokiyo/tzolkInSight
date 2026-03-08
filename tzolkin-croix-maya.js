@@ -7,43 +7,27 @@
  */
 
 // ============================================================================
-// TEXTES EXPLICATIFS PAR POSITION
+// I18N HELPER
 // ============================================================================
 
-const POSITION_TEXTS = {
-    centre: {
-        title: "Kin de Naissance — Centre",
-        text: "Votre nawal de naissance est l'essence fondamentale de votre être. Il révèle vos dons naturels et la couleur énergétique qui teinte toute votre existence. C'est votre identité profonde dans le calendrier sacré K'iche'."
-    },
-    est: {
-        title: "Est — Conception",
-        text: "L'énergie de l'Est représente votre conception, l'impulsion originelle qui vous a mis en mouvement. C'est l'énergie de l'aube et du premier souffle — le courage qui vous a fait naître. Elle révèle vos origines profondes et la force initiale de votre existence."
-    },
-    ouest: {
-        title: "Ouest — Mission",
-        text: "L'énergie de l'Ouest représente votre mission dans cette vie, le chemin que vous êtes venu accomplir. C'est l'énergie du couchant et de la transformation. Elle révèle ce vers quoi vous tendez naturellement — votre destination profonde."
-    },
-    nord: {
-        title: "Nord — Guide",
-        text: "L'énergie du Nord est votre guide intérieur, la sagesse des ancêtres qui vous oriente. C'est le souffle froid porteur de mémoire et de clarté. Cette énergie vous oriente dans vos choix et éclaire votre chemin de vie."
-    },
-    sud: {
-        title: "Sud — Soutien",
-        text: "L'énergie du Sud est votre soutien naturel, la chaleur qui vous nourrit et vous renforce. C'est l'énergie du corps, de l'abondance et de la communauté. Elle représente vos alliés et les ressources sur lesquelles vous pouvez vous appuyer."
-    },
-    trecena: {
-        title: "Trécéna de Naissance",
-        text: "La trécéna est la période de 13 jours à laquelle appartient votre kin de naissance. Elle commence toujours au ton 1 et colore l'ensemble du cycle. Le nawal qui ouvre votre trécéna est votre maître de période — il oriente l'énergie fondamentale dans laquelle vous avez émergé. Dans la tradition K'iche', le 8e jour de chaque trécéna (Wajxaqib') est le plus propice aux cérémonies : le 8 est le nombre divin du renouveau et du commencement."
-    },
-    porteur: {
-        title: "Porteur d'Année K'iche'",
-        text: "Le porteur d'année gouverne le cycle annuel pour toute la collectivité. Il colore l'énergie collective et influence le contexte dans lequel se déroulent les événements. L'année de naissance révèle dans quel souffle cosmique vous êtes arrivé."
-    },
-    seigneur: {
-        title: "Seigneur de la Nuit",
-        text: "Les Bolontiku — les Neuf Seigneurs de la Nuit — forment un cycle de 9 nuits qui court en permanence en parallèle du Tzolk'in. La nuit de votre naissance était placée sous le règne de l'un d'eux : une énergie souterraine, nocturne et intérieure qui complète votre kin solaire. Là où le nawal du jour révèle qui vous êtes dans la lumière — vos dons, votre mission, votre dynamique sociale —, le Seigneur de la Nuit révèle qui vous êtes dans l'ombre : votre monde intérieur, vos rêves, vos processus invisibles, votre rapport à l'inconscient et aux forces cachées de la vie. Ensemble, ils forment le double fil de votre être."
-    }
-};
+const t = window.i18n ? window.i18n.t.bind(window.i18n) : k => k;
+
+// ============================================================================
+// TEXTES EXPLICATIFS PAR POSITION (via i18n)
+// ============================================================================
+
+function getPositionTexts() {
+    return {
+        centre:   { title: t('croix_maya.position_centre_title'),  text: t('croix_maya.position_centre_text')  },
+        est:      { title: t('croix_maya.position_east_title'),    text: t('croix_maya.position_east_text')    },
+        ouest:    { title: t('croix_maya.position_west_title'),    text: t('croix_maya.position_west_text')    },
+        nord:     { title: t('croix_maya.position_north_title'),   text: t('croix_maya.position_north_text')   },
+        sud:      { title: t('croix_maya.position_south_title'),   text: t('croix_maya.position_south_text')   },
+        trecena:  { title: t('croix_maya.position_trecena_title'), text: t('croix_maya.position_trecena_text') },
+        porteur:  { title: t('croix_maya.position_bearer_title'),  text: t('croix_maya.position_bearer_text')  },
+        seigneur: { title: t('croix_maya.position_lord_title'),    text: t('croix_maya.position_lord_text')    }
+    };
+}
 
 // ============================================================================
 // PALETTES DE COULEURS (fonds solides pour les paragraphes)
@@ -94,11 +78,11 @@ function openCroixMayaModal(personName, glyphId, numberId, birthDate) {
     renderLordOfNight('croix-lord-section', lordNum);
 
     // --- Grille en croix (Nord haut, Ouest-Centre-Est milieu, Sud bas) ---
-    renderCrossPosition('croix-nord',    cross.nord,   'Nord · Guide');
-    renderCrossPosition('croix-ouest',   cross.ouest,  'Ouest · Mission');
-    renderCrossPosition('croix-centre',  cross.centre, 'Kin de Naissance');
-    renderCrossPosition('croix-est',     cross.est,    'Est · Conception');
-    renderCrossPosition('croix-sud',     cross.sud,    'Sud · Soutien');
+    renderCrossPosition('croix-nord',    cross.nord,   t('croix_maya.north_guide'));
+    renderCrossPosition('croix-ouest',   cross.ouest,  t('croix_maya.west_mission'));
+    renderCrossPosition('croix-centre',  cross.centre, t('croix_maya.birth_kin'));
+    renderCrossPosition('croix-est',     cross.est,    t('croix_maya.east_conception'));
+    renderCrossPosition('croix-sud',     cross.sud,    t('croix_maya.south_support'));
 
     // --- Porteur d'année (glyph uniquement, avant les paragraphes) ---
     renderYearBearerGlyphs('croix-bearers-section', currentBearer, thisYear, birthBearer, birthYear);
@@ -138,7 +122,7 @@ function renderLordOfNight(containerId, lordNum) {
     el.innerHTML = `
         <div style="display:flex; align-items:center; gap:14px; padding:12px 16px; background:#1a1a1a; border-radius:12px; border:2px solid #444; margin-bottom:12px;">
             <div style="flex:1; text-align:right;">
-                <div style="font-size:14px; color:#ccc; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:2px;">Seigneur de la Nuit · G${lordNum}</div>
+                <div style="font-size:14px; color:#ccc; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:2px;">${t('croix_maya.lord_of_night_label').replace('{num}', lordNum)}</div>
                 <div style="font-size:18px; font-weight:bold; color:#fff; font-family:'Summer',cursive;">${lord.name}</div>
                 <div style="font-size:15px; color:#eee; margin-top:2px;">${lord.domain}</div>
             </div>
@@ -207,10 +191,10 @@ function renderYearBearerGlyphs(containerId, currentBearer, currentYear, birthBe
     };
 
     el.innerHTML = `
-        <p style="font-family:'Summer',cursive; font-size:16px; color:#222; margin:0 0 10px 0; text-align:center; font-weight:bold;">🏔 Porteurs d'Année K'iche'</p>
+        <p style="font-family:'Summer',cursive; font-size:16px; color:#222; margin:0 0 10px 0; text-align:center; font-weight:bold;">🏔 ${t('croix_maya.year_bearers_title')}</p>
         <div style="display:flex; justify-content:center; gap:24px; flex-wrap:wrap;">
-            ${renderOne(currentBearer, currentYear, 'Année en cours')}
-            ${birthBearer ? renderOne(birthBearer, birthYear, 'Année de naissance') : ''}
+            ${renderOne(currentBearer, currentYear, t('croix_maya.current_year'))}
+            ${birthBearer ? renderOne(birthBearer, birthYear, t('croix_maya.birth_year')) : ''}
         </div>
     `;
 }
@@ -223,12 +207,14 @@ function renderParagraphs(containerId, cross, lordNum, currentBearer, birthBeare
     const el = document.getElementById(containerId);
     if (!el) return;
 
+    const POSITION_TEXTS = getPositionTexts();
+
     const blocks = [
-        { pos: cross.centre, key: 'centre', posName: 'Kin de Naissance' },
-        { pos: cross.nord,   key: 'nord',   posName: 'Nord · Guide'     },
-        { pos: cross.ouest,  key: 'ouest',  posName: 'Ouest · Mission'  },
-        { pos: cross.est,    key: 'est',    posName: 'Est · Conception' },
-        { pos: cross.sud,    key: 'sud',    posName: 'Sud · Soutien'    }
+        { pos: cross.centre, key: 'centre', posName: t('croix_maya.birth_kin')        },
+        { pos: cross.nord,   key: 'nord',   posName: t('croix_maya.north_guide')      },
+        { pos: cross.ouest,  key: 'ouest',  posName: t('croix_maya.west_mission')     },
+        { pos: cross.est,    key: 'est',    posName: t('croix_maya.east_conception')   },
+        { pos: cross.sud,    key: 'sud',    posName: t('croix_maya.south_support')     }
     ];
 
     let html = '';
@@ -274,7 +260,7 @@ function renderParagraphs(containerId, cross, lordNum, currentBearer, birthBeare
                     ? `<img src="${imgURL}" alt="G${lordNum}" style="height:30px; width:auto; filter:invert(1); opacity:0.85;">`
                     : `<div style="width:30px; height:30px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:bold; color:#ccc;">G${lordNum}</div>`}
                 <div style="flex:1;">
-                    <div style="font-size:14px; color:#ddd; font-style:italic;">${POSITION_TEXTS.seigneur.title} · G${lordNum}</div>
+                    <div style="font-size:14px; color:#ddd; font-style:italic;">${t('croix_maya.lord_of_night_label').replace('{num}', lordNum)}</div>
                     <div style="font-size:16px; font-weight:bold; color:#fff; font-family:'Summer',cursive;">${lord.name} · ${lord.domain}</div>
                 </div>
                 <button onclick="openLordDetail(${lordNum})"
@@ -321,7 +307,7 @@ function renderParagraphs(containerId, cross, lordNum, currentBearer, birthBeare
         <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
             <img src="${bearerURL}" alt="${bearerGlyph.name}" style="height:30px; width:auto; opacity:0.85;">
             <div style="flex:1;">
-                <div style="font-size:14px; color:${bearerPal.textColor}; font-style:italic;">${pt.title} · Naissance ${displayYear}</div>
+                <div style="font-size:14px; color:${bearerPal.textColor}; font-style:italic;">${pt.title} · ${t('croix_maya.birth_prefix')} ${displayYear}</div>
                 <div style="font-size:16px; font-weight:bold; color:${bearerPal.textColor}; font-family:'Summer',cursive;">${bearerGlyph.name} · ${bearerGlyph.translation}</div>
             </div>
             ${btnDetail('porteur', displayBearer)}
@@ -375,7 +361,7 @@ function openLordDetail(lordNum) {
     overlay.innerHTML = `
         <div style="max-width: 560px; width: 100%; margin: 40px auto; padding: 30px; box-sizing: border-box; background: rgba(222, 210, 179, 0.9); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 2px solid #222; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
             <button onclick="closeLordDetail()"
-                style="padding: 8px 16px; background: #222; color: #ded2b3; border: none; border-radius: 8px; cursor: pointer; margin-bottom: 20px; font-family: 'Summer', cursive; font-size: 18px; display: inline-block;">← Retour</button>
+                style="padding: 8px 16px; background: #222; color: #ded2b3; border: none; border-radius: 8px; cursor: pointer; margin-bottom: 20px; font-family: 'Summer', cursive; font-size: 18px; display: inline-block;">${t('croix_maya.back')}</button>
 
             <div style="background: #ded2b3; border: 2px solid #222; border-radius: 16px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.09); margin: 0 auto;">
                 ${imgURL ? `<img src="${imgURL}" alt="G${lordNum}" style="max-width: 100px; height: auto; display: block; margin: 0 auto 10px;">` : ''}

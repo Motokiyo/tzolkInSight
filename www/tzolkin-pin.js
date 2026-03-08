@@ -12,6 +12,8 @@
 
 class TzolkinPIN {
     constructor() {
+        /** @type {(key: string, params?: object) => string} */
+        this.t = window.i18n ? window.i18n.t.bind(window.i18n) : k => k;
         this.pinModalId = 'pin-modal';
         this.pinAttempts = 0;
         this.maxAttempts = 3;
@@ -40,11 +42,11 @@ class TzolkinPIN {
             <dialog id="${this.pinModalId}" class="pin-modal">
                 <div class="modal-content pin-content">
                     <div class="header">
-                        <h2>Code PIN requis</h2>
+                        <h2>${this.t('pin.title')}</h2>
                     </div>
 
                     <div class="pin-body">
-                        <p id="pin-message">Entrez votre code PIN à 4 chiffres pour accéder aux notes enregistrées.</p>
+                        <p id="pin-message">${this.t('pin.instruction')}</p>
 
                         <div class="pin-input-container">
                             <input type="password"
@@ -80,41 +82,41 @@ class TzolkinPIN {
                         <div class="pin-error" id="pin-error" style="display:none;"></div>
 
                         <div class="pin-actions">
-                            <button type="button" id="pin-submit-btn" class="button button-primary" style="display:none;">Valider</button>
-                            <button type="button" id="pin-cancel-btn" class="button button-secondary">Annuler</button>
+                            <button type="button" id="pin-submit-btn" class="button button-primary" style="display:none;">${this.t('pin.validate')}</button>
+                            <button type="button" id="pin-cancel-btn" class="button button-secondary">${this.t('pin.cancel')}</button>
                         </div>
 
                         <div class="pin-setup" id="pin-setup-section" style="display:none;">
                             <hr />
-                            <p><strong>Aucun code PIN défini.</strong></p>
-                            <p>Voulez-vous en créer un pour protéger vos notes ?</p>
-                            <button type="button" id="pin-create-btn" class="button button-primary">Créer un code PIN</button>
-                            <button type="button" id="pin-skip-btn" class="button button-secondary">Accéder sans code</button>
+                            <p><strong>${this.t('pin.no_pin')}</strong></p>
+                            <p>${this.t('pin.create_pin_question')}</p>
+                            <button type="button" id="pin-create-btn" class="button button-primary">${this.t('pin.create_pin')}</button>
+                            <button type="button" id="pin-skip-btn" class="button button-secondary">${this.t('pin.access_without')}</button>
                         </div>
 
                         <!-- Section création de PIN (formulaire masqué avec œil) -->
                         <div class="pin-setup" id="pin-create-section" style="display:none;">
                             <hr />
-                            <p style="margin:0 0 4px;"><strong>Nouveau code PIN (4 chiffres)</strong></p>
+                            <p style="margin:0 0 4px;"><strong>${this.t('pin.new_pin')}</strong></p>
                             <div class="pin-input-container" style="margin:10px 0;">
                                 <input type="password" id="pin-new-1" class="pin-digit pin-create-digit" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off" />
                                 <input type="password" id="pin-new-2" class="pin-digit pin-create-digit" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off" />
                                 <input type="password" id="pin-new-3" class="pin-digit pin-create-digit" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off" />
                                 <input type="password" id="pin-new-4" class="pin-digit pin-create-digit" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off" />
                             </div>
-                            <p style="margin:0 0 4px;"><strong>Confirmer le code PIN</strong></p>
+                            <p style="margin:0 0 4px;"><strong>${this.t('pin.confirm_pin')}</strong></p>
                             <div class="pin-input-container" style="margin:10px 0 8px;">
                                 <input type="password" id="pin-conf-1" class="pin-digit pin-create-digit" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off" />
                                 <input type="password" id="pin-conf-2" class="pin-digit pin-create-digit" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off" />
                                 <input type="password" id="pin-conf-3" class="pin-digit pin-create-digit" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off" />
                                 <input type="password" id="pin-conf-4" class="pin-digit pin-create-digit" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off" />
                             </div>
-                            <button type="button" id="pin-eye-btn" class="pin-eye-btn" title="Afficher / masquer">
+                            <button type="button" id="pin-eye-btn" class="pin-eye-btn" title="${this.t('pin.show_hide')}">
                                 <svg id="pin-eye-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                             </button>
                             <div class="pin-actions">
-                                <button type="button" id="pin-confirm-create-btn" class="button button-primary">Créer</button>
-                                <button type="button" id="pin-cancel-create-btn" class="button button-secondary">Annuler</button>
+                                <button type="button" id="pin-confirm-create-btn" class="button button-primary">${this.t('pin.create')}</button>
+                                <button type="button" id="pin-cancel-create-btn" class="button button-secondary">${this.t('pin.cancel')}</button>
                             </div>
                         </div>
                     </div>
@@ -325,7 +327,7 @@ class TzolkinPIN {
         if (lockoutEnd && Date.now() < parseInt(lockoutEnd)) {
             const remainingMs = parseInt(lockoutEnd) - Date.now();
             const remainingMin = Math.ceil(remainingMs / 60000);
-            alert(`Trop de tentatives échouées. Veuillez patienter encore ${remainingMin} minute(s).`);
+            alert(this.t('pin.too_many_attempts', {minutes: remainingMin}));
             if (onCancel) onCancel();
             return;
         }
@@ -392,7 +394,7 @@ class TzolkinPIN {
         const pin = this.getPinFromInputs();
 
         if (pin.length !== 4) {
-            this.showError('Veuillez entrer les 4 chiffres');
+            this.showError(this.t('pin.enter_4_digits'));
             return;
         }
 
@@ -415,7 +417,7 @@ class TzolkinPIN {
                 const lockoutEnd = Date.now() + this.lockoutTime;
                 localStorage.setItem('tzolkin_pin_lockout', lockoutEnd.toString());
 
-                this.showError(`Code PIN incorrect. ${this.maxAttempts} tentatives échouées. Verrouillage pendant 5 minutes.`);
+                this.showError(this.t('pin.lockout_message', {attempts: this.maxAttempts}));
 
                 setTimeout(() => {
                     this.closePinModal();
@@ -423,7 +425,7 @@ class TzolkinPIN {
                 }, 2000);
             } else {
                 const remaining = this.maxAttempts - this.pinAttempts;
-                this.showError(`Code PIN incorrect. ${remaining} tentative(s) restante(s).`);
+                this.showError(this.t('pin.wrong_pin_remaining', {remaining: remaining}));
                 this.resetPinInputs();
             }
         }
@@ -494,11 +496,11 @@ class TzolkinPIN {
         const conf = [1,2,3,4].map(i => document.getElementById(`pin-conf-${i}`)?.value || '').join('');
 
         if (!/^\d{4}$/.test(pin)) {
-            this.showError('Entrez 4 chiffres pour le nouveau code');
+            this.showError(this.t('pin.enter_4_digits_new'));
             return;
         }
         if (pin !== conf) {
-            this.showError('Les deux codes ne correspondent pas');
+            this.showError(this.t('pin.codes_mismatch'));
             return;
         }
 
@@ -611,7 +613,7 @@ class TzolkinPIN {
      * Supprimer le code PIN (fonction admin)
      */
     async removePinWithConfirmation() {
-        const confirmed = confirm('Voulez-vous vraiment supprimer votre code PIN ?\nVos notes ne seront plus protégées.');
+        const confirmed = confirm(this.t('pin.confirm_delete_pin'));
 
         if (!confirmed) {
             return;
@@ -620,7 +622,7 @@ class TzolkinPIN {
         // Demander le PIN actuel pour confirmation
         this.requestPin(() => {
             window.TzolkinStorage.removePinCode();
-            alert('Code PIN supprimé avec succès.');
+            alert(this.t('pin.pin_deleted'));
         }, null);
     }
 }

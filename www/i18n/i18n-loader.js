@@ -170,7 +170,8 @@
         var dataFiles = [
             './i18n/core-data-' + lang + '.js',
             './i18n/details-data-' + lang + '.js',
-            './i18n/summary-data-' + lang + '.js'
+            './i18n/summary-data-' + lang + '.js',
+            './i18n/corn-family-' + lang + '.js'
         ];
 
         // We need these to load AFTER the main scripts but BEFORE the app renders.

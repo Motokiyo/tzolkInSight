@@ -14,7 +14,8 @@
     "widget": {
         "date_placeholder": "mm/dd/yyyy",
         "invalid_format": "Invalid date format. Use mm/dd/yyyy.",
-        "invalid_date": "Invalid date. Please enter a valid date."
+        "invalid_date": "Invalid date. Please enter a valid date.",
+        "today_tooltip": "back to today"
     },
     "details": {
         "important_for": "Important day for",
@@ -71,7 +72,8 @@
         "gps_denied": "GPS denied.",
         "gps_unavailable": "Position unavailable. Enter the city manually.",
         "location_settings_browser": "Go to your browser settings to allow location access.",
-        "open_settings": "Open settings →"
+        "open_settings": "Open settings →",
+        "gps_android": "Go to Settings → Apps → Tzolkin → Permissions → Location"
     },
     "saved_modal": {
         "title": "Saved Notes",
@@ -101,7 +103,13 @@
         "import_duplicates_prefix": "duplicate note(s)",
         "import_duplicates_exists": "An entry already exists for these dates in the app.",
         "import_duplicates_replace": "Replace all duplicate entries?",
-        "import_duplicates_buttons": "OK = Replace   |   Cancel = Keep existing"
+        "import_duplicates_buttons": "OK = Replace   |   Cancel = Keep existing",
+        "no_notes_export": "No notes to export.",
+        "file_saved": "saved to Downloads",
+        "pdf_title": "Tzolk'in Journal",
+        "csv_note1": "💾 Your notes are saved in the downloaded CSV file.",
+        "csv_note2": "🔄 To restore them, re-import this file via <strong>Upload</strong>.",
+        "csv_note3": "⚠️ Only CSV allows full restoration. TXT and PDF are not sufficient."
     },
     "emotions": {
         "joie": "Joy",
@@ -236,12 +244,33 @@
         "section_cross": "The Mayan Cross",
         "section_notes": "Notes",
         "section_saved": "Saved",
-        "section_settings": "Settings"
+        "section_settings": "Settings",
+        "intro_p1": "The Tzolk'in, also called the \"count of days\" or \"sacred calendar,\" is one of the calendars of the Maya civilization. Originating from Mesoamerica, this calendrical system was developed over 2,500 years ago. Its use has continued uninterrupted to this day in certain Maya communities of Guatemala and Mexico.",
+        "intro_p2": "Unlike our Gregorian calendar, which follows solar cycles, the Tzolk'in is based on a 260-day cycle, resulting from the combination of two simultaneous cycles: a cycle of 13 numbers and a cycle of 20 glyphs (called \"nawals\"). Each day is thus identified by a number from 1 to 13 paired with one of the 20 glyphs, creating 260 unique combinations. This cycle corresponds approximately to the period of human gestation and is also linked to agricultural and astronomical cycles, central to Maya civilization.",
+        "cycles_text": "The Maya possessed remarkably precise astronomical knowledge, which is reflected in the structure of the Tzolk'in. The 260-day cycle presents several significant astronomical correlations: it corresponds approximately to nine synodic lunar cycles (about 29.5 days each) as well as the visibility period of Venus. Moreover, Maya observers had noted that the Sun's zenith passages at the latitude of Copán (approximately 14.8° North) occurred at 260-day intervals. The 20-day cycle, linked to the Maya vigesimal (base 20) system, also reflects the cycle of the Pleiades, visible for about 260 days per year at these latitudes. The cycle of 13, in turn, could correspond to the number of \"heavens\" or cosmic levels in Maya cosmology. The Maya had calculated with stunning precision the synodic cycles of the visible planets, solar and lunar eclipses, and even the precession of the equinoxes, a cycle of approximately 26,000 years. The Tzolk'in was part of a broader calendrical system, including the Haab (a 365-day solar calendar), forming the \"Long Count,\" which tracked periods spanning several millennia.",
+        "resonances_text": "Remarkably, the numbers 13 and 20, at the heart of the Maya Tzolk'in, appear with similar significance in other culturally distant traditions. In the Celtic tradition, the lunar calendar comprised 13 months of 28 days, corresponding to the 13 lunar cycles of a solar year. The number 20 appears in their vigesimal counting system, and certain Celtic stone circles feature arrangements based on these numbers. The Celtic Ogham calendar, for example, has 20 main signs, reminiscent of the 20 glyphs of the Tzolk'in. Among the ancient Egyptians, the cycle of Sirius (the brightest star in the sky) was particularly important, and its visibility period was approximately 260 days per year. Their calendar featured 13 phases corresponding to the Nile floods, and their numerical system attributed particular significance to the number 20 as a marker of a complete period. In the Hopi tradition of North America, we find a prophetic system based on 13 major cycles, and their cosmology divides the world into 20 fundamental aspects. This numerical convergence between cultures, apparently without direct contact, raises fascinating questions about the potential universality of certain astronomical observations or about fundamental mathematical intuitions common to humanity.",
+        "glyphs_text": "The 20 glyphs of the Tzolk'in represent fundamental spiritual forces or energies that influence each day according to Maya cosmogony. Each glyph possesses its own characteristics, symbolism, and spiritual significance. They are represented by complex visual symbols evoking natural elements, animals, or abstract concepts: Imix (Crocodile), Ik (Wind), Akbal (Night), Kan (Seed), Chicchan (Serpent), Cimi (Death), Manik (Deer), Lamat (Star), Muluc (Water), Oc (Dog), Chuen (Monkey), Eb (Grass), Ben (Reed), Ix (Jaguar), Men (Eagle), Cib (Vulture), Caban (Earth), Etznab (Flint), Cauac (Storm), and Ahau (Lord/Sun). These glyphs determine the fundamental nature of each day and are considered portals for communicating with different dimensions of existence and specific deities.",
+        "numbers_text": "In the Tzolk'in, the 13 numbers are not mere quantitative indicators but possess deep qualitative and spiritual significance. Each number from 1 to 13 represents a particular intention, being, or energy direction: 1 symbolizes unity and initiation, 2 duality and polarity, 3 activation and movement, 4 stability and measure, 5 harmony and center, 6 balance and rhythm, 7 reflection and meditation, 8 harmony and justice, 9 patience and perseverance, 10 manifestation and accomplishment, 11 dissolution and liberation, 12 understanding and stability, and 13 ascension and transcendence. According to Maya tradition, each number modulates the energy of the glyph to which it is associated, creating a unique dynamic for each day of the calendar. These numbers are also linked to the thirteen major joints of the human body, establishing a connection between the macrocosm and the microcosm.",
+        "calendar_btn": "Details ›",
+        "calendar_text": "The ◀ ▶ arrows navigate day by day. Click on the date → free entry (birth, event…). ↺ returns to today. <strong>Every element is clickable</strong> — glyph, number, trecena — and opens a description page.",
+        "corn_text": "Below the calendar, the colored frame indicates the <strong>K'iche' corn family</strong> of the day — Red (East), White (North), Black (West) or Yellow (South). <strong>Click on it</strong> to access the family page: Popol Vuh, element, the 5 K'iche' nawals and associated ceremonies.",
+        "cross_text": "Personal map from your date of birth — five dimensions: <span style=\"background:#ded2b3;border:1px solid #222;border-radius:4px;padding:1px 7px;font-size:14px;\">Center</span> birth · <span style=\"background:#e57373;color:#4a0f0f;border-radius:4px;padding:1px 7px;font-size:14px;\">East</span> conception · <span style=\"background:#64b5f6;color:#0d2d4a;border-radius:4px;padding:1px 7px;font-size:14px;\">West</span> mission · <span style=\"background:#f0f0f0;color:#333;border-radius:4px;padding:1px 7px;font-size:14px;\">North</span> guide · <span style=\"background:#ffd54f;color:#3a2400;border-radius:4px;padding:1px 7px;font-size:14px;\">South</span> support. Plus the <span style=\"background:#1a1a1a;color:#ccc;border-radius:4px;padding:1px 7px;font-size:14px;\">Lord of the Night G1–G9</span>. Each position is clickable. Accessible from \"Important day for\" or from the <strong>✛</strong> button in Settings.",
+        "notes_text": "Choose an emotion from <strong>Plutchik's wheel</strong> and write freely. Automatic saving. Also possible for a <strong>past day</strong> (date, time and location confirmed, city pre-filled by GPS).",
+        "notes_emotions": "<span style=\"background:#FFFF99;color:#555;border-radius:3px;padding:1px 7px;\">Joy</span> · Serenity · Ecstasy<br><span style=\"background:#99CCFF;color:#333;border-radius:3px;padding:1px 7px;\">Sadness</span> · Pensiveness · Grief<br><span style=\"background:#99FF99;color:#333;border-radius:3px;padding:1px 7px;\">Fear</span> · Apprehension · Terror<br><span style=\"background:#FF9999;color:#333;border-radius:3px;padding:1px 7px;\">Anger</span> · Annoyance · Rage<br><span style=\"background:#CC99FF;color:#333;border-radius:3px;padding:1px 7px;\">Surprise</span> · Distraction · Amazement<br><span style=\"background:#CCFFCC;color:#333;border-radius:3px;padding:1px 7px;\">Trust</span> · Acceptance · Admiration<br><span style=\"background:#999966;color:#fff;border-radius:3px;padding:1px 7px;\">Disgust</span> · Loathing · Boredom<br><span style=\"background:#FFCC99;color:#555;border-radius:3px;padding:1px 7px;\">Anticipation</span> · Interest · Vigilance",
+        "saved_text": "Complete, filterable history. Download as <strong style=\"color:#4CAF50;\">CSV</strong>, <strong style=\"color:#2196F3;\">TXT</strong> or <strong style=\"color:#e53935;\">PDF</strong>. CSV reimport available. <strong>Automatic annual backup</strong> — keep it safe.",
+        "saved_other_day": "<strong>Save for another day:</strong> navigate to the desired day in the calendar, open Notes — a date confirmation will be requested before entering time and location.",
+        "saved_edit": "<strong>Editing from Saved:</strong> each note is fully editable — text, time, location. The <strong>📍</strong> button activates GPS to automatically fill your location if permission is granted.",
+        "settings_contacts": "Manage your <strong>contacts</strong> for the Mayan Cross. Save as many names and birth dates as you wish, choose a color. For each contact: <strong>Edit</strong>, <strong>Delete</strong>, and the <strong style=\"background:#e57373;color:#fff;border-radius:4px;padding:1px 8px;\">✛</strong> button directly opens their Mayan Cross.",
+        "settings_pin": "This is also where you set up an optional <strong>PIN code</strong> to protect your notes.",
+        "quote": "\"Know thyself and thou shalt know the Universe and the Gods\""
     },
     "credits": {
         "company": "GALAAD MOTOKIYO FERRAN",
         "subtitle": "AI Access Consulting & Creation",
         "app_title": "Sacred Mayan Calendar",
+        "developed_by": "Designed, imagined and developed by Alexandre Ferran for",
+        "ai_label": "AI:",
+        "splash_tagline": "AI Access · Consulting & Creation",
         "support_text": "This app is free and ad-free. If it brings you value, you can freely support its development.",
         "support_button": "☕ Support the project"
     },

@@ -14,7 +14,8 @@
     "widget": {
         "date_placeholder": "jj/mm/aaaa",
         "invalid_format": "Format de date incorrect. Utilisez jj/mm/aaaa.",
-        "invalid_date": "Date invalide. Veuillez entrer une date valide."
+        "invalid_date": "Date invalide. Veuillez entrer une date valide.",
+        "today_tooltip": "retour au jour d'aujourd'hui"
     },
     "details": {
         "important_for": "Jour important pour",
@@ -71,7 +72,8 @@
         "gps_denied": "GPS refusé.",
         "gps_unavailable": "Position indisponible. Saisissez la ville manuellement.",
         "location_settings_browser": "Allez dans les réglages de votre navigateur pour autoriser la localisation.",
-        "open_settings": "Ouvrir les réglages →"
+        "open_settings": "Ouvrir les réglages →",
+        "gps_android": "Allez dans Réglages → Applications → Tzolkin → Autorisations → Localisation"
     },
     "saved_modal": {
         "title": "Notes enregistrées",
@@ -101,7 +103,13 @@
         "import_duplicates_prefix": "note(s) en double",
         "import_duplicates_exists": "Une entrée existe déjà pour ces dates dans l'application.",
         "import_duplicates_replace": "Remplacer toutes les entrées en double ?",
-        "import_duplicates_buttons": "OK = Remplacer   |   Annuler = Conserver les existantes"
+        "import_duplicates_buttons": "OK = Remplacer   |   Annuler = Conserver les existantes",
+        "no_notes_export": "Aucune note à exporter.",
+        "file_saved": "enregistré dans Téléchargements",
+        "pdf_title": "Journal Tzolk'in",
+        "csv_note1": "💾 Vos notes sont conservées dans le fichier CSV téléchargé.",
+        "csv_note2": "🔄 Pour les retrouver, réimportez ce fichier via <strong>Uploader</strong>.",
+        "csv_note3": "⚠️ Seul le CSV permet une restauration complète. TXT et PDF ne suffisent pas."
     },
     "emotions": {
         "joie": "Joie",
@@ -236,12 +244,33 @@
         "section_cross": "La Croix Maya",
         "section_notes": "Notes",
         "section_saved": "Enregistrés",
-        "section_settings": "Réglages"
+        "section_settings": "Réglages",
+        "intro_p1": "Le tzolk'in, également appelé \"compte des jours\" ou \"calendrier sacré\", est l'un des calendriers de la civilisation maya. Originaire de la Mésoamérique, ce système calendaire a été développé il y a plus de 2 500 ans. Son utilisation s'est poursuivie sans interruption jusqu'à nos jours dans certaines communautés mayas du Guatemala et du Mexique.",
+        "intro_p2": "Contrairement à notre calendrier grégorien, qui suit les cycles solaires, le tzolk'in repose sur un cycle de 260 jours, résultant de la combinaison de deux cycles simultanés : un cycle de 13 nombres et un cycle de 20 glyphes (appelés \"nawals\"). Chaque jour est ainsi identifié par un nombre de 1 à 13 associé à l'un des 20 glyphes, créant 260 combinaisons uniques. Ce cycle correspond approximativement à la période de gestation humaine et est également lié aux cycles agricoles et astronomiques, centraux pour la civilisation maya.",
+        "cycles_text": "Les Mayas possédaient une connaissance astronomique remarquablement précise, qui se reflète dans la structure du tzolk'in. Le cycle de 260 jours présente plusieurs corrélations astronomiques significatives : il correspond approximativement à neuf cycles lunaires synodiques (environ 29,5 jours chacun) ainsi qu'à la période de visibilité de Vénus. De plus, les observateurs mayas avaient noté que les passages du Soleil au zénith à la latitude de Copán (environ 14,8° Nord) se produisaient à 260 jours d'intervalle. Le cycle de 20 jours, lié au système vigésimal (base 20) des Mayas, reflète également le cycle des Pléiades, visible pendant environ 260 jours par an sous ces latitudes. Le cycle de 13, quant à lui, pourrait correspondre au nombre de \"cieux\" ou niveaux cosmiques dans la cosmologie maya. Les Mayas avaient calculé avec une précision stupéfiante les cycles synodiques des planètes visibles, les éclipses solaires et lunaires, et même la précession des équinoxes, un cycle d'environ 26 000 ans. Le tzolk'in s'intégrait dans un système calendaire plus vaste, incluant le Haab (calendrier solaire de 365 jours), pour former le \"Compte Long\", permettant de suivre des périodes de plusieurs millénaires.",
+        "resonances_text": "Fait remarquable, les nombres 13 et 20, au cœur du tzolk'in maya, se retrouvent avec une signification similaire dans d'autres traditions culturelles éloignées géographiquement. Dans la tradition celtique, le calendrier lunaire comportait 13 mois de 28 jours, correspondant aux 13 cycles lunaires d'une année solaire. Le nombre 20 apparaît dans leur système de comptage vigésimal, et certains cercles de pierres celtiques présentent des arrangements basés sur ces nombres. Le calendrier oghamique celtique, par exemple, possède 20 signes principaux, rappelant les 20 glyphes du tzolk'in. Chez les Égyptiens anciens, le cycle de Sirius (l'étoile la plus brillante du ciel) était particulièrement important, et sa période de visibilité était d'environ 260 jours par an. Leur calendrier présentait 13 phases correspondant aux inondations du Nil, et leur système numérique attribuait une signification particulière au nombre 20 comme marqueur d'une période complète. Dans la tradition hopi d'Amérique du Nord, on retrouve un système prophétique basé sur 13 cycles majeurs, et leur cosmologie divise le monde en 20 aspects fondamentaux. Cette convergence numérique entre cultures, apparemment sans contacts directs, soulève des questions fascinantes sur l'universalité potentielle de certaines observations astronomiques ou sur des intuitions mathématiques fondamentales communes à l'humanité.",
+        "glyphs_text": "Les 20 glyphes du tzolk'in représentent des forces ou énergies spirituelles fondamentales qui influencent chaque jour selon la cosmogonie maya. Chaque glyphe possède ses propres caractéristiques, son symbolisme et sa signification spirituelle. Ils sont représentés par des symboles visuels complexes qui évoquent des éléments naturels, des animaux ou des concepts abstraits : Imix (Crocodile), Ik (Vent), Akbal (Nuit), Kan (Maïs), Chicchan (Serpent), Cimi (Mort), Manik (Cerf), Lamat (Étoile), Muluc (Eau), Oc (Chien), Chuen (Singe), Eb (Herbe), Ben (Roseau), Ix (Jaguar), Men (Aigle), Cib (Vautour), Caban (Terre), Etznab (Silex), Cauac (Orage) et Ahau (Seigneur/Soleil). Ces glyphes déterminent la nature fondamentale de chaque jour et sont considérés comme des portails permettant de communiquer avec différentes dimensions de l'existence et des divinités spécifiques.",
+        "numbers_text": "Dans le tzolk'in, les 13 nombres ne sont pas de simples indicateurs quantitatifs, mais possèdent une signification qualitative et spirituelle profonde. Chaque nombre de 1 à 13 représente une intention, un être ou une direction d'énergie particulière : le 1 symbolise l'unité et l'initiation, le 2 la dualité et la polarité, le 3 l'activation et le mouvement, le 4 la stabilité et la mesure, le 5 l'harmonie et le centre, le 6 l'équilibre et le rythme, le 7 la réflexion et la méditation, le 8 l'harmonie et la justice, le 9 la patience et la persévérance, le 10 la manifestation et l'accomplissement, le 11 la dissolution et la libération, le 12 la compréhension et la stabilité, et le 13 l'ascension et la transcendance. Selon la tradition maya, chaque nombre module l'énergie du glyphe auquel il est associé, créant une dynamique unique pour chaque jour du calendrier. Ces nombres sont également liés aux treize articulations majeures du corps humain, établissant une connexion entre le macrocosme et le microcosme.",
+        "calendar_btn": "Détails ›",
+        "calendar_text": "Les flèches ◀ ▶ naviguent jour par jour. Clic sur la date → saisie libre (naissance, événement…). ↺ revient au jour actuel. <strong>Chaque élément est cliquable</strong> — glyphe, chiffre, trécéna — et ouvre une page de description.",
+        "corn_text": "Sous le calendrier, le cadre coloré indique la <strong>famille de maïs K'iche'</strong> du jour — Rouge (Est), Blanc (Nord), Noir (Ouest) ou Jaune (Sud). <strong>Cliquez dessus</strong> pour accéder à la page de la famille : Popol Vuh, élément, les 5 nawals K'iche' et les cérémonies associées.",
+        "cross_text": "Carte personnelle depuis votre date de naissance — cinq dimensions : <span style=\"background:#ded2b3;border:1px solid #222;border-radius:4px;padding:1px 7px;font-size:14px;\">Centre</span> naissance · <span style=\"background:#e57373;color:#4a0f0f;border-radius:4px;padding:1px 7px;font-size:14px;\">Est</span> conception · <span style=\"background:#64b5f6;color:#0d2d4a;border-radius:4px;padding:1px 7px;font-size:14px;\">Ouest</span> mission · <span style=\"background:#f0f0f0;color:#333;border-radius:4px;padding:1px 7px;font-size:14px;\">Nord</span> guide · <span style=\"background:#ffd54f;color:#3a2400;border-radius:4px;padding:1px 7px;font-size:14px;\">Sud</span> soutien. Plus le <span style=\"background:#1a1a1a;color:#ccc;border-radius:4px;padding:1px 7px;font-size:14px;\">Seigneur de la Nuit G1–G9</span>. Chaque position est cliquable. Accessible depuis « Jour important pour » ou depuis le bouton <strong>✛</strong> dans Réglages.",
+        "notes_text": "Choisissez une émotion dans la <strong>roue de Plutchik</strong> et écrivez librement. Enregistrement automatique. Possible pour un <strong>jour passé</strong> (date, heure et lieu confirmés, ville pré-remplie par GPS).",
+        "notes_emotions": "<span style=\"background:#FFFF99;color:#555;border-radius:3px;padding:1px 7px;\">Joie</span> · Sérénité · Extase<br><span style=\"background:#99CCFF;color:#333;border-radius:3px;padding:1px 7px;\">Tristesse</span> · Songerie · Chagrin<br><span style=\"background:#99FF99;color:#333;border-radius:3px;padding:1px 7px;\">Peur</span> · Appréhension · Terreur<br><span style=\"background:#FF9999;color:#333;border-radius:3px;padding:1px 7px;\">Colère</span> · Contrariété · Rage<br><span style=\"background:#CC99FF;color:#333;border-radius:3px;padding:1px 7px;\">Surprise</span> · Distraction · Stupéfaction<br><span style=\"background:#CCFFCC;color:#333;border-radius:3px;padding:1px 7px;\">Confiance</span> · Acceptation · Admiration<br><span style=\"background:#999966;color:#fff;border-radius:3px;padding:1px 7px;\">Dégoût</span> · Aversion · Ennui<br><span style=\"background:#FFCC99;color:#555;border-radius:3px;padding:1px 7px;\">Anticipation</span> · Intérêt · Vigilance",
+        "saved_text": "Historique complet, filtrable. Téléchargez en <strong style=\"color:#4CAF50;\">CSV</strong>, <strong style=\"color:#2196F3;\">TXT</strong> ou <strong style=\"color:#e53935;\">PDF</strong>. Réimport CSV possible. <strong>Sauvegarde automatique</strong> annuelle — conservez-la précieusement.",
+        "saved_other_day": "<strong>Enregistrer pour un autre jour :</strong> naviguez jusqu'au jour souhaité dans le calendrier, ouvrez les Notes — une confirmation de date vous sera demandée avant de saisir heure et lieu.",
+        "saved_edit": "<strong>Édition depuis Enregistrés :</strong> chaque note est entièrement modifiable — texte, heure, lieu. Le bouton <strong>📍</strong> active le GPS pour remplir automatiquement votre localisation si la permission est accordée.",
+        "settings_contacts": "Gérez vos <strong>contacts</strong> pour la Croix Maya. Enregistrez autant de noms et dates de naissance que vous le souhaitez, choisissez une couleur. Pour chaque contact : <strong>Modifier</strong>, <strong>Supprimer</strong>, et le bouton <strong style=\"background:#e57373;color:#fff;border-radius:4px;padding:1px 8px;\">✛</strong> ouvre directement sa Croix Maya.",
+        "settings_pin": "C'est ici aussi que vous configurez un <strong>code PIN optionnel</strong> pour protéger vos notes.",
+        "quote": "« Connais-toi toi-même et tu connaîtras l'Univers et les Dieux »"
     },
     "credits": {
         "company": "GALAAD MOTOKIYO FERRAN",
         "subtitle": "IA Access Conseil & Création",
         "app_title": "Calendrier Maya Sacré",
+        "developed_by": "Pensé, imaginé et développé par Alexandre Ferran pour",
+        "ai_label": "IA :",
+        "splash_tagline": "IA Access · Conseil & Création",
         "support_text": "Cette app est gratuite et sans publicité. Si elle vous apporte de la valeur, vous pouvez soutenir son développement librement.",
         "support_button": "☕ Soutenir le projet"
     },

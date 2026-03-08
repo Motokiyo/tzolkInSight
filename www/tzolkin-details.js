@@ -1,3 +1,5 @@
+const _tDetails = k => window.i18n?.t(k) || k;
+
 // Définir les maps globalement
 const glyphMap = {
     'Imix': './assets/glyphs/MAYA-g-log-cal-D01-Imix.svg',
@@ -69,7 +71,7 @@ function showDetail(type, id) {
 
     detailContent.innerHTML = `
         <div style="padding: 20px; max-width: 800px; margin: 0 auto; position: relative;">
-            <button id="tzolkin-back-btn" style="padding: 8px 16px; background: #222; color: #ded2b3; border: none; border-radius: 8px; cursor: pointer; margin-bottom: 20px; font-family: 'Summer', cursive; font-size: 18px; display: inline-block;">← Retour</button>
+            <button id="tzolkin-back-btn" style="padding: 8px 16px; background: #222; color: #ded2b3; border: none; border-radius: 8px; cursor: pointer; margin-bottom: 20px; font-family: 'Summer', cursive; font-size: 18px; display: inline-block;">${_tDetails('details.back')}</button>
 
             <div style="background: #ded2b3; border: 2px solid #222; border-radius: 16px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.09); max-width: 500px; margin: 0 auto;">
                 <img src="${item.image}" alt="${item.titre}" class="tzolkin-detail-img" style="max-width: 100px; height: auto; display: block; margin: 0 auto 10px;">
