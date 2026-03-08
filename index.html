@@ -66,7 +66,7 @@
                 <div class="tzolkin-splash-text">
                     <h1>tzolkInSight</h1>
                     <p>Calendrier Maya Sacré</p>
-                    <p class="version">Version 1.1.6</p>
+                    <p class="version">Version 1.1.7</p>
                 </div>
                 <div class="splash-galaad-footer">
                     <div class="splash-galaad-divider"></div>
@@ -117,6 +117,13 @@
                 const html = await response.text();
                 document.getElementById('modales-container').innerHTML = html;
                 console.log('✅ Menu et modales chargés');
+
+                // Apply i18n translations to the dynamically loaded menu
+                if (window.i18n) {
+                    window.i18n.onReady(function () {
+                        window.i18n.applyToDOM(document.getElementById('modales-container'));
+                    });
+                }
 
                 // Exécuter les scripts du fichier chargé
                 const scripts = document.getElementById('modales-container').querySelectorAll('script');
