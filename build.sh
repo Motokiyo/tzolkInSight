@@ -12,17 +12,26 @@ rsync -a \
   --exclude='android/' \
   --exclude='node_modules/' \
   --exclude='.git/' \
+  --exclude='tools/' \
+  --exclude='docs/' \
   --exclude='package.json' \
   --exclude='package-lock.json' \
   --exclude='capacitor.config.json' \
   --exclude='build.sh' \
+  --exclude='bump-version.sh' \
   --exclude='*.md' \
   --exclude='*.php' \
   --exclude='*.wp-backup' \
+  --exclude='*.csv' \
+  --exclude='*.py' \
+  --exclude='*.txt' \
   --exclude='glyphes.json' \
   --exclude='chiffres.json' \
   --exclude='trecenas.json' \
   --exclude='porteurs.json' \
+  --exclude='test-pwa.js' \
+  --exclude='feature-graphic.html' \
+  --exclude='x-post-visual.html' \
   . www/
 
 echo "✅ www/ prêt — $(find www -type f | wc -l | tr -d ' ') fichiers"
