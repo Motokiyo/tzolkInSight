@@ -1,6 +1,6 @@
 <!-- 
   Tzolk'in Menu Standalone - Menu et Modales
-  Version: 1.1.7
+  Version: 1.1.8
   Auteur: Alexandre Ferran + Claude AI
 -->
 
@@ -419,7 +419,7 @@
             </div>
             <h1 class="credits-app-title">tzolkInSight</h1>
             <p class="credits-app-sub" data-i18n="credits.app_title">Calendrier Maya Sacré</p>
-            <p class="credits-app-version">Version 1.1.7</p>
+            <p class="credits-app-version">Version 1.1.8</p>
             <p class="credits-app-meta" data-i18n-html="credits.developed_by">Pensé, imaginé et développé par Alexandre Ferran pour <strong class="credits-galaad-name">Galaad Motokiyo Ferran</strong></p>
             <p class="credits-app-meta"><strong>IA :</strong> Claude, Grok, DeepSeek</p>
             <a href="https://leparede.org" target="_blank" class="credits-app-site">leparede.org</a>
@@ -452,7 +452,7 @@
         <img src="./assets/boutons/SVG/manik-bt.svg" alt="Crédits">
         <span data-i18n="menu.credits">Crédits</span>
     </div>
-    <div onclick="commanderAnalyse()" style="cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:4px 6px; background:#c19434; border-radius:8px; margin:4px 4px;">
+    <div onclick="showAnalyseConfirm()" style="cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:4px 6px; background:#c19434; border-radius:8px; margin:4px 4px;">
         <span style="font-size:16px; line-height:1;">✉</span>
         <span data-i18n-html="analysis.menu_button" style="font-family:'Simplifica',sans-serif; font-size:10px; color:white; white-space:nowrap; margin-top:2px; text-align:center;">Commander<br>Analyse</span>
     </div>
@@ -534,6 +534,27 @@
             <button onclick="postCSVDelete()"
                 style="flex:1; padding:12px; background:#c0392b; color:white; border:none; border-radius:8px; font-size:15px; cursor:pointer; font-family:'Simplifica',sans-serif;" data-i18n="saved_modal.yes_delete">Oui,
                 supprimer</button>
+        </div>
+    </div>
+</div>
+
+<!-- Popup confirmation Commander Analyse -->
+<div id="analyse-confirm-popup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; z-index:1600; background:rgba(10,15,25,0.72); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); align-items:center; justify-content:center; box-sizing:border-box; padding:20px;">
+    <div style="background:rgba(222,210,179,0.98); border-radius:16px; border:2px solid #c19434; max-width:480px; width:100%; padding:28px 24px 24px; box-shadow:0 8px 40px rgba(0,0,0,0.4); box-sizing:border-box;">
+        <h2 data-i18n="analysis.confirm_title" style="font-family:'Summer',cursive; color:#c19434; font-size:22px; margin:0 0 18px 0; text-align:center; line-height:1.3;">Commander votre analyse Tzolk'in</h2>
+        <p data-i18n="analysis.confirm_intro" style="font-size:16px; color:#333; margin:0 0 10px 0; font-family:'Simplifica',sans-serif;">En confirmant, vous allez :</p>
+        <ul style="margin:0 0 18px 16px; padding:0; font-family:'Simplifica',sans-serif; font-size:16px; color:#333; line-height:1.7;">
+            <li data-i18n="analysis.confirm_item_csv">Envoyer votre journal Tzolk'in (CSV) à notre équipe</li>
+            <li data-i18n="analysis.confirm_item_payment">Recevoir un lien de paiement de 50 € par email</li>
+            <li data-i18n="analysis.confirm_item_analysis">Recevoir votre analyse personnalisée après règlement</li>
+        </ul>
+        <label style="display:flex; align-items:flex-start; gap:10px; background:rgba(193,148,52,0.12); border:1px solid rgba(193,148,52,0.4); border-radius:10px; padding:12px; margin-bottom:22px; cursor:pointer;">
+            <input type="checkbox" id="analyse-confirm-checkbox" style="margin-top:3px; width:18px; height:18px; flex-shrink:0; accent-color:#c19434; cursor:pointer;">
+            <span data-i18n="analysis.confirm_checkbox" style="font-family:'Simplifica',sans-serif; font-size:15px; color:#333; line-height:1.5;">Je comprends que cet envoi déclenche une commande payante de 50 € et que je recevrai mon analyse par email après règlement.</span>
+        </label>
+        <div style="display:flex; gap:12px;">
+            <button onclick="closeAnalyseConfirm()" data-i18n="analysis.confirm_cancel" style="flex:1; padding:12px; background:none; border:2px solid #999; border-radius:10px; font-family:'Simplifica',sans-serif; font-size:16px; color:#666; cursor:pointer;">Annuler</button>
+            <button onclick="confirmAnalyse()" id="analyse-confirm-ok" data-i18n="analysis.confirm_ok" style="flex:2; padding:12px; background:#c19434; border:none; border-radius:10px; font-family:'Simplifica',sans-serif; font-size:16px; color:white; cursor:pointer; opacity:0.5; pointer-events:none;">Je comprends, envoyer mon CSV →</button>
         </div>
     </div>
 </div>
@@ -1333,6 +1354,38 @@
     }
 
 
+    //=== FONCTION: Popup confirmation Commander Analyse ===
+    function showAnalyseConfirm() {
+        const popup = document.getElementById('analyse-confirm-popup');
+        const checkbox = document.getElementById('analyse-confirm-checkbox');
+        const okBtn = document.getElementById('analyse-confirm-ok');
+        checkbox.checked = false;
+        okBtn.style.opacity = '0.5';
+        okBtn.style.pointerEvents = 'none';
+        popup.style.display = 'flex';
+        if (window.i18n) window.i18n.applyToDOM(popup);
+    }
+
+    function closeAnalyseConfirm() {
+        document.getElementById('analyse-confirm-popup').style.display = 'none';
+    }
+
+    async function confirmAnalyse() {
+        const checkbox = document.getElementById('analyse-confirm-checkbox');
+        if (!checkbox.checked) return;
+        closeAnalyseConfirm();
+        await commanderAnalyse();
+    }
+
+    // Activer/désactiver le bouton selon la case à cocher
+    // Note: ce script est injecté dynamiquement (DOMContentLoaded déjà passé),
+    // on enregistre donc le listener directement, sans wrapper DOMContentLoaded.
+    document.getElementById('analyse-confirm-checkbox')?.addEventListener('change', function() {
+        const okBtn = document.getElementById('analyse-confirm-ok');
+        okBtn.style.opacity = this.checked ? '1' : '0.5';
+        okBtn.style.pointerEvents = this.checked ? 'auto' : 'none';
+    });
+
     //=== FONCTION: Commander Analyse (export CSV + email) ===
     async function commanderAnalyse() {
         if (!notes || !notes.length) {
@@ -1802,18 +1855,31 @@ ${notesHtml}
         });
 
         // Gestion navigation historique
-        window.addEventListener('popstate', () => {
-            const hash = window.location.hash.replace('#', '');
-            const validModals = ['fonctionnement', 'notes', 'saved', 'credits', 'admin'];
-            if (validModals.includes(hash)) {
-                if (hash === 'saved') {
-                    openSavedWithPin();
-                } else {
-                    openModal(hash);
-                }
-            } else {
-                closeAllModals();
+        window.addEventListener('popstate', (e) => {
+            // Retour depuis vue détail → calendrier
+            if (document.body.classList.contains('detail-view-active')) {
+                if (typeof showMain === 'function') showMain();
+                return;
             }
+
+            // Retour depuis Croix Maya → calendrier
+            const croixModal = document.getElementById('croix-maya-modal');
+            if (croixModal && croixModal.style.display === 'block') {
+                if (typeof closeCroixMayaModal === 'function') closeCroixMayaModal();
+                closeAllModals();
+                return;
+            }
+
+            // Retour depuis Enregistrés → Notes
+            const savedModal = document.getElementById('saved-modal');
+            if (savedModal && savedModal.classList.contains('active')) {
+                closeAllModals();
+                openModal('notes');
+                return;
+            }
+
+            // Toute autre modale ou vue → calendrier
+            closeAllModals();
         });
 
         // Sauvegarder avant fermeture

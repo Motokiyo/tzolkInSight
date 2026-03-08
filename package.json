@@ -24,5 +24,8 @@
     "@capacitor/cli": "^8.1.0",
     "@capacitor/core": "^8.1.0",
     "capacitor-email-composer": "^8.0.0"
+  },
+  "devDependencies": {
+    "puppeteer": "^24.38.0"
   }
 }

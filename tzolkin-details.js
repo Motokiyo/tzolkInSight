@@ -42,6 +42,7 @@ const numberMap = {
 
 // Fonction showDetail exposée globalement
 function showDetail(type, id) {
+    window.history.pushState({ page: 'detail', type, id }, '', '#detail');
     const mainView = document.querySelector('.tzolkin-app');
     const widgetContainer = document.getElementById('tzolkin-widget-container');
     const summarySection = document.getElementById('tzolkin-details');

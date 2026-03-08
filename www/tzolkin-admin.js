@@ -318,7 +318,7 @@ class TzolkinAdmin {
         }
 
         const locale = this.t('date_format.locale');
-        let html = `<table class="contacts-table"><thead><tr><th>${this.t('settings.name').replace(' :', '')}</th><th>${this.t('settings.birthdate').replace(' :', '')}</th><th>Tzolk'in</th><th>${this.t('settings.color').replace(' :', '')}</th><th>Actions</th></tr></thead><tbody>`;
+        let html = '<div style="display:flex; flex-direction:column; gap:8px;">';
 
         people.forEach((person, index) => {
             const glyphId = person.glyph;
@@ -326,26 +326,34 @@ class TzolkinAdmin {
             const glyphURL = window.TzolkinCore.getGlyphURL(glyphId);
             const numberURL = window.TzolkinCore.getNumberURL(numberId);
             const glyphName = window.TzolkinCore.GLYPHS[glyphId].name;
+            const css = window.TzolkinCore.getGlyphColorCSS(glyphId);
+            const dateStr = new Date(person.birthDate).toLocaleDateString(locale);
 
             html += `
-                <tr>
-                    <td>${person.name}</td>
-                    <td>${new Date(person.birthDate).toLocaleDateString(locale)}</td>
-                    <td style="white-space:nowrap;">
-                        <img src="${numberURL}" alt="${numberId}" style="width:22px;height:22px;vertical-align:middle;opacity:0.85;">
-                        <img src="${glyphURL}" alt="${glyphName}" style="width:22px;height:22px;vertical-align:middle;opacity:0.85;margin-left:2px;">
-                    </td>
-                    <td><span style="display:inline-block;width:30px;height:30px;background:${person.color};border-radius:4px;border:1px solid #ccc;"></span></td>
-                    <td style="white-space:nowrap;">
-                        <button onclick="window.tzolkinAdmin.editPerson(${index})" class="btn-edit">${this.t('saved_modal.edit')}</button>
-                        <button onclick="window.openCroixMayaModal('${person.name.replace(/'/g,"\\'")}', ${glyphId}, ${numberId}, '${person.birthDate}')" class="btn-edit" title="${this.t('details.maya_cross')}" style="padding:6px 10px; background:${window.TzolkinCore.getGlyphColorCSS(glyphId).bg}; color:${window.TzolkinCore.getGlyphColorCSS(glyphId).text}; border-color:${window.TzolkinCore.getGlyphColorCSS(glyphId).border};">✛</button>
-                        <span onclick="window.tzolkinAdmin.deletePerson(${index})" title="${this.t('saved_modal.delete')}" style="cursor:pointer; font-size:20px; padding:0 4px;">🗑</span>
-                    </td>
-                </tr>
+                <div style="display:flex; align-items:center; gap:8px; padding:10px 12px; background:white; border-radius:10px; border-left:4px solid ${person.color}; box-shadow:0 1px 4px rgba(0,0,0,0.07); overflow:hidden;">
+                    <!-- Couleur -->
+                    <span style="flex-shrink:0; width:14px; height:14px; border-radius:50%; background:${person.color}; border:1px solid rgba(0,0,0,0.15);"></span>
+                    <!-- Info (tronqué si trop long) -->
+                    <div style="flex:1; min-width:0;">
+                        <div style="font-size:17px; font-weight:bold; color:#222; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${person.name}</div>
+                        <div style="font-size:13px; color:#888; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${dateStr} · ${numberId} ${glyphName}</div>
+                    </div>
+                    <!-- Glyphes Tzolk'in -->
+                    <div style="flex-shrink:0; display:flex; align-items:center; gap:2px;">
+                        <img src="${numberURL}" alt="${numberId}" style="width:22px;height:22px;opacity:0.85;">
+                        <img src="${glyphURL}" alt="${glyphName}" style="width:22px;height:22px;opacity:0.85;">
+                    </div>
+                    <!-- Actions -->
+                    <div style="flex-shrink:0; display:flex; align-items:center; gap:4px;">
+                        <button onclick="window.tzolkinAdmin.editPerson(${index})" class="btn-edit" style="padding:6px 10px; font-size:15px; margin-right:0;">${this.t('saved_modal.edit')}</button>
+                        <button onclick="window.openCroixMayaModal('${person.name.replace(/'/g,"\\'")}', ${glyphId}, ${numberId}, '${person.birthDate}')" class="btn-edit" title="${this.t('details.maya_cross')}" style="padding:6px 10px; font-size:15px; margin-right:0; background:${css.bg}; color:${css.text}; border-color:${css.border};">✛</button>
+                        <span onclick="window.tzolkinAdmin.deletePerson(${index})" title="${this.t('saved_modal.delete')}" style="cursor:pointer; font-size:22px; padding:4px; line-height:1;">🗑</span>
+                    </div>
+                </div>
             `;
         });
 
-        html += '</tbody></table>';
+        html += '</div>';
         container.innerHTML = html;
     }
 

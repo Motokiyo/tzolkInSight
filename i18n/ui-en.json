@@ -283,7 +283,15 @@
         "section_title": "Personalized Analysis",
         "section_description": "Analysis of your TzolkInSight year from your .csv (not worthwhile without enough data — minimum 100 to 150 entries over a year): glyph recurrence, tones, trecenas, transits, cycles, Jungian psyche…",
         "price": "€50 / report",
-        "send_to": "Send to:"
+        "send_to": "Send to:",
+        "confirm_title": "Order your Tzolk'in analysis",
+        "confirm_intro": "By confirming, you will:",
+        "confirm_item_csv": "Send your Tzolk'in journal (CSV) to our team",
+        "confirm_item_payment": "Receive a payment link of €50 by email",
+        "confirm_item_analysis": "Receive your personalised analysis after payment",
+        "confirm_checkbox": "I understand that this submission triggers a paid order of €50 and that I will receive my analysis by email after payment.",
+        "confirm_cancel": "Cancel",
+        "confirm_ok": "I understand, send my CSV →"
     },
     "glyphs": {
         "1": "Crocodile",

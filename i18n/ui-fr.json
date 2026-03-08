@@ -283,7 +283,15 @@
         "section_title": "Analyse personnalisée",
         "section_description": "Analyse de votre année TzolkInSight à partir de votre .csv (aucun intérêt s'il n'y a pas assez de données — minimum 100 à 150 entrées sur une année) : récurrence des glyphes, tons, trécénas, transits, cycles, psyché jungienne…",
         "price": "50 € / rapport",
-        "send_to": "A envoyer à :"
+        "send_to": "A envoyer à :",
+        "confirm_title": "Commander votre analyse Tzolk'in",
+        "confirm_intro": "En confirmant, vous allez :",
+        "confirm_item_csv": "Envoyer votre journal Tzolk'in (CSV) à notre équipe",
+        "confirm_item_payment": "Recevoir un lien de paiement de 50 € par email",
+        "confirm_item_analysis": "Recevoir votre analyse personnalisée après règlement",
+        "confirm_checkbox": "Je comprends que cet envoi déclenche une commande payante de 50 € et que je recevrai mon analyse par email après règlement.",
+        "confirm_cancel": "Annuler",
+        "confirm_ok": "Je comprends, envoyer mon CSV →"
     },
     "glyphs": {
         "1": "Crocodile",

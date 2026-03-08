@@ -10,7 +10,7 @@
 // I18N HELPER
 // ============================================================================
 
-const t = window.i18n ? window.i18n.t.bind(window.i18n) : k => k;
+function _tc(key) { return window.i18n ? window.i18n.t(key) : key; }
 
 // ============================================================================
 // TEXTES EXPLICATIFS PAR POSITION (via i18n)
@@ -18,14 +18,14 @@ const t = window.i18n ? window.i18n.t.bind(window.i18n) : k => k;
 
 function getPositionTexts() {
     return {
-        centre:   { title: t('croix_maya.position_centre_title'),  text: t('croix_maya.position_centre_text')  },
-        est:      { title: t('croix_maya.position_east_title'),    text: t('croix_maya.position_east_text')    },
-        ouest:    { title: t('croix_maya.position_west_title'),    text: t('croix_maya.position_west_text')    },
-        nord:     { title: t('croix_maya.position_north_title'),   text: t('croix_maya.position_north_text')   },
-        sud:      { title: t('croix_maya.position_south_title'),   text: t('croix_maya.position_south_text')   },
-        trecena:  { title: t('croix_maya.position_trecena_title'), text: t('croix_maya.position_trecena_text') },
-        porteur:  { title: t('croix_maya.position_bearer_title'),  text: t('croix_maya.position_bearer_text')  },
-        seigneur: { title: t('croix_maya.position_lord_title'),    text: t('croix_maya.position_lord_text')    }
+        centre:   { title: _tc('croix_maya.position_centre_title'),  text: _tc('croix_maya.position_centre_text')  },
+        est:      { title: _tc('croix_maya.position_east_title'),    text: _tc('croix_maya.position_east_text')    },
+        ouest:    { title: _tc('croix_maya.position_west_title'),    text: _tc('croix_maya.position_west_text')    },
+        nord:     { title: _tc('croix_maya.position_north_title'),   text: _tc('croix_maya.position_north_text')   },
+        sud:      { title: _tc('croix_maya.position_south_title'),   text: _tc('croix_maya.position_south_text')   },
+        trecena:  { title: _tc('croix_maya.position_trecena_title'), text: _tc('croix_maya.position_trecena_text') },
+        porteur:  { title: _tc('croix_maya.position_bearer_title'),  text: _tc('croix_maya.position_bearer_text')  },
+        seigneur: { title: _tc('croix_maya.position_lord_title'),    text: _tc('croix_maya.position_lord_text')    }
     };
 }
 
@@ -50,6 +50,7 @@ function openCroixMayaModal(personName, glyphId, numberId, birthDate) {
     if (!window.TzolkinCore) { console.error('TzolkinCore non disponible'); return; }
     const modal = document.getElementById('croix-maya-modal');
     if (!modal) { console.error('Modale croix-maya-modal introuvable'); return; }
+    window.history.pushState({ page: 'croix-maya' }, '', '#croix-maya');
 
     // Calculs de base
     const cross   = window.TzolkinCore.calculateCroixMaya(glyphId, numberId);
@@ -78,11 +79,11 @@ function openCroixMayaModal(personName, glyphId, numberId, birthDate) {
     renderLordOfNight('croix-lord-section', lordNum);
 
     // --- Grille en croix (Nord haut, Ouest-Centre-Est milieu, Sud bas) ---
-    renderCrossPosition('croix-nord',    cross.nord,   t('croix_maya.north_guide'));
-    renderCrossPosition('croix-ouest',   cross.ouest,  t('croix_maya.west_mission'));
-    renderCrossPosition('croix-centre',  cross.centre, t('croix_maya.birth_kin'));
-    renderCrossPosition('croix-est',     cross.est,    t('croix_maya.east_conception'));
-    renderCrossPosition('croix-sud',     cross.sud,    t('croix_maya.south_support'));
+    renderCrossPosition('croix-nord',    cross.nord,   _tc('croix_maya.north_guide'));
+    renderCrossPosition('croix-ouest',   cross.ouest,  _tc('croix_maya.west_mission'));
+    renderCrossPosition('croix-centre',  cross.centre, _tc('croix_maya.birth_kin'));
+    renderCrossPosition('croix-est',     cross.est,    _tc('croix_maya.east_conception'));
+    renderCrossPosition('croix-sud',     cross.sud,    _tc('croix_maya.south_support'));
 
     // --- Porteur d'année (glyph uniquement, avant les paragraphes) ---
     renderYearBearerGlyphs('croix-bearers-section', currentBearer, thisYear, birthBearer, birthYear);
@@ -122,7 +123,7 @@ function renderLordOfNight(containerId, lordNum) {
     el.innerHTML = `
         <div style="display:flex; align-items:center; gap:14px; padding:12px 16px; background:#1a1a1a; border-radius:12px; border:2px solid #444; margin-bottom:12px;">
             <div style="flex:1; text-align:right;">
-                <div style="font-size:14px; color:#ccc; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:2px;">${t('croix_maya.lord_of_night_label').replace('{num}', lordNum)}</div>
+                <div style="font-size:14px; color:#ccc; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:2px;">${_tc('croix_maya.lord_of_night_label').replace('{num}', lordNum)}</div>
                 <div style="font-size:18px; font-weight:bold; color:#fff; font-family:'Summer',cursive;">${lord.name}</div>
                 <div style="font-size:15px; color:#eee; margin-top:2px;">${lord.domain}</div>
             </div>
@@ -191,10 +192,10 @@ function renderYearBearerGlyphs(containerId, currentBearer, currentYear, birthBe
     };
 
     el.innerHTML = `
-        <p style="font-family:'Summer',cursive; font-size:16px; color:#222; margin:0 0 10px 0; text-align:center; font-weight:bold;">🏔 ${t('croix_maya.year_bearers_title')}</p>
+        <p style="font-family:'Summer',cursive; font-size:16px; color:#222; margin:0 0 10px 0; text-align:center; font-weight:bold;">🏔 ${_tc('croix_maya.year_bearers_title')}</p>
         <div style="display:flex; justify-content:center; gap:24px; flex-wrap:wrap;">
-            ${renderOne(currentBearer, currentYear, t('croix_maya.current_year'))}
-            ${birthBearer ? renderOne(birthBearer, birthYear, t('croix_maya.birth_year')) : ''}
+            ${renderOne(currentBearer, currentYear, _tc('croix_maya.current_year'))}
+            ${birthBearer ? renderOne(birthBearer, birthYear, _tc('croix_maya.birth_year')) : ''}
         </div>
     `;
 }
@@ -210,11 +211,11 @@ function renderParagraphs(containerId, cross, lordNum, currentBearer, birthBeare
     const POSITION_TEXTS = getPositionTexts();
 
     const blocks = [
-        { pos: cross.centre, key: 'centre', posName: t('croix_maya.birth_kin')        },
-        { pos: cross.nord,   key: 'nord',   posName: t('croix_maya.north_guide')      },
-        { pos: cross.ouest,  key: 'ouest',  posName: t('croix_maya.west_mission')     },
-        { pos: cross.est,    key: 'est',    posName: t('croix_maya.east_conception')   },
-        { pos: cross.sud,    key: 'sud',    posName: t('croix_maya.south_support')     }
+        { pos: cross.centre, key: 'centre', posName: _tc('croix_maya.birth_kin')        },
+        { pos: cross.nord,   key: 'nord',   posName: _tc('croix_maya.north_guide')      },
+        { pos: cross.ouest,  key: 'ouest',  posName: _tc('croix_maya.west_mission')     },
+        { pos: cross.est,    key: 'est',    posName: _tc('croix_maya.east_conception')   },
+        { pos: cross.sud,    key: 'sud',    posName: _tc('croix_maya.south_support')     }
     ];
 
     let html = '';
@@ -260,7 +261,7 @@ function renderParagraphs(containerId, cross, lordNum, currentBearer, birthBeare
                     ? `<img src="${imgURL}" alt="G${lordNum}" style="height:30px; width:auto; filter:invert(1); opacity:0.85;">`
                     : `<div style="width:30px; height:30px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:bold; color:#ccc;">G${lordNum}</div>`}
                 <div style="flex:1;">
-                    <div style="font-size:14px; color:#ddd; font-style:italic;">${t('croix_maya.lord_of_night_label').replace('{num}', lordNum)}</div>
+                    <div style="font-size:14px; color:#ddd; font-style:italic;">${_tc('croix_maya.lord_of_night_label').replace('{num}', lordNum)}</div>
                     <div style="font-size:16px; font-weight:bold; color:#fff; font-family:'Summer',cursive;">${lord.name} · ${lord.domain}</div>
                 </div>
                 <button onclick="openLordDetail(${lordNum})"
@@ -307,7 +308,7 @@ function renderParagraphs(containerId, cross, lordNum, currentBearer, birthBeare
         <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
             <img src="${bearerURL}" alt="${bearerGlyph.name}" style="height:30px; width:auto; opacity:0.85;">
             <div style="flex:1;">
-                <div style="font-size:14px; color:${bearerPal.textColor}; font-style:italic;">${pt.title} · ${t('croix_maya.birth_prefix')} ${displayYear}</div>
+                <div style="font-size:14px; color:${bearerPal.textColor}; font-style:italic;">${pt.title} · ${_tc('croix_maya.birth_prefix')} ${displayYear}</div>
                 <div style="font-size:16px; font-weight:bold; color:${bearerPal.textColor}; font-family:'Summer',cursive;">${bearerGlyph.name} · ${bearerGlyph.translation}</div>
             </div>
             ${btnDetail('porteur', displayBearer)}
@@ -344,7 +345,7 @@ function openLordDetail(lordNum) {
 
     let overlay = document.getElementById('lord-detail-overlay');
     if (!overlay) {
-        overlay = document.createElement('div');
+        overlay = document.createElemen_tc('div');
         overlay.id = 'lord-detail-overlay';
         document.body.appendChild(overlay);
     }
@@ -361,7 +362,7 @@ function openLordDetail(lordNum) {
     overlay.innerHTML = `
         <div style="max-width: 560px; width: 100%; margin: 40px auto; padding: 30px; box-sizing: border-box; background: rgba(222, 210, 179, 0.9); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 2px solid #222; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
             <button onclick="closeLordDetail()"
-                style="padding: 8px 16px; background: #222; color: #ded2b3; border: none; border-radius: 8px; cursor: pointer; margin-bottom: 20px; font-family: 'Summer', cursive; font-size: 18px; display: inline-block;">${t('croix_maya.back')}</button>
+                style="padding: 8px 16px; background: #222; color: #ded2b3; border: none; border-radius: 8px; cursor: pointer; margin-bottom: 20px; font-family: 'Summer', cursive; font-size: 18px; display: inline-block;">${_tc('croix_maya.back')}</button>
 
             <div style="background: #ded2b3; border: 2px solid #222; border-radius: 16px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.09); margin: 0 auto;">
                 ${imgURL ? `<img src="${imgURL}" alt="G${lordNum}" style="max-width: 100px; height: auto; display: block; margin: 0 auto 10px;">` : ''}
@@ -380,7 +381,7 @@ function openLordDetail(lordNum) {
     // (position:fixed à l'intérieur d'un filter:invert() est cassé dans Android WebView)
     let scrollBtn = document.getElementById('lord-scroll-top');
     if (!scrollBtn) {
-        scrollBtn = document.createElement('div');
+        scrollBtn = document.createElemen_tc('div');
         scrollBtn.id = 'lord-scroll-top';
         document.body.appendChild(scrollBtn);
     }
