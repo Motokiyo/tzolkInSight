@@ -1,14 +1,28 @@
 apply plugin: 'com.android.application'
 
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader -> localProperties.load(reader) }
+}
+
 android {
     namespace = "org.leparede.tzolkinsight"
     compileSdk = rootProject.ext.compileSdkVersion
+    signingConfigs {
+        release {
+            keyAlias localProperties['TZOLKIN_KEY_ALIAS']
+            keyPassword localProperties['TZOLKIN_KEY_PASSWORD']
+            storeFile file(localProperties['TZOLKIN_KEYSTORE_PATH'])
+            storePassword localProperties['TZOLKIN_KEYSTORE_PASSWORD']
+        }
+    }
     defaultConfig {
         applicationId "org.leparede.tzolkinsight"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName "1.1.8"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -20,6 +34,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }
