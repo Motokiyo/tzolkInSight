@@ -10,3 +10,9 @@ android/.gradle/
 android/build/
 android/app/build/
 android/app/.cxx/
+
+# Données sensibles / fichiers marketing
+testeurs.csv
+email-testeurs.*
+email-ios.html
+email-assets/
