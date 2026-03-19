@@ -116,13 +116,39 @@ Layout sidebar navy (Galaad company, `padding:0` sur modal-content pour sidebar 
 - `mailto:tzolkinsight@leparede.org` — support + commandes analyse
 - `mailto:motokiyoferran@gmail.com` — contact perso (crédits)
 
+## Équipe d'agents spécialisés (dans `~/.claude/agents/`)
+
+### Pipeline i18n — OBLIGATOIRE quand on ajoute du texte visible utilisateur
+| Agent | Rôle | Quand l'invoquer |
+|---|---|---|
+| `tzolkin-extracteur` | Scanne JS/HTML, identifie les strings FR hardcodées | Nouvelle page/fonctionnalité |
+| `tzolkin-injecteur` | Remplace strings par `data-i18n="key"` ou `_t('key')` | Après extraction |
+| `tzolkin-traducteur-en` | Traduit ui-fr.json → ui-en.json + overlays data EN | Nouvelles clés FR ajoutées |
+| `tzolkin-traducteur-es` | Traduit ui-fr.json → ui-es.json + overlays data ES | Nouvelles clés FR ajoutées (en parallèle avec EN) |
+| `tzolkin-verificateur-i18n` | Vérifie cohérence clés entre les 3 JSON, strings FR résiduelles, sync www/ | Avant chaque release |
+| `tzolkin-architecte` | Modifie l'architecture i18n (i18n-loader.js, structure JSON, sélecteur langue) | Nouvelle langue ou refonte i18n |
+
+**Workflow i18n obligatoire** : extracteur → injecteur → traducteur-en + traducteur-es (parallèle) → verificateur-i18n
+
+### Règles de traduction
+- **Termes mayas JAMAIS traduits** : K'iche', Tzolk'in, Haab, Bolontiku, Pauahtun, Itzamna, Yum Kaax, K'awiil, les 20 nawals (Imix→Ahau), Popol Vuh, nawal, trecena
+- **Noms propres JAMAIS traduits** : Galaad Motokiyo Ferran, Alexandre Ferran, tzolkInSight, IA Access
+- HTML statique : `data-i18n="key"` (innerText), `data-i18n-html="key"` (innerHTML), `data-i18n-placeholder="key"`
+- JS dynamique : `_t('key')` dans menu-standalone, `t('key')` dans details-display, `_tc('key')` dans croix-maya
+
+### Autres agents utiles
+| Agent | Rôle |
+|---|---|
+| `verify-app` | Test end-to-end Puppeteer (page load, JS errors, navigation, modales, responsive) |
+| `code-simplifier` | Simplifie/nettoie le code après modifications |
+
 ## Règles OBLIGATOIRES
 
 ### i18n — à chaque texte ajouté/modifié
 1. Ajouter les clés dans `i18n/ui-fr.json`
 2. Utiliser `data-i18n="key"` (HTML statique) ou `_t('key')` (JS dynamique)
-3. Traduire en parallèle dans ui-en.json et ui-es.json
-4. Vérifier la cohérence (agents tzolkin-traducteur-en, tzolkin-traducteur-es, tzolkin-verificateur-i18n)
+3. Traduire en parallèle dans ui-en.json et ui-es.json via les agents traducteurs
+4. Vérifier la cohérence via `tzolkin-verificateur-i18n`
 5. **Ne jamais laisser de string FR hardcodée visible par l'utilisateur dans le code**
 
 ### Après toute modification de code
