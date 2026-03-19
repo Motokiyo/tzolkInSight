@@ -35,6 +35,7 @@ self.addEventListener('install', event => {
     './tzolkin-details.js',
     './tzolkin-details-display.js',
     './tzolkin-croix-maya.js',
+    './tzolkin-iap.js',
     './tzolkin-croix-maya.css',
     './tzolkin-menu-standalone.html',
     './imask.js',

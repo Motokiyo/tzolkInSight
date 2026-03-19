@@ -331,5 +331,14 @@
     "sw": {
         "update_available": "Mise à jour disponible",
         "refresh": "Actualiser"
+    },
+    "tips": {
+        "small": "Petit café",
+        "medium": "Soutien",
+        "large": "Grand soutien",
+        "thank_you": "Merci pour votre soutien !",
+        "thank_you_small": "Merci pour le café ! ☕",
+        "thank_you_medium": "Merci pour votre généreux soutien ! 🙏",
+        "thank_you_large": "Merci infiniment pour votre générosité ! 🎁"
     }
 }

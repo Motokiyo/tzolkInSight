@@ -399,7 +399,7 @@
 
 <!-- Modale Crédits -->
 <div id="credits-modal" class="modal" style="z-index:1400; padding:0; position:fixed; top:0; left:0; width:100%; height:100%; overflow-y:auto; -webkit-overflow-scrolling:touch; background:rgba(222,210,179,0.95);">
-    <div class="modal-content" style="background:transparent; border:none; border-radius:0; box-shadow:none; width:100%; max-width:100%; margin:0; padding:20px; padding-top:calc(env(safe-area-inset-top,0px)+20px); padding-bottom:calc(env(safe-area-inset-bottom,0px)+20px); box-sizing:border-box; position:relative; min-height:100%; overflow:visible;">
+    <div class="modal-content" style="background:transparent; border:none; border-radius:0; box-shadow:none; width:100%; max-width:100%; margin:0; padding:0; box-sizing:border-box; position:relative; min-height:100%; overflow:visible;">
         <button onclick="closeAllModals()" style="position:absolute; top:calc(env(safe-area-inset-top,0px)+40px); right:15px; background:none; border:none; font-size:24px; cursor:pointer; z-index:1500; color:#333; line-height:1;">&times;</button>
         <!-- Sidebar gauche Galaad (navy, ~28%) -->
         <div class="credits-galaad-section">
@@ -424,10 +424,27 @@
             <p class="credits-app-meta"><strong>IA :</strong> Claude, Grok, DeepSeek</p>
             <a href="https://leparede.org" target="_blank" class="credits-app-site">leparede.org</a>
             <p class="credits-rapport-text" data-i18n="credits.support_text" style="font-size:0.92em; color:#555; text-align:center; line-height:1.5;">Cette app est gratuite et sans publicité.<br>Si elle vous apporte de la valeur, vous pouvez soutenir son développement librement.</p>
-            <a href="https://revolut.me/galaadmf" target="_blank" rel="noopener"
-               style="display:inline-block; margin:8px auto 4px; padding:10px 20px; background:#c19434; color:#fff; border-radius:8px; font-family:'Simplifica',sans-serif; font-size:1em; text-decoration:none; font-weight:bold;" data-i18n="credits.support_button">☕ Soutenir le projet</a>
-            <a href="https://revolut.me/galaadmf" target="_blank" rel="noopener"
-               style="display:block; font-size:0.75em; color:#888; text-align:center; margin-bottom:4px; word-break:break-all;">revolut.me/galaadmf</a>
+            <!-- Tip jar iOS (IAP) — masqué par défaut, affiché par JS si iOS natif -->
+            <div id="tip-jar-iap" style="display:none; text-align:center; margin:10px 0 6px;">
+                <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap;">
+                    <button onclick="purchaseTip('petit_cafe')" style="padding:7px 14px; background:none; border:1.5px solid #c19434; border-radius:20px; font-family:'Simplifica',sans-serif; font-size:0.85em; color:#c19434; cursor:pointer; white-space:nowrap;">
+                        ☕ <span data-iap-price="petit_cafe">1,99 €</span>
+                    </button>
+                    <button onclick="purchaseTip('soutien')" style="padding:7px 14px; background:rgba(193,148,52,0.15); border:1.5px solid #c19434; border-radius:20px; font-family:'Simplifica',sans-serif; font-size:0.85em; color:#c19434; cursor:pointer; white-space:nowrap;">
+                        🙏 <span data-iap-price="soutien">4,99 €</span>
+                    </button>
+                    <button onclick="purchaseTip('grand_soutien')" style="padding:7px 14px; background:#c19434; border:1.5px solid #c19434; border-radius:20px; font-family:'Simplifica',sans-serif; font-size:0.85em; color:#fff; cursor:pointer; white-space:nowrap;">
+                        🎁 <span data-iap-price="grand_soutien">9,99 €</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Tip jar web/Android (Revolut) — masqué si iOS natif -->
+            <div id="tip-jar-revolut">
+                <a href="https://revolut.me/galaadmf" target="_blank" rel="noopener"
+                   style="display:inline-block; margin:8px auto 4px; padding:10px 20px; background:#c19434; color:#fff; border-radius:8px; font-family:'Simplifica',sans-serif; font-size:1em; text-decoration:none; font-weight:bold;" data-i18n="credits.support_button">☕ Soutenir le projet</a>
+                <a href="https://revolut.me/galaadmf" target="_blank" rel="noopener"
+                   style="display:block; font-size:0.75em; color:#888; text-align:center; margin-bottom:4px; word-break:break-all;">revolut.me/galaadmf</a>
+            </div>
             <a href="mailto:tzolkinsight@leparede.org" class="credits-app-email">tzolkinsight@leparede.org</a>
         </div>
     </div>
@@ -559,6 +576,15 @@
     </div>
 </div>
 
+<!-- Popup remerciement tip IAP -->
+<div id="tip-thank-you-popup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; z-index:1700; background:rgba(10,15,25,0.72); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); align-items:center; justify-content:center; box-sizing:border-box; padding:20px;">
+    <div style="background:rgba(222,210,179,0.98); border-radius:16px; border:2px solid #c19434; max-width:360px; width:100%; padding:28px 24px 24px; box-shadow:0 8px 40px rgba(0,0,0,0.4); text-align:center; box-sizing:border-box;">
+        <p style="font-size:2em; margin:0 0 12px;">🙏</p>
+        <p class="tip-thank-you-msg" data-i18n="tips.thank_you" style="font-family:'Simplifica',sans-serif; font-size:18px; color:#333; margin:0 0 20px; line-height:1.5;">Merci pour votre soutien !</p>
+        <button onclick="closeTipThankYou()" style="padding:12px 32px; background:#c19434; color:white; border:none; border-radius:10px; font-family:'Simplifica',sans-serif; font-size:16px; cursor:pointer;">OK</button>
+    </div>
+</div>
+
 <!-- Modale Croix Maya -->
 <div id="croix-maya-modal"
     style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(222,210,179,0.97); z-index:1500; overflow-y:auto; box-sizing:border-box;">
@@ -617,6 +643,20 @@
 
 <!-- JavaScript des modales -->
 <script>
+    // Tip jar : afficher IAP sur iOS natif, Revolut sur web/Android
+    (function() {
+        const isiOS = typeof Capacitor !== 'undefined'
+            && Capacitor.isNativePlatform()
+            && Capacitor.getPlatform() === 'ios';
+        if (isiOS) {
+            const iapEl = document.getElementById('tip-jar-iap');
+            const revEl = document.getElementById('tip-jar-revolut');
+            if (iapEl) iapEl.style.display = 'block';
+            if (revEl) revEl.style.display = 'none';
+            if (typeof initIAP === 'function') initIAP();
+        }
+    })();
+
     // i18n helpers
     const _t = k => (window.i18n?.t(k)) || k;
     const EMOTION_KEY_MAP = {

@@ -10,6 +10,7 @@ mkdir -p www
 rsync -a \
   --exclude='www/' \
   --exclude='android/' \
+  --exclude='ios/' \
   --exclude='node_modules/' \
   --exclude='.git/' \
   --exclude='tools/' \

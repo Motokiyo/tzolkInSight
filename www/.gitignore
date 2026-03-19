@@ -1,10 +1,18 @@
+context.md
 .DS_Store
 assets/.DS_Store
 assets/boutons/.DS_Store
 *.docx
 node_modules/
 android/local.properties
+*.keystore
 android/.gradle/
 android/build/
 android/app/build/
 android/app/.cxx/
+
+# Données sensibles / fichiers marketing
+testeurs.csv
+email-testeurs.*
+email-ios.html
+email-assets/
