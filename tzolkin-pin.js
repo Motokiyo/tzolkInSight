@@ -445,6 +445,7 @@ class TzolkinPIN {
      * Ignorer le PIN (accès sans protection)
      */
     skipPin() {
+        localStorage.setItem('tzolkin_pin_setup_skipped', '1');
         this.closePinModal();
         if (this.onPinSuccess) {
             this.onPinSuccess();

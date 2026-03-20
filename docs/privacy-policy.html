@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Politique de Confidentialité – TzolkinSight</title>
+  <title>Privacy Policy – TzolkInSight</title>
   <style>
     body {
       font-family: Georgia, serif;
@@ -20,102 +20,178 @@
     a  { color: #3b2a6e; }
     .updated { color: #888; font-size: 0.9em; margin-bottom: 2em; }
     .section { margin-bottom: 1.6em; }
+    .lang-switch {
+      text-align: right;
+      margin-bottom: 1em;
+      font-family: Arial, sans-serif;
+      font-size: 0.9em;
+    }
+    .lang-switch a {
+      margin: 0 6px;
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid #d4a92a;
+      color: #3b2a6e;
+    }
+    .lang-switch a.active {
+      background: #3b2a6e;
+      color: #fff;
+      border-color: #3b2a6e;
+    }
+    .lang { display: none; }
+    .lang.active { display: block; }
   </style>
 </head>
 <body>
 
-  <h1>Politique de Confidentialité</h1>
-  <p class="updated">Application : <strong>TzolkinSight</strong> &nbsp;|&nbsp; Développeur : Alexandre Ferran &nbsp;|&nbsp; Dernière mise à jour : mars 2026</p>
-
-  <div class="section">
-    <h2>1. Engagement général</h2>
-    <p>
-      TzolkinSight est une application de calendrier et de journal personnel basée sur le Tzolkin (calendrier maya).
-      La protection de votre vie privée est une priorité. Cette politique décrit de manière transparente comment
-      l'application traite vos données.
-    </p>
+  <div class="lang-switch">
+    <a href="#" onclick="switchLang('fr')" id="btn-fr" class="active">Français</a>
+    <a href="#" onclick="switchLang('en')" id="btn-en">English</a>
+    <a href="#" onclick="switchLang('es')" id="btn-es">Español</a>
   </div>
 
-  <div class="section">
-    <h2>2. Données collectées automatiquement</h2>
-    <p>
-      <strong>Aucune donnée n'est collectée automatiquement.</strong> TzolkinSight ne transmet aucune information
-      à des serveurs externes, ne contient pas de traceurs (analytics), et ne partage aucune donnée avec des tiers.
-    </p>
-    <p>
-      Toutes les données que vous saisissez dans l'application (notes de journal, entrées personnelles, etc.)
-      sont stockées <strong>uniquement sur votre appareil</strong>.
-    </p>
+  <!-- FRANÇAIS -->
+  <div id="lang-fr" class="lang active">
+    <h1>Politique de Confidentialité</h1>
+    <p class="updated">Application : <strong>TzolkInSight</strong> &nbsp;|&nbsp; Développeur : Alexandre Ferran &nbsp;|&nbsp; Dernière mise à jour : mars 2026</p>
+
+    <div class="section">
+      <h2>1. Engagement général</h2>
+      <p>TzolkInSight est une application de calendrier et de journal personnel basée sur le Tzolk'in (calendrier sacré maya). La protection de votre vie privée est une priorité. Cette politique décrit de manière transparente comment l'application traite vos données.</p>
+    </div>
+    <div class="section">
+      <h2>2. Données collectées automatiquement</h2>
+      <p><strong>Aucune donnée n'est collectée automatiquement.</strong> TzolkInSight ne transmet aucune information à des serveurs externes, ne contient pas de traceurs (analytics), et ne partage aucune donnée avec des tiers.</p>
+      <p>Toutes les données que vous saisissez dans l'application (notes de journal, entrées personnelles, etc.) sont stockées <strong>uniquement sur votre appareil</strong>.</p>
+    </div>
+    <div class="section">
+      <h2>3. Localisation (GPS)</h2>
+      <p>L'application peut accéder à votre position GPS <strong>uniquement lorsque vous choisissez d'associer un lieu à une note de journal</strong>. Cette information de localisation est stockée localement sur votre appareil et n'est jamais transmise à l'extérieur. Vous pouvez révoquer cette permission à tout moment dans les paramètres de votre appareil.</p>
+    </div>
+    <div class="section">
+      <h2>4. Envoi volontaire de données pour analyse personnalisée</h2>
+      <p>TzolkInSight propose un service optionnel d'<strong>analyse personnalisée annuelle</strong>. Si vous souhaitez en bénéficier, vous pouvez choisir d'envoyer votre journal de bord au développeur via un bouton dédié dans l'application.</p>
+      <p>Cet envoi est <strong>entièrement volontaire</strong>, explicitement initié par vous, et ne se produit jamais de manière automatique. Les données transmises dans ce cadre sont utilisées uniquement pour produire votre rapport personnel et ne sont ni revendues, ni partagées, ni conservées au-delà de la durée nécessaire à la réalisation de l'analyse.</p>
+    </div>
+    <div class="section">
+      <h2>5. Connexion internet</h2>
+      <p>TzolkInSight fonctionne entièrement hors ligne. L'application ne se connecte à internet que dans le cas où vous utilisez volontairement la fonctionnalité d'envoi de données décrite à l'article 4.</p>
+    </div>
+    <div class="section">
+      <h2>6. Public visé</h2>
+      <p>TzolkInSight s'adresse à un public adulte ou adolescent intéressé par les traditions calendaires mayas. L'application n'est pas spécifiquement destinée aux enfants de moins de 13 ans. Aucune donnée n'est collectée sur les mineurs.</p>
+    </div>
+    <div class="section">
+      <h2>7. Vos droits</h2>
+      <p>Étant donné que vos données restent sur votre appareil, vous en gardez le contrôle total à tout moment. Vous pouvez les supprimer en désinstallant l'application ou en effaçant les données de l'app depuis les paramètres de votre appareil.</p>
+      <p>Pour toute question relative à vos données personnelles ou à ce service d'analyse, vous pouvez contacter le développeur à l'adresse : <a href="mailto:alexferran@gmail.com">alexferran@gmail.com</a></p>
+    </div>
+    <div class="section">
+      <h2>8. Modifications de cette politique</h2>
+      <p>Cette politique peut être mise à jour ponctuellement. Toute modification sera indiquée par la mise à jour de la date en haut de cette page. Nous vous encourageons à la consulter régulièrement.</p>
+    </div>
   </div>
 
-  <div class="section">
-    <h2>3. Localisation (GPS)</h2>
-    <p>
-      L'application peut accéder à votre position GPS <strong>uniquement lorsque vous choisissez d'associer
-      un lieu à une note de journal</strong>. Cette information de localisation est stockée localement sur
-      votre appareil et n'est jamais transmise à l'extérieur. Vous pouvez révoquer cette permission à tout
-      moment dans les paramètres de votre appareil.
-    </p>
+  <!-- ENGLISH -->
+  <div id="lang-en" class="lang">
+    <h1>Privacy Policy</h1>
+    <p class="updated">Application: <strong>TzolkInSight</strong> &nbsp;|&nbsp; Developer: Alexandre Ferran &nbsp;|&nbsp; Last updated: March 2026</p>
+
+    <div class="section">
+      <h2>1. General commitment</h2>
+      <p>TzolkInSight is a calendar and personal journal application based on the Tzolk'in (sacred Mayan calendar). Protecting your privacy is a priority. This policy transparently describes how the application handles your data.</p>
+    </div>
+    <div class="section">
+      <h2>2. Automatically collected data</h2>
+      <p><strong>No data is collected automatically.</strong> TzolkInSight does not transmit any information to external servers, does not contain trackers (analytics), and does not share any data with third parties.</p>
+      <p>All data you enter in the application (journal notes, personal entries, etc.) is stored <strong>only on your device</strong>.</p>
+    </div>
+    <div class="section">
+      <h2>3. Location (GPS)</h2>
+      <p>The application may access your GPS location <strong>only when you choose to associate a place with a journal note</strong>. This location information is stored locally on your device and is never transmitted externally. You can revoke this permission at any time in your device settings.</p>
+    </div>
+    <div class="section">
+      <h2>4. Voluntary data submission for personalized analysis</h2>
+      <p>TzolkInSight offers an optional <strong>annual personalized analysis</strong> service. If you wish to benefit from it, you can choose to send your journal to the developer via a dedicated button in the application.</p>
+      <p>This submission is <strong>entirely voluntary</strong>, explicitly initiated by you, and never occurs automatically. The data transmitted in this context is used solely to produce your personal report and is neither resold, shared, nor retained beyond the time necessary to complete the analysis.</p>
+    </div>
+    <div class="section">
+      <h2>5. Internet connection</h2>
+      <p>TzolkInSight works entirely offline. The application only connects to the internet if you voluntarily use the data submission feature described in section 4.</p>
+    </div>
+    <div class="section">
+      <h2>6. Target audience</h2>
+      <p>TzolkInSight is intended for adults and teenagers interested in Mayan calendar traditions. The application is not specifically designed for children under 13. No data is collected on minors.</p>
+    </div>
+    <div class="section">
+      <h2>7. Your rights</h2>
+      <p>Since your data remains on your device, you retain full control at all times. You can delete it by uninstalling the application or clearing the app data from your device settings.</p>
+      <p>For any questions regarding your personal data or this analysis service, you can contact the developer at: <a href="mailto:alexferran@gmail.com">alexferran@gmail.com</a></p>
+    </div>
+    <div class="section">
+      <h2>8. Changes to this policy</h2>
+      <p>This policy may be updated from time to time. Any changes will be indicated by updating the date at the top of this page. We encourage you to review it regularly.</p>
+    </div>
   </div>
 
-  <div class="section">
-    <h2>4. Envoi volontaire de données pour analyse personnalisée</h2>
-    <p>
-      TzolkinSight propose un service optionnel d'<strong>analyse personnalisée annuelle</strong>. Si vous
-      souhaitez en bénéficier, vous pouvez choisir d'envoyer votre journal de bord au développeur via un
-      bouton dédié dans l'application.
-    </p>
-    <p>
-      Cet envoi est <strong>entièrement volontaire</strong>, explicitement initié par vous, et ne se produit
-      jamais de manière automatique. Les données transmises dans ce cadre sont utilisées uniquement pour
-      produire votre rapport personnel et ne sont ni revendues, ni partagées, ni conservées au-delà
-      de la durée nécessaire à la réalisation de l'analyse.
-    </p>
-  </div>
+  <!-- ESPAÑOL -->
+  <div id="lang-es" class="lang">
+    <h1>Política de Privacidad</h1>
+    <p class="updated">Aplicación: <strong>TzolkInSight</strong> &nbsp;|&nbsp; Desarrollador: Alexandre Ferran &nbsp;|&nbsp; Última actualización: marzo 2026</p>
 
-  <div class="section">
-    <h2>5. Connexion internet</h2>
-    <p>
-      TzolkinSight fonctionne entièrement hors ligne. L'application ne se connecte à internet que dans
-      le cas où vous utilisez volontairement la fonctionnalité d'envoi de données décrite à l'article 4.
-    </p>
-  </div>
-
-  <div class="section">
-    <h2>6. Public visé</h2>
-    <p>
-      TzolkinSight s'adresse à un public adulte ou adolescent intéressé par les traditions calendaires mayas.
-      L'application n'est pas spécifiquement destinée aux enfants de moins de 13 ans. Aucune donnée
-      n'est collectée sur les mineurs.
-    </p>
-  </div>
-
-  <div class="section">
-    <h2>7. Vos droits</h2>
-    <p>
-      Étant donné que vos données restent sur votre appareil, vous en gardez le contrôle total à tout moment.
-      Vous pouvez les supprimer en désinstallant l'application ou en effaçant les données de l'app
-      depuis les paramètres de votre appareil.
-    </p>
-    <p>
-      Pour toute question relative à vos données personnelles ou à ce service d'analyse,
-      vous pouvez contacter le développeur à l'adresse : <a href="mailto:alexferran@gmail.com">alexferran@gmail.com</a>
-    </p>
-  </div>
-
-  <div class="section">
-    <h2>8. Modifications de cette politique</h2>
-    <p>
-      Cette politique peut être mise à jour ponctuellement. Toute modification sera indiquée par
-      la mise à jour de la date en haut de cette page. Nous vous encourageons à la consulter
-      régulièrement.
-    </p>
+    <div class="section">
+      <h2>1. Compromiso general</h2>
+      <p>TzolkInSight es una aplicación de calendario y diario personal basada en el Tzolk'in (calendario sagrado maya). La protección de su privacidad es una prioridad. Esta política describe de manera transparente cómo la aplicación trata sus datos.</p>
+    </div>
+    <div class="section">
+      <h2>2. Datos recopilados automáticamente</h2>
+      <p><strong>No se recopila ningún dato automáticamente.</strong> TzolkInSight no transmite ninguna información a servidores externos, no contiene rastreadores (analytics) y no comparte ningún dato con terceros.</p>
+      <p>Todos los datos que introduce en la aplicación (notas del diario, entradas personales, etc.) se almacenan <strong>únicamente en su dispositivo</strong>.</p>
+    </div>
+    <div class="section">
+      <h2>3. Localización (GPS)</h2>
+      <p>La aplicación puede acceder a su posición GPS <strong>únicamente cuando usted elige asociar un lugar a una nota del diario</strong>. Esta información de localización se almacena localmente en su dispositivo y nunca se transmite al exterior. Puede revocar este permiso en cualquier momento en los ajustes de su dispositivo.</p>
+    </div>
+    <div class="section">
+      <h2>4. Envío voluntario de datos para análisis personalizado</h2>
+      <p>TzolkInSight ofrece un servicio opcional de <strong>análisis personalizado anual</strong>. Si desea beneficiarse de él, puede elegir enviar su diario al desarrollador mediante un botón dedicado en la aplicación.</p>
+      <p>Este envío es <strong>totalmente voluntario</strong>, iniciado explícitamente por usted, y nunca se produce de manera automática. Los datos transmitidos en este contexto se utilizan únicamente para elaborar su informe personal y no se revenden, comparten ni conservan más allá del tiempo necesario para realizar el análisis.</p>
+    </div>
+    <div class="section">
+      <h2>5. Conexión a internet</h2>
+      <p>TzolkInSight funciona completamente sin conexión. La aplicación solo se conecta a internet si usted utiliza voluntariamente la función de envío de datos descrita en el artículo 4.</p>
+    </div>
+    <div class="section">
+      <h2>6. Público objetivo</h2>
+      <p>TzolkInSight está dirigida a un público adulto o adolescente interesado en las tradiciones calendáricas mayas. La aplicación no está específicamente destinada a menores de 13 años. No se recopilan datos sobre menores.</p>
+    </div>
+    <div class="section">
+      <h2>7. Sus derechos</h2>
+      <p>Dado que sus datos permanecen en su dispositivo, usted mantiene el control total en todo momento. Puede eliminarlos desinstalando la aplicación o borrando los datos de la app desde los ajustes de su dispositivo.</p>
+      <p>Para cualquier pregunta relativa a sus datos personales o al servicio de análisis, puede contactar al desarrollador en: <a href="mailto:alexferran@gmail.com">alexferran@gmail.com</a></p>
+    </div>
+    <div class="section">
+      <h2>8. Modificaciones de esta política</h2>
+      <p>Esta política puede actualizarse puntualmente. Cualquier modificación se indicará mediante la actualización de la fecha en la parte superior de esta página. Le recomendamos consultarla regularmente.</p>
+    </div>
   </div>
 
   <hr style="margin-top:3em; border:none; border-top:1px solid #ddd"/>
   <p style="font-size:0.85em; color:#888; text-align:center;">
-    TzolkinSight &copy; 2026 Alexandre Ferran — Tous droits réservés
+    TzolkInSight &copy; 2026 Alexandre Ferran — All rights reserved / Tous droits réservés / Todos los derechos reservados
   </p>
+
+  <script>
+    function switchLang(lang) {
+      document.querySelectorAll('.lang').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.lang-switch a').forEach(el => el.classList.remove('active'));
+      document.getElementById('lang-' + lang).classList.add('active');
+      document.getElementById('btn-' + lang).classList.add('active');
+      document.documentElement.lang = lang === 'es' ? 'es' : lang === 'en' ? 'en' : 'fr';
+      return false;
+    }
+  </script>
 
 </body>
 </html>

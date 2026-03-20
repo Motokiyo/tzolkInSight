@@ -331,6 +331,8 @@ class TzolkinWidget {
                         placeholderChar: '_',
                         lazy: false
                     });
+                    // Forcer le curseur au début du champ
+                    setTimeout(() => dateInput.setSelectionRange(0, 0), 50);
                 }
             });
 

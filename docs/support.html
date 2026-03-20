@@ -53,135 +53,260 @@
     .btn:hover { background: #5a3e9e; }
     .btn-red { background: #c0392b; }
     .btn-red:hover { background: #e74c3c; }
+    .lang-switch {
+      text-align: right;
+      margin-bottom: 1em;
+      font-family: Arial, sans-serif;
+      font-size: 0.9em;
+    }
+    .lang-switch a {
+      margin: 0 6px;
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid #d4a92a;
+      color: #3b2a6e;
+    }
+    .lang-switch a.active {
+      background: #3b2a6e;
+      color: #fff;
+      border-color: #3b2a6e;
+    }
+    .lang { display: none; }
+    .lang.active { display: block; }
   </style>
 </head>
 <body>
 
-  <h1>Support – TzolkInSight</h1>
-  <p class="subtitle">Application : <strong>TzolkInSight</strong> &nbsp;|&nbsp; Développeur : Alexandre Ferran &nbsp;|&nbsp; Galaad Motokiyo Ferran</p>
-
-  <!-- FONCTIONNEMENT -->
-  <div class="section">
-    <h2>Fonctionnement de l'application</h2>
-
-    <h3>Le calendrier Tzolk'in</h3>
-    <p>Le Tzolk'in est le calendrier sacré maya — un cycle de 260 jours combinant 20 glyphes (nawals) et 13 nombres. Ce cycle est utilisé sans interruption depuis plus de 2 500 ans dans les communautés mayas du Guatemala et du Mexique. Il correspond à la période de gestation humaine et à plusieurs cycles astronomiques précis.</p>
-
-    <h3>Écran Calendrier</h3>
-    <p>L'écran principal affiche le jour Tzolk'in du jour : glyphe (nawal), nombre (ton), trécéna, famille de maïs K'iche' et Seigneur de la Nuit. Vous pouvez :</p>
-    <ul>
-      <li>Naviguer jour par jour avec les flèches ◀ ▶</li>
-      <li>Revenir au jour actuel avec le bouton ↺</li>
-      <li>Saisir librement une date (naissance, événement passé)</li>
-      <li>Cliquer sur le glyphe, le nombre ou la trécéna pour accéder à leur page de détail</li>
-    </ul>
-
-    <h3>Pages de détail</h3>
-    <p>Chaque glyphe, nombre et trécéna possède sa propre page : signification spirituelle, mots-clés, animal de pouvoir, élément, cérémonies K'iche', extraits du Popol Vuh. Les 20 glyphes (Imix, Ik, Akbal, Kan, Chicchan, Cimi, Manik, Lamat, Muluc, Oc, Chuen, Eb, Ben, Ix, Men, Cib, Caban, Etznab, Cauac, Ahau) et les 13 nombres ont chacun leur symbolisme propre.</p>
-
-    <h3>Famille de Maïs K'iche'</h3>
-    <p>Le bandeau coloré sous le calendrier indique la famille de maïs du jour :</p>
-    <ul>
-      <li><strong>Maïs Rouge</strong> — Est · Feu</li>
-      <li><strong>Maïs Blanc</strong> — Nord · Air</li>
-      <li><strong>Maïs Noir</strong> — Ouest · Eau</li>
-      <li><strong>Maïs Jaune</strong> — Sud · Terre</li>
-    </ul>
-    <p>Cliquez dessus pour accéder à la page de la famille : Popol Vuh, élément, les 5 nawals K'iche', cérémonies associées, porteurs d'année.</p>
-
-    <h3>Croix Maya</h3>
-    <p>La Croix Maya est votre carte personnelle calculée depuis une date de naissance. Elle révèle 5 dimensions :</p>
-    <ul>
-      <li><strong>Centre</strong> : kin de naissance (nawal de naissance)</li>
-      <li><strong>Est</strong> : conception (origine)</li>
-      <li><strong>Ouest</strong> : mission de vie</li>
-      <li><strong>Nord</strong> : guide</li>
-      <li><strong>Sud</strong> : soutien</li>
-    </ul>
-    <p>Gérez les croix de vos proches via Réglages → Contacts. Chaque position est cliquable vers sa page de détail.</p>
-
-    <h3>Notes — Journal quotidien</h3>
-    <p>Chaque jour du calendrier peut recevoir une note :</p>
-    <ul>
-      <li>Choisissez une émotion sur la <strong>roue de Plutchik</strong> (8 familles d'émotions codées par couleur)</li>
-      <li>Rédigez votre texte librement</li>
-      <li>L'heure et le lieu sont enregistrés automatiquement (ou manuellement)</li>
-      <li>Vous pouvez noter un <strong>jour passé</strong> (confirmation de la date demandée)</li>
-      <li>Protection optionnelle par <strong>code PIN à 4 chiffres</strong></li>
-    </ul>
-
-    <h3>Enregistrés — Historique</h3>
-    <p>Consultez toutes vos notes, filtrez par glyphe, ton ou date. Exportez en <strong>CSV, TXT ou PDF</strong>. Réimportez un fichier CSV si vous changez d'appareil. Chaque note est entièrement modifiable.</p>
-
-    <h3>Commander une Analyse</h3>
-    <p>Après 100 à 150 entrées dans votre journal, vous pouvez commander une analyse personnalisée de votre année Tzolk'in. L'équipe Galaad Motokiyo Ferran réalise une lecture de vos récurrences émotionnelles, cycles, transits et psyché jungienne. <strong>Tarif : 50 €.</strong></p>
-
-    <h3>Réglages</h3>
-    <ul>
-      <li>Gérer vos contacts (Croix Maya)</li>
-      <li>Activer / changer / désactiver le code PIN</li>
-      <li>Choisir la langue : Français / English / Español</li>
-    </ul>
+  <div class="lang-switch">
+    <a href="#" onclick="switchLang('fr')" id="btn-fr" class="active">Français</a>
+    <a href="#" onclick="switchLang('en')" id="btn-en">English</a>
+    <a href="#" onclick="switchLang('es')" id="btn-es">Español</a>
   </div>
 
-  <!-- FAQ -->
-  <div class="section">
-    <h2>Questions fréquentes (FAQ)</h2>
+  <!-- ==================== FRANÇAIS ==================== -->
+  <div id="lang-fr" class="lang active">
+    <h1>Support – TzolkInSight</h1>
+    <p class="subtitle">Application : <strong>TzolkInSight</strong> &nbsp;|&nbsp; Développeur : Alexandre Ferran &nbsp;|&nbsp; Galaad Motokiyo Ferran</p>
 
-    <p class="faq-q">Mes données sont-elles envoyées quelque part ?</p>
-    <p class="faq-a">Non. Toutes vos notes, contacts et réglages sont stockés <strong>uniquement sur votre appareil</strong>. TzolkInSight ne se connecte à aucun serveur et ne nécessite aucun compte.</p>
+    <div class="section">
+      <h2>Fonctionnement de l'application</h2>
+      <h3>Le calendrier Tzolk'in</h3>
+      <p>Le Tzolk'in est le calendrier sacré maya — un cycle de 260 jours combinant 20 glyphes (nawals) et 13 nombres. Ce cycle est utilisé sans interruption depuis plus de 2 500 ans dans les communautés mayas du Guatemala et du Mexique.</p>
+      <h3>Écran Calendrier</h3>
+      <p>L'écran principal affiche le jour Tzolk'in du jour : glyphe (nawal), nombre (ton), trécéna, famille de maïs K'iche' et Seigneur de la Nuit. Vous pouvez :</p>
+      <ul>
+        <li>Naviguer jour par jour avec les flèches ◀ ▶</li>
+        <li>Revenir au jour actuel avec le bouton ↺</li>
+        <li>Saisir librement une date (naissance, événement passé)</li>
+        <li>Cliquer sur le glyphe, le nombre ou la trécéna pour accéder à leur page de détail</li>
+      </ul>
+      <h3>Pages de détail</h3>
+      <p>Chaque glyphe, nombre et trécéna possède sa propre page : signification spirituelle, mots-clés, animal de pouvoir, élément, cérémonies K'iche', extraits du Popol Vuh.</p>
+      <h3>Famille de Maïs K'iche'</h3>
+      <p>Le bandeau coloré sous le calendrier indique la famille de maïs du jour :</p>
+      <ul>
+        <li><strong>Maïs Rouge</strong> — Est · Feu</li>
+        <li><strong>Maïs Blanc</strong> — Nord · Air</li>
+        <li><strong>Maïs Noir</strong> — Ouest · Eau</li>
+        <li><strong>Maïs Jaune</strong> — Sud · Terre</li>
+      </ul>
+      <h3>Croix Maya</h3>
+      <p>La Croix Maya est votre carte personnelle calculée depuis une date de naissance. Elle révèle 5 dimensions : Centre (naissance), Est (conception), Ouest (mission de vie), Nord (guide), Sud (soutien). Gérez les croix de vos proches via Réglages → Contacts.</p>
+      <h3>Notes — Journal quotidien</h3>
+      <p>Chaque jour du calendrier peut recevoir une note :</p>
+      <ul>
+        <li>Choisissez une émotion sur la <strong>roue de Plutchik</strong></li>
+        <li>Rédigez votre texte librement</li>
+        <li>L'heure et le lieu sont enregistrés automatiquement (ou manuellement)</li>
+        <li>Protection optionnelle par <strong>code PIN à 4 chiffres</strong></li>
+      </ul>
+      <h3>Enregistrés — Historique</h3>
+      <p>Consultez toutes vos notes, filtrez par glyphe, ton ou date. Exportez en CSV, TXT ou PDF. Réimportez un fichier CSV si vous changez d'appareil.</p>
+      <h3>Commander une Analyse</h3>
+      <p>Après 100 à 150 entrées, commandez une analyse personnalisée de votre année Tzolk'in réalisée par l'équipe Galaad Motokiyo Ferran. <strong>Tarif : 50 €.</strong></p>
+    </div>
 
-    <p class="faq-q">Comment sauvegarder mes notes si je change d'appareil ?</p>
-    <p class="faq-a">Allez dans <em>Enregistrés</em> → exportez vos notes en <strong>CSV</strong>. Sur le nouvel appareil, réimportez ce fichier depuis le même écran.</p>
+    <div class="section">
+      <h2>Questions fréquentes (FAQ)</h2>
+      <p class="faq-q">Mes données sont-elles envoyées quelque part ?</p>
+      <p class="faq-a">Non. Toutes vos notes sont stockées <strong>uniquement sur votre appareil</strong>. TzolkInSight ne se connecte à aucun serveur.</p>
+      <p class="faq-q">Comment sauvegarder mes notes si je change d'appareil ?</p>
+      <p class="faq-a">Allez dans <em>Enregistrés</em> → exportez vos notes en CSV. Sur le nouvel appareil, réimportez ce fichier.</p>
+      <p class="faq-q">J'ai oublié mon code PIN.</p>
+      <p class="faq-a">Le PIN est stocké localement et ne peut pas être récupéré. La seule solution est de réinstaller l'application. Pensez à exporter vos données régulièrement.</p>
+      <p class="faq-q">L'app est-elle disponible hors ligne ?</p>
+      <p class="faq-a">Oui, entièrement.</p>
+      <p class="faq-q">L'application est-elle gratuite ?</p>
+      <p class="faq-a">Oui, entièrement gratuite et sans publicité.</p>
+    </div>
 
-    <p class="faq-q">J'ai oublié mon code PIN. Comment faire ?</p>
-    <p class="faq-a">Malheureusement, le PIN est stocké localement de façon sécurisée et ne peut pas être récupéré à distance. La seule solution est de réinstaller l'application (vos notes seront effacées). Pensez à exporter vos données régulièrement.</p>
-
-    <p class="faq-q">Le jour affiché ne correspond pas à ce que je connais du Tzolk'in. Pourquoi ?</p>
-    <p class="faq-a">TzolkInSight utilise le corrélation GMT (Goodman-Martinez-Thompson), la corrélation de référence dans les études mayanistes. Certaines traditions utilisent des corrélations différentes avec un écart de quelques jours.</p>
-
-    <p class="faq-q">L'app est-elle disponible hors ligne ?</p>
-    <p class="faq-a">Oui, entièrement. Une fois installée, TzolkInSight fonctionne sans connexion internet.</p>
-
-    <p class="faq-q">Comment accéder à la Croix Maya d'un proche ?</p>
-    <p class="faq-a">Allez dans <em>Réglages</em>, ajoutez un contact avec son nom et sa date de naissance. Cliquez ensuite sur le bouton ✛ à côté de son nom pour voir sa Croix Maya.</p>
-
-    <p class="faq-q">Puis-je noter un événement qui s'est passé il y a plusieurs jours ?</p>
-    <p class="faq-a">Oui. Naviguez jusqu'au jour concerné avec les flèches ◀ ▶, puis ouvrez la modale Notes. L'app vous demandera de confirmer la date passée.</p>
-
-    <p class="faq-q">Comment changer la langue de l'application ?</p>
-    <p class="faq-a">Allez dans <em>Réglages</em> (icône en bas de l'écran) → section Langue → choisissez Français, English ou Español.</p>
-
-    <p class="faq-q">L'application est-elle gratuite ?</p>
-    <p class="faq-a">Oui, TzolkInSight est entièrement gratuite et sans publicité. Un bouton de soutien libre est disponible pour ceux qui souhaitent contribuer.</p>
-
-    <p class="faq-q">Qu'est-ce que le Seigneur de la Nuit ?</p>
-    <p class="faq-a">Les 9 Seigneurs de la Nuit (G1 à G9) forment un cycle de 9 jours superposé au Tzolk'in. Chaque Seigneur a ses propres attributs symboliques. Vous pouvez cliquer dessus sur l'écran principal pour en savoir plus.</p>
+    <div class="contact-box">
+      <h2 style="border:none; padding:0; margin-top:0;">Contact</h2>
+      <p>Vous n'avez pas trouvé la réponse ? Nous sommes disponibles par email :</p>
+      <p><strong><a href="mailto:motokiyoferran@gmail.com">motokiyoferran@gmail.com</a></strong></p>
+      <p>Galaad Motokiyo Ferran — IA Access · Conseil &amp; Création</p>
+      <a class="btn" href="mailto:motokiyoferran@gmail.com?subject=TzolkInSight%20-%20Question">Envoyer un message</a>
+    </div>
+    <div class="bug-box">
+      <h2 style="border:none; padding:0; margin-top:0; color:#c0392b;">Signaler un bug</h2>
+      <p>Précisez : version de l'app, appareil, étapes pour reproduire le problème.</p>
+      <a class="btn btn-red" href="mailto:motokiyoferran@gmail.com?subject=TzolkInSight%20-%20Bug%20Report">Signaler par email</a>
+    </div>
   </div>
 
-  <!-- CONTACT -->
-  <div class="contact-box">
-    <h2 style="border:none; padding:0; margin-top:0;">Contact</h2>
-    <p>Vous n'avez pas trouvé la réponse à votre question ? Nous sommes disponibles par email :</p>
-    <p><strong><a href="mailto:motokiyoferran@gmail.com">motokiyoferran@gmail.com</a></strong></p>
-    <p>Galaad Motokiyo Ferran — IA Access · Conseil &amp; Création</p>
-    <a class="btn" href="mailto:motokiyoferran@gmail.com?subject=TzolkInSight%20-%20Question">Envoyer un message</a>
+  <!-- ==================== ENGLISH ==================== -->
+  <div id="lang-en" class="lang">
+    <h1>Support – TzolkInSight</h1>
+    <p class="subtitle">Application: <strong>TzolkInSight</strong> &nbsp;|&nbsp; Developer: Alexandre Ferran &nbsp;|&nbsp; Galaad Motokiyo Ferran</p>
+
+    <div class="section">
+      <h2>How the app works</h2>
+      <h3>The Tzolk'in calendar</h3>
+      <p>The Tzolk'in is the sacred Mayan calendar — a 260-day cycle combining 20 glyphs (nawals) and 13 numbers. This cycle has been used without interruption for over 2,500 years in Maya communities of Guatemala and Mexico.</p>
+      <h3>Calendar screen</h3>
+      <p>The main screen displays today's Tzolk'in day: glyph (nawal), number (tone), trecena, K'iche' corn family and Lord of the Night. You can:</p>
+      <ul>
+        <li>Navigate day by day with the ◀ ▶ arrows</li>
+        <li>Return to today with the ↺ button</li>
+        <li>Enter any date freely (birth, past event)</li>
+        <li>Tap the glyph, number or trecena to access its detail page</li>
+      </ul>
+      <h3>Detail pages</h3>
+      <p>Each glyph, number and trecena has its own page: spiritual meaning, keywords, power animal, element, K'iche' ceremonies, excerpts from the Popol Vuh.</p>
+      <h3>K'iche' Corn Family</h3>
+      <p>The colored band below the calendar shows the corn family of the day:</p>
+      <ul>
+        <li><strong>Red Corn</strong> — East · Fire</li>
+        <li><strong>White Corn</strong> — North · Air</li>
+        <li><strong>Black Corn</strong> — West · Water</li>
+        <li><strong>Yellow Corn</strong> — South · Earth</li>
+      </ul>
+      <h3>Maya Cross</h3>
+      <p>The Maya Cross is your personal chart calculated from a date of birth. It reveals 5 dimensions: Center (birth), East (conception), West (life mission), North (guide), South (support). Manage crosses for your loved ones via Settings → Contacts.</p>
+      <h3>Notes — Daily journal</h3>
+      <p>Each calendar day can receive a note:</p>
+      <ul>
+        <li>Choose an emotion on the <strong>Plutchik wheel</strong></li>
+        <li>Write your text freely</li>
+        <li>Time and place are recorded automatically (or manually)</li>
+        <li>Optional protection with a <strong>4-digit PIN code</strong></li>
+      </ul>
+      <h3>Saved — History</h3>
+      <p>Browse all your notes, filter by glyph, tone or date. Export to CSV, TXT or PDF. Re-import a CSV file if you switch devices.</p>
+      <h3>Order an Analysis</h3>
+      <p>After 100–150 entries, order a personalized analysis of your Tzolk'in year by the Galaad Motokiyo Ferran team. <strong>Price: €50.</strong></p>
+    </div>
+
+    <div class="section">
+      <h2>Frequently Asked Questions (FAQ)</h2>
+      <p class="faq-q">Is my data sent anywhere?</p>
+      <p class="faq-a">No. All your notes are stored <strong>only on your device</strong>. TzolkInSight does not connect to any server.</p>
+      <p class="faq-q">How do I back up my notes if I switch devices?</p>
+      <p class="faq-a">Go to <em>Saved</em> → export your notes as CSV. On the new device, re-import the file.</p>
+      <p class="faq-q">I forgot my PIN code.</p>
+      <p class="faq-a">The PIN is stored locally and cannot be recovered. The only solution is to reinstall the app. Remember to export your data regularly.</p>
+      <p class="faq-q">Does the app work offline?</p>
+      <p class="faq-a">Yes, fully.</p>
+      <p class="faq-q">Is the app free?</p>
+      <p class="faq-a">Yes, completely free and ad-free.</p>
+    </div>
+
+    <div class="contact-box">
+      <h2 style="border:none; padding:0; margin-top:0;">Contact</h2>
+      <p>Didn't find your answer? Reach us by email:</p>
+      <p><strong><a href="mailto:motokiyoferran@gmail.com">motokiyoferran@gmail.com</a></strong></p>
+      <p>Galaad Motokiyo Ferran — IA Access · Consulting &amp; Creation</p>
+      <a class="btn" href="mailto:motokiyoferran@gmail.com?subject=TzolkInSight%20-%20Question">Send a message</a>
+    </div>
+    <div class="bug-box">
+      <h2 style="border:none; padding:0; margin-top:0; color:#c0392b;">Report a bug</h2>
+      <p>Please include: app version, device, steps to reproduce the issue.</p>
+      <a class="btn btn-red" href="mailto:motokiyoferran@gmail.com?subject=TzolkInSight%20-%20Bug%20Report">Report by email</a>
+    </div>
   </div>
 
-  <!-- BUG REPORT -->
-  <div class="bug-box">
-    <h2 style="border:none; padding:0; margin-top:0; color:#c0392b;">Signaler un bug</h2>
-    <p>Vous avez rencontré un comportement inattendu ? Merci de nous le signaler en précisant :</p>
-    <ul>
-      <li>La version de l'app (visible dans Crédits)</li>
-      <li>Votre appareil et version iOS/Android</li>
-      <li>Les étapes pour reproduire le problème</li>
-      <li>Ce que vous attendiez et ce qui s'est passé à la place</li>
-    </ul>
-    <a class="btn btn-red" href="mailto:motokiyoferran@gmail.com?subject=TzolkInSight%20-%20Bug%20Report&body=Version%20de%20l'app%20:%20%0AAppareil%20:%20%0AVersion%20iOS/Android%20:%20%0A%0ADescription%20du%20bug%20:%0A%0A%C3%89tapes%20pour%20reproduire%20:%0A1.%20%0A2.%20%0A3.%20%0A%0AComportement%20attendu%20:%0A%0AComportement%20observ%C3%A9%20:">Signaler un bug par email</a>
-    &nbsp;
-    <a class="btn" href="https://github.com/motokiyo/tzolkInSight/issues/new" target="_blank">Ouvrir un ticket GitHub</a>
+  <!-- ==================== ESPAÑOL ==================== -->
+  <div id="lang-es" class="lang">
+    <h1>Soporte – TzolkInSight</h1>
+    <p class="subtitle">Aplicación: <strong>TzolkInSight</strong> &nbsp;|&nbsp; Desarrollador: Alexandre Ferran &nbsp;|&nbsp; Galaad Motokiyo Ferran</p>
+
+    <div class="section">
+      <h2>Funcionamiento de la aplicación</h2>
+      <h3>El calendario Tzolk'in</h3>
+      <p>El Tzolk'in es el calendario sagrado maya — un ciclo de 260 días que combina 20 glifos (nawals) y 13 números. Este ciclo se ha utilizado sin interrupción desde hace más de 2 500 años en las comunidades mayas de Guatemala y México.</p>
+      <h3>Pantalla del calendario</h3>
+      <p>La pantalla principal muestra el día Tzolk'in actual: glifo (nawal), número (tono), trecena, familia de maíz K'iche' y Señor de la Noche. Puede:</p>
+      <ul>
+        <li>Navegar día a día con las flechas ◀ ▶</li>
+        <li>Volver al día actual con el botón ↺</li>
+        <li>Introducir cualquier fecha libremente (nacimiento, evento pasado)</li>
+        <li>Tocar el glifo, número o trecena para acceder a su página de detalle</li>
+      </ul>
+      <h3>Páginas de detalle</h3>
+      <p>Cada glifo, número y trecena tiene su propia página: significado espiritual, palabras clave, animal de poder, elemento, ceremonias K'iche', extractos del Popol Vuh.</p>
+      <h3>Familia de Maíz K'iche'</h3>
+      <p>La franja de color bajo el calendario indica la familia de maíz del día:</p>
+      <ul>
+        <li><strong>Maíz Rojo</strong> — Este · Fuego</li>
+        <li><strong>Maíz Blanco</strong> — Norte · Aire</li>
+        <li><strong>Maíz Negro</strong> — Oeste · Agua</li>
+        <li><strong>Maíz Amarillo</strong> — Sur · Tierra</li>
+      </ul>
+      <h3>Cruz Maya</h3>
+      <p>La Cruz Maya es su carta personal calculada a partir de una fecha de nacimiento. Revela 5 dimensiones: Centro (nacimiento), Este (concepción), Oeste (misión de vida), Norte (guía), Sur (apoyo). Gestione las cruces de sus seres queridos en Ajustes → Contactos.</p>
+      <h3>Notas — Diario cotidiano</h3>
+      <p>Cada día del calendario puede recibir una nota:</p>
+      <ul>
+        <li>Elija una emoción en la <strong>rueda de Plutchik</strong></li>
+        <li>Escriba su texto libremente</li>
+        <li>La hora y el lugar se registran automáticamente (o manualmente)</li>
+        <li>Protección opcional con <strong>código PIN de 4 dígitos</strong></li>
+      </ul>
+      <h3>Guardados — Historial</h3>
+      <p>Consulte todas sus notas, filtre por glifo, tono o fecha. Exporte en CSV, TXT o PDF. Reimporte un archivo CSV si cambia de dispositivo.</p>
+      <h3>Encargar un Análisis</h3>
+      <p>Después de 100-150 entradas, encargue un análisis personalizado de su año Tzolk'in realizado por el equipo Galaad Motokiyo Ferran. <strong>Precio: 50 €.</strong></p>
+    </div>
+
+    <div class="section">
+      <h2>Preguntas frecuentes (FAQ)</h2>
+      <p class="faq-q">¿Se envían mis datos a algún lugar?</p>
+      <p class="faq-a">No. Todas sus notas se almacenan <strong>únicamente en su dispositivo</strong>. TzolkInSight no se conecta a ningún servidor.</p>
+      <p class="faq-q">¿Cómo hago una copia de seguridad si cambio de dispositivo?</p>
+      <p class="faq-a">Vaya a <em>Guardados</em> → exporte sus notas en CSV. En el nuevo dispositivo, reimporte el archivo.</p>
+      <p class="faq-q">Olvidé mi código PIN.</p>
+      <p class="faq-a">El PIN se almacena localmente y no se puede recuperar. La única solución es reinstalar la aplicación. Recuerde exportar sus datos regularmente.</p>
+      <p class="faq-q">¿La app funciona sin conexión?</p>
+      <p class="faq-a">Sí, completamente.</p>
+      <p class="faq-q">¿La aplicación es gratuita?</p>
+      <p class="faq-a">Sí, completamente gratuita y sin publicidad.</p>
+    </div>
+
+    <div class="contact-box">
+      <h2 style="border:none; padding:0; margin-top:0;">Contacto</h2>
+      <p>¿No encontró su respuesta? Contáctenos por email:</p>
+      <p><strong><a href="mailto:motokiyoferran@gmail.com">motokiyoferran@gmail.com</a></strong></p>
+      <p>Galaad Motokiyo Ferran — IA Access · Consultoría y Creación</p>
+      <a class="btn" href="mailto:motokiyoferran@gmail.com?subject=TzolkInSight%20-%20Pregunta">Enviar un mensaje</a>
+    </div>
+    <div class="bug-box">
+      <h2 style="border:none; padding:0; margin-top:0; color:#c0392b;">Reportar un error</h2>
+      <p>Incluya: versión de la app, dispositivo, pasos para reproducir el problema.</p>
+      <a class="btn btn-red" href="mailto:motokiyoferran@gmail.com?subject=TzolkInSight%20-%20Bug%20Report">Reportar por email</a>
+    </div>
   </div>
+
+  <script>
+    function switchLang(lang) {
+      document.querySelectorAll('.lang').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.lang-switch a').forEach(el => el.classList.remove('active'));
+      document.getElementById('lang-' + lang).classList.add('active');
+      document.getElementById('btn-' + lang).classList.add('active');
+      document.documentElement.lang = lang === 'es' ? 'es' : lang === 'en' ? 'en' : 'fr';
+      return false;
+    }
+  </script>
 
 </body>
 </html>

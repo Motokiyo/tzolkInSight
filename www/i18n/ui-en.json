@@ -161,6 +161,7 @@
         "confirm_delete_contact": "Are you sure you want to delete \"{name}\"?",
         "contact_deleted": "Contact \"{name}\" deleted",
         "no_contacts": "No contacts saved.",
+        "no_contacts_hint": "Add your loved ones above to track their Tzolk'in day in the calendar.",
         "edit_contact": "Edit contact",
         "save_changes": "Save changes"
     },

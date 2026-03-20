@@ -82,13 +82,10 @@ class TzolkinAdmin {
                     </div>
 
                     <!-- Section Code PIN -->
-                    <div style="margin: 24px 0; padding: 18px 0; border-top: 2px solid rgba(0,0,0,0.1); border-bottom: 2px solid rgba(0,0,0,0.1);">
+                    <div id="pin-admin-section" style="margin: 24px 0; padding: 18px 0; border-top: 2px solid rgba(0,0,0,0.1); border-bottom: 2px solid rgba(0,0,0,0.1);">
                         <h3 style="font-family:'Summer',cursive; font-size:20px; color:#c19434; margin:0 0 10px 0;">${t('pin.title')}</h3>
                         <p id="pin-admin-status" style="font-size:16px; color:#222; margin:0 0 14px 0;">${t('settings.loading')}</p>
-                        <div style="display:flex; gap:12px; flex-wrap:wrap;">
-                            <button onclick="window.tzolkinAdmin.handlePinChange()" class="btn-edit" style="flex:1; font-size:16px; padding:10px;">${t('pin.change_pin')}</button>
-                            <button onclick="window.tzolkinAdmin.handlePinRemove()" class="btn-delete" style="flex:1; font-size:16px; padding:10px;">${t('pin.disable_pin')}</button>
-                        </div>
+                        <div id="pin-admin-buttons" style="display:flex; gap:12px; flex-wrap:wrap;"></div>
                     </div>
 
                     <!-- Liste des contacts -->
@@ -313,7 +310,12 @@ class TzolkinAdmin {
         const people = window.TzolkinStorage.loadPeople();
 
         if (people.length === 0) {
-            container.innerHTML = `<p>${this.t('settings.no_contacts') || 'Aucun contact enregistré.'}</p>`;
+            container.innerHTML = `
+                <div style="text-align:center; padding:20px 10px; color:#888;">
+                    <p style="font-size:17px; margin:0 0 8px;">${this.t('settings.no_contacts') || 'Aucun contact enregistré.'}</p>
+                    <p style="font-size:14px; margin:0; line-height:1.5;">${this.t('settings.no_contacts_hint') || 'Ajoutez vos proches ci-dessus pour suivre leur jour Tzolk\'in dans le calendrier.'}</p>
+                </div>
+            `;
             return;
         }
 
@@ -467,6 +469,20 @@ class TzolkinAdmin {
             ? (this.t('pin.active_status') || '✓ Code PIN actif — vos notes sont protégées.')
             : (this.t('pin.inactive_status') || 'Aucun code PIN défini — vos notes sont accessibles librement.');
         el.style.color = hasPin ? '#5e832a' : '#888';
+
+        // Adapter les boutons selon l'état du PIN
+        const btnContainer = document.getElementById('pin-admin-buttons');
+        if (!btnContainer) return;
+        if (hasPin) {
+            btnContainer.innerHTML = `
+                <button onclick="window.tzolkinAdmin.handlePinChange()" class="btn-edit" style="flex:1; font-size:16px; padding:10px;">${this.t('pin.change_pin')}</button>
+                <button onclick="window.tzolkinAdmin.handlePinRemove()" class="btn-delete" style="flex:1; font-size:16px; padding:10px;">${this.t('pin.disable_pin')}</button>
+            `;
+        } else {
+            btnContainer.innerHTML = `
+                <button onclick="window.tzolkinAdmin.handlePinChange()" class="btn-edit" style="flex:1; font-size:16px; padding:10px;">${this.t('pin.create_pin')}</button>
+            `;
+        }
     }
 
     handlePinChange() {

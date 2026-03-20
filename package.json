@@ -28,6 +28,6 @@
     "cordova-plugin-purchase": "^13.13.1"
   },
   "devDependencies": {
-    "puppeteer": "^24.38.0"
+    "puppeteer": "^24.40.0"
   }
 }

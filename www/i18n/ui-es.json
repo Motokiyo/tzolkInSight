@@ -161,6 +161,7 @@
         "confirm_delete_contact": "¿Está seguro de que desea eliminar a \"{name}\"?",
         "contact_deleted": "Contacto \"{name}\" eliminado",
         "no_contacts": "Ningún contacto guardado.",
+        "no_contacts_hint": "Agregue a sus seres queridos arriba para seguir su día Tzolk'in en el calendario.",
         "edit_contact": "Modificar el contacto",
         "save_changes": "Guardar los cambios"
     },

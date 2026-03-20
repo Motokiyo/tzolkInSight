@@ -1,6 +1,6 @@
 <!-- 
   Tzolk'in Menu Standalone - Menu et Modales
-  Version: 1.1.8
+  Version: 1.0.1
   Auteur: Alexandre Ferran + Claude AI
 -->
 
@@ -419,7 +419,7 @@
             </div>
             <h1 class="credits-app-title">tzolkInSight</h1>
             <p class="credits-app-sub" data-i18n="credits.app_title">Calendrier Maya Sacré</p>
-            <p class="credits-app-version">Version 1.1.8</p>
+            <p class="credits-app-version">Version 1.0.1</p>
             <p class="credits-app-meta" data-i18n-html="credits.developed_by">Pensé, imaginé et développé par Alexandre Ferran pour <strong class="credits-galaad-name">Galaad Motokiyo Ferran</strong></p>
             <p class="credits-app-meta"><strong>IA :</strong> Claude, Grok, DeepSeek</p>
             <a href="https://leparede.org" target="_blank" class="credits-app-site">leparede.org</a>
@@ -848,8 +848,11 @@
 
     //=== FONCTION: Ouvrir Enregistrés avec PIN ===
     async function openSavedWithPin() {
-        // Si aucun PIN défini → accès direct sans popup
-        if (!window.TzolkinStorage.hasPinCode()) {
+        const hasPin = window.TzolkinStorage.hasPinCode();
+        const pinSkipped = localStorage.getItem('tzolkin_pin_setup_skipped') === '1';
+
+        // Pas de PIN et l'utilisateur a déjà décliné la création → accès direct
+        if (!hasPin && pinSkipped) {
             await saveCurrentNote();
             notesLoaded = false;
             await ensureNotesLoaded();
@@ -859,16 +862,16 @@
         }
 
         // PIN déjà vérifié cette session → accès direct sans redemander
-        if (sessionStorage.getItem('tzolkin_pin_verified') === '1') {
+        if (hasPin && sessionStorage.getItem('tzolkin_pin_verified') === '1') {
             await saveCurrentNote();
-            notesLoaded = false; // Forcer rechargement pour avoir les dernières notes
+            notesLoaded = false;
             await ensureNotesLoaded();
             openModal('saved', true);
             filterNotes();
             return;
         }
 
-        // Demander le code PIN avant d'accéder
+        // Demander le code PIN (ou proposer création si aucun PIN)
         window.tzolkinPIN.requestPin(
             // Succès: marquer la session et ouvrir la modale
             async () => {
@@ -1370,24 +1373,11 @@
         const csvContent = '\uFEFF' + rows.join('\n');
         const filename = `tzolkin-notes-${today}.csv`;
 
-        if (window.Capacitor) {
-            try {
-                await window.Capacitor.nativePromise('FileDownloader', 'saveFile', {
-                    filename: filename,
-                    content: csvContent,
-                    mimeType: 'text/csv'
-                });
-                alert(`✓ "${filename}" ${_t('saved_modal.file_saved')}`);
-            } catch (e) {
-                alert(_t('saved_modal.download_error') + ' : ' + e.message);
-            }
-        } else {
-            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url; a.download = filename; a.click();
-            URL.revokeObjectURL(url);
-        }
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = filename; a.click();
+        URL.revokeObjectURL(url);
 
         // Proposer de supprimer les notes après téléchargement
         setTimeout(() => showPostCSVConfirm(), 600);
@@ -1594,24 +1584,11 @@ P.S. Surveillez vos spam. Normalement le lien pour le paiement devrait arriver i
         const txtContent = lines.join('\n');
         const filename = `tzolkin-notes-${today}.txt`;
 
-        if (window.Capacitor) {
-            try {
-                await window.Capacitor.nativePromise('FileDownloader', 'saveFile', {
-                    filename: filename,
-                    content: txtContent,
-                    mimeType: 'text/plain'
-                });
-                alert(`✓ "${filename}" ${_t('saved_modal.file_saved')}`);
-            } catch (e) {
-                alert(_t('saved_modal.download_error') + ' : ' + e.message);
-            }
-        } else {
-            const blob = new Blob([txtContent], { type: 'text/plain;charset=utf-8;' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url; a.download = filename; a.click();
-            URL.revokeObjectURL(url);
-        }
+        const blob = new Blob([txtContent], { type: 'text/plain;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = filename; a.click();
+        URL.revokeObjectURL(url);
     }
 
     //=== FONCTION: Imprimer / PDF ===
@@ -1639,11 +1616,9 @@ P.S. Surveillez vos spam. Normalement le lien pour le paiement devrait arriver i
             </div>`;
         }).join('');
 
-        const win = window.open('', '_blank');
-        if (!win) { alert(_t('saved_modal.allow_popups')); return; }
         const _pdfLang = window.i18n?.lang || 'fr';
         const _pdfLocale = _pdfLang === 'fr' ? 'fr-FR' : _pdfLang === 'es' ? 'es-ES' : 'en-GB';
-        win.document.write(`<!DOCTYPE html><html lang="${_pdfLang}">
+        const pdfHtml = `<!DOCTYPE html><html lang="${_pdfLang}">
 <head><meta charset="UTF-8"><title>${_t('saved_modal.pdf_title')}</title>
 <style>
 body{font-family:Georgia,serif;background:#faf8f2;color:#333;margin:0;padding:20px;}
@@ -1662,9 +1637,20 @@ h1{font-size:24px;color:#c19434;text-align:center;margin-bottom:4px;}
 <h1>${_t('saved_modal.pdf_title')}</h1>
 <div class="sub">${_t('saved_modal.generated_on')} ${new Date().toLocaleDateString(_pdfLocale)} · ${sorted.length} note(s)</div>
 ${notesHtml}
-<script>window.onload=function(){window.print();}<\/script>
-</body></html>`);
-        win.document.close();
+</body></html>`;
+
+        // Essayer window.open (web), sinon fallback Blob HTML (iOS Capacitor)
+        const win = window.open('', '_blank');
+        if (win) {
+            win.document.write(pdfHtml + '<script>window.onload=function(){window.print();}<\/script>');
+            win.document.close();
+        } else {
+            const blob = new Blob([pdfHtml], { type: 'text/html;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = `tzolkin-notes-${new Date().toISOString().split('T')[0]}.html`; a.click();
+            URL.revokeObjectURL(url);
+        }
     }
 
     //=== FONCTION: Toggle menu téléchargement ===
