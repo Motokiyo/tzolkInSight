@@ -632,10 +632,17 @@ class TzolkinPIN {
 // INITIALISATION
 // ============================================================================
 
-// Créer l'instance globale au chargement du DOM
-document.addEventListener('DOMContentLoaded', () => {
+// Créer l'instance globale quand i18n est prêt (évite la race condition fetch JSON)
+function initPIN() {
     window.tzolkinPIN = new TzolkinPIN();
     console.log('✅ Module PIN initialisé et accessible via window.tzolkinPIN');
-});
+}
+if (window.i18n && window.i18n.ready) {
+    initPIN();
+} else if (window.i18n && window.i18n.onReady) {
+    window.i18n.onReady(initPIN);
+} else {
+    document.addEventListener('DOMContentLoaded', initPIN);
+}
 
 console.log('✅ Tzolk\'in PIN chargé - Système de protection par code prêt');

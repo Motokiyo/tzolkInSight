@@ -176,7 +176,7 @@ Layout sidebar navy (Galaad company, `padding:0` sur modal-content pour sidebar 
 ## Identifiants & déploiement
 - **App ID** : `org.leparede.tzolkinsight`
 - **Play Store** : v1.1.8, versionCode 1, beta ouverte
-- **App Store** : v1.0 build 4, resoumise 19 mars 2026 (fix rejet 3.1.1 : IAP StoreKit remplace Revolut sur iOS)
+- **App Store** : v1.0.1 build 6, soumise 20 mars 2026 (fix rejet 2.1(a) placeholder buttons + localisations EN/ES)
 - **Apple Team ID** : JAH4678AHH, Bundle ID : `org.leparede.tzolkinsight`
 - **Keystore Android** : `tzolkin-release.keystore` (racine, exclu du git, sauvegardé Google Drive)
 - **Privacy** : https://motokiyo.github.io/tzolkInSight/privacy-policy.html

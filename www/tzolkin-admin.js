@@ -516,10 +516,17 @@ class TzolkinAdmin {
 // INITIALISATION
 // ============================================================================
 
-// Créer l'instance globale au chargement du DOM
-document.addEventListener('DOMContentLoaded', () => {
+// Créer l'instance globale quand i18n est prêt (évite la race condition fetch JSON)
+function initAdmin() {
     window.tzolkinAdmin = new TzolkinAdmin();
     console.log('✅ Admin initialisé et accessible via window.tzolkinAdmin');
-});
+}
+if (window.i18n && window.i18n.ready) {
+    initAdmin();
+} else if (window.i18n && window.i18n.onReady) {
+    window.i18n.onReady(initAdmin);
+} else {
+    document.addEventListener('DOMContentLoaded', initAdmin);
+}
 
 console.log('✅ Tzolk\'in Admin chargé - Module de gestion des contacts prêt');
