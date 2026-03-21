@@ -162,6 +162,8 @@ Layout sidebar navy (Galaad company, `padding:0` sur modal-content pour sidebar 
 - **Menu dynamique** : le menu est injecté dans `#modales-container` par fetch, donc les listeners doivent être ajoutés APRÈS injection (pas dans DOMContentLoaded).
 - **bump-version.sh** ne touche PAS `android/app/build.gradle` → versionCode/versionName = mise à jour manuelle.
 - **build.sh** doit exclure `ios/` (sinon les Info.plist avec `$(PRODUCT_BUNDLE_IDENTIFIER)` non résolu se retrouvent dans www/ → cassent Transporter/altool).
+- **i18n race condition** : `TzolkinAdmin` et `TzolkinPIN` doivent attendre `i18n.onReady()` avant de construire leurs modales. Sinon les clés brutes (`settings.add_contact`) s'affichent à la place des traductions.
+- **Profil provisioning iOS** : le nom contient 4 espaces (`"tzolkInSight App    Store"`). Utiliser le nom exact dans les commandes xcodebuild.
 
 ## App Store Connect — RÈGLES CRITIQUES
 - **TOUJOURS lire la doc Apple avant d'agir** : https://developer.apple.com/help/app-store-connect/
@@ -176,7 +178,8 @@ Layout sidebar navy (Galaad company, `padding:0` sur modal-content pour sidebar 
 ## Identifiants & déploiement
 - **App ID** : `org.leparede.tzolkinsight`
 - **Play Store** : v1.1.8, versionCode 1, beta ouverte
-- **App Store** : v1.0.1 build 6, soumise 20 mars 2026 (fix rejet 2.1(a) placeholder buttons + localisations EN/ES)
+- **App Store** : v1.0.2 build 7, soumise 21 mars 2026 (fix i18n race condition admin/PIN + localisations EN/ES)
+- **Apple ID app** : 6760587618
 - **Apple Team ID** : JAH4678AHH, Bundle ID : `org.leparede.tzolkinsight`
 - **Keystore Android** : `tzolkin-release.keystore` (racine, exclu du git, sauvegardé Google Drive)
 - **Privacy** : https://motokiyo.github.io/tzolkInSight/privacy-policy.html
