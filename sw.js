@@ -1,5 +1,5 @@
 // sw.js : Service Worker pour Tzolkin
-const APP_VERSION = '4.10';
+const APP_VERSION = '4.11';
 const CACHE_NAME = `tzolkin-v${APP_VERSION}`;
 
 // Journalisation
@@ -37,6 +37,9 @@ self.addEventListener('install', event => {
     './tzolkin-croix-maya.js',
     './tzolkin-iap.js',
     './tzolkin-croix-maya.css',
+    './tzolkin-speech.js',
+    './tzolkin-speech.css',
+    './tzolkin-icloud.js',
     './tzolkin-menu-standalone.html',
     './imask.js',
     './assets/x-balanque.png',

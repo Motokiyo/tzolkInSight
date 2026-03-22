@@ -15,4 +15,16 @@ android/app/.cxx/
 testeurs.csv
 email-testeurs.*
 email-ios.html
+email-ios-merci.html
 email-assets/
+assets/Signature_Mail_Galaad.html
+www/assets/Signature_Mail_Galaad.html
+
+# IDE / local
+.vscode/
+www/.vscode/
+
+# Debug / dev local
+ios/debug.xcconfig
+ios-widget/donation-api.php
+ios-widget/donation-data.json

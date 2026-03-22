@@ -5,7 +5,7 @@
     <key>CAPACITOR_DEBUG</key>
 	<string>$(CAPACITOR_DEBUG)</string>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>fr</string>
 	<key>CFBundleDisplayName</key>
         <string>TzolkinSight</string>
 	<key>CFBundleExecutable</key>
@@ -49,5 +49,9 @@
 	<true/>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>TzolkInSight utilise le microphone pour la dictée vocale de vos notes spirituelles.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>TzolkInSight utilise la reconnaissance vocale pour transcrire vos notes dictées.</string>
 </dict>
 </plist>

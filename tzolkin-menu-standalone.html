@@ -1,6 +1,6 @@
 <!-- 
   Tzolk'in Menu Standalone - Menu et Modales
-  Version: 1.0.2
+  Version: 1.1.0
   Auteur: Alexandre Ferran + Claude AI
 -->
 
@@ -288,7 +288,14 @@
                         Intérêt, Vigilance</span>
                 </div>
             </div>
-            <textarea id="notes-input" placeholder="Entrez vos notes du jour..." data-i18n-placeholder="notes_modal.placeholder"></textarea>
+            <div class="notes-input-wrapper">
+                <textarea id="notes-input" placeholder="Entrez vos notes du jour..." data-i18n-placeholder="notes_modal.placeholder"></textarea>
+                <button id="speech-btn" class="speech-btn" onclick="TzolkinSpeech.toggle()"
+                        data-i18n-title="speech.mic_title" title="Dictée vocale" style="display:none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1-9c0-.55.45-1 1-1s1 .45 1 1v6c0 .55-.45 1-1 1s-1-.45-1-1V5zm6 6c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+                </button>
+            </div>
+            <div id="speech-status"></div>
         </div>
     </div>
 </div>
@@ -419,7 +426,7 @@
             </div>
             <h1 class="credits-app-title">tzolkInSight</h1>
             <p class="credits-app-sub" data-i18n="credits.app_title">Calendrier Maya Sacré</p>
-            <p class="credits-app-version">Version 1.0.2</p>
+            <p class="credits-app-version">Version 1.1.0</p>
             <p class="credits-app-meta" data-i18n-html="credits.developed_by">Pensé, imaginé et développé par Alexandre Ferran pour <strong class="credits-galaad-name">Galaad Motokiyo Ferran</strong></p>
             <p class="credits-app-meta"><strong>IA :</strong> Claude, Grok, DeepSeek</p>
             <a href="https://leparede.org" target="_blank" class="credits-app-site">leparede.org</a>
@@ -1907,6 +1914,38 @@ ${notesHtml}
             // Toute autre modale ou vue → calendrier
             closeAllModals();
         });
+
+        // Speech-to-text init
+        if (window.TzolkinSpeech) {
+            TzolkinSpeech.init();
+            if (TzolkinSpeech.available) {
+                TzolkinSpeech.onResult(function (text) {
+                    var ta = document.getElementById('notes-input');
+                    if (!ta) return;
+                    ta.value = ta.value + (ta.value ? ' ' : '') + text;
+                    ta.dispatchEvent(new Event('input'));
+                });
+                TzolkinSpeech.onError(function (error) {
+                    var msg;
+                    switch (error) {
+                        case 'not-allowed': msg = _t('speech.error_no_permission'); break;
+                        case 'network': msg = _t('speech.error_network'); break;
+                        default: msg = _t('speech.error_generic');
+                    }
+                    alert(msg);
+                });
+            }
+        }
+
+        // iCloud KVS sync init
+        if (window.TzolkinICloud) {
+            TzolkinICloud.init();
+            TzolkinICloud.onExternalChange(function () {
+                console.log('[iCloud] Rechargement des données après sync externe');
+                notesLoaded = false;
+                ensureNotesLoaded().then(function () { applyCurrentNoteToUI(); });
+            });
+        }
 
         // Sauvegarder avant fermeture
         window.addEventListener('beforeunload', () => {

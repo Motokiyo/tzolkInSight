@@ -139,6 +139,14 @@
         "wheel_title": "PLUTCHIK'S EMOTION WHEEL: I feel...",
         "no_emotion": "No emotion (no color)"
     },
+    "speech": {
+        "mic_title": "Voice dictation",
+        "listening": "Listening…",
+        "error_not_available": "Voice dictation is not available on this device.",
+        "error_no_permission": "Microphone permission denied. Enable it in your settings.",
+        "error_network": "Network error during speech recognition.",
+        "error_generic": "Speech recognition error."
+    },
     "settings": {
         "title": "Settings",
         "contacts_title": "Settings - My Contacts",

@@ -139,6 +139,14 @@
         "wheel_title": "RUEDA DE EMOCIONES de R. Plutchik: Me siento...",
         "no_emotion": "Sin emoción (sin color)"
     },
+    "speech": {
+        "mic_title": "Dictado por voz",
+        "listening": "Escuchando…",
+        "error_not_available": "El dictado por voz no está disponible en este dispositivo.",
+        "error_no_permission": "Permiso de micrófono denegado. Actívelo en los ajustes.",
+        "error_network": "Error de red en el reconocimiento de voz.",
+        "error_generic": "Error de reconocimiento de voz."
+    },
     "settings": {
         "title": "Ajustes",
         "contacts_title": "Ajustes - Mis Contactos",

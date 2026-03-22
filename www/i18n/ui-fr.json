@@ -139,6 +139,14 @@
         "wheel_title": "ROUE DES EMOTIONS de R. Plutchik : Je me sens...",
         "no_emotion": "Aucune émotion (sans couleur)"
     },
+    "speech": {
+        "mic_title": "Dictée vocale",
+        "listening": "Écoute en cours…",
+        "error_not_available": "La dictée vocale n'est pas disponible sur cet appareil.",
+        "error_no_permission": "Permission micro refusée. Activez-la dans les réglages.",
+        "error_network": "Erreur réseau pour la reconnaissance vocale.",
+        "error_generic": "Erreur de reconnaissance vocale."
+    },
     "settings": {
         "title": "Réglages",
         "contacts_title": "Réglages - Mes Contacts",

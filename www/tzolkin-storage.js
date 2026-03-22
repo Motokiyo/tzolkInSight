@@ -120,6 +120,9 @@ async function saveNote(userKey, note) {
         // Fusionner par date (même logique que PHP)
         const existingIndex = notes.findIndex(n => n.date === note.date);
 
+        // Ajouter timestamp pour sync iCloud
+        note.updatedAt = Date.now();
+
         if (existingIndex >= 0) {
             // Mettre à jour note existante
             notes[existingIndex] = note;
@@ -130,6 +133,9 @@ async function saveNote(userKey, note) {
 
         // Sauvegarder
         localStorage.setItem(storageKey, JSON.stringify(notes));
+
+        // Sync iCloud
+        syncToCloud();
 
         // Enregistrer la clé utilisateur si nouvelle
         registerUserKey(hash, userKey);
@@ -182,6 +188,9 @@ async function deleteNote(userKey, date) {
         notes = notes.filter(n => n.date !== date);
 
         localStorage.setItem(storageKey, JSON.stringify(notes));
+
+        // Sync iCloud
+        syncToCloud();
 
         console.log(`✅ Note du ${date} supprimée`);
         return true;
@@ -268,11 +277,15 @@ function addPerson(person) {
             birthDate: person.birthDate,
             color: person.color,
             glyph: person.glyphId,
-            number: person.numberId
+            number: person.numberId,
+            updatedAt: Date.now()
         });
 
         // Sauvegarder
         localStorage.setItem('tzolkin_people_cycles', JSON.stringify(people));
+
+        // Sync iCloud
+        syncToCloud();
 
         console.log(`✅ Contact "${person.name}" ajouté`);
         return true;
@@ -318,6 +331,9 @@ function deletePerson(index) {
 
         localStorage.setItem('tzolkin_people_cycles', JSON.stringify(people));
 
+        // Sync iCloud
+        syncToCloud();
+
         console.log(`✅ Contact "${deletedName}" supprimé`);
         return true;
     } catch (error) {
@@ -348,10 +364,14 @@ function updatePerson(index, updatedPerson) {
             birthDate: updatedPerson.birthDate || people[index].birthDate,
             color: updatedPerson.color || people[index].color,
             glyph: updatedPerson.glyphId || people[index].glyph,
-            number: updatedPerson.numberId || people[index].number
+            number: updatedPerson.numberId || people[index].number,
+            updatedAt: Date.now()
         };
 
         localStorage.setItem('tzolkin_people_cycles', JSON.stringify(people));
+
+        // Sync iCloud
+        syncToCloud();
 
         console.log(`✅ Contact "${people[index].name}" modifié`);
         return true;
@@ -468,6 +488,16 @@ function loadUserKey() {
  */
 function clearUserKey() {
     localStorage.removeItem('tzolkin_user_key');
+}
+
+// ============================================================================
+// HELPERS INTERNES
+// ============================================================================
+
+function syncToCloud() {
+    if (window.TzolkinICloud && TzolkinICloud.available) {
+        TzolkinICloud.syncToCloud();
+    }
 }
 
 // ============================================================================

@@ -1,0 +1,63 @@
+/* tzolkin-speech.css — Bouton micro dictée vocale */
+
+.notes-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.notes-input-wrapper textarea {
+    flex: 1;
+}
+
+.speech-btn {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #c19434;
+    border-radius: 50%;
+    background: rgba(222, 210, 179, 0.8);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s, border-color 0.2s, transform 0.1s;
+    margin-top: 4px;
+    padding: 0;
+}
+
+.speech-btn:active {
+    transform: scale(0.92);
+}
+
+.speech-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: #c19434;
+    transition: fill 0.2s;
+}
+
+.speech-btn.listening {
+    background: rgba(220, 50, 50, 0.15);
+    border-color: #dc3232;
+    animation: speech-pulse 1.2s ease-in-out infinite;
+}
+
+.speech-btn.listening svg {
+    fill: #dc3232;
+}
+
+@keyframes speech-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(220, 50, 50, 0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(220, 50, 50, 0); }
+}
+
+#speech-status {
+    font-family: 'Simplifica', sans-serif;
+    font-size: 13px;
+    color: #dc3232;
+    min-height: 16px;
+    margin-top: 2px;
+    text-align: right;
+}
