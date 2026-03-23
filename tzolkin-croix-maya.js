@@ -345,7 +345,7 @@ function openLordDetail(lordNum) {
 
     let overlay = document.getElementById('lord-detail-overlay');
     if (!overlay) {
-        overlay = document.createElemen_tc('div');
+        overlay = document.createElement('div');
         overlay.id = 'lord-detail-overlay';
         document.body.appendChild(overlay);
     }
@@ -381,7 +381,7 @@ function openLordDetail(lordNum) {
     // (position:fixed à l'intérieur d'un filter:invert() est cassé dans Android WebView)
     let scrollBtn = document.getElementById('lord-scroll-top');
     if (!scrollBtn) {
-        scrollBtn = document.createElemen_tc('div');
+        scrollBtn = document.createElement('div');
         scrollBtn.id = 'lord-scroll-top';
         document.body.appendChild(scrollBtn);
     }

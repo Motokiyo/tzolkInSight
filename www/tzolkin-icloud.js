@@ -75,6 +75,28 @@
         }
     }
 
+    var TOMBSTONE_MAX_AGE_MS = 30 * 24 * 60 * 60 * 1000; // 30 jours
+
+    /** Purge les tombstones (deleted:true) de plus de 30 jours dans localStorage */
+    function purgeTombstones() {
+        var now = Date.now();
+        for (var i = 0; i < localStorage.length; i++) {
+            var key = localStorage.key(i);
+            if (!key || (key.indexOf(NOTES_PREFIX) !== 0 && key !== 'tzolkin_people_cycles')) continue;
+            try {
+                var items = JSON.parse(localStorage.getItem(key) || '[]');
+                var before = items.length;
+                items = items.filter(function (item) {
+                    return !item.deleted || (now - (item.updatedAt || 0)) < TOMBSTONE_MAX_AGE_MS;
+                });
+                if (items.length < before) {
+                    localStorage.setItem(key, JSON.stringify(items));
+                    console.log('[iCloud] Purgé ' + (before - items.length) + ' tombstone(s) de ' + key);
+                }
+            } catch (e) { /* ignore */ }
+        }
+    }
+
     /** Push effectif (sans debounce) — appelé par le timer */
     function _pushAllToCloud() {
         SYNC_KEYS.forEach(function (key) {
@@ -120,6 +142,9 @@
                     console.log('[iCloud] Changement externe détecté', data.keys);
                     self._applyExternalChanges(data.keys);
                 });
+
+                // Purger les tombstones de +30 jours avant sync (évite gonflement quota)
+                purgeTombstones();
 
                 // Sync initiale : pull cloud → merge → push le résultat fusionné vers iCloud
                 // C'est une action locale (lancement), pas une réponse à notification externe
