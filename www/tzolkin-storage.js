@@ -162,7 +162,9 @@ async function loadNotes(userKey) {
     try {
         const hash = await sha256(userKey);
         const storageKey = `tzolkin_notes_${hash}`;
-        const notes = JSON.parse(localStorage.getItem(storageKey) || '[]');
+        const allNotes = JSON.parse(localStorage.getItem(storageKey) || '[]');
+        // Filtrer les tombstones (notes supprimées, gardées pour sync iCloud)
+        const notes = allNotes.filter(n => !n.deleted);
 
         console.log(`✅ ${notes.length} note(s) chargée(s)`);
         return notes;
@@ -184,12 +186,18 @@ async function deleteNote(userKey, date) {
         const hash = await sha256(userKey);
         const storageKey = `tzolkin_notes_${hash}`;
 
-        let notes = JSON.parse(localStorage.getItem(storageKey) || '[]');
-        notes = notes.filter(n => n.date !== date);
+        const notes = JSON.parse(localStorage.getItem(storageKey) || '[]');
+        const idx = notes.findIndex(n => n.date === date);
+        if (idx < 0) {
+            console.warn(`Note du ${date} introuvable`);
+            return false;
+        }
+
+        // Tombstone : marquer supprimé pour que le merge iCloud propage la suppression
+        notes[idx].deleted = true;
+        notes[idx].updatedAt = Date.now();
 
         localStorage.setItem(storageKey, JSON.stringify(notes));
-
-        // Sync iCloud
         syncToCloud();
 
         console.log(`✅ Note du ${date} supprimée`);
@@ -271,8 +279,12 @@ function addPerson(person) {
         // Charger contacts existants
         let people = JSON.parse(localStorage.getItem('tzolkin_people_cycles') || '[]');
 
-        // Ajouter le nouveau contact
+        // Ajouter le nouveau contact avec UUID unique (pour merge iCloud)
+        const id = crypto.randomUUID
+            ? crypto.randomUUID()
+            : Date.now().toString(36) + Math.random().toString(36).slice(2);
         people.push({
+            id,
             name: person.name,
             birthDate: person.birthDate,
             color: person.color,
@@ -302,7 +314,9 @@ function addPerson(person) {
  */
 function loadPeople() {
     try {
-        const people = JSON.parse(localStorage.getItem('tzolkin_people_cycles') || '[]');
+        const allPeople = JSON.parse(localStorage.getItem('tzolkin_people_cycles') || '[]');
+        // Filtrer les tombstones (contacts supprimés, gardés pour sync iCloud)
+        const people = allPeople.filter(p => !p.deleted);
         console.log(`✅ ${people.length} contact(s) chargé(s)`);
         return people;
     } catch (error) {
@@ -319,22 +333,27 @@ function loadPeople() {
  */
 function deletePerson(index) {
     try {
-        let people = JSON.parse(localStorage.getItem('tzolkin_people_cycles') || '[]');
+        const people = JSON.parse(localStorage.getItem('tzolkin_people_cycles') || '[]');
+        // Filtrer les tombstones pour obtenir l'index visible (basé sur les objets du tableau original)
+        const visiblePeople = people.filter(p => !p.deleted);
 
-        if (index < 0 || index >= people.length) {
+        if (index < 0 || index >= visiblePeople.length) {
             console.error('Index invalide');
             return false;
         }
 
-        const deletedName = people[index].name;
-        people.splice(index, 1);
+        const target = visiblePeople[index];
+        // indexOf retrouve l'entrée par référence d'objet (pas de clone dans filter)
+        const realIdx = people.indexOf(target);
+
+        // Tombstone : marquer supprimé pour que le merge iCloud propage
+        people[realIdx].deleted = true;
+        people[realIdx].updatedAt = Date.now();
 
         localStorage.setItem('tzolkin_people_cycles', JSON.stringify(people));
-
-        // Sync iCloud
         syncToCloud();
 
-        console.log(`✅ Contact "${deletedName}" supprimé`);
+        console.log(`✅ Contact "${target.name}" supprimé`);
         return true;
     } catch (error) {
         console.error('Erreur lors de la suppression du contact:', error);
@@ -351,29 +370,35 @@ function deletePerson(index) {
  */
 function updatePerson(index, updatedPerson) {
     try {
-        let people = JSON.parse(localStorage.getItem('tzolkin_people_cycles') || '[]');
+        const people = JSON.parse(localStorage.getItem('tzolkin_people_cycles') || '[]');
+        // Filtrer les tombstones pour obtenir l'index visible (basé sur les objets du tableau original)
+        const visiblePeople = people.filter(p => !p.deleted);
 
-        if (index < 0 || index >= people.length) {
+        if (index < 0 || index >= visiblePeople.length) {
             console.error('Index invalide');
             return false;
         }
 
-        // Mettre à jour les données
-        people[index] = {
-            name: updatedPerson.name || people[index].name,
-            birthDate: updatedPerson.birthDate || people[index].birthDate,
-            color: updatedPerson.color || people[index].color,
-            glyph: updatedPerson.glyphId || people[index].glyph,
-            number: updatedPerson.numberId || people[index].number,
+        // indexOf retrouve l'entrée par référence d'objet (pas de clone dans filter)
+        const realIdx = people.indexOf(visiblePeople[index]);
+        const existing = people[realIdx];
+
+        // Préserver l'id pour le merge iCloud ; les noms de champs diffèrent intentionnellement
+        // (caller passe glyphId/numberId, stockage interne utilise glyph/number)
+        people[realIdx] = {
+            id: existing.id,
+            name: updatedPerson.name || existing.name,
+            birthDate: updatedPerson.birthDate || existing.birthDate,
+            color: updatedPerson.color || existing.color,
+            glyph: updatedPerson.glyphId || existing.glyph,
+            number: updatedPerson.numberId || existing.number,
             updatedAt: Date.now()
         };
 
         localStorage.setItem('tzolkin_people_cycles', JSON.stringify(people));
-
-        // Sync iCloud
         syncToCloud();
 
-        console.log(`✅ Contact "${people[index].name}" modifié`);
+        console.log(`✅ Contact "${people[realIdx].name}" modifié`);
         return true;
     } catch (error) {
         console.error('Erreur lors de la modification du contact:', error);
@@ -495,8 +520,8 @@ function clearUserKey() {
 // ============================================================================
 
 function syncToCloud() {
-    if (window.TzolkinICloud && TzolkinICloud.available) {
-        TzolkinICloud.syncToCloud();
+    if (window.TzolkinICloud && window.TzolkinICloud.available) {
+        window.TzolkinICloud.syncToCloud();
     }
 }
 
