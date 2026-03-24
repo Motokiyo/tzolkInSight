@@ -1,5 +1,5 @@
 // sw.js : Service Worker pour Tzolkin
-const APP_VERSION = '4.12';
+const APP_VERSION = '4.13';
 const CACHE_NAME = `tzolkin-v${APP_VERSION}`;
 
 // Journalisation
