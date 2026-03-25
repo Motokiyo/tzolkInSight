@@ -72,10 +72,12 @@ public class ICloudKVSPlugin: CAPPlugin, CAPBridgedPlugin {
               let keys = userInfo[NSUbiquitousKeyValueStoreChangedKeysKey] as? [String] else {
             return
         }
-        notifyListeners("icloudChanged", data: [
-            "reason": reason,
-            "keys": keys
-        ])
+        DispatchQueue.main.async {
+            self.notifyListeners("icloudChanged", data: [
+                "reason": reason,
+                "keys": keys
+            ])
+        }
     }
 
     deinit {

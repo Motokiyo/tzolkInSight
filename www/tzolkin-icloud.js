@@ -16,8 +16,8 @@
 
     var KVS = null;
     var _onExternalChange = null;
-    var _isApplyingExternal = false; // empêche les boucles de sync
-    var _syncTimer = null;           // debounce timer pour syncToCloud
+    var _applyingCount = 0;     // compteur anti-boucle (remplace le boolean)
+    var _syncTimer = null;      // debounce timer pour syncToCloud
 
     function isIOSNative() {
         return typeof Capacitor !== 'undefined'
@@ -37,10 +37,6 @@
 
     /**
      * Merge deux tableaux d'objets en prenant le plus récent par clé identité.
-     * @param {Array} local  — items locaux
-     * @param {Array} cloud  — items distants
-     * @param {string} idProp — propriété servant d'identifiant (ex: 'date', 'id')
-     * @returns {Array}
      */
     function mergeByKey(local, cloud, idProp) {
         var merged = {};
@@ -80,9 +76,12 @@
     /** Purge les tombstones (deleted:true) de plus de 30 jours dans localStorage */
     function purgeTombstones() {
         var now = Date.now();
+        var keys = [];
         for (var i = 0; i < localStorage.length; i++) {
-            var key = localStorage.key(i);
-            if (!key || (key.indexOf(NOTES_PREFIX) !== 0 && key !== 'tzolkin_people_cycles')) continue;
+            keys.push(localStorage.key(i));
+        }
+        keys.forEach(function (key) {
+            if (!key || (key.indexOf(NOTES_PREFIX) !== 0 && key !== 'tzolkin_people_cycles')) return;
             try {
                 var items = JSON.parse(localStorage.getItem(key) || '[]');
                 var before = items.length;
@@ -94,27 +93,43 @@
                     console.log('[iCloud] Purgé ' + (before - items.length) + ' tombstone(s) de ' + key);
                 }
             } catch (e) { /* ignore */ }
-        }
+        });
     }
 
-    /** Push effectif (sans debounce) — appelé par le timer */
-    function _pushAllToCloud() {
+    /** Collecte toutes les clés à synchroniser */
+    function _collectSyncEntries() {
+        var entries = [];
         SYNC_KEYS.forEach(function (key) {
             var value = localStorage.getItem(key);
             if (value !== null) {
-                KVS.set({ key: key, value: value });
+                entries.push({ key: key, value: value });
             }
         });
-
         for (var i = 0; i < localStorage.length; i++) {
             var key = localStorage.key(i);
             if (key && key.indexOf(NOTES_PREFIX) === 0) {
-                KVS.set({ key: key, value: localStorage.getItem(key) });
+                entries.push({ key: key, value: localStorage.getItem(key) });
             }
         }
+        return entries;
+    }
 
-        KVS.synchronize();
-        console.log('[iCloud] Push vers cloud terminé');
+    /** Push effectif — chaîne les set() puis synchronize() */
+    function _pushAllToCloud() {
+        var entries = _collectSyncEntries();
+        var chain = Promise.resolve();
+        entries.forEach(function (entry) {
+            chain = chain.then(function () {
+                return KVS.set({ key: entry.key, value: entry.value });
+            });
+        });
+        return chain.then(function () {
+            return KVS.synchronize();
+        }).then(function () {
+            console.log('[iCloud] Push vers cloud terminé (' + entries.length + ' clés)');
+        }).catch(function (e) {
+            console.error('[iCloud] Erreur push', e);
+        });
     }
 
     window.TzolkinICloud = {
@@ -139,27 +154,32 @@
                         self.available = false;
                         return;
                     }
-                    console.log('[iCloud] Changement externe détecté', data.keys);
+                    console.log('[iCloud] Changement externe détecté (reason=' + data.reason + ')', data.keys);
                     self._applyExternalChanges(data.keys);
                 });
 
-                // Purger les tombstones de +30 jours avant sync (évite gonflement quota)
+                // Purger les tombstones de +30 jours avant sync
                 purgeTombstones();
 
-                // Sync initiale : pull cloud → merge → push le résultat fusionné vers iCloud
-                // C'est une action locale (lancement), pas une réponse à notification externe
-                this._pullAndMerge().then(function () {
-                    _pushAllToCloud();
-                    console.log('[iCloud] Sync initiale terminée (pull + merge + push)');
+                // Sync initiale : demander au système de tirer les données cloud,
+                // puis pull ce qui est disponible localement et push nos données.
+                // Le vrai merge cross-device arrivera via le listener icloudChanged.
+                KVS.synchronize().then(function () {
+                    return self._pullAndMerge();
+                }).then(function () {
+                    return _pushAllToCloud();
+                }).then(function () {
+                    console.log('[iCloud] Sync initiale terminée');
                 });
 
-                // Au retour foreground : pull → merge → push (comme à l'init)
+                // Au retour foreground : synchronize → pull → push conditionnel
                 document.addEventListener('visibilitychange', function () {
-                    if (document.visibilityState === 'visible') {
+                    if (document.visibilityState === 'visible' && self.available) {
                         console.log('[iCloud] Retour foreground — sync');
-                        KVS.synchronize();
-                        self._pullAndMerge().then(function (changed) {
-                            if (changed) _pushAllToCloud();
+                        KVS.synchronize().then(function () {
+                            return self._pullAndMerge();
+                        }).then(function (changed) {
+                            if (changed) return _pushAllToCloud();
                         });
                     }
                 });
@@ -176,9 +196,8 @@
          */
         syncToCloud: function () {
             if (!this.available) return;
-            if (_isApplyingExternal) return; // pas de push pendant un apply externe
+            if (_applyingCount > 0) return;
 
-            // Debounce : attend 1s d'inactivité avant push effectif
             clearTimeout(_syncTimer);
             _syncTimer = setTimeout(function () {
                 _pushAllToCloud();
@@ -189,7 +208,7 @@
         _pullAndMerge: function () {
             if (!this.available) return Promise.resolve(false);
 
-            _isApplyingExternal = true;
+            _applyingCount++;
 
             return KVS.getAllKeys().then(function (result) {
                 var keys = (result.keys || []).filter(isSyncableKey);
@@ -209,14 +228,14 @@
                             changed = true;
                         }
                     });
-                    _isApplyingExternal = false;
+                    _applyingCount--;
                     if (changed && _onExternalChange) {
                         _onExternalChange();
                     }
                     return changed;
                 });
             }).catch(function (e) {
-                _isApplyingExternal = false;
+                _applyingCount--;
                 console.error('[iCloud] Erreur pullAndMerge', e);
                 return false;
             });
@@ -229,7 +248,7 @@
         _applyExternalChanges: function (changedKeys) {
             if (!changedKeys || !changedKeys.length) return;
 
-            _isApplyingExternal = true;
+            _applyingCount++;
 
             var promises = changedKeys.filter(isSyncableKey).map(function (key) {
                 return KVS.get({ key: key }).then(function (data) {
@@ -240,10 +259,10 @@
             });
 
             Promise.all(promises).then(function () {
-                _isApplyingExternal = false;
+                _applyingCount--;
                 if (_onExternalChange) _onExternalChange();
             }).catch(function () {
-                _isApplyingExternal = false;
+                _applyingCount--;
             });
         },
 

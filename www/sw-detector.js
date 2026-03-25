@@ -1,5 +1,5 @@
 // detector.js : Détecteur pour Tzolkin
-const APP_VERSION = '1.1.2';
+const APP_VERSION = '1.1.3';
 const CACHE_NAME = `tzolkin-v${APP_VERSION}`;
 const UPDATE_INTERVAL_MS = 12 * 60 * 60 * 1000; // 12h pour refus
 const CHANGELOG_URL = '/wp-content/themes/astra-child/tzolkin-changelog.html';
