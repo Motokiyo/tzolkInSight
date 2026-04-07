@@ -32,19 +32,19 @@ Repo GitHub : https://github.com/Motokiyo/tzolkin_PWA (public, GitHub Pages pour
 | `tzolkin-details-data.js` | Descriptions longues HTML des glyphes/nombres/trécénas (FR) |
 | `tzolkin-details-summary-data.js` | Descriptions courtes pour résumés |
 | `tzolkin-croix-maya.js` | Croix Maya K'iche' : 5 positions (Centre/Est/Ouest/Nord/Sud) + Seigneur de la Nuit G1-G9 + Porteurs d'année. Helper `function _tc(key)` |
-| `tzolkin-admin.js` | Contacts : formulaire nom/date/couleur, cards flex, boutons modifier/supprimer/croix-maya. Gestion PIN (changer/désactiver). Injecte bouton "Réglages" dans le menu |
+| `tzolkin-admin.js` | Contacts : formulaire nom/date/couleur, cards flex, boutons modifier/supprimer/croix-maya. Gestion PIN (changer/désactiver). Injecte bouton "Profils" dans le menu. Layout : liste contacts en haut, formulaire ajout + PIN en bas |
 | `tzolkin-storage.js` | Couche localStorage : notes CRUD, contacts, PIN SHA256, CSV import/export, PDF (html2pdf), GPS cache (Nominatim) |
 | `tzolkin-pin.js` | Code PIN 4 chiffres : SHA256, 3 tentatives max, lockout 5 min |
 | `tzolkin-app-interactive.js` | Logique menu/modales/navigation : openModal/closeAllModals, popstate handler (back Android), auto-hide menu (3s inactivité), splash dismiss |
 | `email-composer.js` | Wrapper Capacitor EmailComposer : actif sur natif, fallback silencieux sur web |
 | `imask.js` | Librairie externe : masquage input dates (DD/MM/YYYY) |
-| `sw.js` | Service Worker v4.7 : cache 100+ assets, stratégie stale-while-revalidate |
+| `sw.js` | Service Worker v4.15 : cache 100+ assets, stratégie stale-while-revalidate |
 | `sw-detector.js` | Détection mises à jour SW, modal update, cooldown 12h |
 
 ### i18n (12 fichiers, 3 langues)
 | Fichier | Rôle |
 |---|---|
-| `i18n/i18n-loader.js` | Détection langue (localStorage → navigator.language → FR), charge JSON, expose `window.i18n.t(key)`, `applyToDOM()`, `onReady()` |
+| `i18n/i18n-loader.js` | Détection langue (localStorage → navigator.language → FR), charge JSON, expose `window.i18n.t(key)`, `applyToDOM()`, `onReady()`. Détecte changement de langue système au resume (Capacitor) et reload si nécessaire |
 | `i18n/ui-{fr,en,es}.json` | Strings UI : menu, widget, details, notes, saved, pin, settings, analysis, croix_maya, emotions, how_it_works, credits |
 | `i18n/details-data-{en,es}.js` | Descriptions longues traduites (lazy-load si non-FR) |
 | `i18n/summary-data-{en,es}.js` | Résumés traduits |
@@ -85,7 +85,7 @@ Protégé par PIN. Filtres par glyphe/nombre/date, tri chrono/antichrono. Action
 ### Croix Maya K'iche'
 5 positions depuis date de naissance : Centre (naissance), Est (conception), Ouest (mission), Nord (guide), Sud (soutien). Seigneur de la Nuit G1-G9. Porteurs d'année. Grille 3×3 cliquable.
 
-### Contacts (Réglages)
+### Contacts (Profils)
 Formulaire nom/date/couleur avec aperçu Tzolk'in auto. Cards flex. Bouton ⊕ → ouvre Croix Maya du contact.
 
 ### Commander Analyse (50€)
@@ -163,7 +163,13 @@ Layout sidebar navy (Galaad company, `padding:0` sur modal-content pour sidebar 
 - **bump-version.sh** ne touche PAS `android/app/build.gradle` → versionCode/versionName = mise à jour manuelle.
 - **build.sh** doit exclure `ios/` (sinon les Info.plist avec `$(PRODUCT_BUNDLE_IDENTIFIER)` non résolu se retrouvent dans www/ → cassent Transporter/altool).
 - **i18n race condition** : `TzolkinAdmin` et `TzolkinPIN` doivent attendre `i18n.onReady()` avant de construire leurs modales. Sinon les clés brutes (`settings.add_contact`) s'affichent à la place des traductions.
+- **Android configChanges locale** : le Manifest inclut `locale` dans `configChanges`, donc Android ne recrée pas la WebView au changement de langue système. Le fix est dans `i18n-loader.js` (listeners `resume` + `appStateChange` → reload si langue changée).
+- **Noms de contacts dans détails** : ne JAMAIS ajouter `matchingPeople`/noms de contacts dans les titres des vues détail (glyphe, chiffre, trécéna, porteur). Les noms ne doivent apparaître que dans le widget et la carte résumé sous le widget.
+- **Croix Maya depuis Profils** : toujours fermer la modale admin (`closeAdminModal()`) AVANT d'ouvrir `openCroixMayaModal()` pour éviter les problèmes de z-index/backdrop-filter sur Android WebView.
 - **Profil provisioning iOS** : le nom contient 4 espaces (`"tzolkInSight App    Store"`). Utiliser le nom exact dans les commandes xcodebuild.
+
+### Bugs à corriger (prochaine session)
+- **Modification contact — glyphe/ton pas recalculé** : dans `tzolkin-admin.js` `savePerson()`, quand on modifie un contact existant et qu'on change sa date de naissance, le glyphe et le nombre Tzolk'in ne sont pas recalculés. Le `calculateTzolkin(birthDateObj)` est bien appelé mais le résultat (`tzolkin.glyphId`, `tzolkin.numberId`) doit écraser `person.glyph` et `person.number` y compris en mode édition. Vérifier que `savePerson()` utilise bien les nouvelles valeurs calculées et pas les anciennes.
 
 ## App Store Connect — RÈGLES CRITIQUES
 - **TOUJOURS lire la doc Apple avant d'agir** : https://developer.apple.com/help/app-store-connect/
@@ -177,8 +183,8 @@ Layout sidebar navy (Galaad company, `padding:0` sur modal-content pour sidebar 
 
 ## Identifiants & déploiement
 - **App ID** : `org.leparede.tzolkinsight`
-- **Play Store** : v1.1.8, versionCode 1, beta ouverte
-- **App Store** : v1.0.2 build 7, soumise 21 mars 2026 (fix i18n race condition admin/PIN + localisations EN/ES)
+- **Play Store** : v1.1.0, versionCode 2, test fermé (rejet production → nouvelle boucle 14 jours)
+- **App Store** : v1.1.4 build 13 (bug fixes + renommage Réglages → Profils + détection langue au resume)
 - **Apple ID app** : 6760587618
 - **Apple Team ID** : JAH4678AHH, Bundle ID : `org.leparede.tzolkinsight`
 - **Keystore Android** : `tzolkin-release.keystore` (racine, exclu du git, sauvegardé Google Drive)

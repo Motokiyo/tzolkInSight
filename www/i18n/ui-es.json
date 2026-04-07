@@ -8,7 +8,7 @@
         "calendar": "Calendario",
         "how_it_works": "Funcionamiento",
         "notes": "Notas",
-        "settings": "Ajustes",
+        "settings": "Perfiles",
         "credits": "Créditos"
     },
     "widget": {
@@ -148,8 +148,8 @@
         "error_generic": "Error de reconocimiento de voz."
     },
     "settings": {
-        "title": "Ajustes",
-        "contacts_title": "Ajustes - Mis Contactos",
+        "title": "Perfiles",
+        "contacts_title": "Perfiles",
         "add_contact": "Agregar un contacto",
         "name": "Nombre:",
         "birthdate": "Fecha de nacimiento:",
@@ -169,7 +169,7 @@
         "confirm_delete_contact": "¿Está seguro de que desea eliminar a \"{name}\"?",
         "contact_deleted": "Contacto \"{name}\" eliminado",
         "no_contacts": "Ningún contacto guardado.",
-        "no_contacts_hint": "Agregue a sus seres queridos arriba para seguir su día Tzolk'in en el calendario.",
+        "no_contacts_hint": "Agregue a sus seres queridos abajo para seguir su día Tzolk'in en el calendario.",
         "edit_contact": "Modificar el contacto",
         "save_changes": "Guardar los cambios"
     },
@@ -253,7 +253,7 @@
         "section_cross": "La Cruz Maya",
         "section_notes": "Notas",
         "section_saved": "Guardados",
-        "section_settings": "Ajustes",
+        "section_settings": "Perfiles",
         "intro_p1": "El tzolk'in, también llamado \"cuenta de los días\" o \"calendario sagrado\", es uno de los calendarios de la civilización maya. Originario de Mesoamérica, este sistema calendárico fue desarrollado hace más de 2 500 años. Su uso ha continuado sin interrupción hasta nuestros días en ciertas comunidades mayas de Guatemala y México.",
         "intro_p2": "A diferencia de nuestro calendario gregoriano, que sigue los ciclos solares, el tzolk'in se basa en un ciclo de 260 días, resultado de la combinación de dos ciclos simultáneos: un ciclo de 13 números y un ciclo de 20 glifos (llamados \"nawals\"). Cada día se identifica así por un número del 1 al 13 asociado a uno de los 20 glifos, creando 260 combinaciones únicas. Este ciclo corresponde aproximadamente al período de gestación humana y también está vinculado a los ciclos agrícolas y astronómicos, centrales para la civilización maya.",
         "cycles_text": "Los mayas poseían un conocimiento astronómico notablemente preciso, que se refleja en la estructura del tzolk'in. El ciclo de 260 días presenta varias correlaciones astronómicas significativas: corresponde aproximadamente a nueve ciclos lunares sinódicos (alrededor de 29,5 días cada uno) así como al período de visibilidad de Venus. Además, los observadores mayas habían notado que los pasos del Sol por el cenit a la latitud de Copán (aproximadamente 14,8° Norte) se producían a 260 días de intervalo. El ciclo de 20 días, ligado al sistema vigesimal (base 20) de los mayas, refleja también el ciclo de las Pléyades, visible durante aproximadamente 260 días al año bajo esas latitudes. El ciclo de 13, por su parte, podría corresponder al número de \"cielos\" o niveles cósmicos en la cosmología maya. Los mayas habían calculado con una precisión asombrosa los ciclos sinódicos de los planetas visibles, los eclipses solares y lunares, e incluso la precesión de los equinoccios, un ciclo de aproximadamente 26 000 años. El tzolk'in se integraba en un sistema calendárico más amplio, que incluía el Haab (calendario solar de 365 días), para formar el \"Cuenta Larga\", permitiendo seguir períodos de varios milenios.",
@@ -263,7 +263,7 @@
         "calendar_btn": "Detalles ›",
         "calendar_text": "Las flechas ◀ ▶ navegan día por día. Clic en la fecha → entrada libre (nacimiento, evento…). ↺ regresa al día actual. <strong>Cada elemento es clicable</strong> — glifo, número, trecena — y abre una página de descripción.",
         "corn_text": "Bajo el calendario, el marco de color indica la <strong>familia de maíz K'iche'</strong> del día — Rojo (Este), Blanco (Norte), Negro (Oeste) o Amarillo (Sur). <strong>Haga clic</strong> para acceder a la página de la familia: Popol Vuh, elemento, los 5 nawals K'iche' y las ceremonias asociadas.",
-        "cross_text": "Carta personal desde su fecha de nacimiento — cinco dimensiones: <span style=\"background:#ded2b3;border:1px solid #222;border-radius:4px;padding:1px 7px;font-size:14px;\">Centro</span> nacimiento · <span style=\"background:#e57373;color:#4a0f0f;border-radius:4px;padding:1px 7px;font-size:14px;\">Este</span> concepción · <span style=\"background:#64b5f6;color:#0d2d4a;border-radius:4px;padding:1px 7px;font-size:14px;\">Oeste</span> misión · <span style=\"background:#f0f0f0;color:#333;border-radius:4px;padding:1px 7px;font-size:14px;\">Norte</span> guía · <span style=\"background:#ffd54f;color:#3a2400;border-radius:4px;padding:1px 7px;font-size:14px;\">Sur</span> apoyo. Más el <span style=\"background:#1a1a1a;color:#ccc;border-radius:4px;padding:1px 7px;font-size:14px;\">Señor de la Noche G1–G9</span>. Cada posición es clicable. Accesible desde « Día importante para » o desde el botón <strong>✛</strong> en Ajustes.",
+        "cross_text": "Carta personal desde su fecha de nacimiento — cinco dimensiones: <span style=\"background:#ded2b3;border:1px solid #222;border-radius:4px;padding:1px 7px;font-size:14px;\">Centro</span> nacimiento · <span style=\"background:#e57373;color:#4a0f0f;border-radius:4px;padding:1px 7px;font-size:14px;\">Este</span> concepción · <span style=\"background:#64b5f6;color:#0d2d4a;border-radius:4px;padding:1px 7px;font-size:14px;\">Oeste</span> misión · <span style=\"background:#f0f0f0;color:#333;border-radius:4px;padding:1px 7px;font-size:14px;\">Norte</span> guía · <span style=\"background:#ffd54f;color:#3a2400;border-radius:4px;padding:1px 7px;font-size:14px;\">Sur</span> apoyo. Más el <span style=\"background:#1a1a1a;color:#ccc;border-radius:4px;padding:1px 7px;font-size:14px;\">Señor de la Noche G1–G9</span>. Cada posición es clicable. Accesible desde « Día importante para » o desde el botón <strong>✛</strong> en Perfiles.",
         "notes_text": "Elija una emoción en la <strong>rueda de Plutchik</strong> y escriba libremente. Guardado automático. También posible para un <strong>día pasado</strong> (fecha, hora y lugar confirmados, ciudad prellenada por GPS).",
         "notes_emotions": "<span style=\"background:#FFFF99;color:#555;border-radius:3px;padding:1px 7px;\">Alegría</span> · Serenidad · Éxtasis<br><span style=\"background:#99CCFF;color:#333;border-radius:3px;padding:1px 7px;\">Tristeza</span> · Melancolía · Pena<br><span style=\"background:#99FF99;color:#333;border-radius:3px;padding:1px 7px;\">Miedo</span> · Aprensión · Terror<br><span style=\"background:#FF9999;color:#333;border-radius:3px;padding:1px 7px;\">Ira</span> · Contrariedad · Furia<br><span style=\"background:#CC99FF;color:#333;border-radius:3px;padding:1px 7px;\">Sorpresa</span> · Distracción · Asombro<br><span style=\"background:#CCFFCC;color:#333;border-radius:3px;padding:1px 7px;\">Confianza</span> · Aceptación · Admiración<br><span style=\"background:#999966;color:#fff;border-radius:3px;padding:1px 7px;\">Asco</span> · Aversión · Hastío<br><span style=\"background:#FFCC99;color:#555;border-radius:3px;padding:1px 7px;\">Anticipación</span> · Interés · Vigilancia",
         "saved_text": "Historial completo, filtrable. Descargue en <strong style=\"color:#4CAF50;\">CSV</strong>, <strong style=\"color:#2196F3;\">TXT</strong> o <strong style=\"color:#e53935;\">PDF</strong>. Reimportación CSV posible. <strong>Copia de seguridad automática</strong> anual — consérvela con cuidado.",

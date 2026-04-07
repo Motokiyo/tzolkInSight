@@ -163,7 +163,35 @@
             }
         });
 
-    // --- 5. Load heavy data translations (details-data, summary-data, core overlay) ---
+    // --- 5. Detect language change (Android WebView doesn't always update navigator.language) ---
+    // On app resume (Capacitor), re-check system language and reload if it changed
+    document.addEventListener('resume', function () {
+        var newBrowserLang = (navigator.language || navigator.userLanguage || DEFAULT_LANG).slice(0, 2).toLowerCase();
+        var effectiveLang = SUPPORTED_LANGS.indexOf(newBrowserLang) !== -1 ? newBrowserLang : DEFAULT_LANG;
+        if (effectiveLang !== window.i18n.lang) {
+            console.log('[i18n] Language changed on resume: ' + window.i18n.lang + ' → ' + effectiveLang + ', reloading...');
+            // Clear any stored override so the new system language takes effect
+            try { localStorage.removeItem('tzolkin-lang'); } catch (e) {}
+            window.location.reload();
+        }
+    });
+
+    // Also listen to Capacitor's native configChanged / localeChanged
+    if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.App) {
+        window.Capacitor.Plugins.App.addListener('appStateChange', function (state) {
+            if (state.isActive) {
+                var newBrowserLang = (navigator.language || navigator.userLanguage || DEFAULT_LANG).slice(0, 2).toLowerCase();
+                var effectiveLang = SUPPORTED_LANGS.indexOf(newBrowserLang) !== -1 ? newBrowserLang : DEFAULT_LANG;
+                if (effectiveLang !== window.i18n.lang) {
+                    console.log('[i18n] Language changed (appStateChange): ' + window.i18n.lang + ' → ' + effectiveLang);
+                    try { localStorage.removeItem('tzolkin-lang'); } catch (e) {}
+                    window.location.reload();
+                }
+            }
+        });
+    }
+
+    // --- 6. Load heavy data translations (details-data, summary-data, core overlay) ---
     if (lang !== DEFAULT_LANG) {
         // These scripts overwrite window.TZOLKIN_DETAILS_DATA etc.
         // They are loaded dynamically and will execute after the default FR versions

@@ -8,7 +8,7 @@
         "calendar": "Calendar",
         "how_it_works": "How It Works",
         "notes": "Notes",
-        "settings": "Settings",
+        "settings": "Profiles",
         "credits": "Credits"
     },
     "widget": {
@@ -148,8 +148,8 @@
         "error_generic": "Speech recognition error."
     },
     "settings": {
-        "title": "Settings",
-        "contacts_title": "Settings - My Contacts",
+        "title": "Profiles",
+        "contacts_title": "Profiles",
         "add_contact": "Add a contact",
         "name": "Name:",
         "birthdate": "Date of birth:",
@@ -169,7 +169,7 @@
         "confirm_delete_contact": "Are you sure you want to delete \"{name}\"?",
         "contact_deleted": "Contact \"{name}\" deleted",
         "no_contacts": "No contacts saved.",
-        "no_contacts_hint": "Add your loved ones above to track their Tzolk'in day in the calendar.",
+        "no_contacts_hint": "Add your loved ones below to track their Tzolk'in day in the calendar.",
         "edit_contact": "Edit contact",
         "save_changes": "Save changes"
     },
@@ -253,7 +253,7 @@
         "section_cross": "The Mayan Cross",
         "section_notes": "Notes",
         "section_saved": "Saved",
-        "section_settings": "Settings",
+        "section_settings": "Profiles",
         "intro_p1": "The Tzolk'in, also called the \"count of days\" or \"sacred calendar,\" is one of the calendars of the Maya civilization. Originating from Mesoamerica, this calendrical system was developed over 2,500 years ago. Its use has continued uninterrupted to this day in certain Maya communities of Guatemala and Mexico.",
         "intro_p2": "Unlike our Gregorian calendar, which follows solar cycles, the Tzolk'in is based on a 260-day cycle, resulting from the combination of two simultaneous cycles: a cycle of 13 numbers and a cycle of 20 glyphs (called \"nawals\"). Each day is thus identified by a number from 1 to 13 paired with one of the 20 glyphs, creating 260 unique combinations. This cycle corresponds approximately to the period of human gestation and is also linked to agricultural and astronomical cycles, central to Maya civilization.",
         "cycles_text": "The Maya possessed remarkably precise astronomical knowledge, which is reflected in the structure of the Tzolk'in. The 260-day cycle presents several significant astronomical correlations: it corresponds approximately to nine synodic lunar cycles (about 29.5 days each) as well as the visibility period of Venus. Moreover, Maya observers had noted that the Sun's zenith passages at the latitude of Copán (approximately 14.8° North) occurred at 260-day intervals. The 20-day cycle, linked to the Maya vigesimal (base 20) system, also reflects the cycle of the Pleiades, visible for about 260 days per year at these latitudes. The cycle of 13, in turn, could correspond to the number of \"heavens\" or cosmic levels in Maya cosmology. The Maya had calculated with stunning precision the synodic cycles of the visible planets, solar and lunar eclipses, and even the precession of the equinoxes, a cycle of approximately 26,000 years. The Tzolk'in was part of a broader calendrical system, including the Haab (a 365-day solar calendar), forming the \"Long Count,\" which tracked periods spanning several millennia.",
@@ -263,7 +263,7 @@
         "calendar_btn": "Details ›",
         "calendar_text": "The ◀ ▶ arrows navigate day by day. Click on the date → free entry (birth, event…). ↺ returns to today. <strong>Every element is clickable</strong> — glyph, number, trecena — and opens a description page.",
         "corn_text": "Below the calendar, the colored frame indicates the <strong>K'iche' corn family</strong> of the day — Red (East), White (North), Black (West) or Yellow (South). <strong>Click on it</strong> to access the family page: Popol Vuh, element, the 5 K'iche' nawals and associated ceremonies.",
-        "cross_text": "Personal map from your date of birth — five dimensions: <span style=\"background:#ded2b3;border:1px solid #222;border-radius:4px;padding:1px 7px;font-size:14px;\">Center</span> birth · <span style=\"background:#e57373;color:#4a0f0f;border-radius:4px;padding:1px 7px;font-size:14px;\">East</span> conception · <span style=\"background:#64b5f6;color:#0d2d4a;border-radius:4px;padding:1px 7px;font-size:14px;\">West</span> mission · <span style=\"background:#f0f0f0;color:#333;border-radius:4px;padding:1px 7px;font-size:14px;\">North</span> guide · <span style=\"background:#ffd54f;color:#3a2400;border-radius:4px;padding:1px 7px;font-size:14px;\">South</span> support. Plus the <span style=\"background:#1a1a1a;color:#ccc;border-radius:4px;padding:1px 7px;font-size:14px;\">Lord of the Night G1–G9</span>. Each position is clickable. Accessible from \"Important day for\" or from the <strong>✛</strong> button in Settings.",
+        "cross_text": "Personal map from your date of birth — five dimensions: <span style=\"background:#ded2b3;border:1px solid #222;border-radius:4px;padding:1px 7px;font-size:14px;\">Center</span> birth · <span style=\"background:#e57373;color:#4a0f0f;border-radius:4px;padding:1px 7px;font-size:14px;\">East</span> conception · <span style=\"background:#64b5f6;color:#0d2d4a;border-radius:4px;padding:1px 7px;font-size:14px;\">West</span> mission · <span style=\"background:#f0f0f0;color:#333;border-radius:4px;padding:1px 7px;font-size:14px;\">North</span> guide · <span style=\"background:#ffd54f;color:#3a2400;border-radius:4px;padding:1px 7px;font-size:14px;\">South</span> support. Plus the <span style=\"background:#1a1a1a;color:#ccc;border-radius:4px;padding:1px 7px;font-size:14px;\">Lord of the Night G1–G9</span>. Each position is clickable. Accessible from \"Important day for\" or from the <strong>✛</strong> button in Profiles.",
         "notes_text": "Choose an emotion from <strong>Plutchik's wheel</strong> and write freely. Automatic saving. Also possible for a <strong>past day</strong> (date, time and location confirmed, city pre-filled by GPS).",
         "notes_emotions": "<span style=\"background:#FFFF99;color:#555;border-radius:3px;padding:1px 7px;\">Joy</span> · Serenity · Ecstasy<br><span style=\"background:#99CCFF;color:#333;border-radius:3px;padding:1px 7px;\">Sadness</span> · Pensiveness · Grief<br><span style=\"background:#99FF99;color:#333;border-radius:3px;padding:1px 7px;\">Fear</span> · Apprehension · Terror<br><span style=\"background:#FF9999;color:#333;border-radius:3px;padding:1px 7px;\">Anger</span> · Annoyance · Rage<br><span style=\"background:#CC99FF;color:#333;border-radius:3px;padding:1px 7px;\">Surprise</span> · Distraction · Amazement<br><span style=\"background:#CCFFCC;color:#333;border-radius:3px;padding:1px 7px;\">Trust</span> · Acceptance · Admiration<br><span style=\"background:#999966;color:#fff;border-radius:3px;padding:1px 7px;\">Disgust</span> · Loathing · Boredom<br><span style=\"background:#FFCC99;color:#555;border-radius:3px;padding:1px 7px;\">Anticipation</span> · Interest · Vigilance",
         "saved_text": "Complete, filterable history. Download as <strong style=\"color:#4CAF50;\">CSV</strong>, <strong style=\"color:#2196F3;\">TXT</strong> or <strong style=\"color:#e53935;\">PDF</strong>. CSV reimport available. <strong>Automatic annual backup</strong> — keep it safe.",

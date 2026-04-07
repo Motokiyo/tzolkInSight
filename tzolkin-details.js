@@ -59,16 +59,8 @@ function showDetail(type, id) {
         return;
     }
 
-    // Titre avec capitalisation des noms si présents
-    const titleSpan = document.querySelector('.tzolkin-title-span');
-    const namesStr = titleSpan ? (titleSpan.dataset.names || '') : '';
+    // Titre du détail (sans noms de contacts — ceux-ci ne doivent apparaître que dans le widget)
     let displayTitle = item.titre;
-
-    if (namesStr) {
-        // Capitaliser les noms (ALL CAPS)
-        const capitalizedNames = namesStr.toUpperCase();
-        displayTitle += ` - ${capitalizedNames}`;
-    }
 
     detailContent.innerHTML = `
         <div style="padding: 20px; max-width: 800px; margin: 0 auto; position: relative;">

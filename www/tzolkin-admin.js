@@ -48,8 +48,14 @@ class TzolkinAdmin {
                         <h2 style="font-family: 'Summer', cursive; font-size: 32px; color: #c19434; margin:0;">${t('settings.contacts_title')}</h2>
                     </div>
 
+                    <!-- Liste des contacts (en haut pour accès direct) -->
+                    <div class="contacts-list">
+                        <h3>${t('settings.saved_contacts')}</h3>
+                        <div id="contacts-table"></div>
+                    </div>
+
                     <!-- Formulaire d'ajout/modification -->
-                    <div class="admin-form">
+                    <div class="admin-form" style="margin-top: 20px; padding-top: 20px; border-top: 2px solid rgba(0,0,0,0.1);">
                         <h3 id="form-title">${t('settings.add_contact')}</h3>
 
                         <div class="form-group">
@@ -88,12 +94,7 @@ class TzolkinAdmin {
                         <div id="pin-admin-buttons" style="display:flex; gap:12px; flex-wrap:wrap;"></div>
                     </div>
 
-                    <!-- Liste des contacts -->
-                    <div class="contacts-list">
-                        <h3>${t('settings.saved_contacts')}</h3>
-                        <div id="contacts-table"></div>
-                        <div style="height: 80px;"></div>
-                    </div>
+                    <div style="height: 80px;"></div>
                 </div>
             </div>
         `;
@@ -135,7 +136,7 @@ class TzolkinAdmin {
             } else {
                 menu.insertAdjacentHTML('beforeend', adminButton);
             }
-            console.log('✅ Bouton Réglages ajouté au menu');
+            console.log('✅ Bouton Profils ajouté au menu');
         };
 
         findMenuAndAdd();
@@ -348,7 +349,7 @@ class TzolkinAdmin {
                     <!-- Actions -->
                     <div style="flex-shrink:0; display:flex; align-items:center; gap:4px;">
                         <button onclick="window.tzolkinAdmin.editPerson(${index})" class="btn-edit" style="padding:6px 10px; font-size:15px; margin-right:0;">${this.t('saved_modal.edit')}</button>
-                        <button onclick="window.openCroixMayaModal('${person.name.replace(/'/g,"\\'")}', ${glyphId}, ${numberId}, '${person.birthDate}')" class="btn-edit" title="${this.t('details.maya_cross')}" style="padding:6px 10px; font-size:15px; margin-right:0; background:${css.bg}; color:${css.text}; border-color:${css.border};">✛</button>
+                        <button onclick="window.tzolkinAdmin.closeAdminModal(); window.openCroixMayaModal('${person.name.replace(/'/g,"\\'")}', ${glyphId}, ${numberId}, '${person.birthDate}')" class="btn-edit" title="${this.t('details.maya_cross')}" style="padding:6px 10px; font-size:15px; margin-right:0; background:${css.bg}; color:${css.text}; border-color:${css.border};">✛</button>
                         <span onclick="window.tzolkinAdmin.deletePerson(${index})" title="${this.t('saved_modal.delete')}" style="cursor:pointer; font-size:22px; padding:4px; line-height:1;">🗑</span>
                     </div>
                 </div>
