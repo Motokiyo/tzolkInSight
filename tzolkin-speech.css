@@ -1,19 +1,8 @@
 /* tzolkin-speech.css — Bouton micro dictée vocale */
 
-.notes-input-wrapper {
-    position: relative;
-    display: flex;
-    align-items: flex-start;
-    gap: 6px;
-}
-
-.notes-input-wrapper textarea {
-    flex: 1;
-}
-
 .speech-btn {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border: 2px solid #c19434;
     border-radius: 50%;
     background: rgba(222, 210, 179, 0.8);
@@ -23,8 +12,11 @@
     justify-content: center;
     flex-shrink: 0;
     transition: background 0.2s, border-color 0.2s, transform 0.1s;
-    margin-top: 4px;
     padding: 0;
+}
+
+.speech-btn-header {
+    margin-left: auto;
 }
 
 .speech-btn:active {

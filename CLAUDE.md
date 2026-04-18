@@ -1,4 +1,4 @@
-# TzolkInSight — Instructions Claude Code
+# [[tzolkInSight/CLAUDE\|TzolkInSight]] — Instructions Claude Code
 
 ## Projet
 PWA calendrier maya sacré (Tzolk'in) + wrappers Capacitor 8 Android (Play Store) et iOS (App Store).
@@ -168,9 +168,6 @@ Layout sidebar navy (Galaad company, `padding:0` sur modal-content pour sidebar 
 - **Croix Maya depuis Profils** : toujours fermer la modale admin (`closeAdminModal()`) AVANT d'ouvrir `openCroixMayaModal()` pour éviter les problèmes de z-index/backdrop-filter sur Android WebView.
 - **Profil provisioning iOS** : le nom contient 4 espaces (`"tzolkInSight App    Store"`). Utiliser le nom exact dans les commandes xcodebuild.
 
-### Bugs à corriger (prochaine session)
-- **Modification contact — glyphe/ton pas recalculé** : dans `tzolkin-admin.js` `savePerson()`, quand on modifie un contact existant et qu'on change sa date de naissance, le glyphe et le nombre Tzolk'in ne sont pas recalculés. Le `calculateTzolkin(birthDateObj)` est bien appelé mais le résultat (`tzolkin.glyphId`, `tzolkin.numberId`) doit écraser `person.glyph` et `person.number` y compris en mode édition. Vérifier que `savePerson()` utilise bien les nouvelles valeurs calculées et pas les anciennes.
-
 ## App Store Connect — RÈGLES CRITIQUES
 - **TOUJOURS lire la doc Apple avant d'agir** : https://developer.apple.com/help/app-store-connect/
 - Un build ne peut être changé sur une version **que AVANT soumission**. Après soumission (même rejetée), le build est verrouillé.
@@ -183,8 +180,8 @@ Layout sidebar navy (Galaad company, `padding:0` sur modal-content pour sidebar 
 
 ## Identifiants & déploiement
 - **App ID** : `org.leparede.tzolkinsight`
-- **Play Store** : v1.1.0, versionCode 2, test fermé (rejet production → nouvelle boucle 14 jours)
-- **App Store** : v1.1.4 build 13 (bug fixes + renommage Réglages → Profils + détection langue au resume)
+- **Play Store** : v1.1.5, versionCode 3, test fermé (micro dans header, fix édition notes, fix modif contact)
+- **App Store** : v1.1.5 build 14 (fix iOS clic Seigneur de la Nuit + fix édition notes/contact + micro déplacé)
 - **Apple ID app** : 6760587618
 - **Apple Team ID** : JAH4678AHH, Bundle ID : `org.leparede.tzolkinsight`
 - **Keystore Android** : `tzolkin-release.keystore` (racine, exclu du git, sauvegardé Google Drive)

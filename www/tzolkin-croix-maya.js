@@ -118,10 +118,14 @@ function renderLordOfNight(containerId, lordNum) {
     const imgURL = window.TzolkinCore.getLordOfNightURL(lordNum);
     el.style.display = '';
     el.style.cursor = 'pointer';
-    el.onclick = () => openLordDetail(lordNum);
+    // iOS WebKit ne déclenche pas toujours onclick sur un div non-link dans une modale
+    // avec z-index mixte. role=button + tabindex + cursor:pointer + pointer-events:none
+    // sur le conteneur interne → tap fiable sur iPhone/iPad.
+    el.setAttribute('role', 'button');
+    el.setAttribute('tabindex', '0');
 
     el.innerHTML = `
-        <div style="display:flex; align-items:center; gap:14px; padding:12px 16px; background:#1a1a1a; border-radius:12px; border:2px solid #444; margin-bottom:12px;">
+        <div style="display:flex; align-items:center; gap:14px; padding:12px 16px; background:#1a1a1a; border-radius:12px; border:2px solid #444; margin-bottom:12px; pointer-events:none;">
             <div style="flex:1; text-align:right;">
                 <div style="font-size:14px; color:#ccc; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:2px;">${_tc('croix_maya.lord_of_night_label').replace('{num}', lordNum)}</div>
                 <div style="font-size:18px; font-weight:bold; color:#fff; font-family:'Summer',cursive;">${lord.name}</div>
@@ -132,6 +136,8 @@ function renderLordOfNight(containerId, lordNum) {
                 : `<div style="width:52px; height:52px; flex-shrink:0; border-radius:8px; background:#333; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:bold; color:#aaa;">G${lordNum}</div>`}
         </div>
     `;
+
+    el.onclick = () => openLordDetail(lordNum);
 }
 
 // ============================================================================

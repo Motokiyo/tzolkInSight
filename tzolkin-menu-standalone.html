@@ -1,6 +1,6 @@
 <!-- 
   Tzolk'in Menu Standalone - Menu et Modales
-  Version: 1.1.4
+  Version: 1.1.5
   Auteur: Alexandre Ferran + Claude AI
 -->
 
@@ -245,8 +245,12 @@
                 <button onclick="cancelEdit()"
                     style="padding: 5px 10px; background-color: #FF5555; color: white; border: none; cursor: pointer;" data-i18n="notes_modal.cancel">Annuler</button>
             </div>
+            <button id="speech-btn" class="speech-btn speech-btn-header" onclick="TzolkinSpeech.toggle()"
+                    data-i18n-title="speech.mic_title" title="Dictée vocale" style="display:none; margin-left:auto;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1-9c0-.55.45-1 1-1s1 .45 1 1v6c0 .55-.45 1-1 1s-1-.45-1-1V5zm6 6c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+            </button>
             <button onclick="closeAllModals()"
-                style="background: none; border: none; font-size: 24px; cursor: pointer; margin-left: auto;">&times;</button>
+                style="background: none; border: none; font-size: 24px; cursor: pointer; margin-left: 8px;">&times;</button>
         </div>
         <!-- Contenu défilant -->
         <div class="modal-body">
@@ -288,13 +292,7 @@
                         Intérêt, Vigilance</span>
                 </div>
             </div>
-            <div class="notes-input-wrapper">
-                <textarea id="notes-input" placeholder="Entrez vos notes du jour..." data-i18n-placeholder="notes_modal.placeholder"></textarea>
-                <button id="speech-btn" class="speech-btn" onclick="TzolkinSpeech.toggle()"
-                        data-i18n-title="speech.mic_title" title="Dictée vocale" style="display:none;">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1-9c0-.55.45-1 1-1s1 .45 1 1v6c0 .55-.45 1-1 1s-1-.45-1-1V5zm6 6c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
-                </button>
-            </div>
+            <textarea id="notes-input" placeholder="Entrez vos notes du jour..." data-i18n-placeholder="notes_modal.placeholder"></textarea>
             <div id="speech-status"></div>
         </div>
     </div>
@@ -426,7 +424,7 @@
             </div>
             <h1 class="credits-app-title">tzolkInSight</h1>
             <p class="credits-app-sub" data-i18n="credits.app_title">Calendrier Maya Sacré</p>
-            <p class="credits-app-version">Version 1.1.4</p>
+            <p class="credits-app-version">Version 1.1.5</p>
             <p class="credits-app-meta" data-i18n-html="credits.developed_by">Pensé, imaginé et développé par Alexandre Ferran pour <strong class="credits-galaad-name">Galaad Motokiyo Ferran</strong></p>
             <p class="credits-app-meta"><strong>IA :</strong> Claude, Grok, DeepSeek</p>
             <a href="https://leparede.org" target="_blank" class="credits-app-site">leparede.org</a>
@@ -998,7 +996,10 @@
 
         const timeStr = pendingNoteTime || now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
 
-        const tzolkin = window.TzolkinCore.calculateTzolkin(currentDate);
+        // Calculer depuis dateStr, pas currentDate : en mode édition l'offset peut être
+        // désynchronisé et produire un glyphe qui ne correspond pas à la date de la note.
+        const [y, m, d] = dateStr.split('-').map(Number);
+        const tzolkin = window.TzolkinCore.calculateTzolkin(new Date(y, m - 1, d));
 
         const colorDropdown = document.getElementById('color-dropdown');
         const selected = colorDropdown ? colorDropdown.querySelector('.dropdown-selected') : null;

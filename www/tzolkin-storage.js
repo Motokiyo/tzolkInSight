@@ -383,15 +383,15 @@ function updatePerson(index, updatedPerson) {
         const realIdx = people.indexOf(visiblePeople[index]);
         const existing = people[realIdx];
 
-        // Préserver l'id pour le merge iCloud ; les noms de champs diffèrent intentionnellement
-        // (caller passe glyphId/numberId, stockage interne utilise glyph/number)
+        // Préserver l'id pour le merge iCloud. tzolkin-admin.savePerson() passe
+        // { glyph, number } (mêmes noms que le stockage interne).
         people[realIdx] = {
             id: existing.id,
             name: updatedPerson.name || existing.name,
             birthDate: updatedPerson.birthDate || existing.birthDate,
             color: updatedPerson.color || existing.color,
-            glyph: updatedPerson.glyphId || existing.glyph,
-            number: updatedPerson.numberId || existing.number,
+            glyph: updatedPerson.glyph != null ? updatedPerson.glyph : existing.glyph,
+            number: updatedPerson.number != null ? updatedPerson.number : existing.number,
             updatedAt: Date.now()
         };
 
