@@ -1,7 +1,7 @@
 # INDEX.md — Catalogue wiki TzolkInSight
 
 > Lis ceci EN PREMIER. Ouvre les fichiers SEULEMENT pour les sections liees a ta tache.
-> Mis a jour : 18/04/2026
+> Mis a jour : 19/04/2026
 
 ## CLAUDE.md — instructions dev
 
@@ -56,9 +56,10 @@
 
 ## Deploiement
 
-- Play Store : v1.1.5 versionCode 3, test ferme (AAB 18/04/2026 pret a uploader)
-- App Store : v1.1.5 build 14 (IPA uploade via Transporter 18/04/2026)
+- Play Store : v1.1.5 versionCode 3 soumis en PROD 19/04/2026 (review 1-7j, passage beta fermee -> prod ouverte)
+- App Store : v1.1.5 build 14 LIVE (IPA uploade via Transporter 18/04/2026)
 - GitHub Pages : docs/ (privacy, support)
+- Pays Google Play : selection pays a l'etape 2 du flow release OU onglet Production > Pays/Regions
 
 ## Pieges dev a connaitre (ajoutes le 18/04/2026)
 

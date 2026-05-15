@@ -1,0 +1,28 @@
+{
+    "hooks": {
+        "SessionStart": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "bash .claude/hooks/session_start.sh",
+                        "timeout": 10,
+                        "statusMessage": "Chargement état projet..."
+                    }
+                ]
+            }
+        ],
+        "Stop": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "bash .claude/hooks/stop.sh",
+                        "timeout": 5,
+                        "statusMessage": "Rappel mise à jour mémoire..."
+                    }
+                ]
+            }
+        ]
+    }
+}
